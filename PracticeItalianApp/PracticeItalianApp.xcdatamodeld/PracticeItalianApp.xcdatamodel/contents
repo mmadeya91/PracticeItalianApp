@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G419" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ConjPresent" representedClassName="ConjPresent" syncable="YES" codeGenerationType="class">
+        <attribute name="infinitive" optional="YES" attributeType="String"/>
+        <attribute name="io" optional="YES" attributeType="String"/>
+        <attribute name="loro" optional="YES" attributeType="String"/>
+        <attribute name="lui_lei_Lei" optional="YES" attributeType="String"/>
+        <attribute name="noi" optional="YES" attributeType="String"/>
+        <attribute name="tu" optional="YES" attributeType="String"/>
+        <attribute name="voi" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+</model>
