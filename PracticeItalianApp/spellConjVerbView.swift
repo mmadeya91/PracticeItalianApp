@@ -9,13 +9,13 @@ import SwiftUI
 
 struct spellConjVerbView: View {
     
-    var tense: Int
+    @State var tense: Int
+    @State var tenseString: String = ""
+    @State var userAnswer: String = ""
+    @State var checkToContinue = false
+    @State var correctAnswer: String = "" //need to assign correct answer
     
     var body: some View {
-        
-        let svD = spellVerbData(tense: tense)
-        
-        let svO: spellVerbObject = svD.collectSpellVerbData(tense: svD.tense)
         
         GeometryReader{ geo in
             ZStack{
@@ -27,7 +27,7 @@ struct spellConjVerbView: View {
                     .opacity(1.0)
                 VStack{
                     
-                    Text(svO.tenseName)
+                    Text("Presente")
                         .bold()
                         .font(Font.custom("Zapfino", size: 18))
                         .frame(width:400, height: 75)
@@ -37,60 +37,67 @@ struct spellConjVerbView: View {
                         .shadow(radius: 10)
                         .position(x:200, y:75)
                     
+                    spellVerbActivityWordToSpellView(tense: self.$tense)
+                    spellVerbActivityViewBuilder(userAnswer: self.$userAnswer)
+                    
+                    if !checkToContinue{
+                        spellVerbCheckAnswerButton(tenseIn: self.$tense, correctAnswer: self.$correctAnswer, userInput: self.$userAnswer, checkToContinue: self.$checkToContinue)
+                    } else{
+                        NavigationLink(destination: spellConjVerbView(tense: tense), label: {Text ("Continue")
+                                .bold()
+                                .frame(width: 280, height: 50)
+                                .background(Color.green)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(10)
+                                .shadow(radius: 10)
+                        })
+                    }
+                    
                 }
                 
-                spellVerbActivityWordToSpellView(verbNameIt: svO.verbNameIt, pronoun: svO.pronoun, verbNameEng: svO.verbNameEng, correctAnswer: svO.correctAnswer, tense: tense)
-                    
             }
         }
     }
     
     struct spellVerbActivityWordToSpellView: View{
         
-        var verbNameIt: String
-        var pronoun: String
-        var verbNameEng: String
-        var correctAnswer: String
-        var tense: Int
+        @Binding var tense: Int
         
         var body: some View{
+            
+            let svD = spellVerbData(tense: tense)
+            let svO: spellVerbObject = svD.collectSpellVerbData(tense: svD.tense)
+            
             ZStack{
-                Text(verbNameIt + " - " + pronoun + "\n(" + verbNameEng + ")")
-                    .bold()
-                    .font(Font.custom("Marker Felt", size: 23))
-                    .frame(width:260, height: 100)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 250)
-                    .shadow(radius: 10)
-                    .zIndex(1)
-              
+                VStack{
+                    Text(svO.verbNameIt + " - " + svO.pronoun + "\n(" + svO.verbNameEng + ")")
+                        .bold()
+                        .font(Font.custom("Marker Felt", size: 23))
+                        .frame(width:260, height: 100)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.white)
+                        .multilineTextAlignment(.center)
+                        .shadow(radius: 10)
+                        .zIndex(1)
+                    
                     Rectangle()
                         .fill(Color.gray.opacity(0.40))
                         .cornerRadius(20)
                         .frame(width: 320, height:300)
-                        .position(x:200, y:300)
-                        
-                
+                        .position(x: 200, y: -100)
+                }
+
                 
             }
                 
-            
-            VStack{
-                spellVerbActivityViewBuilder(tense: tense, correctAnswer: correctAnswer)
-            }.position(x:200, y:550)
         }
     }
     
     
     struct spellVerbActivityViewBuilder: View {
         
-        var tense: Int
-        var correctAnswer: String
-        
-        @State var userAnswer: String = ""
+        @Binding var userAnswer: String
         
         var body: some View{
             
@@ -102,50 +109,25 @@ struct spellConjVerbView: View {
                     .padding()
                     .font(Font.custom("Marker Felt", size: 50))
                     .shadow(color: Color.black, radius: 12, x: 0, y:10)
-                
-                spellVerbCheckAnswerButton2(tenseIn: tense, correctAnswer: correctAnswer, userInput: userAnswer)
+ 
             }
         }
     }
     
     struct spellVerbCheckAnswerButton2: View {
-        var tenseIn: Int
-        var correctAnswer: String
-        var userInput: String
         
-        
-        @State var defColor = Color.blue
-        @State var checkToContinue = "Check"
-        @State private var pressed: Bool = false
-        @State private var disable: Bool = false
+        @Binding var tenseIn: Int
+
         var body: some View{
             
-            let isCorrect: Bool = userInput.elementsEqual(correctAnswer)
-            
-            NavigationLink(destination: spellConjVerbView(tense: tenseIn), label: {Text (checkToContinue)
+            NavigationLink(destination: spellConjVerbView(tense: tenseIn), label: {Text ("Continue")
                     .bold()
                     .frame(width: 280, height: 50)
-                    .background(defColor)
+                    .background(Color.green)
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
                     .shadow(radius: 10)
-                    .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
-                        withAnimation(.easeInOut(duration: 0.75)) {
-                            self.pressed = pressing
-                        }
-                        if pressing {
-                            if isCorrect {
-                                defColor = Color.green
-                                checkToContinue = "Continue"
-                            }else {
-                                defColor = Color.red
-                                disable = true
-                            }
-                        } else {
-                            
-                        }
-                    }, perform: { })
-                    .disabled(!disable)
+     
             })
         }
     }
@@ -153,13 +135,13 @@ struct spellConjVerbView: View {
     
     struct spellVerbCheckAnswerButton: View{
         
-        var tenseIn: Int
-        var correctAnswer: String
-        var userInput: String
+        @Binding var tenseIn: Int
+        @Binding var correctAnswer: String
+        @Binding var userInput: String
+        @Binding var checkToContinue: Bool
         
         
         @State var defColor = Color.blue
-        @State var checkToContinue = "Check"
         @State private var pressed: Bool = false
         
         var body: some View{
@@ -167,8 +149,7 @@ struct spellConjVerbView: View {
             
             let isCorrect: Bool = userInput.elementsEqual(correctAnswer)
             
-    
-            Button(checkToContinue, action: {
+            Button("Check", action: {
                 
             })
             .frame(width:180, height: 40)
@@ -185,7 +166,7 @@ struct spellConjVerbView: View {
                 if pressing {
                     if isCorrect {
                         defColor = Color.green
-                        checkToContinue = "Continue"
+                        checkToContinue.toggle()
                     }else {
                         defColor = Color.red
                     }
