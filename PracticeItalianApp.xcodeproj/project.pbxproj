@@ -14,13 +14,13 @@
 		287829012A002197007B3D60 /* verbConjMultipleChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */; };
 		287829032A0023F1007B3D60 /* spellConjVerbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287829022A0023F1007B3D60 /* spellConjVerbView.swift */; };
 		28E88FFD29F9D5F000D07103 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E88FFC29F9D5F000D07103 /* JSONManager.swift */; };
-		28E88FFF29F9DBA100D07103 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 28E88FFE29F9DBA100D07103 /* ItalianAppVerbData.json */; };
 		28F4D2C429D249C00080608F /* PracticeItalianAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2C329D249C00080608F /* PracticeItalianAppApp.swift */; };
 		28F4D2C629D249C00080608F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2C529D249C00080608F /* ContentView.swift */; };
 		28F4D2C829D249C50080608F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F4D2C729D249C50080608F /* Assets.xcassets */; };
 		28F4D2CB29D249C50080608F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F4D2CA29D249C50080608F /* Preview Assets.xcassets */; };
 		28F4D2CD29D249C50080608F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CC29D249C50080608F /* Persistence.swift */; };
 		28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */; };
+		7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,6 @@
 		287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verbConjMultipleChoiceView.swift; sourceTree = "<group>"; };
 		287829022A0023F1007B3D60 /* spellConjVerbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spellConjVerbView.swift; sourceTree = "<group>"; };
 		28E88FFC29F9D5F000D07103 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
-		28E88FFE29F9DBA100D07103 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ItalianAppVerbData.json; path = ../../../ItalianAppVerbData.json; sourceTree = "<group>"; };
 		28F4D2C029D249C00080608F /* PracticeItalianApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PracticeItalianApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F4D2C329D249C00080608F /* PracticeItalianAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeItalianAppApp.swift; sourceTree = "<group>"; };
 		28F4D2C529D249C00080608F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -39,6 +38,7 @@
 		28F4D2CA29D249C50080608F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		28F4D2CC29D249C50080608F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		28F4D2CF29D249C50080608F /* PracticeItalianApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PracticeItalianApp.xcdatamodel; sourceTree = "<group>"; };
+		7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ItalianAppVerbData.json; path = ../../../../Desktop/ItalianAppVerbData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,7 @@
 		28F4D2C929D249C50080608F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				28E88FFE29F9DBA100D07103 /* ItalianAppVerbData.json */,
+				7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */,
 				28F4D2CA29D249C50080608F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -155,9 +155,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28E88FFF29F9DBA100D07103 /* ItalianAppVerbData.json in Resources */,
 				28F4D2CB29D249C50080608F /* Preview Assets.xcassets in Resources */,
 				28F4D2C829D249C50080608F /* Assets.xcassets in Resources */,
+				7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
