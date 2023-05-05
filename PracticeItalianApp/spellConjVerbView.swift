@@ -12,8 +12,9 @@ struct spellConjVerbView: View {
     @State var tense: Int
     @State var tenseString: String = ""
     @State var userAnswer: String = ""
-    @State var rightOrWrongLabel: String = ""
+    @State var rightOrWrongLabel: String = "placeholder"
     @State var checkToContinue = false
+    @State var rightWrongOpacity = 0
 
     
     var body: some View {
@@ -52,11 +53,11 @@ struct spellConjVerbView: View {
                         .position(x:200, y:75)
                     
                     
-                    spellVerbActivityWordToSpellView(verbNameIt: svO.verbNameIt, pronoun: svO.pronoun, verbNameEng: svO.verbNameEng, tense: self.$tense, rightOrWrongLabel: self.$rightOrWrongLabel).position(x:200, y:120)
+                    spellVerbActivityWordToSpellView(verbNameIt: svO.verbNameIt, pronoun: svO.pronoun, verbNameEng: svO.verbNameEng, tense: self.$tense, rightOrWrongLabel: self.$rightOrWrongLabel, rightWrongOpacity: self.$rightWrongOpacity).position(x:200, y:120)
                     
                     spellVerbActivityViewBuilder(userAnswer: self.$userAnswer).position(x:200, y:275)
                     
-                    spellVerbCheckAnswerButton(foundCorrectAnswer: findCorrectAnswer, tenseIn: self.$tense, userInput: self.$userAnswer, checkToContinue: self.$checkToContinue, rightOrWrongLabel: self.$rightOrWrongLabel).position(x:200, y:255)
+                    spellVerbCheckAnswerButton(foundCorrectAnswer: findCorrectAnswer, tenseIn: self.$tense, userInput: self.$userAnswer, checkToContinue: self.$checkToContinue, rightOrWrongLabel: self.$rightOrWrongLabel, rightWrongOpacity:     self.$rightWrongOpacity).position(x:200, y:255)
 
                     skipButton(tense: self.$tense).position(x:290, y:140)
                 }
@@ -72,6 +73,7 @@ struct spellConjVerbView: View {
         
         @Binding var tense: Int
         @Binding var rightOrWrongLabel: String
+        @Binding var rightWrongOpacity: Int
         
         var body: some View{
             
@@ -86,13 +88,14 @@ struct spellConjVerbView: View {
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
                         .shadow(radius: 10)
-                        .offset(y:120)
-                        .zIndex(1)
+                        .offset(y:100)
+                        .zIndex(2)
                     
                     Text(rightOrWrongLabel)
                         .font(Font.custom("Marker Felt", size: 35))
                         .foregroundColor(Color.black)
-                        .offset(y:140)
+                        .offset(y: 120)
+                        .opacity(rightWrongOpacity)
                         .zIndex(1)
                     
 
@@ -101,7 +104,8 @@ struct spellConjVerbView: View {
                         .fill(Color.gray.opacity(0.40))
                         .cornerRadius(20)
                         .frame(width: 320, height:220)
-                        .offset(y:-75)
+                        .offset(y:-90)
+                        .zIndex(0)
                         
                 }
 
@@ -127,7 +131,7 @@ struct spellConjVerbView: View {
                     .shadow(color: Color.black, radius: 12, x: 0, y:10)
                     .offset(y: -140)
                     .padding()
-            }
+            }.ignoresSafeArea(.keyboard)
         }
     }
 
@@ -140,6 +144,7 @@ struct spellConjVerbView: View {
         @Binding var userInput: String
         @Binding var checkToContinue: Bool
         @Binding var rightOrWrongLabel: String
+        @Binding var rightWrongOpacity: Int
         
         
         @State var defColor = Color.blue
@@ -154,11 +159,14 @@ struct spellConjVerbView: View {
                     if isCorrect {
                         defColor = Color.green
                         rightOrWrongLabel = "Correct!"
+                        rightWrongOpacity = 1
                         checkToContinue.toggle()
                     }else {
                         defColor = Color.red
                         rightOrWrongLabel = "Try Again!"
-                    }            })
+                        rightWrongOpacity = 1
+                    }
+                })
                 .font(Font.custom("Marker Felt", size:  18))
                 .frame(width:180, height: 40)
                 .background(defColor)
@@ -175,7 +183,7 @@ struct spellConjVerbView: View {
                     if pressing {
                         
                     } else {
-                        
+           
                     }
                 }, perform: { })
             }else {
@@ -187,8 +195,7 @@ struct spellConjVerbView: View {
                         .foregroundColor(Color.white)
                         .cornerRadius(20)
                         .shadow(radius: 10)
-                        .position(x:200, y:60)
-                }).navigationBarBackButtonHidden(true)
+                }).navigationBarBackButtonHidden(true).position(x:200, y:-125)
             }
             
         }
