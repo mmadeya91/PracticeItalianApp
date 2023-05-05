@@ -14,7 +14,7 @@ struct spellConjVerbView: View {
     @State var userAnswer: String = ""
     @State var rightOrWrongLabel: String = "placeholder"
     @State var checkToContinue = false
-    @State var rightWrongOpacity = 0
+    @State var rightWrongOpacity = 0.0
 
     
     var body: some View {
@@ -73,45 +73,64 @@ struct spellConjVerbView: View {
         
         @Binding var tense: Int
         @Binding var rightOrWrongLabel: String
-        @Binding var rightWrongOpacity: Int
+        @Binding var rightWrongOpacity: Double
         
         var body: some View{
             
             ZStack{
                 VStack{
-                    Text(verbNameIt + " - " + pronoun + "\n(" + verbNameEng + ")")
-                        .bold()
-                        .font(Font.custom("Marker Felt", size: 23))
-                        .frame(width:260, height: 100)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                        .foregroundColor(Color.white)
-                        .multilineTextAlignment(.center)
-                        .shadow(radius: 10)
-                        .offset(y:100)
-                        .zIndex(2)
                     
-                    Text(rightOrWrongLabel)
-                        .font(Font.custom("Marker Felt", size: 35))
-                        .foregroundColor(Color.black)
-                        .offset(y: 120)
-                        .opacity(rightWrongOpacity)
-                        .zIndex(1)
+                    verbChosenView(verbNameIt: verbNameIt, pronoun: pronoun, verbNameEng: verbNameEng)
                     
-
-                    
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.40))
-                        .cornerRadius(20)
-                        .frame(width: 320, height:220)
-                        .offset(y:-90)
-                        .zIndex(0)
-                        
+                    rightOrWrongTextLabel(rightOrWrongLabel: rightOrWrongLabel, rightWrongOpacity: rightWrongOpacity)
                 }
-
                 
             }
-                
+        }
+    }
+    
+    struct verbChosenView: View {
+        
+        var verbNameIt: String
+        var pronoun: String
+        var verbNameEng: String
+        
+        
+        var body: some View{
+            Text(verbNameIt + " - " + pronoun + "\n(" + verbNameEng + ")")
+                .bold()
+                .font(Font.custom("Marker Felt", size: 23))
+                .frame(width:260, height: 100)
+                .background(Color.blue)
+                .cornerRadius(10)
+                .foregroundColor(Color.white)
+                .multilineTextAlignment(.center)
+                .shadow(radius: 10)
+                .offset(y:100)
+                .zIndex(2)
+        }
+    }
+    
+    struct rightOrWrongTextLabel: View {
+
+        
+        var rightOrWrongLabel: String
+        var rightWrongOpacity: Double
+        
+        var body: some View{
+            Text(rightOrWrongLabel)
+                .font(Font.custom("Marker Felt", size: 35))
+                .foregroundColor(Color.black)
+                .offset(y: 120)
+                .opacity(rightWrongOpacity)
+                .zIndex(1)
+            
+            Rectangle()
+                .fill(Color.gray.opacity(0.40))
+                .cornerRadius(20)
+                .frame(width: 320, height:220)
+                .offset(y:-90)
+                .zIndex(0)
         }
     }
     
@@ -144,7 +163,7 @@ struct spellConjVerbView: View {
         @Binding var userInput: String
         @Binding var checkToContinue: Bool
         @Binding var rightOrWrongLabel: String
-        @Binding var rightWrongOpacity: Int
+        @Binding var rightWrongOpacity: Double
         
         
         @State var defColor = Color.blue
