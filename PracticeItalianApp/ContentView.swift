@@ -72,16 +72,14 @@ struct ContentView: View {
                                 .background(Color.blue)
                                 .foregroundColor(Color.white)
                                 .cornerRadius(10)
-                                .position(x:100, y:175)
-                        })
-                        NavigationLink(destination: Text("Destination"), label: {Text ("Reading")
+                        }).position(x:100, y:175)
+                        NavigationLink(destination: shortStoryView(), label: {Text ("Reading")
                                 .bold()
                                 .frame(width: 150, height: 50)
                                 .background(Color.blue)
                                 .foregroundColor(Color.white)
                                 .cornerRadius(10)
-                                .position(x:100, y:-120)
-                        })
+                        }).position(x:100, y:-120)
                     }
                 }
             }
