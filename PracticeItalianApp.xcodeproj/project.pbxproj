@@ -22,6 +22,7 @@
 		28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */; };
 		7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */; };
 		7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA41162A054CDD00462A34 /* shortStoryView.swift */; };
+		7CBA411C2A099E5300462A34 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CBA411B2A099E5300462A34 /* shortStoryAppData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ItalianAppVerbData.json; path = ../../../../Desktop/ItalianAppVerbData.json; sourceTree = "<group>"; };
 		7CBA41162A054CDD00462A34 /* shortStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryView.swift; sourceTree = "<group>"; };
 		7CBA411A2A0826DE00462A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7CBA411B2A099E5300462A34 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = shortStoryAppData.json; path = ../../../../Desktop/shortStoryAppData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */,
+				7CBA411B2A099E5300462A34 /* shortStoryAppData.json */,
 				28F4D2CA29D249C50080608F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -162,6 +165,7 @@
 			files = (
 				28F4D2CB29D249C50080608F /* Preview Assets.xcassets in Resources */,
 				28F4D2C829D249C50080608F /* Assets.xcassets in Resources */,
+				7CBA411C2A099E5300462A34 /* shortStoryAppData.json in Resources */,
 				7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

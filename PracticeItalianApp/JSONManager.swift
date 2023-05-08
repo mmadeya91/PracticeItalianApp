@@ -22,6 +22,27 @@ struct Verb: Codable {
     var verbName, verbEngl: String
 }
 
+
+struct storyObject: Codable {
+    var storyName, story: String
+    var wordLinks: [WordLink]
+    var questionsObjs: [QuestionsObj]
+    
+    static let allStoryObjects: [storyObject] = Bundle.main.decode(file: "shortStoryAppData.json")
+}
+
+
+struct QuestionsObj: Codable {
+    var question: String
+    var choices: [String]
+    var answer: String
+}
+
+
+struct WordLink: Codable {
+    var wordNameIt, infinitive, wordNameEng, explanation: String
+}
+
 extension Bundle {
     func decode<T: Decodable>(file: String) -> T {
         guard let url = self.url(forResource: file, withExtension: nil) else {

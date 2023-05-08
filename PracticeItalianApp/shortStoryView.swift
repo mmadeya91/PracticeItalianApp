@@ -7,7 +7,16 @@
 
 import SwiftUI
 
+extension URL {
+    func valueOf(_ queryParameterName: String) -> String? {
+        guard let url = URLComponents(string: self.absoluteString) else { return nil }
+        return url.queryItems?.first(where: { $0.name == queryParameterName })?.value
+    }
+}
+
 struct shortStoryView: View {
+    
+    var chosenStoryName: String = "Cristofo Columbo"
     
     @State var showPopUpScreen: Bool = false
     @State var showQuestionDropdown: Bool = false
@@ -21,20 +30,45 @@ struct shortStoryView: View {
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     .opacity(1.0)
+                HStack{
+                   
+                        
+                        Button(action: {
+                        }, label: {
+                            Image(systemName: "x.circle")
+                                .foregroundColor(Color.black)
+                                .font(.system(size:35, weight: .medium))
+                                .padding(.leading, 10)
+
+                        })
+                      
+                        Spacer()
+                    
+                 
+                        Text(chosenStoryName)
+                            .font(Font.custom("Arial Hebrew", size: 30))
+                            .padding(.trailing, 55)
+                            .offset(y:5)
+ 
+                        Spacer()
+                    
+
+                }.frame(width: UIScreen.main.bounds.width, height: 50).background(Color.teal.opacity(0.3))
+                    .offset(y: -330)
                 
-                testStory(showPopUpScreen: self.$showPopUpScreen).frame(width: 350, height:400).background(Color.white.opacity(0.75)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                testStory(showPopUpScreen: self.$showPopUpScreen).frame(width: 350, height:400).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                     .stroke(.gray, lineWidth: 6))
                     .shadow(radius: 10)
-                    .offset(y:-90)
+                    .offset(x: -1, y:-90)
                 
                 if showPopUpScreen{
                     popUpView(showPopUpScreen: self.$showPopUpScreen).transition(.slide).animation(.easeIn)
                 }
                 
-                questionsDropDownBar(showQuestionDropdown: self.$showQuestionDropdown).position(x:200, y:525)
+                questionsDropDownBar(showQuestionDropdown: self.$showQuestionDropdown).padding([.leading, .trailing], 5).offset(y:150)
                 
                 if showQuestionDropdown{
-                    questionsView().position(x:200, y:655).transition(.move(edge: .bottom)).animation(.spring())
+                    questionsView().padding([.leading, .trailing], 5).offset(y:274).transition(.move(edge: .bottom)).animation(.spring())
                 }
 
             }
@@ -52,9 +86,9 @@ struct shortStoryView: View {
         
         var body: some View{
             
-            ScrollView(.vertical, showsIndicators: true) {
+            ScrollView(.vertical, showsIndicators: false) {
                     
-                    Text("Cristoforo Colombo [nasce](myappurl://action) nel 1451 vicino a Genova, nel nord Italia. A 14 anni diventa marinaio e viaggia in numerosi Paesi. Per Cristoforo Colombo la Terra è rotonda e verso la fine del ‘400, vuole viaggiare verso l’India e vuole farlo con un viaggio verso ovest. La spedizione è costosa e Colombo prima chiede aiuto al re del Portogallo e poi alla regina Isabella di Castiglia. Nel 1492, dopo mesi di navigazione, scopre però un nuovo continente: l’America, che viene chiamata il Nuovo Mondo. Cristoforo Colombo fa altri viaggi in America ma ormai non è più così amato e così muore nel 1506 povero e dimenticato da tutti.")
+                    Text("Cristoforo Colombo [nasce](myappurl://action?word=nasce) nel 1451 vicino a Genova, nel nord Italia. A 14 anni [diventa](myappurl://action?word=diventa) marinaio e viaggia in numerosi Paesi. Per Cristoforo Colombo la Terra è rotonda e verso la fine del ‘400, vuole viaggiare verso l’India e vuole farlo con un viaggio verso [ovest](myappurl://action?word=ovest). La [spedizione](myappurl://action?word=spedizione) è costosa e Colombo prima chiede aiuto al re del Portogallo e poi alla regina Isabella di Castiglia. Nel 1492, dopo mesi di navigazione, [scopre](myappurl://action?word=scopre) però un nuovo continente: l’America, che viene chiamata il Nuovo Mondo. Cristoforo Colombo fa altri viaggi in America ma ormai non è più così amato e così [muore](myappurl://action?word=muore) nel 1506 [povero e dimenticato](myappurl://action?word=dimenticato) da tutti.")
                         .modifier(textModifer())
                         .environment(\.openURL, OpenURLAction { url in
                             handleURL(url)
@@ -67,6 +101,7 @@ struct shortStoryView: View {
             showPopUpScreen.toggle()
             return .handled
         }
+        
         
     }
     
@@ -96,6 +131,7 @@ struct shortStoryView: View {
                 .background(Color.white)
                 .cornerRadius(20)
                 .shadow(radius: 20)
+                .offset(y:-90)
    
         }
     }
@@ -106,26 +142,30 @@ struct shortStoryView: View {
         
         var body: some View{
             
-            VStack{
-                
+            ZStack{
                 HStack{
                     
-                    Text("Questions")
+                    Text("Questions     " + "1/4")
                         .font(Font.custom("Arial Hebrew", size: 20))
                         .padding(.leading, 10)
                         .padding(.top, 5)
+
                     
                     Button(action: {
                         showQuestionDropdown.toggle()
                     }, label: {
                         Image(systemName: "chevron.down.square.fill")
                             .scaleEffect(2.8)
-                    }).offset(x: 223)
+                    }).offset(x: 170)
+                    
+                    
+
+                    
                 }.frame(width: 360, height: 40, alignment: .leading)
                     .background(Color.white)
-                    .overlay( RoundedRectangle(cornerRadius: 4)
-                        .stroke(.gray, lineWidth: 3))
-                    .shadow(radius: 10)
+                    .overlay(RoundedRectangle(cornerRadius: 3)
+                        .stroke(.gray, lineWidth: 3).padding(.trailing, 40))
+    
             }
             
         }
@@ -135,17 +175,25 @@ struct shortStoryView: View {
         
         
         var body: some View {
-            VStack(alignment: .leading){
-                Text("Where was Cristoro Columbo born?")
-                    .font(Font.custom("Arial Hebrew", size: 18))
-                    .padding([.leading, .top], 20)
+            ZStack{
+                VStack(alignment: .leading){
+                    Text("Where was Cristoro Columbo born?")
+                        .font(Font.custom("Arial Hebrew", size: 18))
+                        .padding([.leading, .top], 20)
+
+                    
+                    radioButtons()
+                }.frame(width: 360, height: 200)
+                    .background(Color.white).cornerRadius(3)
+                    .zIndex(1)
+                    
+                    Rectangle()
+                        .fill(Color.gray.opacity(1))
+                        .frame(width: 368, height: 200).padding(.top, 10)
+                        .zIndex(0)
+                        
                 
-                radioButtons()
-                
-    
-            }.frame(width: 360, height: 200)
-                .background(Color.white).overlay(RoundedRectangle(cornerRadius: 5)
-                    .stroke(.gray, lineWidth: 3))
+            }
         }
     }
     
@@ -187,19 +235,24 @@ struct shortStoryView: View {
                 }).offset(y: -30)
                 
                 HStack{
+                    
+                    Spacer()
+                    
                     Button(action: {}, label: {
                         Image(systemName: "chevron.backward.to.line")
                             .scaleEffect(1.75)
                         
-                    }).padding(.leading, 130)
+                    }).padding(.trailing, 25)
                     
-                    Spacer()
                     
                     Button(action: {}, label: {
                         Image(systemName: "chevron.forward.to.line")
                             .scaleEffect(1.75)
                         
-                    }).padding(.trailing, 130)
+                    }).padding(.leading, 25)
+                    
+                    Spacer()
+                    
                 }.offset(y:-18)
             }
         }
