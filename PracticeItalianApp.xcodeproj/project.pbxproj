@@ -22,7 +22,6 @@
 		28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */; };
 		7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */; };
 		7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA41162A054CDD00462A34 /* shortStoryView.swift */; };
-		7CBA41192A081D5F00462A34 /* shortStoryVerbExplained.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA41182A081D5F00462A34 /* shortStoryVerbExplained.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +41,6 @@
 		28F4D2CF29D249C50080608F /* PracticeItalianApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PracticeItalianApp.xcdatamodel; sourceTree = "<group>"; };
 		7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ItalianAppVerbData.json; path = ../../../../Desktop/ItalianAppVerbData.json; sourceTree = "<group>"; };
 		7CBA41162A054CDD00462A34 /* shortStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryView.swift; sourceTree = "<group>"; };
-		7CBA41182A081D5F00462A34 /* shortStoryVerbExplained.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryVerbExplained.swift; sourceTree = "<group>"; };
 		7CBA411A2A0826DE00462A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,7 +89,6 @@
 				287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */,
 				287829022A0023F1007B3D60 /* spellConjVerbView.swift */,
 				7CBA41162A054CDD00462A34 /* shortStoryView.swift */,
-				7CBA41182A081D5F00462A34 /* shortStoryVerbExplained.swift */,
 			);
 			path = PracticeItalianApp;
 			sourceTree = "<group>";
@@ -180,7 +177,6 @@
 				28F4D2CD29D249C50080608F /* Persistence.swift in Sources */,
 				28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */,
 				7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */,
-				7CBA41192A081D5F00462A34 /* shortStoryVerbExplained.swift in Sources */,
 				287829012A002197007B3D60 /* verbConjMultipleChoiceView.swift in Sources */,
 				28F4D2C629D249C00080608F /* ContentView.swift in Sources */,
 				287828FB29FB2754007B3D60 /* multipleChoiceObject.swift in Sources */,
