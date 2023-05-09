@@ -20,9 +20,12 @@
 		28F4D2CB29D249C50080608F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F4D2CA29D249C50080608F /* Preview Assets.xcassets */; };
 		28F4D2CD29D249C50080608F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CC29D249C50080608F /* Persistence.swift */; };
 		28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */; };
+		7C0013192A09EFE600E27CB4 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */; };
+		7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */; };
 		7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */; };
 		7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA41162A054CDD00462A34 /* shortStoryView.swift */; };
-		7CBA411C2A099E5300462A34 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CBA411B2A099E5300462A34 /* shortStoryAppData.json */; };
+		7CBA411E2A09CE4F00462A34 /* shortStoryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */; };
+		7CBA41202A09CED300462A34 /* shortStoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA411F2A09CED300462A34 /* shortStoryData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,10 +43,13 @@
 		28F4D2CA29D249C50080608F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		28F4D2CC29D249C50080608F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		28F4D2CF29D249C50080608F /* PracticeItalianApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PracticeItalianApp.xcdatamodel; sourceTree = "<group>"; };
+		7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = shortStoryAppData.json; path = ../../../../Desktop/shortStoryAppData.json; sourceTree = "<group>"; };
+		7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = availableShortStories.swift; sourceTree = "<group>"; };
 		7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ItalianAppVerbData.json; path = ../../../../Desktop/ItalianAppVerbData.json; sourceTree = "<group>"; };
 		7CBA41162A054CDD00462A34 /* shortStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryView.swift; sourceTree = "<group>"; };
 		7CBA411A2A0826DE00462A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		7CBA411B2A099E5300462A34 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = shortStoryAppData.json; path = ../../../../Desktop/shortStoryAppData.json; sourceTree = "<group>"; };
+		7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryObject.swift; sourceTree = "<group>"; };
+		7CBA411F2A09CED300462A34 /* shortStoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +85,9 @@
 				7CBA411A2A0826DE00462A34 /* Info.plist */,
 				28F4D2C329D249C00080608F /* PracticeItalianAppApp.swift */,
 				28F4D2C529D249C00080608F /* ContentView.swift */,
+				287829022A0023F1007B3D60 /* spellConjVerbView.swift */,
+				287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */,
+				7CBA41162A054CDD00462A34 /* shortStoryView.swift */,
 				28F4D2C729D249C50080608F /* Assets.xcassets */,
 				28F4D2CC29D249C50080608F /* Persistence.swift */,
 				28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */,
@@ -88,9 +97,9 @@
 				287828FA29FB2754007B3D60 /* multipleChoiceObject.swift */,
 				287828FC2A0013C2007B3D60 /* spellVerbData.swift */,
 				287828FE2A001623007B3D60 /* spellVerbObject.swift */,
-				287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */,
-				287829022A0023F1007B3D60 /* spellConjVerbView.swift */,
-				7CBA41162A054CDD00462A34 /* shortStoryView.swift */,
+				7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */,
+				7CBA411F2A09CED300462A34 /* shortStoryData.swift */,
+				7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */,
 			);
 			path = PracticeItalianApp;
 			sourceTree = "<group>";
@@ -98,8 +107,8 @@
 		28F4D2C929D249C50080608F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */,
 				7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */,
-				7CBA411B2A099E5300462A34 /* shortStoryAppData.json */,
 				28F4D2CA29D249C50080608F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -165,7 +174,7 @@
 			files = (
 				28F4D2CB29D249C50080608F /* Preview Assets.xcassets in Resources */,
 				28F4D2C829D249C50080608F /* Assets.xcassets in Resources */,
-				7CBA411C2A099E5300462A34 /* shortStoryAppData.json in Resources */,
+				7C0013192A09EFE600E27CB4 /* shortStoryAppData.json in Resources */,
 				7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,8 +188,11 @@
 			files = (
 				287829032A0023F1007B3D60 /* spellConjVerbView.swift in Sources */,
 				28F4D2CD29D249C50080608F /* Persistence.swift in Sources */,
+				7CBA41202A09CED300462A34 /* shortStoryData.swift in Sources */,
 				28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */,
 				7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */,
+				7CBA411E2A09CE4F00462A34 /* shortStoryObject.swift in Sources */,
+				7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */,
 				287829012A002197007B3D60 /* verbConjMultipleChoiceView.swift in Sources */,
 				28F4D2C629D249C00080608F /* ContentView.swift in Sources */,
 				287828FB29FB2754007B3D60 /* multipleChoiceObject.swift in Sources */,

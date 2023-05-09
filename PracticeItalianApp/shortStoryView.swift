@@ -16,10 +16,11 @@ extension URL {
 
 struct shortStoryView: View {
     
-    var chosenStoryName: String = "Cristofo Columbo"
+    @State var chosenStoryName: String
     
     @State var showPopUpScreen: Bool = false
     @State var showQuestionDropdown: Bool = false
+    
     
     var body: some View {
         GeometryReader{ geo in
@@ -56,7 +57,7 @@ struct shortStoryView: View {
                 }.frame(width: UIScreen.main.bounds.width, height: 50).background(Color.teal.opacity(0.3))
                     .offset(y: -330)
                 
-                testStory(showPopUpScreen: self.$showPopUpScreen).frame(width: 350, height:400).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                testStory(showPopUpScreen: self.$showPopUpScreen, shortStoryName: self.$chosenStoryName).frame(width: 350, height:400).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                     .stroke(.gray, lineWidth: 6))
                     .shadow(radius: 10)
                     .offset(x: -1, y:-90)
@@ -83,12 +84,19 @@ struct shortStoryView: View {
     struct testStory: View{
         
         @Binding var showPopUpScreen: Bool
+        @Binding var shortStoryName: String
         
         var body: some View{
             
+            let sSD = shortStoryData(chosenStoryName: shortStoryName)
+            let sSO = sSD.collectShortStoryData(storyName: shortStoryName)
+            
+            let storyString: String = sSO.storyString
+            
+            
             ScrollView(.vertical, showsIndicators: false) {
                     
-                    Text("Cristoforo Colombo [nasce](myappurl://action?word=nasce) nel 1451 vicino a Genova, nel nord Italia. A 14 anni [diventa](myappurl://action?word=diventa) marinaio e viaggia in numerosi Paesi. Per Cristoforo Colombo la Terra è rotonda e verso la fine del ‘400, vuole viaggiare verso l’India e vuole farlo con un viaggio verso [ovest](myappurl://action?word=ovest). La [spedizione](myappurl://action?word=spedizione) è costosa e Colombo prima chiede aiuto al re del Portogallo e poi alla regina Isabella di Castiglia. Nel 1492, dopo mesi di navigazione, [scopre](myappurl://action?word=scopre) però un nuovo continente: l’America, che viene chiamata il Nuovo Mondo. Cristoforo Colombo fa altri viaggi in America ma ormai non è più così amato e così [muore](myappurl://action?word=muore) nel 1506 [povero e dimenticato](myappurl://action?word=dimenticato) da tutti.")
+                Text(.init(storyString))
                         .modifier(textModifer())
                         .environment(\.openURL, OpenURLAction { url in
                             handleURL(url)
@@ -260,6 +268,7 @@ struct shortStoryView: View {
     
     
     
+    
     struct textModifer : ViewModifier {
         func body(content: Content) -> some View {
             content
@@ -275,7 +284,7 @@ struct shortStoryView: View {
     
     struct shortStoryView_Previews: PreviewProvider {
         static var previews: some View {
-            shortStoryView()
+            shortStoryView(chosenStoryName: "columbus")
         }
     }
 }
