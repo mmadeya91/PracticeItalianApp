@@ -79,8 +79,8 @@ struct ContentView: View {
                                 .background(Color.blue)
                                 .foregroundColor(Color.white)
                                 .cornerRadius(10)
-                        }).position(x:100, y:-120)
-                    }
+                        })
+                    }.navigationBarBackButtonHidden(true)
                 }
             }
         }
