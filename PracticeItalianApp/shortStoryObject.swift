@@ -20,6 +20,19 @@ class shortStoryObject {
     }
     
     
+    func collectWordExpl(ssO: shortStoryObject, chosenWord: String) -> WordLink {
+        
+        var wordLink: WordLink = ssO.wordLinksArray[0]
+        
+        ssO.wordLinksArray.forEach{ WordLink in
+            if WordLink.wordNameIt == chosenWord {
+                wordLink = WordLink
+            }
+        }
+        
+        return wordLink
+    
+    }
     
     
     

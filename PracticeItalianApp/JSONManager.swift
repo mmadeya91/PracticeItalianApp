@@ -36,6 +36,7 @@ struct QuestionsObj: Codable {
     var question: String
     var choices: [String]
     var answer: String
+    var mC: Bool?
 }
 
 
