@@ -23,6 +23,11 @@
 		7C0013192A09EFE600E27CB4 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */; };
 		7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */; };
 		7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */; };
+		7C77DB602A0E804D00E9E766 /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB5F2A0E804D00E9E766 /* GifImage.swift */; };
+		7C77DB642A0E841200E9E766 /* italAppGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7C77DB632A0E841200E9E766 /* italAppGif.gif */; };
+		7C77DB682A0EB61F00E9E766 /* chooseTense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB672A0EB61F00E9E766 /* chooseTense.swift */; };
+		7C77DB6A2A0EB6A200E9E766 /* chooseVCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */; };
+		7CB8F28F2A0F62470017A740 /* chooseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8F28E2A0F62470017A740 /* chooseActivity.swift */; };
 		7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA41162A054CDD00462A34 /* shortStoryView.swift */; };
 		7CBA411E2A09CE4F00462A34 /* shortStoryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */; };
 		7CBA41202A09CED300462A34 /* shortStoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA411F2A09CED300462A34 /* shortStoryData.swift */; };
@@ -46,6 +51,11 @@
 		7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = shortStoryAppData.json; path = ../../../../Desktop/shortStoryAppData.json; sourceTree = "<group>"; };
 		7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = availableShortStories.swift; sourceTree = "<group>"; };
 		7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ItalianAppVerbData.json; path = ../../../../Desktop/ItalianAppVerbData.json; sourceTree = "<group>"; };
+		7C77DB5F2A0E804D00E9E766 /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
+		7C77DB632A0E841200E9E766 /* italAppGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = italAppGif.gif; sourceTree = "<group>"; };
+		7C77DB672A0EB61F00E9E766 /* chooseTense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseTense.swift; sourceTree = "<group>"; };
+		7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseVCActivity.swift; sourceTree = "<group>"; };
+		7CB8F28E2A0F62470017A740 /* chooseActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseActivity.swift; sourceTree = "<group>"; };
 		7CBA41162A054CDD00462A34 /* shortStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryView.swift; sourceTree = "<group>"; };
 		7CBA411A2A0826DE00462A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryObject.swift; sourceTree = "<group>"; };
@@ -85,6 +95,7 @@
 				7CBA411A2A0826DE00462A34 /* Info.plist */,
 				28F4D2C329D249C00080608F /* PracticeItalianAppApp.swift */,
 				28F4D2C529D249C00080608F /* ContentView.swift */,
+				7C77DB632A0E841200E9E766 /* italAppGif.gif */,
 				287829022A0023F1007B3D60 /* spellConjVerbView.swift */,
 				287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */,
 				7CBA41162A054CDD00462A34 /* shortStoryView.swift */,
@@ -100,6 +111,10 @@
 				7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */,
 				7CBA411F2A09CED300462A34 /* shortStoryData.swift */,
 				7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */,
+				7C77DB5F2A0E804D00E9E766 /* GifImage.swift */,
+				7C77DB672A0EB61F00E9E766 /* chooseTense.swift */,
+				7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */,
+				7CB8F28E2A0F62470017A740 /* chooseActivity.swift */,
 			);
 			path = PracticeItalianApp;
 			sourceTree = "<group>";
@@ -176,6 +191,7 @@
 				28F4D2C829D249C50080608F /* Assets.xcassets in Resources */,
 				7C0013192A09EFE600E27CB4 /* shortStoryAppData.json in Resources */,
 				7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */,
+				7C77DB642A0E841200E9E766 /* italAppGif.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,9 +203,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				287829032A0023F1007B3D60 /* spellConjVerbView.swift in Sources */,
+				7C77DB682A0EB61F00E9E766 /* chooseTense.swift in Sources */,
 				28F4D2CD29D249C50080608F /* Persistence.swift in Sources */,
+				7C77DB602A0E804D00E9E766 /* GifImage.swift in Sources */,
 				7CBA41202A09CED300462A34 /* shortStoryData.swift in Sources */,
 				28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */,
+				7CB8F28F2A0F62470017A740 /* chooseActivity.swift in Sources */,
 				7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */,
 				7CBA411E2A09CE4F00462A34 /* shortStoryObject.swift in Sources */,
 				7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */,
@@ -199,6 +218,7 @@
 				287828F929FB160E007B3D60 /* multipleChoiceData.swift in Sources */,
 				287828FF2A001623007B3D60 /* spellVerbObject.swift in Sources */,
 				28E88FFD29F9D5F000D07103 /* JSONManager.swift in Sources */,
+				7C77DB6A2A0EB6A200E9E766 /* chooseVCActivity.swift in Sources */,
 				28F4D2C429D249C00080608F /* PracticeItalianAppApp.swift in Sources */,
 				287828FD2A0013C2007B3D60 /* spellVerbData.swift in Sources */,
 			);

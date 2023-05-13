@@ -16,6 +16,11 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
     
+    @State var animate: Bool = false
+    @State var showBearAni: Bool = false
+    @State private var var_x = 1
+    @State var goNext: Bool = false
+    
     var body: some View {
         NavigationView{
             GeometryReader{ geo in
@@ -39,186 +44,43 @@ struct ContentView: View {
                             .padding(.bottom, 100)
                             .padding(.top, 100)
                         
+         
+                        Button {
+                           DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                               
+                                goNext = true
+                           }
                         
-                        NavigationLink(destination: chooseActivity(), label: {Text ("Lets Practice!")
-                                .bold()
-                                .frame(width: 280, height: 50)
-                                .background(Color.teal)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(10)
-                                .shadow(radius: 10)
+                            showBearAni.toggle()
+                            
+                        } label: {
+                            Text("Let's Go!")
+                                .font(Font.custom("Marker Felt", size: 24))
+                                .foregroundColor(Color.black)
+                                .frame(width: 300, height: 50)
+                                .background(Color.teal.opacity(0.5))
+                                .cornerRadius(20)
+                        }
+                        
+                        NavigationLink(destination: chooseActivity(),isActive: $goNext,label:{}
+                                    ).isDetailLink(false)
+                            
+                        
+                    }.offset(y:-170)
                     
-                        })
-                    }.position(x:200, y:200)
-                }
-            }
-        }
-    }
-    
-    struct chooseActivity: View {
-        var body: some View{
-            GeometryReader{ geo in
-                ZStack{
-                    Image("watercolor2")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                        .opacity(1.0)
-                    VStack{
-                        NavigationLink(destination: chooseTense(), label:{Text ("Verb Conjugation")
-                                .bold()
-                                .frame(width: 150, height: 50)
-                                .background(Color.blue)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(10)
-                        }).position(x:100, y:175)
-                        NavigationLink(destination: availableShortStories(), label: {Text ("Reading")
-                                .bold()
-                                .frame(width: 150, height: 50)
-                                .background(Color.blue)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(10)
-                        })
-                    }.navigationBarBackButtonHidden(true)
-                }
-            }
-        }
-    }
-    
-    
-    struct chooseTense: View{
-        var body: some View{
-            GeometryReader{ geo in
-                ZStack{
-                    Image("watercolor2")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                        .opacity(1.0)
-                    VStack{
-                        HStack{
-                            NavigationLink(destination: chooseVCActivity(tense: 0), label: {Text ("Presento")
-                                    .bold()
-                                    .frame(width: 150, height: 50)
-                                    .background(Color.blue)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(10)
-                                    .position(x:100, y:220)
-                                
-                            })
-                            NavigationLink(destination: chooseVCActivity(tense: 1), label: {Text ("Passato Prossimo")
-                                    .bold()
-                                    .frame(width: 150, height: 50)
-                                    .background(Color.blue)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(10)
-                                    .position(x:100, y:220)
-                            })
-                        }
-                        HStack{
-                            NavigationLink(destination: chooseVCActivity(tense: 2), label: {Text ("Imperfetto")
-                                    .bold()
-                                    .frame(width: 150, height: 50)
-                                    .background(Color.blue)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(10)
-                                    .position(x:100, y:50)
-                            })
-                            NavigationLink(destination: chooseVCActivity(tense: 3), label: {Text ("Futuro")
-                                    .bold()
-                                    .frame(width: 150, height: 50)
-                                    .background(Color.blue)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(10)
-                                    .position(x:100, y:50)
-                            })
-                        }
-                        HStack{
-                            NavigationLink(destination: chooseVCActivity(tense: 4), label: {Text ("Conditionale")
-                                    .bold()
-                                    .frame(width: 150, height: 50)
-                                    .background(Color.blue)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(10)
-                                    .position(x:100, y:-120)
-                            })
-                            NavigationLink(destination: chooseVCActivity(tense: 5), label: {Text ("Imperativo")
-                                    .bold()
-                                    .frame(width: 150, height: 50)
-                                    .background(Color.blue)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(10)
-                                    .position(x:100, y:-120)
-                            })
-                        }
+                    if showBearAni {
+                        GifImage("italAppGif")
+                            .offset(x: CGFloat(-var_x*600+240), y: 480)
+                            .animation(.linear(duration: 6))
+                            .onAppear { self.var_x *= -1}
                     }
+ 
+   
                 }
             }
         }
     }
-    
-    struct chooseVCActivity: View{
-        var tense: Int
-        var body: some View{
-            GeometryReader{ geo in
-                ZStack{
-                    Image("watercolor2")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                        .opacity(1.0)
-                    VStack{
-                        NavigationLink(destination: verbConjMultipleChoiceView(tenseIn: tense), label:{Text ("Multiple Choice")
-                                .bold()
-                                .frame(width: 150, height: 50)
-                                .background(Color.blue)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(10)
-                                .position(x:100, y:175)
-                        })
-                        NavigationLink(destination: spellConjVerbView(tense:tense), label: {Text ("Spell it out")
-                                .bold()
-                                .frame(width: 150, height: 50)
-                                .background(Color.blue)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(10)
-                        }).navigationBarBackButtonHidden(true)
-                    }
-                }
-            }
-        }
-    }
-    
-    struct BlueButton: ButtonStyle {
-        
-        @State var pressed = false
-        
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-                .frame(width:220, height: 50)
-                .bold()
-                .background(Color.teal)
-                .foregroundColor(Color.white)
-                .cornerRadius(15)
-                .shadow(radius: 5)
-                .padding(.top, 15)
-                .scaleEffect(pressed ? 1.25 : 1.0)
-                .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
-                    withAnimation(.linear(duration: 1.0)) {
-                        self.pressed = pressing
-                    }
-                    if pressing {
 
-                        
-                    } else {
-                        
-                    }
-                }, perform: { })
-        }
-    }
     
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
