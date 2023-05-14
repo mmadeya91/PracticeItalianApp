@@ -20,6 +20,7 @@ struct ContentView: View {
     @State var showBearAni: Bool = false
     @State private var var_x = 1
     @State var goNext: Bool = false
+    @State var navButtonText = "Let's Go!"
     
     var body: some View {
         NavigationView{
@@ -32,29 +33,23 @@ struct ContentView: View {
                         .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                         .opacity(1.0)
                     VStack{
-                        Text("Italian\nPractice")
-                            .bold()
-                            .foregroundColor(Color.black)
-                            .font(Font.custom("Zapfino", size: 36))
-                            .multilineTextAlignment(.center)
-                            .frame(width: 325, height: 250)
-                            .background(Color.blue.opacity(0.5))
-                            .cornerRadius(10)
-                            .shadow(radius: 10)
+                        
+                        homePageText()
                             .padding(.bottom, 100)
                             .padding(.top, 100)
                         
          
                         Button {
-                           DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                           DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                
                                 goNext = true
                            }
-                        
+                            
                             showBearAni.toggle()
+                            navButtonText = "Andiamo!"
                             
                         } label: {
-                            Text("Let's Go!")
+                            Text(navButtonText)
                                 .font(Font.custom("Marker Felt", size: 24))
                                 .foregroundColor(Color.black)
                                 .frame(width: 300, height: 50)
@@ -71,12 +66,36 @@ struct ContentView: View {
                     if showBearAni {
                         GifImage("italAppGif")
                             .offset(x: CGFloat(-var_x*600+240), y: 480)
-                            .animation(.linear(duration: 6))
+                            .animation(.linear(duration: 8 ))
                             .onAppear { self.var_x *= -1}
                     }
  
    
                 }
+            }
+        }
+    }
+    
+    struct homePageText: View {
+        var body: some View {
+            
+            ZStack{
+                VStack{
+                    Text("Italian")
+                        .bold()
+                        .font(Font.custom("Marker Felt", size: 50))
+                        .foregroundColor(Color.green)
+                        .zIndex(1)
+                    
+                    Text("Mastery!")
+                        .bold()
+                        .font(Font.custom("Marker Felt", size: 50))
+                        .foregroundColor(Color.red)
+                        .zIndex(1)
+                }.frame(width: 350, height: 300)
+                    .background(Color.white.opacity(0.6))
+                    .cornerRadius(10)
+                    
             }
         }
     }

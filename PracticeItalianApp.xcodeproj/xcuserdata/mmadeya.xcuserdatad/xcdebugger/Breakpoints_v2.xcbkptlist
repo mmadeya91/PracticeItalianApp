@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "D307AC77-EA37-4E29-B284-7FBE362EA2E6"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6506B7C9-C687-49EB-8EC5-32FC9CDE9BA5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PracticeItalianApp/shortStoryView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "handleURL(_:name:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A1951747-4965-470A-BFB6-B029FDD8917F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PracticeItalianApp/JSONManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "storyObject"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "A1951747-4965-470A-BFB6-B029FDD8917F - 4cf7df06f3e221dd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "one-time initialization function for allStoryObjects"
+                  moduleName = "PracticeItalianApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmadeya/Documents/PracticeItalianApp/PracticeItalianApp/JSONManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "10">
+               </Location>
+               <Location
+                  uuid = "A1951747-4965-470A-BFB6-B029FDD8917F - 215fe8c5d2c2417d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PracticeItalianApp.storyObject.allStoryObjects.unsafeMutableAddressor : Swift.Array&lt;PracticeItalianApp.storyObject&gt;"
+                  moduleName = "PracticeItalianApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmadeya/Documents/PracticeItalianApp/PracticeItalianApp/JSONManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
