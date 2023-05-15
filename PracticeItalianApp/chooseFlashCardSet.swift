@@ -25,7 +25,7 @@ struct chooseFlashCardSet: View {
                     .opacity(1.0)
                 
                 VStack{
-                    shortStoryContainer().frame(width: 345, height:675).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                    flashCardSets().frame(width: 345, height:675).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                         .stroke(.gray, lineWidth: 6))
                         .shadow(radius: 10)
                         .padding(.top, 40)
@@ -41,13 +41,13 @@ struct flashCardSets: View {
         ZStack{
             VStack{
                 
-                Text("Short Stories").zIndex(1)
+                Text("Flash Cards").zIndex(1)
                     .font(Font.custom("Marker Felt", size: 30))
                     .frame(width: 350, height: 60)
                     .background(Color.teal).opacity(0.75)
                     .border(width: 8, edges: [.bottom], color: .yellow)
                 
-                bookHStack()
+                flashCardHStack()
                 
                 
                 
@@ -60,25 +60,31 @@ struct flashCardSets: View {
 struct flashCardHStack: View {
     var body: some View{
         
-        let bookTitles: [String] = ["Food", "test1", "test2", "test3", "test4", "test5"]
+        let flashCardSetTitles: [String] = ["Food", "Animals", "Clothing", "Family", "20 Most Used Words", "Common Phrases", "My List"]
+        
+        let flashCardIcons: [String] = ["food", "bear", "clothes", "family", "dictionary", "talking", "flash-card"]
         
         ScrollView{
             HStack{
-                bookButton(shortStoryName: bookTitles[0])
+                flashCardButton(flashCardSetName: flashCardSetTitles[0], flashCardSetIcon: flashCardIcons[0])
                 Spacer()
-                bookButton(shortStoryName:bookTitles[1])
-            }.padding([.leading, .trailing], 60)
-                .padding(.top, 10)
+                flashCardButton(flashCardSetName: flashCardSetTitles[1], flashCardSetIcon: flashCardIcons[1])
+            }.padding([.leading, .trailing], 45)
+    
             HStack{
-                bookButton(shortStoryName: bookTitles[2])
+                flashCardButton(flashCardSetName: flashCardSetTitles[2], flashCardSetIcon: flashCardIcons[2])
                 Spacer()
-                bookButton(shortStoryName: bookTitles[3])
-            }.padding([.leading, .trailing], 60)
+                flashCardButton(flashCardSetName: flashCardSetTitles[3], flashCardSetIcon: flashCardIcons[3])
+            }.padding([.leading, .trailing], 45)
             HStack{
-                bookButton(shortStoryName:bookTitles[4])
+                flashCardButton(flashCardSetName: flashCardSetTitles[4], flashCardSetIcon: flashCardIcons[4])
                 Spacer()
-                bookButton(shortStoryName: bookTitles[5])
-            }.padding([.leading, .trailing], 60)
+                flashCardButton(flashCardSetName: flashCardSetTitles[5], flashCardSetIcon: flashCardIcons[5])
+            }.padding([.leading, .trailing], 45)
+            HStack{
+                flashCardButton(flashCardSetName: flashCardSetTitles[6], flashCardSetIcon: flashCardIcons[6])
+                Spacer()
+            }.padding([.leading, .trailing], 45)
         }
                
     }
@@ -88,37 +94,49 @@ struct flashCardHStack: View {
 struct flashCardButton: View {
     
     
-    var shortStoryName: String
+    var flashCardSetName: String
+    var flashCardSetIcon: String
     @State var pressed = false
     
     var body: some View{
         
         VStack{
             
-            Text(shortStoryName)
+            Text(flashCardSetName)
                 .font(Font.custom("Marker Felt", size: 20))
-                .frame(width: 70, height: 85)
+                .frame(width: 100, height: 85)
                 .multilineTextAlignment(.center)
                 .offset(y:15)
             
             
-            NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName), label: {
-                Image("book_Fotor")
+            NavigationLink(destination: flashCardActivity(), label: {
+                Image(flashCardSetIcon)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 70, height: 85)
+                    .padding(.top, -15)
             })
-                
-                .scaleEffect(pressed ? 1.25 : 1.0)
-                .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
-                    withAnimation(.easeIn(duration: 0.75)) {
-                        self.pressed = pressing
-                    }
-                }, perform: { })
+            .buttonStyle(navButton())
+            
+            Text("Acc.")
         
         }
     }
     
+}
+
+
+struct navButton: ButtonStyle {
+    @State var pressed = false
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(pressed ? 1.25 : 1.0)
+            .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
+                withAnimation(.easeIn(duration: 0.75)) {
+                    self.pressed = pressing
+                }
+            }, perform: { })
+    }
 }
 
 struct EdgeBorder2: Shape {

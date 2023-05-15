@@ -28,6 +28,7 @@
 		7C77DB682A0EB61F00E9E766 /* chooseTense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB672A0EB61F00E9E766 /* chooseTense.swift */; };
 		7C77DB6A2A0EB6A200E9E766 /* chooseVCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */; };
 		7CA544DD2A1018F300DB6441 /* chooseFlashCardSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA544DC2A1018F300DB6441 /* chooseFlashCardSet.swift */; };
+		7CA544DF2A11D37800DB6441 /* flashCardActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */; };
 		7CB8F28F2A0F62470017A740 /* chooseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8F28E2A0F62470017A740 /* chooseActivity.swift */; };
 		7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA41162A054CDD00462A34 /* shortStoryView.swift */; };
 		7CBA411E2A09CE4F00462A34 /* shortStoryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */; };
@@ -57,6 +58,7 @@
 		7C77DB672A0EB61F00E9E766 /* chooseTense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseTense.swift; sourceTree = "<group>"; };
 		7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseVCActivity.swift; sourceTree = "<group>"; };
 		7CA544DC2A1018F300DB6441 /* chooseFlashCardSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseFlashCardSet.swift; sourceTree = "<group>"; };
+		7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashCardActivity.swift; sourceTree = "<group>"; };
 		7CB8F28E2A0F62470017A740 /* chooseActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseActivity.swift; sourceTree = "<group>"; };
 		7CBA41162A054CDD00462A34 /* shortStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryView.swift; sourceTree = "<group>"; };
 		7CBA411A2A0826DE00462A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */,
 				7CB8F28E2A0F62470017A740 /* chooseActivity.swift */,
 				7CA544DC2A1018F300DB6441 /* chooseFlashCardSet.swift */,
+				7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */,
 			);
 			path = PracticeItalianApp;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				7C77DB6A2A0EB6A200E9E766 /* chooseVCActivity.swift in Sources */,
 				28F4D2C429D249C00080608F /* PracticeItalianAppApp.swift in Sources */,
 				287828FD2A0013C2007B3D60 /* spellVerbData.swift in Sources */,
+				7CA544DF2A11D37800DB6441 /* flashCardActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
