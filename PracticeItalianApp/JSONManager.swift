@@ -44,6 +44,42 @@ struct WordLink: Codable {
     var wordNameIt, infinitive, wordNameEng, explanation: String
 }
 
+
+struct flashCardObject: Codable {
+    var flashSetName: String
+    var words: [Word]
+    
+    static let allFlashCardObjects: [flashCardObject] = Bundle.main.decode(file: "flashCardData.json")
+    
+    static let Food: flashCardObject = flashCardObject.allFlashCardObjects[0]
+    static let Animals: flashCardObject = flashCardObject.allFlashCardObjects[1]
+    static let Clothing: flashCardObject = flashCardObject.allFlashCardObjects[2]
+    static let Family: flashCardObject = flashCardObject.allFlashCardObjects[3]
+    static let CommonNouns: flashCardObject = flashCardObject.allFlashCardObjects[4]
+    static let CommonAdjectives: flashCardObject = flashCardObject.allFlashCardObjects[5]
+    static let CommonAdverbs: flashCardObject = flashCardObject.allFlashCardObjects[6]
+    static let CommonVerbs: flashCardObject = flashCardObject.allFlashCardObjects[7]
+    static let CommonPhrases: flashCardObject = flashCardObject.allFlashCardObjects[8]
+    
+    
+}
+
+
+struct Word: Codable {
+    var wordItal: String
+    var gender: Gender
+    var wordEng: String
+}
+
+enum Gender: String, Codable {
+    case empty = ""
+    case fem = "fem."
+    case genderMascFem = "masc.fem."
+    case masc = "masc."
+    case mascAndFem = "masc. and fem."
+    case mascFem = "masc./fem."
+}
+
 extension Bundle {
     func decode<T: Decodable>(file: String) -> T {
         guard let url = self.url(forResource: file, withExtension: nil) else {

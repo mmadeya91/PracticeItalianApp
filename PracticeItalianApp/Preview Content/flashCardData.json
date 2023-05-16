@@ -1,0 +1,1028 @@
+[
+	{
+		"flashSetName": "Food",
+
+		"words" : [{
+			"wordItal": "Bistecca",
+			"gender": "fem.",
+			"wordEng": "Steak"
+			},
+			{
+			"wordItal": "Agnello",
+			"gender": "masc.",
+			"wordEng": "Lamb"
+			},
+			{
+			"wordItal": "Manzo",
+			"gender": "masc.",
+			"wordEng": "Beef"
+			},
+			{
+			"wordItal": "Maiale",
+			"gender": "masc.",
+			"wordEng": "Pork"
+			},
+			{
+			"wordItal": "Pesce",
+			"gender": "masc.",
+			"wordEng": "Fish"
+			},
+			{
+			"wordItal": "Pollo",
+			"gender": "masc.",
+			"wordEng": "Chicken"
+			},
+			{
+			"wordItal": "Pane",
+			"gender": "masc.",
+			"wordEng": "Bread"
+			},
+			{
+			"wordItal": "Minestra",
+			"gender": "masc.",
+			"wordEng": "Soup"
+			},
+			{
+			"wordItal": "Pomodoro",
+			"gender": "masc.",
+			"wordEng": "Tomato"
+			},
+			{
+			"wordItal": "Melanzana",
+			"gender": "fem.",
+			"wordEng": "Eggplant"
+			},
+			{
+			"wordItal": "Formaggio",
+			"gender": "masc.",
+			"wordEng": "Cheese"
+			},
+			{
+			"wordItal": "Parmagagiano",
+			"gender": "masc.",
+			"wordEng": "Parmesan Cheese"
+			},
+			{
+			"wordItal": "Vino",
+			"gender": "masc.",
+			"wordEng": "Wine"
+			},
+			{
+			"wordItal": "Birra",
+			"gender": "fem.",
+			"wordEng": "Beer"
+			},
+			{
+			"wordItal": "Limonata",
+			"gender": "fem.",
+			"wordEng": "Lemonade"
+			}
+		]
+	
+	},		
+	{
+		"flashSetName": "Animals",
+
+		"words" : [{
+			"wordItal": "Cane",
+			"gender": "masc.",
+			"wordEng": "Dog"
+			},
+			{
+			"wordItal": "Gatto",
+			"gender": "masc.",
+			"wordEng": "Cat"
+			},
+			{
+			"wordItal": "Elefante",
+			"gender": "masc.",
+			"wordEng": "Elephant"
+			},
+			{
+			"wordItal": "Cavallo",
+			"gender": "masc.",
+			"wordEng": "Horse"
+			},
+			{
+			"wordItal": "Lupo",
+			"gender": "masc.",
+			"wordEng": "Wolf"
+			},
+			{
+			"wordItal": "Leone",
+			"gender": "masc.",
+			"wordEng": "Lion"
+			},
+			{
+			"wordItal": "Scimmia",
+			"gender": "fem.",
+			"wordEng": "Monkey"
+			},
+			{
+			"wordItal": "Tartaruga",
+			"gender": "fem.",
+			"wordEng": "Turtle"
+			},
+			{
+			"wordItal": "Rana",
+			"gender": "fem.",
+			"wordEng": "Frog"
+			},
+			{
+			"wordItal": "Farfalle",
+			"gender": "fem.",
+			"wordEng": "Butterfly"
+			},
+			{
+			"wordItal": "Uccello",
+			"gender": "masc.",
+			"wordEng": "Bird"
+			},
+			{
+			"wordItal": "Tigre",
+			"gender": "fem.",
+			"wordEng": "Tiger"
+			},
+			{
+			"wordItal": "Serpente",
+			"gender": "masc.",
+			"wordEng": "Snake"
+			},
+			{
+			"wordItal": "Orso",
+			"gender": "masc.",
+			"wordEng": "Bear"
+			},
+			{
+			"wordItal": "Coniglio",
+			"gender": "masc.",
+			"wordEng": "Rabbit"
+			},
+			{
+			"wordItal": "Criceto",
+			"gender": "masc.",
+			"wordEng": "Hamster"
+			},
+			{
+			"wordItal": "Ragno",
+			"gender": "masc.",
+			"wordEng": "Spider"
+			},
+			{
+			"wordItal": "Formica",
+			"gender": "fem.",
+			"wordEng": "Ant"
+			}
+		]
+	
+	},
+	{
+		"flashSetName": "Clothes",
+
+		"words" : [{
+			"wordItal": "Costume da bagno",
+			"gender": "masc.",
+			"wordEng": "Bathing Suit"
+			},
+			{
+			"wordItal": "Cappotto",
+			"gender": "masc.",
+			"wordEng": "Coat"
+			},
+			{
+			"wordItal": "Giacca",
+			"gender": "fem.",
+			"wordEng": "Jacket"
+			},
+			{
+			"wordItal": "Dei jeans",
+			"gender": "masc.",
+			"wordEng": "Jeans"
+			},
+			{
+			"wordItal": "Pigiama",
+			"gender": "masc.",
+			"wordEng": "Pajamas"
+			},
+			{
+			"wordItal": "Dei pantaloni",
+			"gender": "masc.",
+			"wordEng": "Pants/Trousers"
+			},
+			{
+			"wordItal": "Impermeabile",
+			"gender": "masc.",
+			"wordEng": "Raincoat"
+			},
+			{
+			"wordItal": "Dei pantaloncini",
+			"gender": "masc.",
+			"wordEng": "Shorts"
+			},
+			{
+			"wordItal": "Maglione",
+			"gender": "masc.",
+			"wordEng": "Sweater"
+			},
+			{
+			"wordItal": "Maglietta",
+			"gender": "masc.",
+			"wordEng": "T-Shirt"
+			},
+			{
+			"wordItal": "Canotta",
+			"gender": "fem.",
+			"wordEng": "Tank Top"
+			},
+			{
+			"wordItal": "Dei Stivali",
+			"gender": "masc.",
+			"wordEng": "Boots"
+			},
+			{
+			"wordItal": "Dei Sandali",
+			"gender": "masc.",
+			"wordEng": "Sandals"
+			},
+			{
+			"wordItal": "Delle Scarpe",
+			"gender": "fem.",
+			"wordEng": "Shoes"
+			},
+			{
+			"wordItal": "Delle Scarpe con Tacchi Alti",
+			"gender": "fem.",
+			"wordEng": "High-heeled Shoes"
+			},
+			{
+			"wordItal": "Delle Scarpe da Ginnastica",
+			"gender": "fem.",
+			"wordEng": "Sneakers"
+			},
+			{
+			"wordItal": "Dei Calzini",
+			"gender": "masc.",
+			"wordEng": "Socks"
+			},
+			{
+			"wordItal": "Camicia",
+			"gender": "fem.",
+			"wordEng": "Blouse"
+			},
+			{
+			"wordItal": "Vestito",
+			"gender": "masc.",
+			"wordEng": "Dress"
+			},
+			{
+			"wordItal": "Gonna",
+			"gender": "fem.",
+			"wordEng": "Skirt"
+			},
+			{
+			"wordItal": "Camicia",
+			"gender": "fem.",
+			"wordEng": "Shirt"
+			},
+			{
+			"wordItal": "Abito da Uomo",
+			"gender": "masc.",
+			"wordEng": "Suit"
+			},
+			{
+			"wordItal": "Cravatta",
+			"gender": "fem.",
+			"wordEng": "Tie"
+			}
+		]
+	
+	},
+
+	{
+		"flashSetName": "Family",
+
+		"words" : [{
+			"wordItal": "Padre",
+			"gender": "masc.",
+			"wordEng": "Father"
+			},
+			{
+			"wordItal": "Madre",
+			"gender": "fem.",
+			"wordEng": "Mother"
+			},
+			{
+			"wordItal": "I Genitori",
+			"gender": "masc.",
+			"wordEng": "Parents"
+			},
+			{
+			"wordItal": "Fratello",
+			"gender": "masc.",
+			"wordEng": "Brother"
+			},
+			{
+			"wordItal": "Sorella",
+			"gender": "fem.",
+			"wordEng": "Sister"
+			},
+			{
+			"wordItal": "Marito",
+			"gender": "masc.",
+			"wordEng": "Husband"
+			},
+			{
+			"wordItal": "Moglie",
+			"gender": "fem.",
+			"wordEng": "Wife"
+			},
+			{
+			"wordItal": "Figlio",
+			"gender": "masc.",
+			"wordEng": "Son"
+			},
+			{
+			"wordItal": "Figlia",
+			"gender": "fem.",
+			"wordEng": "Daughter"
+			},
+			{
+			"wordItal": "Zio",
+			"gender": "masc.",
+			"wordEng": "Uncle"
+			},
+			{
+			"wordItal": "Zia",
+			"gender": "fem.",
+			"wordEng": "Aunt"
+			},
+			{
+			"wordItal": "Nonno",
+			"gender": "masc.",
+			"wordEng": "Grandfather"
+			},
+			{
+			"wordItal": "Nonna",
+			"gender": "fem.",
+			"wordEng": "Grandmother"
+			},
+			{
+			"wordItal": "Il Nipote",
+			"gender": "masc.",
+			"wordEng": "Grandson/Nephew"
+			},
+			{
+			"wordItal": "La Nipote",
+			"gender": "fem.",
+			"wordEng": "Grandaughter/Niece"
+			},
+			{
+			"wordItal": "Il Cugino/La Cugina",
+			"gender": "masc./fem.",
+			"wordEng": "Cousin"
+			},
+			{
+			"wordItal": "Il Findanzato/La Fidanzata",
+			"gender": "masc./fem.",
+			"wordEng": "Fiance/Fiancee"
+			},
+			{
+			"wordItal": "Il Suocero/La Suocera",
+			"gender": "masc./fem.",
+			"wordEng": "Father-in-law/Mother-in-law"
+			},
+			{
+			"wordItal": "Il Cognato/La Cognata",
+			"gender": "masc./fem.",
+			"wordEng": "Brother-in-law/Sister-in-law"
+			},
+			{
+			"wordItal": "Il Bimbo/La Bimba",
+			"gender": "masc./fem.",
+			"wordEng": "Baby"
+			}
+
+		]
+	 
+	},
+		{
+		"flashSetName": "mostUsedNouns",
+
+		"words" : [{
+			"wordItal": "Amore",
+			"gender": "fem.",
+			"wordEng": "Love"
+			},
+			{
+			"wordItal": "Animale",
+			"gender": "masc.",
+			"wordEng": "Animal"
+			},
+			{
+			"wordItal": "Auto",
+			"gender": "fem.",
+			"wordEng": "Car"
+			},
+			{
+			"wordItal": "Affare",
+			"gender": "fem.",
+			"wordEng": "affair/matter/bargain"
+			},
+			{
+			"wordItal": "Il Bambino/La Bambina",
+			"gender": "masc./fem.",
+			"wordEng": "Boy/Girl"
+			},
+			{
+			"wordItal": "Coso/Cosa",
+			"gender": "masc./fem.",
+			"wordEng": "Thing"
+			},
+			{
+			"wordItal": "Casa",
+			"gender": "fem.",
+			"wordEng": "House"
+			},
+			{
+			"wordItal": "Citta",
+			"gender": "fem.",
+			"wordEng": "City"
+			},
+			{
+			"wordItal": "Clima",
+			"gender": "masc.",
+			"wordEng": "Climate"
+			},
+			{
+			"wordItal": "Famiglia",
+			"gender": "fem.",
+			"wordEng": "Family"
+			},
+			{
+			"wordItal": "Festa",
+			"gender": "fem.",
+			"wordEng": "Party"
+			},
+			{
+			"wordItal": "Forza",
+			"gender": "fem.",
+			"wordEng": "Strength"
+			},
+			{
+			"wordItal": "Gente",
+			"gender": "fem.",
+			"wordEng": "People"
+			},
+			{
+			"wordItal": "Giorno",
+			"gender": "masc.",
+			"wordEng": "Day"
+			},
+			{
+			"wordItal": "Luce",
+			"gender": "fem.",
+			"wordEng": "Light"
+			},
+			{
+			"wordItal": "Mamma",
+			"gender": "fem.",
+			"wordEng": "Mom"
+			},
+			{
+			"wordItal": "Mano",
+			"gender": "masc.",
+			"wordEng": "Hand"
+			},
+			{
+			"wordItal": "Mare",
+			"gender": "masc.",
+			"wordEng": "Sea"
+			},
+			{
+			"wordItal": "Modo",
+			"gender": "masc.",
+			"wordEng": "Way/manner"
+			},
+			{
+			"wordItal": "Moda",
+			"gender": "fem.",
+			"wordEng": "Fashion"
+			},
+			{
+			"wordItal": "Montagna",
+			"gender": "fem.",
+			"wordEng": "Mountain"
+			},
+			{
+			"wordItal": "Nome",
+			"gender": "masc.",
+			"wordEng": "Name"
+			},
+			{
+			"wordItal": "Ora",
+			"gender": "fem.",
+			"wordEng": "Hour/time"
+			},
+			{
+			"wordItal": "Paese",
+			"gender": "masc.",
+			"wordEng": "Country/town"
+			},
+			{
+			"wordItal": "Posto",
+			"gender": "masc.",
+			"wordEng": "Place"
+			},
+			{
+			"wordItal": "Ricetta",
+			"gender": "fem.",
+			"wordEng": "Recipe"
+			},
+			{
+			"wordItal": "Sole",
+			"gender": "masc.",
+			"wordEng": "Sun"
+			},
+			{
+			"wordItal": "Tempo",
+			"gender": "masc.",
+			"wordEng": "Time/weather"
+			},
+			{
+			"wordItal": "Vestito",
+			"gender": "masc.",
+			"wordEng": "Clothes/suit/dress"
+			},
+			{
+			"wordItal": "Vita",
+			"gender": "fem.",
+			"wordEng": "Life"
+			},
+			{
+			"wordItal": "Uomo",
+			"gender": "masc.",
+			"wordEng": "Man/human-being"
+			}
+
+		]
+	 
+	},
+
+	{
+		"flashSetName": "mostUsedAdjetives",
+
+		"words" : [{
+			"wordItal": "Bello/Bella",
+			"gender": "masc./fem.",
+			"wordEng": "Beautiful"
+			},
+			{
+			"wordItal": "Caldo/Calda",
+			"gender": "masc./fem.",
+			"wordEng": "Hot"
+			},
+			{
+			"wordItal": "Caro/Cara",
+			"gender": "masc./fem.",
+			"wordEng": "Expensive/dear"
+			},
+			{
+			"wordItal": "Comodo/Comoda",
+			"gender": "masc./fem.",
+			"wordEng": "Comfortable"
+			},
+			{
+			"wordItal": "Corto/Corta",
+			"gender": "masc./fem.",
+			"wordEng": "Short"
+			},
+			{
+			"wordItal": "Difficile",
+			"gender": "masc. and fem.",
+			"wordEng": "Difficult"
+			},
+			{
+			"wordItal": "Economico/Economica",
+			"gender": "masc./fem.",
+			"wordEng": "Cheap/inexpensive"
+			},
+			{
+			"wordItal": "Facile",
+			"gender": "masc. and fem.",
+			"wordEng": "Easy"
+			},
+			{
+			"wordItal": "Fresco/Fresca",
+			"gender": "masc./fem.",
+			"wordEng": "Fresh"
+			},
+			{
+			"wordItal": "Grande",
+			"gender": "masc. and fem.",
+			"wordEng": "Big/great"
+			},
+			{
+			"wordItal": "Lontano/Lontana",
+			"gender": "masc./fem.",
+			"wordEng": "Far"
+			},
+			{
+			"wordItal": "Lungo/Lunga",
+			"gender": "masc./fem.",
+			"wordEng": "Long"
+			},
+			{
+			"wordItal": "Normale",
+			"gender": "masc. and fem.",
+			"wordEng": "Normal"
+			},
+			{
+			"wordItal": "Nuovo/Nuova",
+			"gender": "masc./fem.",
+			"wordEng": "New"
+			},
+			{
+			"wordItal": "Perfetto/Perfetta",
+			"gender": "masc.fem.",
+			"wordEng": "Perfect"
+			},
+			{
+			"wordItal": "Piccolo/Piccola",
+			"gender": "masc./fem.",
+			"wordEng": "Small/little"
+			},
+			{
+			"wordItal": "Quello/Quella",
+			"gender": "masc./fem.",
+			"wordEng": "That"
+			},
+			{
+			"wordItal": "Questo/Qeusta",
+			"gender": "masc./fem.",
+			"wordEng": "This"
+			},
+			{
+			"wordItal": "Semplice",
+			"gender": "masc. and fem.",
+			"wordEng": "Simple"
+			},
+			{
+			"wordItal": "Stupido/Stupida",
+			"gender": "masc./fem.",
+			"wordEng": "Stupid"
+			},
+			{
+			"wordItal": "Tanto/Tanta",
+			"gender": "masc./fem.",
+			"wordEng": "A lot/many"
+			},
+			{
+			"wordItal": "Utile",
+			"gender": "masc. and fem.",
+			"wordEng": "Useful"
+			},
+			{
+			"wordItal": "Vecchio/Vecchia",
+			"gender": "masc./fem.",
+			"wordEng": "Old"
+			},
+			{
+			"wordItal": "Vicino/Vicina",
+			"gender": "masc./fem.",
+			"wordEng": "Close/near"
+			},
+			{
+			"wordItal": "Vuoto/Vuota",
+			"gender": "masc./fem.",
+			"wordEng": "Empty"
+			}
+
+		]
+	 
+	},
+
+	{
+		"flashSetName": "mostUsedVerbs",
+
+		"words" : [{
+			"wordItal": "Abitare",
+			"gender": "",
+			"wordEng": "To live"
+			},
+			{
+			"wordItal": "Andare",
+			"gender": "",
+			"wordEng": "To go"
+			},
+			{
+			"wordItal": "Avere",
+			"gender": "",
+			"wordEng": "To have"
+			},
+			{
+			"wordItal": "Bere",
+			"gender": "",
+			"wordEng": "To drink"
+			},
+			{
+			"wordItal": "Capire",
+			"gender": "",
+			"wordEng": "To understand"
+			},
+			{
+			"wordItal": "Comprare",
+			"gender": "",
+			"wordEng": "To buy"
+			},
+			{
+			"wordItal": "Dare",
+			"gender": "",
+			"wordEng": "To give"
+			},
+			{
+			"wordItal": "Dire",
+			"gender": "",
+			"wordEng": "To say/tell"
+			},
+			{
+			"wordItal": "Dovere",
+			"gender": "",
+			"wordEng": "Must/have to"
+			},
+			{
+			"wordItal": "Essere",
+			"gender": "",
+			"wordEng": "To be"
+			},
+			{
+			"wordItal": "Fare",
+			"gender": "",
+			"wordEng": "To do/make"
+			},
+			{
+			"wordItal": "Mangiare",
+			"gender": "",
+			"wordEng": "To eat"
+			},
+			{
+			"wordItal": "Parlare",
+			"gender": "",
+			"wordEng": "To talk"
+			},
+			{
+			"wordItal": "Potere",
+			"gender": "",
+			"wordEng": "Can/be able to"
+			},
+			{
+			"wordItal": "Prendere",
+			"gender": "",
+			"wordEng": "To get/take"
+			},
+			{
+			"wordItal": "Sentire",
+			"gender": "",
+			"wordEng": "To feel"
+			},
+			{
+			"wordItal": "Vedere",
+			"gender": "",
+			"wordEng": "To see"
+			},
+			{
+			"wordItal": "Venire",
+			"gender": "",
+			"wordEng": "To come"
+			},
+			{
+			"wordItal": "Volere",
+			"gender": "",
+			"wordEng": "To want"
+			},
+			{
+			"wordItal": "Vestire",
+			"gender": "",
+			"wordEng": "To dress"
+			}
+
+		]
+	 
+	},
+
+	{
+		"flashSetName": "mostUsedAdverbs",
+
+		"words" : [{
+			"wordItal": "Adesso",
+			"gender": "",
+			"wordEng": "Now"
+			},
+			{
+			"wordItal": "Allora",
+			"gender": "",
+			"wordEng": "So/then"
+			},
+			{
+			"wordItal": "Anche",
+			"gender": "",
+			"wordEng": "Also/too"
+			},
+			{
+			"wordItal": "Bene",
+			"gender": "",
+			"wordEng": "Good/well"
+			},
+			{
+			"wordItal": "Davanti",
+			"gender": "",
+			"wordEng": "In front of"
+			},
+			{
+			"wordItal": "Dietro",
+			"gender": "",
+			"wordEng": "Behind"
+			},
+			{
+			"wordItal": "Dopo",
+			"gender": "",
+			"wordEng": "After/later"
+			},
+			{
+			"wordItal": "Dove",
+			"gender": "",
+			"wordEng": "Where"
+			},
+			{
+			"wordItal": "Dunque",
+			"gender": "",
+			"wordEng": "So/therefore"
+			},
+			{
+			"wordItal": "Frequente",
+			"gender": "",
+			"wordEng": "Frequent"
+			},
+			{
+			"wordItal": "Eccetera",
+			"gender": "",
+			"wordEng": "Eccetera"
+			},
+			{
+			"wordItal": "Male",
+			"gender": "",
+			"wordEng": "Badly/poorly"
+			},
+			{
+			"wordItal": "Mentre",
+			"gender": "",
+			"wordEng": "While"
+			},
+			{
+			"wordItal": "Ora",
+			"gender": "",
+			"wordEng": "Now"
+			},
+			{
+			"wordItal": "Prima",
+			"gender": "",
+			"wordEng": "Before"
+			},
+			{
+			"wordItal": "Sopra",
+			"gender": "",
+			"wordEng": "On top of/above/over"
+			},
+			{
+			"wordItal": "Soprattuto",
+			"gender": "",
+			"wordEng": "Especially"
+			},
+			{
+			"wordItal": "Sotto",
+			"gender": "",
+			"wordEng": "Under/underneath"
+			},
+			{
+			"wordItal": "Spesso",
+			"gender": "",
+			"wordEng": "Often"
+			},
+			{
+			"wordItal": "A volte",
+			"gender": "",
+			"wordEng": "Sometimes"
+			}
+
+		]
+	 
+	},
+
+	{
+		"flashSetName": "usefulPhrases",
+
+		"words" : [{
+			"wordItal": "Ciao",
+			"gender": "",
+			"wordEng": "Hello/goodbye"
+			},
+			{
+			"wordItal": "Arrivederci!",
+			"gender": "",
+			"wordEng": "Goodbye"
+			},
+			{
+			"wordItal": "Grazie!",
+			"gender": "",
+			"wordEng": "Thank you!"
+			},
+			{
+			"wordItal": "Prego!",
+			"gender": "",
+			"wordEng": "You're welcome!/Can I help you?"
+			},
+			{
+			"wordItal": "Mi scusi!",
+			"gender": "",
+			"wordEng": "Excuse me"
+			},
+			{
+			"wordItal": "Quanto costa?",
+			"gender": "",
+			"wordEng": "How much is?"
+			},
+			{
+			"wordItal": "Come si arriva...?",
+			"gender": "",
+			"wordEng": "How do I get to...?"
+			},
+			{
+			"wordItal": "Dove il bagno",
+			"gender": "",
+			"wordEng": "Where is the bathroom?"
+			},
+			{
+			"wordItal": "Vorrei",
+			"gender": "",
+			"wordEng": "I would like"
+			},
+			{
+			"wordItal": "Salute!",
+			"gender": "",
+			"wordEng": "Cheers!"
+			},
+			{
+			"wordItal": "Come ti chiami?",
+			"gender": "",
+			"wordEng": "What is your name?"
+			},
+			{
+			"wordItal": "Mi chiamo...",
+			"gender": "",
+			"wordEng": "My name is..."
+			},
+			{
+			"wordItal": "Come sta? (formal)",
+			"gender": "",
+			"wordEng": "How are you?"
+			},
+			{
+			"wordItal": "Di dove sei?",
+			"gender": "",
+			"wordEng": "Wherea are you from?"
+			},
+			{
+			"wordItal": "Sono di...",
+			"gender": "",
+			"wordEng": "I am from..."
+			},
+			{
+			"wordItal": "Non capisco",
+			"gender": "",
+			"wordEng": "I don't understand"
+			},
+			{
+			"wordItal": "Sorry!",
+			"gender": "",
+			"wordEng": "Mi dispiace!"
+			},
+			{
+			"wordItal": "Per favore",
+			"gender": "",
+			"wordEng": "Please"
+			},
+			{
+			"wordItal": "Quanti anni hai?",
+			"gender": "",
+			"wordEng": "How old are you?"
+			},
+			{
+			"wordItal": "Io ho ... anni",
+			"gender": "",
+			"wordEng": "I am .... years old"
+			}
+
+		]
+	 
+	}
+
+]

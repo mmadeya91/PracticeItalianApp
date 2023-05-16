@@ -41,31 +41,8 @@ struct shortStoryView: View {
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     .opacity(1.0)
-                HStack{
-                   
-                        
-                        Button(action: {
-                        }, label: {
-                            Image(systemName: "x.circle")
-                                .foregroundColor(Color.black)
-                                .font(.system(size:35, weight: .medium))
-                                .padding(.leading, 10)
-
-                        })
-                      
-                        Spacer()
-                    
-                 
-                        Text(chosenStoryNameIn)
-                            .font(Font.custom("Arial Hebrew", size: 30))
-                            .padding(.trailing, 55)
-                            .offset(y:5)
- 
-                        Spacer()
-                    
-
-                }.frame(width: UIScreen.main.bounds.width, height: 50).background(Color.teal.opacity(0.3))
-                    .offset(y: -330)
+                
+                customTopNavBar3(chosenStoryNameIn: self.$chosenStoryNameIn).position(x:200, y:40)
                 
                 testStory(shortStoryObj: self.storyObj, showPopUpScreen: self.$showPopUpScreen, linkClickedString: self.$linkClickedString).frame(width: 350, height:380).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                     .stroke(.gray, lineWidth: 6))
@@ -475,6 +452,46 @@ struct shortStoryView: View {
                 .padding(.trailing, 40)
                 .lineSpacing(20)
             
+        }
+    }
+    
+    struct customTopNavBar3: View {
+        
+        @Binding var chosenStoryNameIn: String
+        
+        var body: some View {
+            ZStack{
+                HStack{
+                    NavigationLink(destination: availableShortStories(), label: {Image("cross")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.leading, 20)
+                    })
+                    
+                    Spacer()
+                    
+                    Text(chosenStoryNameIn)
+                        .font(Font.custom("Arial Hebrew", size: 20))
+                        .bold()
+                        .padding(.top, 7)
+                        .padding(.trailing, 10)
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: chooseActivity(), label: {Image("house")
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(1.5)
+                            .padding([.top, .bottom], 15)
+                            .padding(.trailing, 38)
+                           
+                    })
+                }.zIndex(1)
+            }.frame(width: 400, height: 60)
+                .background(Color.gray.opacity(0.25))
+                .border(width: 3, edges: [.bottom, .top], color: .teal)
+                .zIndex(0)
+                        
         }
     }
     

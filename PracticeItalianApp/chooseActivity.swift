@@ -32,6 +32,13 @@ struct chooseActivity: View {
                             .foregroundColor(Color.white)
                             .cornerRadius(10)
                     })
+                    NavigationLink(destination: chooseFlashCardSet(), label: {Text ("Flash Cards")
+                            .bold()
+                            .frame(width: 150, height: 50)
+                            .background(Color.blue)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(10)
+                    })
                 }.navigationBarBackButtonHidden(true)
             }
         }

@@ -27,22 +27,12 @@ struct verbConjMultipleChoiceView: View{
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     .opacity(1.0)
-                VStack{
-                    
-                    Text(mcO.tenseName)
-                        .bold()
-                        .font(Font.custom("Zapfino", size: 18))
-                        .frame(width:400, height: 75)
-                        .background(Color.gray.opacity(0.5))
-                        .foregroundColor(Color.white)
-                        .multilineTextAlignment(.center)
-                        .shadow(radius: 10)
-                        .position(x:200, y:75)
-                    
-                }
                 
                 VStack{
-                    multipleChoiceViewButtons(verbNameIt: mcO.verbNameIt, verbNameEng: mcO.verbNameEng, choices: mcO.choiceList.shuffled(), pickPronoun: mcO.pronoun, correctAnswer: mcO.correctAnswer, tense: tenseIn)
+                    
+                    customTopNavBar4(tenseIn: tenseIn, tenseName: mcO.tenseName).position(x:200, y:40)
+  
+                    multipleChoiceViewButtons(verbNameIt: mcO.verbNameIt, verbNameEng: mcO.verbNameEng, choices: mcO.choiceList.shuffled(), pickPronoun: mcO.pronoun, correctAnswer: mcO.correctAnswer, tense: tenseIn).offset(y:-250)
                     
                 }
             }
@@ -75,11 +65,8 @@ struct verbConjMultipleChoiceView: View{
                 
                 choicesView(choicesIn: choices, correctAnswerIn: correctAnswer)
                 
-                
-            }.position(x:200, y:425)
-            VStack{
-                mChoiceNextButton(tense: tense)
-            }.position(x:200, y:200)
+                mChoiceNextButton(tense: tense).padding(.top, 20)
+            }
             
         }
     }
@@ -168,6 +155,45 @@ struct verbConjMultipleChoiceView: View{
             })
             .navigationBarBackButtonHidden(true)
             
+        }
+    }
+    
+    struct customTopNavBar4: View {
+        
+        var tenseIn: Int
+        var tenseName: String
+        
+        var body: some View {
+            ZStack{
+                HStack{
+                    NavigationLink(destination: chooseVCActivity(tense: tenseIn), label: {Image("cross")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.leading, 20)
+                    })
+                    
+                    Spacer()
+                    
+                    Text(tenseName)
+                        .bold()
+                        .font(Font.custom("Zapfino", size: 18))
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: chooseActivity(), label: {Image("house")
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(1.5)
+                            .padding([.top, .bottom], 15)
+                            .padding(.trailing, 38)
+                           
+                    })
+                }.zIndex(1)
+            }.frame(width: 400, height: 60)
+                .background(Color.gray.opacity(0.25))
+                .border(width: 3, edges: [.bottom, .top], color: .teal)
+                .zIndex(0)
+                        
         }
     }
     

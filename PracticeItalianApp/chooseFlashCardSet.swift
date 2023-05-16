@@ -25,10 +25,12 @@ struct chooseFlashCardSet: View {
                     .opacity(1.0)
                 
                 VStack{
+                    customTopNavBar2().position(x:200, y:40)
+                    
                     flashCardSets().frame(width: 345, height:675).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                         .stroke(.gray, lineWidth: 6))
                         .shadow(radius: 10)
-                        .padding(.top, 40)
+                        .padding(.top, 10)
                 }
                 
             }
@@ -60,30 +62,41 @@ struct flashCardSets: View {
 struct flashCardHStack: View {
     var body: some View{
         
-        let flashCardSetTitles: [String] = ["Food", "Animals", "Clothing", "Family", "20 Most Used Words", "Common Phrases", "My List"]
+        let flashCardSetTitles: [String] = ["Food", "Animals", "Clothing", "Family", "Common Nouns", "Common Adjetives", "Common Adverbs", "Common Verbs", "Common Phrases", "My List", "Make Your Own"]
         
-        let flashCardIcons: [String] = ["food", "bear", "clothes", "family", "dictionary", "talking", "flash-card"]
+        let flashCardIcons: [String] = ["food", "bear", "clothes", "family", "dictionary", "dictionary", "dictionary", "dictionary", "talking", "flash-card", "flash-card"]
         
         ScrollView{
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[0], flashCardSetIcon: flashCardIcons[0])
+                flashCardButton(flashCardSetName: flashCardSetTitles[0], flashCardSetIcon: flashCardIcons[0], arrayIndex: 0)
                 Spacer()
-                flashCardButton(flashCardSetName: flashCardSetTitles[1], flashCardSetIcon: flashCardIcons[1])
+                flashCardButton(flashCardSetName: flashCardSetTitles[1], flashCardSetIcon: flashCardIcons[1], arrayIndex: 1)
             }.padding([.leading, .trailing], 45)
     
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[2], flashCardSetIcon: flashCardIcons[2])
+                flashCardButton(flashCardSetName: flashCardSetTitles[2], flashCardSetIcon: flashCardIcons[2], arrayIndex: 2)
                 Spacer()
-                flashCardButton(flashCardSetName: flashCardSetTitles[3], flashCardSetIcon: flashCardIcons[3])
+                flashCardButton(flashCardSetName: flashCardSetTitles[3], flashCardSetIcon: flashCardIcons[3], arrayIndex: 3)
             }.padding([.leading, .trailing], 45)
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[4], flashCardSetIcon: flashCardIcons[4])
+                flashCardButton(flashCardSetName: flashCardSetTitles[4], flashCardSetIcon: flashCardIcons[4], arrayIndex: 4)
                 Spacer()
-                flashCardButton(flashCardSetName: flashCardSetTitles[5], flashCardSetIcon: flashCardIcons[5])
+                flashCardButton(flashCardSetName: flashCardSetTitles[5], flashCardSetIcon: flashCardIcons[5], arrayIndex: 5)
             }.padding([.leading, .trailing], 45)
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[6], flashCardSetIcon: flashCardIcons[6])
+                flashCardButton(flashCardSetName: flashCardSetTitles[6], flashCardSetIcon: flashCardIcons[6], arrayIndex: 6)
                 Spacer()
+                flashCardButton(flashCardSetName: flashCardSetTitles[7], flashCardSetIcon: flashCardIcons[7], arrayIndex: 7)
+            }.padding([.leading, .trailing], 45)
+            HStack{
+                flashCardButton(flashCardSetName: flashCardSetTitles[8], flashCardSetIcon: flashCardIcons[8], arrayIndex: 8)
+                Spacer()
+                flashCardButton(flashCardSetName: flashCardSetTitles[9], flashCardSetIcon: flashCardIcons[9], arrayIndex: 9)
+            }.padding([.leading, .trailing], 45)
+            HStack{
+                flashCardButton(flashCardSetName: flashCardSetTitles[10], flashCardSetIcon: flashCardIcons[10], arrayIndex: 10)
+                Spacer()
+  
             }.padding([.leading, .trailing], 45)
         }
                
@@ -96,9 +109,13 @@ struct flashCardButton: View {
     
     var flashCardSetName: String
     var flashCardSetIcon: String
+    var arrayIndex: Int
+    
     @State var pressed = false
     
     var body: some View{
+        
+        let dataObj = flashCardData(chosenFlashSetIndex: arrayIndex)
         
         VStack{
             
@@ -109,7 +126,7 @@ struct flashCardButton: View {
                 .offset(y:15)
             
             
-            NavigationLink(destination: flashCardActivity(), label: {
+            NavigationLink(destination: flashCardActivity(flashCardObj: dataObj.collectChosenFlashSetData(index: arrayIndex)), label: {
                 Image(flashCardSetIcon)
                     .resizable()
                     .scaledToFit()
@@ -176,6 +193,35 @@ struct EdgeBorder2: Shape {
             path.addRect(CGRect(x: x, y: y, width: w, height: h))
         }
         return path
+    }
+}
+
+struct customTopNavBar2: View {
+    var body: some View {
+        ZStack{
+            HStack{
+                NavigationLink(destination: chooseActivity(), label: {Image("cross")
+                        .resizable()
+                        .scaledToFit()
+                        .padding(.leading, 20)
+                })
+                
+                Spacer()
+                
+                NavigationLink(destination: chooseActivity(), label: {Image("house")
+                        .resizable()
+                        .scaledToFit()
+                        .scaleEffect(1.5)
+                        .padding([.top, .bottom], 15)
+                        .padding(.trailing, 38)
+                       
+                })
+            }.zIndex(1)
+        }.frame(width: 400, height: 60)
+            .background(Color.gray.opacity(0.25))
+            .border(width: 3, edges: [.bottom, .top], color: .teal)
+            .zIndex(0)
+                    
     }
 }
 

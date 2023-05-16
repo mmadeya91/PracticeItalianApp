@@ -65,7 +65,7 @@ struct ContentView: View {
                     
                     if showBearAni {
                         GifImage("italAppGif")
-                            .offset(x: CGFloat(-var_x*600+240), y: 480)
+                            .offset(x: CGFloat(-var_x*600+240), y: 500)
                             .animation(.linear(duration: 8 ))
                             .onAppear { self.var_x *= -1}
                     }
