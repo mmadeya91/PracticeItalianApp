@@ -39,7 +39,7 @@ struct flashCardActivity: View {
             rightWrongButtonSet().offset(y:-65)
             saveToMyListButton().offset(y:-50)
             
-        }.offset(y:-80)
+        }.offset(y:-80).navigationBarBackButtonHidden(true)
         
     }
 }
@@ -341,7 +341,7 @@ struct customTopNavBar: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: chooseFlashCardSet(), label: {Image("house")
+                NavigationLink(destination: chooseActivity(), label: {Image("house")
                         .resizable()
                         .scaledToFit()
                         .scaleEffect(1.5)

@@ -14,6 +14,14 @@ extension View {
 }
 
 struct chooseFlashCardSet: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \UserMadeFlashCard, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<Item>
+    
     var body: some View {
         GeometryReader{ geo in
             ZStack{
@@ -91,10 +99,10 @@ struct flashCardHStack: View {
             HStack{
                 flashCardButton(flashCardSetName: flashCardSetTitles[8], flashCardSetIcon: flashCardIcons[8], arrayIndex: 8)
                 Spacer()
-                flashCardButton(flashCardSetName: flashCardSetTitles[9], flashCardSetIcon: flashCardIcons[9], arrayIndex: 9)
+                toMakeYourOwnButton(flashCardSetName: flashCardSetTitles[9], flashCardSetIcon: flashCardIcons[9])
             }.padding([.leading, .trailing], 45)
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[10], flashCardSetIcon: flashCardIcons[10], arrayIndex: 10)
+                toMakeYourOwnButton(flashCardSetName: flashCardSetTitles[10], flashCardSetIcon: flashCardIcons[10])
                 Spacer()
   
             }.padding([.leading, .trailing], 45)
@@ -133,7 +141,72 @@ struct flashCardButton: View {
                     .frame(width: 70, height: 85)
                     .padding(.top, -15)
             })
-            .buttonStyle(navButton())
+            
+            Text("Acc.")
+        
+        }
+    }
+    
+}
+
+struct toMakeYourOwnButton: View {
+    
+    
+    var flashCardSetName: String
+    var flashCardSetIcon: String
+    
+    var body: some View{
+        
+        
+        VStack{
+            
+            Text(flashCardSetName)
+                .font(Font.custom("Marker Felt", size: 20))
+                .frame(width: 100, height: 85)
+                .multilineTextAlignment(.center)
+                .offset(y:15)
+            
+            
+            NavigationLink(destination: createFlashCard(), label: {
+                Image(flashCardSetIcon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70, height: 85)
+                    .padding(.top, -15)
+            })
+            
+            Text("Acc.")
+        
+        }
+    }
+    
+}
+
+struct toMyListButton: View {
+    
+    
+    var flashCardSetName: String
+    var flashCardSetIcon: String
+    
+    var body: some View{
+        
+        
+        VStack{
+            
+            Text(flashCardSetName)
+                .font(Font.custom("Marker Felt", size: 20))
+                .frame(width: 100, height: 85)
+                .multilineTextAlignment(.center)
+                .offset(y:15)
+            
+            
+            NavigationLink(destination: createFlashCard(), label: {
+                Image(flashCardSetIcon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70, height: 85)
+                    .padding(.top, -15)
+            })
             
             Text("Acc.")
         
@@ -143,18 +216,7 @@ struct flashCardButton: View {
 }
 
 
-struct navButton: ButtonStyle {
-    @State var pressed = false
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(pressed ? 1.25 : 1.0)
-            .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
-                withAnimation(.easeIn(duration: 0.75)) {
-                    self.pressed = pressing
-                }
-            }, perform: { })
-    }
-}
+
 
 struct EdgeBorder2: Shape {
     var width: CGFloat

@@ -23,6 +23,7 @@
 		7C0013192A09EFE600E27CB4 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */; };
 		7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */; };
 		7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */; };
+		7C43BCBA2A147E6F001378F4 /* createFlashCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C43BCB92A147E6F001378F4 /* createFlashCard.swift */; };
 		7C77DB602A0E804D00E9E766 /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB5F2A0E804D00E9E766 /* GifImage.swift */; };
 		7C77DB642A0E841200E9E766 /* italAppGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7C77DB632A0E841200E9E766 /* italAppGif.gif */; };
 		7C77DB682A0EB61F00E9E766 /* chooseTense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB672A0EB61F00E9E766 /* chooseTense.swift */; };
@@ -55,6 +56,7 @@
 		7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = shortStoryAppData.json; path = ../../../../Desktop/shortStoryAppData.json; sourceTree = "<group>"; };
 		7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = availableShortStories.swift; sourceTree = "<group>"; };
 		7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ItalianAppVerbData.json; path = ../../../../Desktop/ItalianAppVerbData.json; sourceTree = "<group>"; };
+		7C43BCB92A147E6F001378F4 /* createFlashCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createFlashCard.swift; sourceTree = "<group>"; };
 		7C77DB5F2A0E804D00E9E766 /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
 		7C77DB632A0E841200E9E766 /* italAppGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = italAppGif.gif; sourceTree = "<group>"; };
 		7C77DB672A0EB61F00E9E766 /* chooseTense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseTense.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				7CB8F28E2A0F62470017A740 /* chooseActivity.swift */,
 				7CA544DC2A1018F300DB6441 /* chooseFlashCardSet.swift */,
 				7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */,
+				7C43BCB92A147E6F001378F4 /* createFlashCard.swift */,
 			);
 			path = PracticeItalianApp;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				7C77DB6A2A0EB6A200E9E766 /* chooseVCActivity.swift in Sources */,
 				28F4D2C429D249C00080608F /* PracticeItalianAppApp.swift in Sources */,
 				287828FD2A0013C2007B3D60 /* spellVerbData.swift in Sources */,
+				7C43BCBA2A147E6F001378F4 /* createFlashCard.swift in Sources */,
 				7CA544DF2A11D37800DB6441 /* flashCardActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +304,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_USE_INTEGRATED_DRIVER = NO;
 			};
 			name = Debug;
 		};
@@ -353,6 +358,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_USE_INTEGRATED_DRIVER = NO;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
