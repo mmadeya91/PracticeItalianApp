@@ -14,14 +14,7 @@ extension View {
 }
 
 struct chooseFlashCardSet: View {
-    
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \UserMadeFlashCard, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-    
+      
     var body: some View {
         GeometryReader{ geo in
             ZStack{
@@ -99,7 +92,7 @@ struct flashCardHStack: View {
             HStack{
                 flashCardButton(flashCardSetName: flashCardSetTitles[8], flashCardSetIcon: flashCardIcons[8], arrayIndex: 8)
                 Spacer()
-                toMakeYourOwnButton(flashCardSetName: flashCardSetTitles[9], flashCardSetIcon: flashCardIcons[9])
+                toMyListButton(flashCardSetName: flashCardSetTitles[9], flashCardSetIcon: flashCardIcons[9])
             }.padding([.leading, .trailing], 45)
             HStack{
                 toMakeYourOwnButton(flashCardSetName: flashCardSetTitles[10], flashCardSetIcon: flashCardIcons[10])
@@ -184,9 +177,20 @@ struct toMakeYourOwnButton: View {
 
 struct toMyListButton: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
     
     var flashCardSetName: String
     var flashCardSetIcon: String
+    
+//    var isEmpty: Bool {
+//        do {
+//            let request = viewContext.fetch(NSFetchRequest<UserMadeFlashCard>)
+//            let count  = try context.count(for: request)
+//            return count == 0
+//        } catch {
+//            return true
+//        }
+//    }
     
     var body: some View{
         
@@ -200,7 +204,7 @@ struct toMyListButton: View {
                 .offset(y:15)
             
             
-            NavigationLink(destination: createFlashCard(), label: {
+            NavigationLink(destination: myListFlashCardActivity(), label: {
                 Image(flashCardSetIcon)
                     .resizable()
                     .scaledToFit()
@@ -212,6 +216,8 @@ struct toMyListButton: View {
         
         }
     }
+    
+    
     
 }
 

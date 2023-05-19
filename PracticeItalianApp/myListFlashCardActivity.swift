@@ -1,21 +1,29 @@
 //
-//  flashCardActivity.swift
+//  myListFlashCardActivity.swift
 //  PracticeItalianApp
 //
-//  Created by Matt Madeya on 5/14/23.
+//  Created by Matt Madeya on 5/17/23.
 //
 
 import SwiftUI
 
 extension View {
-    func border3(width: CGFloat, edges: [Edge], color: Color) -> some View {
+    func border5(width: CGFloat, edges: [Edge], color: Color) -> some View {
         overlay(EdgeBorder(width: width, edges: edges).foregroundColor(color))
     }
 }
 
-struct flashCardActivity: View {
+struct myListFlashCardActivity: View {
     
-    @State var flashCardObj: flashCardObject
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    var isEmpty: Bool {myListCards.isEmpty}
+    
+    @FetchRequest var myListCards: FetchedResults<UserMadeFlashCard>
+
+    init() {
+        self._myListCards = FetchRequest(entity: UserMadeFlashCard.entity(), sortDescriptors: [])
+    }
     
     @State  var flipped = false
     @State  var animate3d = false
@@ -27,38 +35,50 @@ struct flashCardActivity: View {
     var body: some View {
         
         VStack {
-            customTopNavBar().position(x:200, y:120)
             
-            progressBar(counter: self.$counter, totalCards: flashCardObj.words.count)
-                .padding(.bottom, 60)
+            if isEmpty {
+                customTopNavBar()
+                Spacer()
+                noCardsInList()
+                    .padding(.bottom, 260)
+            }else{
+                
+                customTopNavBar()
+                
+                progressBarMyList(counter: self.$counter, totalCards: myListCards.count)
+                    .padding(.bottom, 60)
+                
+                scrollViewBuilderMyList(flipped: self.$flipped, animate3d: self.$animate3d, counter: self.$counter, myListCards: myListCards)
+                
+                
+                rightWrongButtonSet()
+                    .padding(.top, 40)
+                removeFromListButton(cardToDelete: myListCards[counter])
+                    .padding(.top, 20)
+            }
             
-
-            scrollViewBuilder(flipped: self.$flipped, animate3d: self.$animate3d, flashCardObj: self.$flashCardObj, counter: self.$counter)
-
-            
-            rightWrongButtonSet().offset(y:-65)
-            saveToMyListButton().offset(y:-50)
-            
-        }.offset(y:-80).navigationBarBackButtonHidden(true)
-        
+        }.navigationBarBackButtonHidden(true)
     }
+    
 }
 
-struct scrollViewBuilder: View {
+
+struct scrollViewBuilderMyList: View {
     
     @Binding var flipped: Bool
     @Binding var animate3d: Bool
-    @Binding var flashCardObj: flashCardObject
     @Binding var counter: Int
+    
+    var myListCards: FetchedResults<UserMadeFlashCard>
     
     var body: some View{
         
         ScrollViewReader {scrollView in
             ScrollView(.horizontal){
                 HStack{
-                    ForEach(0..<flashCardObj.words.count, id: \.self) {i in
-                        cardView(flipped: $flipped, animate3d: $animate3d, counterTest: i , flashCardObj: $flashCardObj)
-                            .padding([.leading, .trailing], 25)
+                    ForEach(0..<myListCards.count, id: \.self) {i in
+                        cardViewMyList(flipped: $flipped, animate3d: $animate3d, counterTest: i, myListCards: myListCards)
+                            .padding([.leading, .trailing], 35)
                     }
                 }
             }.scrollDisabled(true)
@@ -85,7 +105,7 @@ struct scrollViewBuilder: View {
                 
                 Button(action: {
                     withAnimation{
-                        if counter < flashCardObj.words.count - 1 {
+                        if counter < myListCards.count - 1 {
                             counter = counter + 1
                         }
                         scrollView.scrollTo(counter)
@@ -100,26 +120,38 @@ struct scrollViewBuilder: View {
                     
                     
                 }).padding(.trailing, 90)
-            }.offset(y:175)
+            }.padding(.top,20)
         }
       
     }
 }
 
+struct noCardsInList: View {
+    var body: some View{
+        Text("You have no cards in your list!")
+            .bold()
+            .font(Font.custom("Marker Felt", size: 35))
+            .frame(width: 350, height: 200)
+            .background(Color.blue.opacity(0.5))
+            .cornerRadius(20)
+            .padding([.leading, .trailing], 20)
+            .multilineTextAlignment(.center)
+    }
+}
 
-struct cardView: View {
+
+struct cardViewMyList: View {
     
     @Binding var flipped: Bool
     @Binding var animate3d: Bool
     var counterTest: Int
-    //@Binding var counter: Int
-    @Binding var flashCardObj: flashCardObject
+    var myListCards: FetchedResults<UserMadeFlashCard>
     
     
     var body: some View{
         ZStack() {
-            flashCardItal(counterTest: counterTest, fcO: $flashCardObj).opacity(flipped ? 0.0 : 1.0)
-            flashCardEng(counterTest: counterTest, fcO: $flashCardObj).opacity(flipped ? 1.0 : 0.0)
+            flashCardItalMyList(counterTest: counterTest, userMadeFlashCards: myListCards).opacity(flipped ? 0.0 : 1.0)
+            flashCardEngMyList(counterTest: counterTest, userMadeFlashCards: myListCards).opacity(flipped ? 1.0 : 0.0)
         }
         .modifier(FlipEffect(flipped: $flipped, angle: animate3d ? 180 : 0, axis: (x: 0, y: 1)))
         .onTapGesture {
@@ -131,78 +163,23 @@ struct cardView: View {
     }
 }
 
-struct FlipEffect: GeometryEffect {
-    
-    var animatableData: Double {
-        get { angle }
-        set { angle = newValue }
-    }
-    
-    @Binding var flipped: Bool
-    var angle: Double
-    let axis: (x: CGFloat, y: CGFloat)
-    
-    func effectValue(size: CGSize) -> ProjectionTransform {
-        
-        DispatchQueue.main.async {
-            self.flipped = self.angle >= 90 && self.angle < 270
-        }
-        
-        let tweakedAngle = flipped ? -180 + angle : angle
-        let a = CGFloat(Angle(degrees: tweakedAngle).radians)
-        
-        var transform3d = CATransform3DIdentity;
-        transform3d.m34 = -1/max(size.width, size.height)
-        
-        transform3d = CATransform3DRotate(transform3d, a, axis.x, axis.y, 0)
-        transform3d = CATransform3DTranslate(transform3d, -size.width/2.0, -size.height/2.0, 0)
-        
-        let affineTransform = ProjectionTransform(CGAffineTransform(translationX: size.width/2.0, y: size.height / 2.0))
-        
-        return ProjectionTransform(transform3d).concatenating(affineTransform)
-    }
-}
-
-struct flashCardItal: View {
-    
-    var counterTest: Int
-    
-    //@Binding var counter: Int
-    @Binding var fcO: flashCardObject
-    
-    
-    var body: some View{
-        Text(fcO.words[counterTest].wordItal)
-            .font(Font.custom("Marker Felt", size: 40))
-            .foregroundColor(Color.black)
-            .frame(width: 325, height: 250)
-                .background(Color.teal)
-                .cornerRadius(20)
-                .shadow(radius: 10)
-            .padding(.bottom, 30)
-            .padding([.leading, .trailing], 10)
-        
-        
-    }
-}
-
-struct flashCardEng: View {
+struct flashCardItalMyList: View {
     
     var counterTest: Int
 
-    @Binding var fcO: flashCardObject
+    var userMadeFlashCards: FetchedResults<UserMadeFlashCard>
     
     
     var body: some View{
         VStack{
-            Text(fcO.words[counterTest].wordEng)
+            Text(userMadeFlashCards[counterTest].italianLine1!)
                 .font(Font.custom("Marker Felt", size: 40))
                 .foregroundColor(Color.black)
                 .padding(.bottom, 30)
                 .padding([.leading, .trailing], 10)
             
             
-            Text(fcO.words[counterTest].gender.rawValue)
+            Text(userMadeFlashCards[counterTest].italianLine2!)
                 .font(Font.custom("Marker Felt", size: 30))
                 .foregroundColor(Color.black)
                 .padding(.top, 2)
@@ -215,7 +192,36 @@ struct flashCardEng: View {
     }
 }
 
-struct rightWrongButtonSet: View{
+struct flashCardEngMyList: View {
+    
+    var counterTest: Int
+
+    var userMadeFlashCards: FetchedResults<UserMadeFlashCard>
+    
+    
+    var body: some View{
+        VStack{
+            Text(userMadeFlashCards[counterTest].englishLine1!)
+                .font(Font.custom("Marker Felt", size: 40))
+                .foregroundColor(Color.black)
+                .padding(.bottom, 30)
+                .padding([.leading, .trailing], 10)
+            
+            
+            Text(userMadeFlashCards[counterTest].englishLine2!)
+                .font(Font.custom("Marker Felt", size: 30))
+                .foregroundColor(Color.black)
+                .padding(.top, 2)
+                .padding([.leading, .trailing], 10)
+            
+        }.frame(width: 325, height: 250)
+            .background(Color.teal)
+            .cornerRadius(20)
+            .shadow(radius: 10)
+    }
+}
+
+struct rightWrongButtonSet5: View{
     var body: some View{
         
         HStack{
@@ -251,17 +257,49 @@ struct rightWrongButtonSet: View{
     }
 }
 
-struct saveToMyListButton: View{
+struct removeFromListButton: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    var cardToDelete: UserMadeFlashCard
+    
     var body: some View{
-        Button(action: {}, label: {Text("Save to My List")})
+        Button(action: {
+            deleteItems(cardToDelete: cardToDelete)
+        }, label: {
+            Text("Remove from List").padding(.top, 5)
+                .font(Font.custom("Arial Hebrew", size: 20))
+                .foregroundColor(Color.black)
+                .frame(width: 200, height: 40)
+                .background(Color.orange)
+                .cornerRadius(20)
+            
+        })
     }
+    
+    func deleteItems(cardToDelete: UserMadeFlashCard) {
+        withAnimation {
+
+                    viewContext.delete(cardToDelete)
+            
+            do {
+                try viewContext.save()
+            } catch {
+                
+            }
+        }
+    }
+    
 }
 
-struct nextPreviousButtonSet: View{
+
+
+struct nextPreviousButtonSet5: View{
     
-    @Binding var fcO: flashCardObject
     @Binding var counter: Int
     @Binding var nextBackClicked: Bool
+    
+    var myListCards: FetchedResults<UserMadeFlashCard>
     
     var body: some View{
         HStack{
@@ -287,7 +325,7 @@ struct nextPreviousButtonSet: View{
             
             Button(action: {
                 withAnimation{
-                    if counter < fcO.words.count - 1 {
+                    if counter < myListCards.count - 1 {
                         counter = counter + 1
                         nextBackClicked.toggle()
                     }
@@ -306,100 +344,33 @@ struct nextPreviousButtonSet: View{
     }
 }
 
-struct progressBar: View {
-    
+struct progressBarMyList: View {
+
     @Binding var counter: Int
     let totalCards: Int
-    
+
     var body: some View {
         VStack {
-            
+
             Text(String(counter + 1) + "/" + String(totalCards)).offset(y:20)
                 .font(Font.custom("Arial Hebrew", size: 28))
                 .bold()
-            
+
             ProgressView("", value: Double(counter), total: Double(totalCards - 1))
                 .tint(Color.orange)
                 .frame(width: 300)
                 .scaleEffect(x: 1, y: 4)
-                
-            
-            
+
+
+
         }
     }
 }
 
-struct customTopNavBar: View {
-    var body: some View {
-        ZStack{
-            HStack{
-                NavigationLink(destination: chooseFlashCardSet(), label: {Image("cross")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.leading, 20)
-                })
-                
-                Spacer()
-                
-                NavigationLink(destination: chooseActivity(), label: {Image("house")
-                        .resizable()
-                        .scaledToFit()
-                        .scaleEffect(1.5)
-                        .padding([.top, .bottom], 15)
-                        .padding(.trailing, 38)
-                       
-                })
-            }.zIndex(1)
-        }.frame(width: 400, height: 60)
-            .background(Color.gray.opacity(0.25))
-            .border(width: 3, edges: [.bottom, .top], color: .teal)
-            .zIndex(0)
-                    
-    }
-}
+struct myListFlashCardActivity_Previews: PreviewProvider {
+   static var previews: some View {
+    myListFlashCardActivity().environment(\.managedObjectContext,
+      PersistenceController.preview.container.viewContext)
 
-struct EdgeBorder3: Shape {
-    var width: CGFloat
-    var edges: [Edge]
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        for edge in edges {
-            var x: CGFloat {
-                switch edge {
-                case .top, .bottom, .leading: return rect.minX
-                case .trailing: return rect.maxX - width
-                }
-            }
-
-            var y: CGFloat {
-                switch edge {
-                case .top, .leading, .trailing: return rect.minY
-                case .bottom: return rect.maxY - width
-                }
-            }
-
-            var w: CGFloat {
-                switch edge {
-                case .top, .bottom: return rect.width
-                case .leading, .trailing: return width
-                }
-            }
-
-            var h: CGFloat {
-                switch edge {
-                case .top, .bottom: return width
-                case .leading, .trailing: return rect.height
-                }
-            }
-            path.addRect(CGRect(x: x, y: y, width: w, height: h))
-        }
-        return path
-    }
-}
-
-struct flashCardActivity_Previews: PreviewProvider {
-    static var previews: some View {
-        flashCardActivity(flashCardObj: flashCardObject.Food)
-    }
+   }
 }

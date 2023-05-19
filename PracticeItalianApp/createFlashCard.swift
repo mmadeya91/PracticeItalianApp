@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct createFlashCard: View {
     
     @State var showingSheet = false
@@ -90,7 +91,7 @@ struct createFlashCard: View {
             Spacer()
             
             HStack{
-                saveButton()
+                saveButton(fPI1: self.frontUserInput2, fPI2: self.frontUserInput2, bUI1: self.backUserInput1, bUI2: self.backUserInput2)
                 previewButton(showingSheet: self.$showingSheet)
             }.padding(.top, 20
             )
@@ -221,13 +222,42 @@ struct flashCardEngPreview: View {
 }
 
 struct saveButton: View{
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    var fPI1: String
+    var fPI2: String
+    var bUI1: String
+    var bUI2: String
+    
     var body: some View{
-        Button(action: {}, label: {
+        Button(action: {
+            addItem(f1: fPI1, f2: fPI2, b1: bUI1, b2: bUI2)
+        }, label: {
             Text("Save to My List")
                 .frame(width: 180, height: 50)
                 .background(Color.orange)
                 .cornerRadius(20)
         })
+        
+        
+    }
+    
+    func addItem(f1: String, f2: String, b1: String, b2: String) {
+        withAnimation {
+            let newUserMadeFlashCard = UserMadeFlashCard(context: viewContext)
+            newUserMadeFlashCard.italianLine1 = f1
+            newUserMadeFlashCard.italianLine2 = f2
+            newUserMadeFlashCard.englishLine1 = b1
+            newUserMadeFlashCard.englishLine2 = b2
+            
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
     }
 }
 
