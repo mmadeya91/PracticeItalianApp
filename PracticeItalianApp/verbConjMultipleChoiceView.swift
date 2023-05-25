@@ -12,12 +12,15 @@ struct verbConjMultipleChoiceView: View{
     var tenseIn: Int
     
     @State private var pressed = false
+    @State private var counter: Int = 0
     
     var body: some View {
         
+        let tenseName = ["Presente", "Passato Prossimo", "Imperfetto", "Futuro", "Conditionale", "Imperativo"]
+        
         let mcD = multipleChoiceData(tense: tenseIn)
         
-        let mcO: multipleChoiceObject = mcD.collectMultipleChoiceData(tense: mcD.tense)
+        let mcOArray: [multipleChoiceObject] = mcD.createArrayOfMCD(numberOfVerbs: 15, tense: mcD.tense)
         
         GeometryReader{ geo in
             ZStack{
@@ -28,45 +31,114 @@ struct verbConjMultipleChoiceView: View{
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     .opacity(1.0)
                 
+  
                 VStack{
                     
-                    customTopNavBar4(tenseIn: tenseIn, tenseName: mcO.tenseName).position(x:200, y:40)
-  
-                    multipleChoiceViewButtons(verbNameIt: mcO.verbNameIt, verbNameEng: mcO.verbNameEng, choices: mcO.choiceList.shuffled(), pickPronoun: mcO.pronoun, correctAnswer: mcO.correctAnswer, tense: tenseIn).offset(y:-250)
+                    customTopNavBar8(tenseIn: tenseIn, tenseName: tenseName[tenseIn]).offset(y:-35)
+                    
+                    VStack{
+                        progressBarMultipleChoice(counter: self.$counter, totalQuestions: mcOArray.count)
+                        
+                        scrollViewBuilderMultipleChoice(mcOArray: mcOArray, counter: self.$counter, tense: tenseIn).padding(.top, 30)
+                            .padding([.leading, .trailing], 10)
+                        
+                        addToMyListConjVerbButton().padding(.top, 20)
+                    }.padding(.top, 50)
                     
                 }
             }
         }
     }
+}
     
-    struct multipleChoiceViewButtons: View{
+    struct scrollViewBuilderMultipleChoice: View{
         
-        var verbNameIt: String
-        var verbNameEng: String
-        var choices: [String]
-        var pickPronoun: String
-        var correctAnswer: String
+        var mcOArray: [multipleChoiceObject]
+        
+        @Binding var counter: Int
         var tense: Int
         
-        @State var pressed = false
+        var body: some View{
+            ScrollViewReader {scrollView in
+                ScrollView(.horizontal){
+                    HStack{
+                        ForEach(0..<mcOArray.count, id: \.self) { i in
+                            multipleChoiceView(mcOIn: mcOArray[i])
+                                .padding([.leading, .trailing], 10)
+                        }
+                    }
+                }.scrollDisabled(true)
+                HStack{
+                    Button(action: {
+                        withAnimation{
+                            if counter > 0 {
+                                counter = counter - 1
+                            }
+                            scrollView.scrollTo(counter)
+                        }
+                    }, label:
+                            {Image(systemName: "arrow.backward").resizable()
+                            .bold()
+                            .scaledToFit()
+                            .frame(width: 65, height: 65)
+                            .foregroundColor(Color.black)
+                        
+                        
+                        
+                    }).padding(.leading, 90)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        withAnimation{
+                            if counter < mcOArray.count - 1 {
+                                counter = counter + 1
+                            }
+                            scrollView.scrollTo(counter)
+                        }
+                    }, label:
+                            {Image(systemName: "arrow.forward").resizable()
+                            .bold()
+                            .scaledToFit()
+                            .frame(width: 65, height: 65)
+                            .foregroundColor(Color.black)
+                        
+                        
+                        
+                    }).padding(.trailing, 90)
+                }.padding(.top, 50)
+            }
+        }
+    }
+    
+    struct multipleChoiceView: View {
+        var mcOIn: multipleChoiceObject
+        var body: some View{
+            VStack{
+                multipleChoiceViewVerbtoConj(verbNameIt: mcOIn.verbNameIt, pronoun: mcOIn.pronoun, verbNameEng: mcOIn.verbNameEng)
+                choicesView(choicesIn: mcOIn.choiceList, correctAnswerIn: mcOIn.correctAnswer)
+            }
+        }
+    }
+        
+    struct multipleChoiceViewVerbtoConj: View{
+        
+        var verbNameIt: String
+        var pronoun: String
+        var verbNameEng: String
         
         var body: some View{
             
-            VStack{
-                Text(verbNameIt + " - " + pickPronoun + "\n(" + verbNameEng + ")")
+                Text(verbNameIt + " - " + pronoun + "\n(" + verbNameEng)
                     .bold()
-                    .frame(width:240, height: 75)
-                    .background(Color.blue)
+                    .font(Font.custom("Arial Hebrew", size: 20))
+                    .frame(width:260, height: 100)
+                    .background(Color.teal)
                     .cornerRadius(10)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 20)
                     .shadow(radius: 10)
-                
-                choicesView(choicesIn: choices, correctAnswerIn: correctAnswer)
-                
-                mChoiceNextButton(tense: tense).padding(.top, 20)
-            }
             
         }
     }
@@ -101,64 +173,109 @@ struct verbConjMultipleChoiceView: View{
         var correctAnswer: String
         
         
-        @State var defColor = Color.blue
+        @State var defColor = Color.teal
         @State private var pressed: Bool = false
+        @State var selected = false
         
         var body: some View{
             
             let isCorrect: Bool = choiceString.elementsEqual(correctAnswer)
             
-            Button(choiceString, action: {
-                
-            })
-            .frame(width:180, height: 40)
-            .background(defColor)
-            .foregroundColor(Color.white)
-            .cornerRadius(20)
-            .shadow(radius: 5)
-            .padding(.trailing, 5)
-            .scaleEffect(pressed ? 1.25 : 1.0)
-            .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
-                withAnimation(.easeInOut(duration: 0.75)) {
-                    self.pressed = pressing
-                }
-                if pressing {
-                    if isCorrect {
-                        defColor = Color.green
-                    }else {
-                        defColor = Color.red
+           Button(action: {
+               
+               if !isCorrect    {
+                   defColor = Color.red
+                   self.selected.toggle()
+               }
+
+           }, label: {
+               Text(choiceString)
+                   .font(Font.custom("Arial Hebrew", size: 18))
+                   .padding(.top, 6)
+                   .padding([.leading, .trailing], 2)
+               
+           }).frame(width:170, height: 40)
+                .background(defColor)
+                .foregroundColor(Color.white)
+                .cornerRadius(20)
+                .shadow(radius: 5)
+                .padding(.trailing, 5)
+                .scaleEffect(pressed ? 1.25 : 1.0)
+                .offset(x: selected ? -5 : 0)
+                .animation(Animation.default.repeatCount(5).speed(6))
+                .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
+                    withAnimation(.easeInOut(duration: 0.75)) {
+                        if isCorrect{
+                            SoundManager.instance.playSound(sound: .correct)
+                            self.pressed = pressing
+                            defColor = Color.green
+                        }
                     }
-                } else {
-                    
-                }
-            }, perform: { })
+
+                }, perform: { })
         }
     }
     
-    struct mChoiceNextButton: View{
+    struct progressBarMultipleChoice: View {
         
+        @Binding var counter: Int
+        let totalQuestions: Int
         
-        var tense: Int
-        
-        @State var pressed = false
-        
-        var body: some View{
+        var body: some View {
             
-            
-            NavigationLink(destination: verbConjMultipleChoiceView(tenseIn: tense), label: {Text ("Next")
+            VStack {
+                
+                Text(String(counter + 1) + "/" + String(totalQuestions))
+                    .font(Font.custom("Arial Hebrew", size: 25))
                     .bold()
-                    .frame(width: 150, height: 40)
-                    .background(Color.teal)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 10)
-            })
-            .navigationBarBackButtonHidden(true)
-            
+                    .offset(y:35)
+                
+                ProgressView("", value: Double(counter), total: Double(totalQuestions - 1))
+                    .tint(Color.orange)
+                    .scaleEffect(x: 1, y: 4)
+                    .padding([.leading, .trailing], 10)
+                    .padding(.bottom, 70)
+                    
+                
+                
+            }.frame(width: 350, height: 70)
+                .background(.white.opacity(0.8))
+                .border(.orange, width: 3)
+                .cornerRadius(10)
+               
         }
     }
+
+struct addToMyListConjVerbButton: View {
+    @Environment(\.managedObjectContext) private var viewContext
     
-    struct customTopNavBar4: View {
+    var body: some View{
+        Button(action: {}, label: {
+            Text("Save to my List")
+                .font(Font.custom("Arial Hebrew", size: 20))
+                .foregroundColor(Color.black)
+                .frame(width: 200, height: 40)
+                .background(Color.orange)
+                .cornerRadius(20)
+            
+        })
+    }
+    
+    func deleteItems(cardToDelete: UserMadeFlashCard) {
+        withAnimation {
+
+                    viewContext.delete(cardToDelete)
+            
+            do {
+                try viewContext.save()
+            } catch {
+                
+            }
+        }
+    }
+}
+    
+    struct customTopNavBar8: View {
         
         var tenseIn: Int
         var tenseName: String
@@ -192,8 +309,7 @@ struct verbConjMultipleChoiceView: View{
             }.frame(width: 400, height: 60)
                 .background(Color.gray.opacity(0.25))
                 .border(width: 3, edges: [.bottom, .top], color: .teal)
-                .zIndex(0)
-                        
+
         }
     }
     
@@ -204,4 +320,4 @@ struct verbConjMultipleChoiceView: View{
         }
     }
     
-}
+

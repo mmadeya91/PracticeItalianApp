@@ -15,6 +15,20 @@ class multipleChoiceData{
         self.tense = tense
     }
     
+    func createArrayOfMCD(numberOfVerbs: Int, tense: Int) -> [multipleChoiceObject] {
+        var counter = 1
+        var arrayOfMCD: [multipleChoiceObject] = [multipleChoiceObject]()
+        while counter <= numberOfVerbs{
+            let mcOtoAdd = collectMultipleChoiceData(tense: tense)
+            if !arrayOfMCD.contains(where: { mcO in return mcO.correctAnswer == mcOtoAdd.correctAnswer}) {
+                arrayOfMCD.append(mcOtoAdd)
+                counter = counter + 1
+            }
+        }
+        
+        return arrayOfMCD
+    }
+    
     func collectMultipleChoiceData(tense: Int) -> multipleChoiceObject {
         
         let verbList: [verbObject] = verbObject.allVerbObject

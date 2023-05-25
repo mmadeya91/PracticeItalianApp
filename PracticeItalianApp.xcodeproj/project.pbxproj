@@ -36,10 +36,14 @@
 		7CA544DF2A11D37800DB6441 /* flashCardActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */; };
 		7CA544E12A12D94600DB6441 /* flashCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CA544E02A12D94600DB6441 /* flashCardData.json */; };
 		7CA544E52A12EA1700DB6441 /* flashCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA544E42A12EA1700DB6441 /* flashCardData.swift */; };
+		7CB79B432A1E8F8C00B09EB7 /* correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CB79B422A1E8F8A00B09EB7 /* correct.mp3 */; };
+		7CB79B492A1E95C000B09EB7 /* introMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CB79B482A1E95C000B09EB7 /* introMusic.mp3 */; };
 		7CB8F28F2A0F62470017A740 /* chooseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8F28E2A0F62470017A740 /* chooseActivity.swift */; };
 		7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA41162A054CDD00462A34 /* shortStoryView.swift */; };
 		7CBA411E2A09CE4F00462A34 /* shortStoryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */; };
 		7CBA41202A09CED300462A34 /* shortStoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA411F2A09CED300462A34 /* shortStoryData.swift */; };
+		7CC881BB2A1E43480010CF64 /* thumbUp.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7CC881BA2A1E43480010CF64 /* thumbUp.gif */; };
+		7CC881BD2A1E86820010CF64 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC881BC2A1E86820010CF64 /* SoundManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,11 +77,15 @@
 		7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashCardActivity.swift; sourceTree = "<group>"; };
 		7CA544E02A12D94600DB6441 /* flashCardData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = flashCardData.json; sourceTree = "<group>"; };
 		7CA544E42A12EA1700DB6441 /* flashCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashCardData.swift; sourceTree = "<group>"; };
+		7CB79B422A1E8F8A00B09EB7 /* correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correct.mp3; sourceTree = "<group>"; };
+		7CB79B482A1E95C000B09EB7 /* introMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = introMusic.mp3; sourceTree = "<group>"; };
 		7CB8F28E2A0F62470017A740 /* chooseActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseActivity.swift; sourceTree = "<group>"; };
 		7CBA41162A054CDD00462A34 /* shortStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryView.swift; sourceTree = "<group>"; };
 		7CBA411A2A0826DE00462A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryObject.swift; sourceTree = "<group>"; };
 		7CBA411F2A09CED300462A34 /* shortStoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryData.swift; sourceTree = "<group>"; };
+		7CC881BA2A1E43480010CF64 /* thumbUp.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thumbUp.gif; sourceTree = "<group>"; };
+		7CC881BC2A1E86820010CF64 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,11 +123,12 @@
 				28F4D2C329D249C00080608F /* PracticeItalianAppApp.swift */,
 				28F4D2C529D249C00080608F /* ContentView.swift */,
 				7C77DB632A0E841200E9E766 /* italAppGif.gif */,
+				7CC881BA2A1E43480010CF64 /* thumbUp.gif */,
 				287829022A0023F1007B3D60 /* spellConjVerbView.swift */,
 				287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */,
-				7CBA41162A054CDD00462A34 /* shortStoryView.swift */,
 				28F4D2C729D249C50080608F /* Assets.xcassets */,
 				28F4D2CC29D249C50080608F /* Persistence.swift */,
+				7CB79B3F2A1E8F6200B09EB7 /* Sounds */,
 				28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */,
 				28F4D2C929D249C50080608F /* Preview Content */,
 				28E88FFC29F9D5F000D07103 /* JSONManager.swift */,
@@ -127,20 +136,22 @@
 				287828FA29FB2754007B3D60 /* multipleChoiceObject.swift */,
 				287828FC2A0013C2007B3D60 /* spellVerbData.swift */,
 				287828FE2A001623007B3D60 /* spellVerbObject.swift */,
+				7CBA41162A054CDD00462A34 /* shortStoryView.swift */,
+				7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */,
 				7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */,
 				7CBA411F2A09CED300462A34 /* shortStoryData.swift */,
-				7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */,
 				7C77DB5F2A0E804D00E9E766 /* GifImage.swift */,
 				7C77DB672A0EB61F00E9E766 /* chooseTense.swift */,
 				7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */,
-				7CB8F28E2A0F62470017A740 /* chooseActivity.swift */,
 				7CA544DC2A1018F300DB6441 /* chooseFlashCardSet.swift */,
+				7CB8F28E2A0F62470017A740 /* chooseActivity.swift */,
 				7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */,
 				7C43BCB92A147E6F001378F4 /* createFlashCard.swift */,
 				7C639EA92A1552DB00DFD8CF /* myListFlashCardActivity.swift */,
 				7C639EAD2A17E10000DFD8CF /* listeningActivity.swift */,
 				7C639EB12A17EFB300DFD8CF /* AudioManager.swift */,
 				7C639EB32A17F5D600DFD8CF /* PlaybackControlButton.swift */,
+				7CC881BC2A1E86820010CF64 /* SoundManager.swift */,
 			);
 			path = PracticeItalianApp;
 			sourceTree = "<group>";
@@ -154,6 +165,15 @@
 				28F4D2CA29D249C50080608F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7CB79B3F2A1E8F6200B09EB7 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				7CB79B422A1E8F8A00B09EB7 /* correct.mp3 */,
+				7CB79B482A1E95C000B09EB7 /* introMusic.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,8 +235,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				28F4D2CB29D249C50080608F /* Preview Assets.xcassets in Resources */,
+				7CB79B432A1E8F8C00B09EB7 /* correct.mp3 in Resources */,
+				7CB79B492A1E95C000B09EB7 /* introMusic.mp3 in Resources */,
 				28F4D2C829D249C50080608F /* Assets.xcassets in Resources */,
 				7CA544E12A12D94600DB6441 /* flashCardData.json in Resources */,
+				7CC881BB2A1E43480010CF64 /* thumbUp.gif in Resources */,
 				7C0013192A09EFE600E27CB4 /* shortStoryAppData.json in Resources */,
 				7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */,
 				7C77DB642A0E841200E9E766 /* italAppGif.gif in Resources */,
@@ -235,6 +258,7 @@
 				28F4D2CD29D249C50080608F /* Persistence.swift in Sources */,
 				7C77DB602A0E804D00E9E766 /* GifImage.swift in Sources */,
 				7CBA41202A09CED300462A34 /* shortStoryData.swift in Sources */,
+				7CC881BD2A1E86820010CF64 /* SoundManager.swift in Sources */,
 				28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */,
 				7CA544E52A12EA1700DB6441 /* flashCardData.swift in Sources */,
 				7CB8F28F2A0F62470017A740 /* chooseActivity.swift in Sources */,

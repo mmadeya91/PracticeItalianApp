@@ -21,35 +21,46 @@ struct flashCardActivity: View {
     @State  var animate3d = false
     @State  var showButtonSet = false
     @State var nextBackClicked = false
+    @State var correctShowGif = false
     
     @State  var counter: Int = 0
     
     var body: some View {
-        
-        VStack {
-            customTopNavBar().position(x:200, y:120)
+        ZStack{
+            VStack{
+                customTopNavBar()
+                Spacer()
+                progressBar(counter: self.$counter, totalCards: flashCardObj.words.count)
+                Spacer()
+                scrollViewBuilder(flipped: self.$flipped, animate3d: self.$animate3d, flashCardObj: self.$flashCardObj, counter: self.$counter, showGif: self.$correctShowGif).padding(.bottom, 160).padding(.top, 40)
+                Spacer()
+                
+            }
             
-            progressBar(counter: self.$counter, totalCards: flashCardObj.words.count)
-                .padding(.bottom, 60)
             
-
-            scrollViewBuilder(flipped: self.$flipped, animate3d: self.$animate3d, flashCardObj: self.$flashCardObj, counter: self.$counter)
-
+            if correctShowGif {
+                GifImage("thumbUp")
+                    .offset(x:100, y:630)
+                    .animation(Animation.easeIn, value: correctShowGif)
+                   
+            }
             
-            rightWrongButtonSet().offset(y:-65)
-            saveToMyListButton().offset(y:-50)
-            
-        }.offset(y:-80).navigationBarBackButtonHidden(true)
-        
+        }.navigationBarBackButtonHidden(true)
+    
     }
 }
 
 struct scrollViewBuilder: View {
     
+    @State var leadingPad: CGFloat = 20
+    @State var trailingPad: CGFloat = 20
+    @State var selected = false
+
     @Binding var flipped: Bool
     @Binding var animate3d: Bool
     @Binding var flashCardObj: flashCardObject
     @Binding var counter: Int
+    @Binding var showGif: Bool
     
     var body: some View{
         
@@ -58,49 +69,77 @@ struct scrollViewBuilder: View {
                 HStack{
                     ForEach(0..<flashCardObj.words.count, id: \.self) {i in
                         cardView(flipped: $flipped, animate3d: $animate3d, counterTest: i , flashCardObj: $flashCardObj)
-                            .padding([.leading, .trailing], 25)
+                            .padding(.leading, leadingPad)
+                            .padding(.trailing, trailingPad)
                     }
                 }
             }.scrollDisabled(true)
-            HStack{
-                Button(action: {
-                    withAnimation{
-                        if counter > 0 {
-                            counter = counter - 1
+            VStack{
+                HStack{
+                    Button(action: {
+  
+                        withAnimation{
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                animate3d.toggle()
+                                if counter < flashCardObj.words.count - 1 {
+                                    counter = counter + 1
+                                }
+                                withAnimation{
+                                    scrollView.scrollTo(counter)
+                                }
+                            }
+                            
+                            self.selected.toggle()
+
                         }
-                        scrollView.scrollTo(counter)
-                    }
-                }, label:
-                        {Image(systemName: "arrow.backward").resizable()
-                        .bold()
-                        .scaledToFit()
-                        .frame(width: 65, height: 65)
-                        .foregroundColor(Color.black)
+                    }, label:
+                            {Image("cancel")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 65, height: 65)
+                            .offset(x: selected ? -5 : 0)
+                            .animation(Animation.default.repeatCount(5).speed(6))
+                        
+                        
+                        
+                    }).padding(.leading, 90)
                     
+                    Spacer()
                     
-                    
-                }).padding(.leading, 90)
-                
-                Spacer()
-                
-                Button(action: {
-                    withAnimation{
-                        if counter < flashCardObj.words.count - 1 {
-                            counter = counter + 1
+                    Button(action: {
+                        
+    
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            animate3d.toggle()
+                            showGif.toggle()
+                            if counter < flashCardObj.words.count - 1 {
+                                counter = counter + 1
+                            }
+                            withAnimation{
+                                scrollView.scrollTo(counter)
+                            }
                         }
-                        scrollView.scrollTo(counter)
-                    }
-                }, label:
-                        {Image(systemName: "arrow.forward").resizable()
-                        .bold()
-                        .scaledToFit()
-                        .frame(width: 65, height: 65)
-                        .foregroundColor(Color.black)
-                    
-                    
-                    
-                }).padding(.trailing, 90)
-            }.offset(y:175)
+                            SoundManager.instance.playSound(sound: .correct)
+                        
+                            showGif.toggle()
+                        
+                    }, label:
+                            {Image("checked")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 65, height: 65)
+                        
+                        
+                        
+                        
+                    }).padding(.trailing, 90)
+                }
+                
+                saveToMyListButton(italLine1: flashCardObj.words[counter].wordItal,  engLine1: flashCardObj.words[counter].wordEng, engLine2: flashCardObj.words[counter].gender.rawValue).padding(.top, 20)
+                
+            }.opacity(flipped ? 1 : 0).animation(.easeIn(duration: 0.3), value: flipped)
         }
       
     }
@@ -112,7 +151,6 @@ struct cardView: View {
     @Binding var flipped: Bool
     @Binding var animate3d: Bool
     var counterTest: Int
-    //@Binding var counter: Int
     @Binding var flashCardObj: flashCardObject
     
     
@@ -167,20 +205,20 @@ struct flashCardItal: View {
     
     var counterTest: Int
     
-    //@Binding var counter: Int
     @Binding var fcO: flashCardObject
     
     
     var body: some View{
-        Text(fcO.words[counterTest].wordItal)
-            .font(Font.custom("Marker Felt", size: 40))
-            .foregroundColor(Color.black)
-            .frame(width: 325, height: 250)
-                .background(Color.teal)
-                .cornerRadius(20)
-                .shadow(radius: 10)
-            .padding(.bottom, 30)
-            .padding([.leading, .trailing], 10)
+        VStack{
+            Text(fcO.words[counterTest].wordItal)
+                .font(Font.custom("Marker Felt", size: 40))
+                .padding(.bottom, 30)
+                .padding([.leading, .trailing], 10)
+        } .frame(width: 325, height: 250)
+            .background(Color.teal)
+            .cornerRadius(20)
+            .shadow(radius: 10)
+            .padding()
         
         
     }
@@ -205,106 +243,107 @@ struct flashCardEng: View {
             Text(fcO.words[counterTest].gender.rawValue)
                 .font(Font.custom("Marker Felt", size: 30))
                 .foregroundColor(Color.black)
-                .padding(.top, 2)
                 .padding([.leading, .trailing], 10)
             
         }.frame(width: 325, height: 250)
             .background(Color.teal)
             .cornerRadius(20)
             .shadow(radius: 10)
+            .padding()
     }
 }
 
-struct rightWrongButtonSet: View{
-    var body: some View{
-        
-        HStack{
-            
-            Button(action: {
-                
-            }, label:
-                    {Image("cancel")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                
-                
-                
-            }).padding(.leading, 80)
-            
-            
-            Spacer()
-            
-            Button(action: {
-                
-            }, label:
-                    {Image("checked")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                
-                
-            }).padding(.trailing, 80)
-            
-        }
-        
-    }
-}
 
 struct saveToMyListButton: View{
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    var italLine1: String
+    var engLine1: String
+    var engLine2: String
+    
     var body: some View{
-        Button(action: {}, label: {Text("Save to My List")})
+        Button(action: {
+            
+            
+        }, label: {
+            Text("Save to My List")
+                .bold()
+                .frame(width: 190, height: 50)
+                .background(.orange)
+                .foregroundColor(.black)
+                .cornerRadius(20)
+        })
     }
-}
+    
+    private func addItem() {
+        withAnimation {
+            let newFlashCardEntity = UserMadeFlashCard(context: viewContext)
+            newFlashCardEntity.italianLine1 = italLine1
+            newFlashCardEntity.italianLine2 = ""
+            newFlashCardEntity.englishLine1 = engLine1
+            newFlashCardEntity.englishLine2 = engLine2
+            
 
-struct nextPreviousButtonSet: View{
-    
-    @Binding var fcO: flashCardObject
-    @Binding var counter: Int
-    @Binding var nextBackClicked: Bool
-    
-    var body: some View{
-        HStack{
-            Button(action: {
-                withAnimation{
-                    if counter > 0 {
-                        counter = counter - 1
-                        nextBackClicked.toggle()
-                    }
-                }
-            }, label:
-                    {Image(systemName: "arrow.backward").resizable()
-                    .bold()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                    .foregroundColor(Color.black)
-                
-                
-                
-            }).padding(.leading, 90)
-            
-            Spacer()
-            
-            Button(action: {
-                withAnimation{
-                    if counter < fcO.words.count - 1 {
-                        counter = counter + 1
-                        nextBackClicked.toggle()
-                    }
-                }
-            }, label:
-                    {Image(systemName: "arrow.forward").resizable()
-                    .bold()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                    .foregroundColor(Color.black)
-                
-                
-                
-            }).padding(.trailing, 90)
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+            }
         }
     }
 }
+
+//struct nextPreviousButtonSet: View{
+//
+//    @Binding var fcO: flashCardObject
+//    @Binding var counter: Int
+//    @Binding var nextBackClicked: Bool
+//
+//    var body: some View{
+//        HStack{
+//            Button(action: {
+//                withAnimation{
+//                    if counter > 0 {
+//                        counter = counter - 1
+//                        nextBackClicked.toggle()
+//                    }
+//                }
+//            }, label:
+//                    {Image(systemName: "arrow.backward").resizable()
+//                    .bold()
+//                    .scaledToFit()
+//                    .frame(width: 65, height: 65)
+//                    .foregroundColor(Color.black)
+//
+//
+//
+//            }).padding(.leading, 90)
+//
+//            Spacer()
+//
+//            Button(action: {
+//                withAnimation{
+//                    if counter < fcO.words.count - 1 {
+//                        counter = counter + 1
+//                        nextBackClicked.toggle()
+//                    }
+//                }
+//            }, label:
+//                    {Image(systemName: "arrow.forward").resizable()
+//                    .bold()
+//                    .scaledToFit()
+//                    .frame(width: 65, height: 65)
+//                    .foregroundColor(Color.black)
+//
+//
+//
+//            }).padding(.trailing, 90)
+//        }
+//    }
+//}
 
 struct progressBar: View {
     

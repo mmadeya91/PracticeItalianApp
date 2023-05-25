@@ -34,12 +34,12 @@ struct ContentView: View {
                         
          
                         Button {
-                           DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                           DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
                                
                                 goNext = true
                            }
-                            
                             showBearAni.toggle()
+                            SoundManager.instance.playSound(sound: .introMusic)
                             navButtonText = "Andiamo!"
                             
                         } label: {
@@ -54,13 +54,12 @@ struct ContentView: View {
                         NavigationLink(destination: chooseActivity(),isActive: $goNext,label:{}
                                     ).isDetailLink(false)
                             
-                        
                     }.offset(y:-170)
                     
                     if showBearAni {
                         GifImage("italAppGif")
-                            .offset(x: CGFloat(-var_x*600+240), y: 500)
-                            .animation(.linear(duration: 8 ))
+                            .offset(x: CGFloat(-var_x*700+240), y: 500)
+                            .animation(.linear(duration: 11 ))
                             .onAppear { self.var_x *= -1}
                     }
  

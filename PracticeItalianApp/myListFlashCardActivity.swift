@@ -29,34 +29,38 @@ struct myListFlashCardActivity: View {
     @State  var animate3d = false
     @State  var showButtonSet = false
     @State var nextBackClicked = false
+    @State var correctShowGif = false
     
     @State  var counter: Int = 0
     
     var body: some View {
         
-        VStack {
-            
-            if isEmpty {
-                customTopNavBar()
-                Spacer()
-                noCardsInList()
-                    .padding(.bottom, 260)
-            }else{
+        ZStack{
+            VStack {
                 
-                customTopNavBar()
+                if isEmpty {
+                    customTopNavBar()
+                    Spacer()
+                    noCardsInList()
+                        .padding(.bottom, 260)
+                }else{
+                    
+                    customTopNavBar()
+                    Spacer()
+                    progressBarMyList(counter: self.$counter, totalCards: myListCards.count)
+                    Spacer()
+                    scrollViewBuilderMyList(flipped: self.$flipped, animate3d: self.$animate3d, counter: self.$counter, showGif: self.$correctShowGif, myListCards: myListCards).padding(.bottom, 160).padding(.top, 40)
+                    Spacer()
+                }
                 
-                progressBarMyList(counter: self.$counter, totalCards: myListCards.count)
-                    .padding(.bottom, 60)
-                
-                scrollViewBuilderMyList(flipped: self.$flipped, animate3d: self.$animate3d, counter: self.$counter, myListCards: myListCards)
-                
-                
-                rightWrongButtonSet()
-                    .padding(.top, 40)
-                removeFromListButton(cardToDelete: myListCards[counter])
-                    .padding(.top, 20)
             }
             
+            if correctShowGif {
+                GifImage("thumbUp")
+                    .offset(x:100, y:630)
+                    .animation(Animation.easeIn, value: correctShowGif)
+                   
+            }
         }.navigationBarBackButtonHidden(true)
     }
     
@@ -65,9 +69,17 @@ struct myListFlashCardActivity: View {
 
 struct scrollViewBuilderMyList: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @State var leadingPad: CGFloat = 30
+    @State var trailingPad: CGFloat = 20
+    @State var selected = false
+
+    
     @Binding var flipped: Bool
     @Binding var animate3d: Bool
     @Binding var counter: Int
+    @Binding var showGif: Bool
     
     var myListCards: FetchedResults<UserMadeFlashCard>
     
@@ -77,52 +89,109 @@ struct scrollViewBuilderMyList: View {
             ScrollView(.horizontal){
                 HStack{
                     ForEach(0..<myListCards.count, id: \.self) {i in
-                        cardViewMyList(flipped: $flipped, animate3d: $animate3d, counterTest: i, myListCards: myListCards)
-                            .padding([.leading, .trailing], 35)
+                        cardViewMyList(flipped: $flipped, animate3d: $animate3d, counterTest: i, myListCards: myListCards).padding([.leading, .trailing], 20)
+                            
                     }
                 }
             }.scrollDisabled(true)
-            HStack{
-                Button(action: {
-                    withAnimation{
-                        if counter > 0 {
-                            counter = counter - 1
+            VStack{
+                HStack{
+                    Button(action: {
+  
+                        withAnimation{
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                animate3d.toggle()
+                                if counter < myListCards.count - 1 {
+                                    counter = counter + 1
+                                }
+                                withAnimation{
+                                    scrollView.scrollTo(counter)
+                                }
+                            }
+                            
+                            self.selected.toggle()
+
                         }
-                        scrollView.scrollTo(counter)
-                    }
-                }, label:
-                        {Image(systemName: "arrow.backward").resizable()
-                        .bold()
-                        .scaledToFit()
-                        .frame(width: 65, height: 65)
-                        .foregroundColor(Color.black)
+                    }, label:
+                            {Image("cancel")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 65, height: 65)
+                            .offset(x: selected ? -5 : 0)
+                            .animation(Animation.default.repeatCount(5).speed(6))
+                        
+                        
+                        
+                    }).padding(.leading, 90)
                     
+                    Spacer()
                     
-                    
-                }).padding(.leading, 90)
-                
-                Spacer()
-                
+                    Button(action: {
+                        
+    
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            animate3d.toggle()
+                            showGif.toggle()
+                            if counter < myListCards.count - 1 {
+                                counter = counter + 1
+                            }
+                            withAnimation{
+                                scrollView.scrollTo(counter)
+                            }
+                        }
+                            SoundManager.instance.playSound(sound: .correct)
+                        
+                            showGif.toggle()
+                        
+                    }, label:
+                            {Image("checked")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 65, height: 65)
+                        
+                        
+                        
+                        
+                    }).padding(.trailing, 90)
+                }
                 Button(action: {
-                    withAnimation{
+                    deleteItems(cardToDelete: myListCards[counter])
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        animate3d.toggle()
                         if counter < myListCards.count - 1 {
                             counter = counter + 1
                         }
-                        scrollView.scrollTo(counter)
+                        withAnimation{
+                            scrollView.scrollTo(counter)
+                        }
                     }
-                }, label:
-                        {Image(systemName: "arrow.forward").resizable()
-                        .bold()
-                        .scaledToFit()
-                        .frame(width: 65, height: 65)
+                }, label: {
+                    Text("Remove from List").padding(.top, 5)
+                        .font(Font.custom("Arial Hebrew", size: 20))
                         .foregroundColor(Color.black)
+                        .frame(width: 200, height: 40)
+                        .background(Color.orange)
+                        .cornerRadius(20)
                     
-                    
-                    
-                }).padding(.trailing, 90)
-            }.padding(.top,20)
+                }).padding(.top, 20)
+            }.opacity(flipped ? 1 : 0).animation(.easeIn(duration: 0.3), value: flipped)
         }
       
+    }
+    
+    func deleteItems(cardToDelete: UserMadeFlashCard) {
+        withAnimation {
+
+                    viewContext.delete(cardToDelete)
+            
+            do {
+                try viewContext.save()
+            } catch {
+                
+            }
+        }
     }
 }
 
@@ -188,7 +257,7 @@ struct flashCardItalMyList: View {
         }.frame(width: 325, height: 250)
             .background(Color.teal)
             .cornerRadius(20)
-            .shadow(radius: 10)
+            .padding()
     }
 }
 
@@ -217,7 +286,7 @@ struct flashCardEngMyList: View {
         }.frame(width: 325, height: 250)
             .background(Color.teal)
             .cornerRadius(20)
-            .shadow(radius: 10)
+            .padding()
     }
 }
 
@@ -256,42 +325,6 @@ struct rightWrongButtonSet5: View{
         
     }
 }
-
-struct removeFromListButton: View {
-    
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    var cardToDelete: UserMadeFlashCard
-    
-    var body: some View{
-        Button(action: {
-            deleteItems(cardToDelete: cardToDelete)
-        }, label: {
-            Text("Remove from List").padding(.top, 5)
-                .font(Font.custom("Arial Hebrew", size: 20))
-                .foregroundColor(Color.black)
-                .frame(width: 200, height: 40)
-                .background(Color.orange)
-                .cornerRadius(20)
-            
-        })
-    }
-    
-    func deleteItems(cardToDelete: UserMadeFlashCard) {
-        withAnimation {
-
-                    viewContext.delete(cardToDelete)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                
-            }
-        }
-    }
-    
-}
-
 
 
 struct nextPreviousButtonSet5: View{
