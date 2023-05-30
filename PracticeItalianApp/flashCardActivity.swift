@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-extension View {
-    func border3(width: CGFloat, edges: [Edge], color: Color) -> some View {
-        overlay(EdgeBorder(width: width, edges: edges).foregroundColor(color))
+extension Image {
+    
+    func imageStarModifier() -> some View {
+        self
+            .resizable()
+            .scaledToFit()
+            .frame(width: 25, height: 25)
     }
 }
 
@@ -64,6 +68,8 @@ struct scrollViewBuilder: View {
     
     var body: some View{
         
+        let fCAM = FlashCardAccDataManager(cardName: flashCardObj.words[counter].wordItal)
+        
         ScrollViewReader {scrollView in
             ScrollView(.horizontal){
                 HStack{
@@ -88,6 +94,13 @@ struct scrollViewBuilder: View {
                                 withAnimation{
                                     scrollView.scrollTo(counter)
                                 }
+                            }
+                            
+                            if fCAM.isEmptyFlashCardAccData() {
+                                fCAM.addNewCardAccEntityIncorrect()
+                            }else{
+                                
+                                fCAM.updateIncorrectInput(card: fCAM.getAccData())
                             }
                             
                             self.selected.toggle()
@@ -122,6 +135,13 @@ struct scrollViewBuilder: View {
                             }
                         }
                             SoundManager.instance.playSound(sound: .correct)
+                        
+                        if fCAM.isEmptyFlashCardAccData() {
+                            fCAM.addNewCardAccEntityCorrect()
+                        } else {
+                            fCAM.updateCorrectInput(card: fCAM.getAccData())
+                        }
+                        
                         
                             showGif.toggle()
                         
@@ -212,8 +232,13 @@ struct flashCardItal: View {
         VStack{
             Text(fcO.words[counterTest].wordItal)
                 .font(Font.custom("Marker Felt", size: 40))
-                .padding(.bottom, 30)
+                .padding(.top, 70)
                 .padding([.leading, .trailing], 10)
+            
+            starAndAccuracy(cardName: fcO.words[counterTest].wordItal)
+            
+            
+            
         } .frame(width: 325, height: 250)
             .background(Color.teal)
             .cornerRadius(20)
@@ -250,6 +275,92 @@ struct flashCardEng: View {
             .cornerRadius(20)
             .shadow(radius: 10)
             .padding()
+    }
+}
+
+struct starAndAccuracy: View {
+    
+    var cardName: String
+    
+    var body: some View{
+        let fCAM = FlashCardAccDataManager(cardName: cardName)
+        let isEmpty = fCAM.isEmptyFlashCardAccData()
+        
+
+        if isEmpty {
+            HStack{
+                Image("emptyStar")
+                    .imageStarModifier()
+                Image("emptyStar")
+                    .imageStarModifier()
+                Image("emptyStar")
+                    .imageStarModifier()
+                Spacer()
+                Text("0/0")
+                    .font(Font.custom("Arial Hebrew", size: 30))
+            }.padding([.leading, .trailing], 20)
+                .padding(.top, 55)
+        } else {
+            
+            let fetchedResults = fCAM.getAccData()
+            let numOfStars = fCAM.getNumOfStars(card: fetchedResults)
+            
+            switch numOfStars {
+                case 0:
+                    HStack{
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Spacer()
+                        Text(String(fetchedResults.correct) + " / " + String(fetchedResults.cardAttempts))
+                    }.padding([.leading, .trailing], 20).padding(.top, 55)
+                
+                case 1:
+                    HStack{
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Spacer()
+                        Text(String(fetchedResults.correct) + " / " + String(fetchedResults.cardAttempts))
+                    
+                    }.padding([.leading, .trailing], 20).padding(.top, 55)
+                case 2:
+                    HStack{
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Spacer()
+                        Text(String(fetchedResults.correct) + " / " + String(fetchedResults.cardAttempts))
+                    
+                    }.padding([.leading, .trailing], 20).padding(.top, 55)
+                case 3:
+                    HStack{
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Spacer()
+                        Text(String(fetchedResults.correct) + " / " + String(fetchedResults.cardAttempts))
+                    }.padding([.leading, .trailing], 20).padding(.top, 55)
+                default:
+                    HStack{
+                        Text("Error")
+                    }
+            }
+            
+        }
+        
     }
 }
 
@@ -394,46 +505,6 @@ struct customTopNavBar: View {
             .border(width: 3, edges: [.bottom, .top], color: .teal)
             .zIndex(0)
                     
-    }
-}
-
-struct EdgeBorder3: Shape {
-    var width: CGFloat
-    var edges: [Edge]
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        for edge in edges {
-            var x: CGFloat {
-                switch edge {
-                case .top, .bottom, .leading: return rect.minX
-                case .trailing: return rect.maxX - width
-                }
-            }
-
-            var y: CGFloat {
-                switch edge {
-                case .top, .leading, .trailing: return rect.minY
-                case .bottom: return rect.maxY - width
-                }
-            }
-
-            var w: CGFloat {
-                switch edge {
-                case .top, .bottom: return rect.width
-                case .leading, .trailing: return width
-                }
-            }
-
-            var h: CGFloat {
-                switch edge {
-                case .top, .bottom: return width
-                case .leading, .trailing: return rect.height
-                }
-            }
-            path.addRect(CGRect(x: x, y: y, width: w, height: h))
-        }
-        return path
     }
 }
 

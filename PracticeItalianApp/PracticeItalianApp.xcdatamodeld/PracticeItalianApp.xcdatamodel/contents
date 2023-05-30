@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G531" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ConjPresent" representedClassName="ConjPresent" syncable="YES" codeGenerationType="class"/>
+    <entity name="FlashCardAccuracy" representedClassName="FlashCardAccuracy" syncable="YES" codeGenerationType="class">
+        <attribute name="cardAttempts" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="cardName" optional="YES" attributeType="String"/>
+        <attribute name="correct" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="incorrect" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="FlashCardSetAccuracy" representedClassName="FlashCardSetAccuracy" syncable="YES" codeGenerationType="class"/>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <entity name="UserFlashCardAccuracy" representedClassName="UserFlashCardAccuracy" syncable="YES" codeGenerationType="class">
-        <attribute name="adjetiveAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="adverbAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="animalAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="clothesAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="familyAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="foodAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="nounAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="phraseAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="userListAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="verbsAcc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-    </entity>
+    <entity name="UserFlashCardAccuracy" representedClassName="UserFlashCardAccuracy" syncable="YES" codeGenerationType="class"/>
     <entity name="UserMadeFlashCard" representedClassName="UserMadeFlashCard" syncable="YES" codeGenerationType="class">
         <attribute name="englishLine1" optional="YES" attributeType="String"/>
         <attribute name="englishLine2" optional="YES" attributeType="String"/>

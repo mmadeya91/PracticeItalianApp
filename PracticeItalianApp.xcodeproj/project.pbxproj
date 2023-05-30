@@ -22,6 +22,7 @@
 		28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */; };
 		7C0013192A09EFE600E27CB4 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */; };
 		7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */; };
+		7C31868E2A24059600E94F60 /* FlashCardAccDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */; };
 		7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */; };
 		7C43BCBA2A147E6F001378F4 /* createFlashCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C43BCB92A147E6F001378F4 /* createFlashCard.swift */; };
 		7C639EAA2A1552DB00DFD8CF /* myListFlashCardActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C639EA92A1552DB00DFD8CF /* myListFlashCardActivity.swift */; };
@@ -63,6 +64,7 @@
 		28F4D2CF29D249C50080608F /* PracticeItalianApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PracticeItalianApp.xcdatamodel; sourceTree = "<group>"; };
 		7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = shortStoryAppData.json; path = ../../../../Desktop/shortStoryAppData.json; sourceTree = "<group>"; };
 		7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = availableShortStories.swift; sourceTree = "<group>"; };
+		7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardAccDataManager.swift; sourceTree = "<group>"; };
 		7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ItalianAppVerbData.json; path = ../../../../Desktop/ItalianAppVerbData.json; sourceTree = "<group>"; };
 		7C43BCB92A147E6F001378F4 /* createFlashCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createFlashCard.swift; sourceTree = "<group>"; };
 		7C639EA92A1552DB00DFD8CF /* myListFlashCardActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myListFlashCardActivity.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				7C639EB12A17EFB300DFD8CF /* AudioManager.swift */,
 				7C639EB32A17F5D600DFD8CF /* PlaybackControlButton.swift */,
 				7CC881BC2A1E86820010CF64 /* SoundManager.swift */,
+				7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */,
 			);
 			path = PracticeItalianApp;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				287829012A002197007B3D60 /* verbConjMultipleChoiceView.swift in Sources */,
 				28F4D2C629D249C00080608F /* ContentView.swift in Sources */,
 				287828FB29FB2754007B3D60 /* multipleChoiceObject.swift in Sources */,
+				7C31868E2A24059600E94F60 /* FlashCardAccDataManager.swift in Sources */,
 				7C639EAA2A1552DB00DFD8CF /* myListFlashCardActivity.swift in Sources */,
 				287828F929FB160E007B3D60 /* multipleChoiceData.swift in Sources */,
 				287828FF2A001623007B3D60 /* spellVerbObject.swift in Sources */,

@@ -10,6 +10,8 @@ import CoreData
 
 struct ContentView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @State var animate: Bool = false
     @State var showBearAni: Bool = false
     @State private var var_x = 1
