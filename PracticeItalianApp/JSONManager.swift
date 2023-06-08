@@ -24,9 +24,10 @@ struct Verb: Codable {
 
 
 struct storyObject: Codable {
-    var storyName, story: String
-    var wordLinks: [WordLink]
-    var questionsObjs: [QuestionsObj]
+    let storyName, story: String
+    let wordLinks: [WordLink]
+    let questionsObjs: [QuestionsObj]
+    let fillInBlankQuestions: [FillInBlankQuestion]
     
     static let allStoryObjects: [storyObject] = Bundle.main.decode(file: "shortStoryAppData.json")
 }
@@ -37,6 +38,12 @@ struct QuestionsObj: Codable {
     var choices: [String]
     var answer: String
     var mC: Bool?
+}
+
+struct FillInBlankQuestion: Codable {
+    let englishLine1, questionPart1, missingWord: String
+    let questionPart2: String
+    let choices: [String]
 }
 
 

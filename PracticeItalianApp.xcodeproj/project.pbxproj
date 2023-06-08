@@ -20,10 +20,12 @@
 		28F4D2CB29D249C50080608F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F4D2CA29D249C50080608F /* Preview Assets.xcassets */; };
 		28F4D2CD29D249C50080608F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CC29D249C50080608F /* Persistence.swift */; };
 		28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */; };
-		7C0013192A09EFE600E27CB4 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */; };
 		7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */; };
 		7C31868E2A24059600E94F60 /* FlashCardAccDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */; };
-		7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */; };
+		7C31869D2A28E05C00E94F60 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C31869C2A28E05C00E94F60 /* ItalianAppVerbData.json */; };
+		7C31869F2A28E06400E94F60 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C31869E2A28E06400E94F60 /* shortStoryAppData.json */; };
+		7C3186A12A28E06A00E94F60 /* flashCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C3186A02A28E06900E94F60 /* flashCardData.json */; };
+		7C3186A32A28E34400E94F60 /* RightWrongButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3186A22A28E34400E94F60 /* RightWrongButtons.swift */; };
 		7C43BCBA2A147E6F001378F4 /* createFlashCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C43BCB92A147E6F001378F4 /* createFlashCard.swift */; };
 		7C639EAA2A1552DB00DFD8CF /* myListFlashCardActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C639EA92A1552DB00DFD8CF /* myListFlashCardActivity.swift */; };
 		7C639EAE2A17E10000DFD8CF /* listeningActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C639EAD2A17E10000DFD8CF /* listeningActivity.swift */; };
@@ -33,16 +35,26 @@
 		7C77DB642A0E841200E9E766 /* italAppGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7C77DB632A0E841200E9E766 /* italAppGif.gif */; };
 		7C77DB682A0EB61F00E9E766 /* chooseTense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB672A0EB61F00E9E766 /* chooseTense.swift */; };
 		7C77DB6A2A0EB6A200E9E766 /* chooseVCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */; };
+		7C9B488B2A32170A009AE5EA /* ListeningActivtyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B488A2A32170A009AE5EA /* ListeningActivtyViewModel.swift */; };
+		7C9B488D2A321D50009AE5EA /* ListeningActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B488C2A321D50009AE5EA /* ListeningActivityView.swift */; };
+		7C9B488F2A3220C5009AE5EA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B488E2A3220C5009AE5EA /* Extensions.swift */; };
+		7C9B48A02A3227F0009AE5EA /* pastaCarbonara.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B489B2A3227EE009AE5EA /* pastaCarbonara.wav */; };
+		7C9B48A12A3227F0009AE5EA /* cosaDesidera.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B489C2A3227EE009AE5EA /* cosaDesidera.wav */; };
+		7C9B48A22A3227F0009AE5EA /* stileBellagio.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B489D2A3227EF009AE5EA /* stileBellagio.wav */; };
+		7C9B48A32A3227F0009AE5EA /* uffizi.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B489E2A3227EF009AE5EA /* uffizi.wav */; };
+		7C9B48A42A3227F0009AE5EA /* rinascimento.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B489F2A3227F0009AE5EA /* rinascimento.wav */; };
 		7CA544DD2A1018F300DB6441 /* chooseFlashCardSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA544DC2A1018F300DB6441 /* chooseFlashCardSet.swift */; };
 		7CA544DF2A11D37800DB6441 /* flashCardActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */; };
-		7CA544E12A12D94600DB6441 /* flashCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CA544E02A12D94600DB6441 /* flashCardData.json */; };
 		7CA544E52A12EA1700DB6441 /* flashCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA544E42A12EA1700DB6441 /* flashCardData.swift */; };
+		7CB4C1012A31097100C10F1B /* chooseAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB4C1002A31097100C10F1B /* chooseAudio.swift */; };
 		7CB79B432A1E8F8C00B09EB7 /* correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CB79B422A1E8F8A00B09EB7 /* correct.mp3 */; };
 		7CB79B492A1E95C000B09EB7 /* introMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CB79B482A1E95C000B09EB7 /* introMusic.mp3 */; };
 		7CB8F28F2A0F62470017A740 /* chooseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8F28E2A0F62470017A740 /* chooseActivity.swift */; };
 		7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA41162A054CDD00462A34 /* shortStoryView.swift */; };
 		7CBA411E2A09CE4F00462A34 /* shortStoryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */; };
 		7CBA41202A09CED300462A34 /* shortStoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA411F2A09CED300462A34 /* shortStoryData.swift */; };
+		7CBBDDF62A29218300A08FFC /* wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CBBDDF52A29218300A08FFC /* wrong.mp3 */; };
+		7CBBDDF82A2A6F8F00A08FFC /* shortStoryPlugInQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBDDF72A2A6F8F00A08FFC /* shortStoryPlugInQuestions.swift */; };
 		7CC881BB2A1E43480010CF64 /* thumbUp.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7CC881BA2A1E43480010CF64 /* thumbUp.gif */; };
 		7CC881BD2A1E86820010CF64 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC881BC2A1E86820010CF64 /* SoundManager.swift */; };
 /* End PBXBuildFile section */
@@ -62,10 +74,12 @@
 		28F4D2CA29D249C50080608F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		28F4D2CC29D249C50080608F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		28F4D2CF29D249C50080608F /* PracticeItalianApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PracticeItalianApp.xcdatamodel; sourceTree = "<group>"; };
-		7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = shortStoryAppData.json; path = ../../../../Desktop/shortStoryAppData.json; sourceTree = "<group>"; };
 		7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = availableShortStories.swift; sourceTree = "<group>"; };
 		7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardAccDataManager.swift; sourceTree = "<group>"; };
-		7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ItalianAppVerbData.json; path = ../../../../Desktop/ItalianAppVerbData.json; sourceTree = "<group>"; };
+		7C31869C2A28E05C00E94F60 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItalianAppVerbData.json; sourceTree = "<group>"; };
+		7C31869E2A28E06400E94F60 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shortStoryAppData.json; sourceTree = "<group>"; };
+		7C3186A02A28E06900E94F60 /* flashCardData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = flashCardData.json; sourceTree = "<group>"; };
+		7C3186A22A28E34400E94F60 /* RightWrongButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightWrongButtons.swift; sourceTree = "<group>"; };
 		7C43BCB92A147E6F001378F4 /* createFlashCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createFlashCard.swift; sourceTree = "<group>"; };
 		7C639EA92A1552DB00DFD8CF /* myListFlashCardActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myListFlashCardActivity.swift; sourceTree = "<group>"; };
 		7C639EAD2A17E10000DFD8CF /* listeningActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listeningActivity.swift; sourceTree = "<group>"; };
@@ -75,10 +89,18 @@
 		7C77DB632A0E841200E9E766 /* italAppGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = italAppGif.gif; sourceTree = "<group>"; };
 		7C77DB672A0EB61F00E9E766 /* chooseTense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseTense.swift; sourceTree = "<group>"; };
 		7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseVCActivity.swift; sourceTree = "<group>"; };
+		7C9B488A2A32170A009AE5EA /* ListeningActivtyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningActivtyViewModel.swift; sourceTree = "<group>"; };
+		7C9B488C2A321D50009AE5EA /* ListeningActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningActivityView.swift; sourceTree = "<group>"; };
+		7C9B488E2A3220C5009AE5EA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7C9B489B2A3227EE009AE5EA /* pastaCarbonara.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pastaCarbonara.wav; sourceTree = "<group>"; };
+		7C9B489C2A3227EE009AE5EA /* cosaDesidera.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cosaDesidera.wav; sourceTree = "<group>"; };
+		7C9B489D2A3227EF009AE5EA /* stileBellagio.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = stileBellagio.wav; sourceTree = "<group>"; };
+		7C9B489E2A3227EF009AE5EA /* uffizi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = uffizi.wav; sourceTree = "<group>"; };
+		7C9B489F2A3227F0009AE5EA /* rinascimento.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rinascimento.wav; sourceTree = "<group>"; };
 		7CA544DC2A1018F300DB6441 /* chooseFlashCardSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseFlashCardSet.swift; sourceTree = "<group>"; };
 		7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashCardActivity.swift; sourceTree = "<group>"; };
-		7CA544E02A12D94600DB6441 /* flashCardData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = flashCardData.json; sourceTree = "<group>"; };
 		7CA544E42A12EA1700DB6441 /* flashCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashCardData.swift; sourceTree = "<group>"; };
+		7CB4C1002A31097100C10F1B /* chooseAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseAudio.swift; sourceTree = "<group>"; };
 		7CB79B422A1E8F8A00B09EB7 /* correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correct.mp3; sourceTree = "<group>"; };
 		7CB79B482A1E95C000B09EB7 /* introMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = introMusic.mp3; sourceTree = "<group>"; };
 		7CB8F28E2A0F62470017A740 /* chooseActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseActivity.swift; sourceTree = "<group>"; };
@@ -86,6 +108,8 @@
 		7CBA411A2A0826DE00462A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryObject.swift; sourceTree = "<group>"; };
 		7CBA411F2A09CED300462A34 /* shortStoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryData.swift; sourceTree = "<group>"; };
+		7CBBDDF52A29218300A08FFC /* wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrong.mp3; sourceTree = "<group>"; };
+		7CBBDDF72A2A6F8F00A08FFC /* shortStoryPlugInQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shortStoryPlugInQuestions.swift; sourceTree = "<group>"; };
 		7CC881BA2A1E43480010CF64 /* thumbUp.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thumbUp.gif; sourceTree = "<group>"; };
 		7CC881BC2A1E86820010CF64 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,7 +128,6 @@
 		28F4D2B729D249C00080608F = {
 			isa = PBXGroup;
 			children = (
-				7CA544E42A12EA1700DB6441 /* flashCardData.swift */,
 				28F4D2C229D249C00080608F /* PracticeItalianApp */,
 				28F4D2C129D249C00080608F /* Products */,
 			);
@@ -121,40 +144,25 @@
 		28F4D2C229D249C00080608F /* PracticeItalianApp */ = {
 			isa = PBXGroup;
 			children = (
-				7CBA411A2A0826DE00462A34 /* Info.plist */,
 				28F4D2C329D249C00080608F /* PracticeItalianAppApp.swift */,
 				28F4D2C529D249C00080608F /* ContentView.swift */,
-				7C77DB632A0E841200E9E766 /* italAppGif.gif */,
-				7CC881BA2A1E43480010CF64 /* thumbUp.gif */,
-				287829022A0023F1007B3D60 /* spellConjVerbView.swift */,
-				287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */,
-				28F4D2C729D249C50080608F /* Assets.xcassets */,
 				28F4D2CC29D249C50080608F /* Persistence.swift */,
+				7CBA411A2A0826DE00462A34 /* Info.plist */,
+				28F4D2C729D249C50080608F /* Assets.xcassets */,
+				7C3186922A28DB4700E94F60 /* Gifs */,
 				7CB79B3F2A1E8F6200B09EB7 /* Sounds */,
 				28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */,
 				28F4D2C929D249C50080608F /* Preview Content */,
-				28E88FFC29F9D5F000D07103 /* JSONManager.swift */,
-				287828F829FB160E007B3D60 /* multipleChoiceData.swift */,
-				287828FA29FB2754007B3D60 /* multipleChoiceObject.swift */,
-				287828FC2A0013C2007B3D60 /* spellVerbData.swift */,
-				287828FE2A001623007B3D60 /* spellVerbObject.swift */,
-				7CBA41162A054CDD00462A34 /* shortStoryView.swift */,
-				7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */,
-				7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */,
-				7CBA411F2A09CED300462A34 /* shortStoryData.swift */,
 				7C77DB5F2A0E804D00E9E766 /* GifImage.swift */,
+				7C9B488E2A3220C5009AE5EA /* Extensions.swift */,
+				7C3186A22A28E34400E94F60 /* RightWrongButtons.swift */,
 				7C77DB672A0EB61F00E9E766 /* chooseTense.swift */,
 				7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */,
-				7CA544DC2A1018F300DB6441 /* chooseFlashCardSet.swift */,
 				7CB8F28E2A0F62470017A740 /* chooseActivity.swift */,
-				7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */,
-				7C43BCB92A147E6F001378F4 /* createFlashCard.swift */,
-				7C639EA92A1552DB00DFD8CF /* myListFlashCardActivity.swift */,
-				7C639EAD2A17E10000DFD8CF /* listeningActivity.swift */,
-				7C639EB12A17EFB300DFD8CF /* AudioManager.swift */,
-				7C639EB32A17F5D600DFD8CF /* PlaybackControlButton.swift */,
-				7CC881BC2A1E86820010CF64 /* SoundManager.swift */,
-				7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */,
+				28E88FFC29F9D5F000D07103 /* JSONManager.swift */,
+				7C31869C2A28E05C00E94F60 /* ItalianAppVerbData.json */,
+				7C31869E2A28E06400E94F60 /* shortStoryAppData.json */,
+				7C3186A02A28E06900E94F60 /* flashCardData.json */,
 			);
 			path = PracticeItalianApp;
 			sourceTree = "<group>";
@@ -162,17 +170,109 @@
 		28F4D2C929D249C50080608F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				7C0013182A09EFE600E27CB4 /* shortStoryAppData.json */,
-				7CA544E02A12D94600DB6441 /* flashCardData.json */,
-				7C36CAA72A03E9960024A223 /* ItalianAppVerbData.json */,
+				7C9B48902A322704009AE5EA /* ListeningActivityAudioFiles */,
+				7C3186962A28DE4D00E94F60 /* ViewManagers */,
+				7C3186952A28DE2100E94F60 /* ListeningActivity */,
+				7C3186942A28DCF900E94F60 /* ShortStory */,
+				7C3186932A28DCC500E94F60 /* SpellVerb */,
+				7C3186902A26725F00E94F60 /* FlashCard */,
+				7C31868F2A2671F800E94F60 /*  MultipleChoice */,
 				28F4D2CA29D249C50080608F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		7C31868F2A2671F800E94F60 /*  MultipleChoice */ = {
+			isa = PBXGroup;
+			children = (
+				287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */,
+				287828F829FB160E007B3D60 /* multipleChoiceData.swift */,
+				287828FA29FB2754007B3D60 /* multipleChoiceObject.swift */,
+			);
+			path = " MultipleChoice";
+			sourceTree = "<group>";
+		};
+		7C3186902A26725F00E94F60 /* FlashCard */ = {
+			isa = PBXGroup;
+			children = (
+				7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */,
+				7CA544E42A12EA1700DB6441 /* flashCardData.swift */,
+				7C43BCB92A147E6F001378F4 /* createFlashCard.swift */,
+				7CA544DC2A1018F300DB6441 /* chooseFlashCardSet.swift */,
+				7C639EA92A1552DB00DFD8CF /* myListFlashCardActivity.swift */,
+			);
+			path = FlashCard;
+			sourceTree = "<group>";
+		};
+		7C3186922A28DB4700E94F60 /* Gifs */ = {
+			isa = PBXGroup;
+			children = (
+				7C77DB632A0E841200E9E766 /* italAppGif.gif */,
+				7CC881BA2A1E43480010CF64 /* thumbUp.gif */,
+			);
+			path = Gifs;
+			sourceTree = "<group>";
+		};
+		7C3186932A28DCC500E94F60 /* SpellVerb */ = {
+			isa = PBXGroup;
+			children = (
+				287829022A0023F1007B3D60 /* spellConjVerbView.swift */,
+				287828FC2A0013C2007B3D60 /* spellVerbData.swift */,
+				287828FE2A001623007B3D60 /* spellVerbObject.swift */,
+			);
+			path = SpellVerb;
+			sourceTree = "<group>";
+		};
+		7C3186942A28DCF900E94F60 /* ShortStory */ = {
+			isa = PBXGroup;
+			children = (
+				7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */,
+				7CBA41162A054CDD00462A34 /* shortStoryView.swift */,
+				7CBA411F2A09CED300462A34 /* shortStoryData.swift */,
+				7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */,
+				7CBBDDF72A2A6F8F00A08FFC /* shortStoryPlugInQuestions.swift */,
+			);
+			path = ShortStory;
+			sourceTree = "<group>";
+		};
+		7C3186952A28DE2100E94F60 /* ListeningActivity */ = {
+			isa = PBXGroup;
+			children = (
+				7C639EAD2A17E10000DFD8CF /* listeningActivity.swift */,
+				7C639EB32A17F5D600DFD8CF /* PlaybackControlButton.swift */,
+				7CB4C1002A31097100C10F1B /* chooseAudio.swift */,
+				7C9B488A2A32170A009AE5EA /* ListeningActivtyViewModel.swift */,
+				7C9B488C2A321D50009AE5EA /* ListeningActivityView.swift */,
+			);
+			path = ListeningActivity;
+			sourceTree = "<group>";
+		};
+		7C3186962A28DE4D00E94F60 /* ViewManagers */ = {
+			isa = PBXGroup;
+			children = (
+				7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */,
+				7CC881BC2A1E86820010CF64 /* SoundManager.swift */,
+				7C639EB12A17EFB300DFD8CF /* AudioManager.swift */,
+			);
+			path = ViewManagers;
+			sourceTree = "<group>";
+		};
+		7C9B48902A322704009AE5EA /* ListeningActivityAudioFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7C9B489C2A3227EE009AE5EA /* cosaDesidera.wav */,
+				7C9B489B2A3227EE009AE5EA /* pastaCarbonara.wav */,
+				7C9B489F2A3227F0009AE5EA /* rinascimento.wav */,
+				7C9B489D2A3227EF009AE5EA /* stileBellagio.wav */,
+				7C9B489E2A3227EF009AE5EA /* uffizi.wav */,
+			);
+			path = ListeningActivityAudioFiles;
+			sourceTree = "<group>";
+		};
 		7CB79B3F2A1E8F6200B09EB7 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7CBBDDF52A29218300A08FFC /* wrong.mp3 */,
 				7CB79B422A1E8F8A00B09EB7 /* correct.mp3 */,
 				7CB79B482A1E95C000B09EB7 /* introMusic.mp3 */,
 			);
@@ -239,12 +339,18 @@
 			files = (
 				28F4D2CB29D249C50080608F /* Preview Assets.xcassets in Resources */,
 				7CB79B432A1E8F8C00B09EB7 /* correct.mp3 in Resources */,
+				7C9B48A02A3227F0009AE5EA /* pastaCarbonara.wav in Resources */,
+				7C9B48A12A3227F0009AE5EA /* cosaDesidera.wav in Resources */,
+				7C3186A12A28E06A00E94F60 /* flashCardData.json in Resources */,
+				7C9B48A32A3227F0009AE5EA /* uffizi.wav in Resources */,
+				7C31869F2A28E06400E94F60 /* shortStoryAppData.json in Resources */,
+				7C9B48A42A3227F0009AE5EA /* rinascimento.wav in Resources */,
+				7CBBDDF62A29218300A08FFC /* wrong.mp3 in Resources */,
+				7C9B48A22A3227F0009AE5EA /* stileBellagio.wav in Resources */,
 				7CB79B492A1E95C000B09EB7 /* introMusic.mp3 in Resources */,
 				28F4D2C829D249C50080608F /* Assets.xcassets in Resources */,
-				7CA544E12A12D94600DB6441 /* flashCardData.json in Resources */,
+				7C31869D2A28E05C00E94F60 /* ItalianAppVerbData.json in Resources */,
 				7CC881BB2A1E43480010CF64 /* thumbUp.gif in Resources */,
-				7C0013192A09EFE600E27CB4 /* shortStoryAppData.json in Resources */,
-				7C36CAA82A03E9960024A223 /* ItalianAppVerbData.json in Resources */,
 				7C77DB642A0E841200E9E766 /* italAppGif.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +367,7 @@
 				28F4D2CD29D249C50080608F /* Persistence.swift in Sources */,
 				7C77DB602A0E804D00E9E766 /* GifImage.swift in Sources */,
 				7CBA41202A09CED300462A34 /* shortStoryData.swift in Sources */,
+				7CBBDDF82A2A6F8F00A08FFC /* shortStoryPlugInQuestions.swift in Sources */,
 				7CC881BD2A1E86820010CF64 /* SoundManager.swift in Sources */,
 				28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */,
 				7CA544E52A12EA1700DB6441 /* flashCardData.swift in Sources */,
@@ -270,14 +377,18 @@
 				7CA544DD2A1018F300DB6441 /* chooseFlashCardSet.swift in Sources */,
 				7CBA411E2A09CE4F00462A34 /* shortStoryObject.swift in Sources */,
 				7C639EB22A17EFB300DFD8CF /* AudioManager.swift in Sources */,
+				7C3186A32A28E34400E94F60 /* RightWrongButtons.swift in Sources */,
 				7C639EB42A17F5D600DFD8CF /* PlaybackControlButton.swift in Sources */,
 				7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */,
 				287829012A002197007B3D60 /* verbConjMultipleChoiceView.swift in Sources */,
+				7C9B488D2A321D50009AE5EA /* ListeningActivityView.swift in Sources */,
+				7C9B488F2A3220C5009AE5EA /* Extensions.swift in Sources */,
 				28F4D2C629D249C00080608F /* ContentView.swift in Sources */,
 				287828FB29FB2754007B3D60 /* multipleChoiceObject.swift in Sources */,
 				7C31868E2A24059600E94F60 /* FlashCardAccDataManager.swift in Sources */,
 				7C639EAA2A1552DB00DFD8CF /* myListFlashCardActivity.swift in Sources */,
 				287828F929FB160E007B3D60 /* multipleChoiceData.swift in Sources */,
+				7C9B488B2A32170A009AE5EA /* ListeningActivtyViewModel.swift in Sources */,
 				287828FF2A001623007B3D60 /* spellVerbObject.swift in Sources */,
 				28E88FFD29F9D5F000D07103 /* JSONManager.swift in Sources */,
 				7C77DB6A2A0EB6A200E9E766 /* chooseVCActivity.swift in Sources */,
@@ -285,6 +396,7 @@
 				287828FD2A0013C2007B3D60 /* spellVerbData.swift in Sources */,
 				7C43BCBA2A147E6F001378F4 /* createFlashCard.swift in Sources */,
 				7CA544DF2A11D37800DB6441 /* flashCardActivity.swift in Sources */,
+				7CB4C1012A31097100C10F1B /* chooseAudio.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

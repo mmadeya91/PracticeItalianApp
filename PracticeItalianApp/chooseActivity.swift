@@ -73,7 +73,9 @@ struct navigationButtons: View{
                 }
                 Spacer()
                 VStack{
-                    NavigationLink(destination: listeningActivity(), label: {
+                    
+                    
+                    NavigationLink(destination: chooseAudio(), label: {
                         Image("talking")
                             .imageIconModifier()
                     })
