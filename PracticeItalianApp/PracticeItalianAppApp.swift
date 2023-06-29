@@ -11,11 +11,13 @@ import SwiftUI
 struct PracticeItalianAppApp: App {
     let persistenceController = PersistenceController.shared
     @StateObject var audioManager = AudioManager()
+    @StateObject var listeningActivityManager = ListeningActivityManager()
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(audioManager)
+                .environmentObject(listeningActivityManager)
         }
     }
 }

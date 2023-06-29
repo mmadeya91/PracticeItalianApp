@@ -24,8 +24,6 @@ struct createFlashCard: View {
         
         VStack{
             
-            customTopNavBar5().padding(.top, 20)
-            
             VStack{
                 
                 Text("Front")
@@ -303,34 +301,6 @@ struct previewButton: View{
 }
 
 
-struct customTopNavBar5: View {
-    var body: some View {
-        ZStack{
-            HStack{
-                NavigationLink(destination: chooseActivity(), label: {Image("cross")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.leading, 20)
-                })
-                
-                Spacer()
-                
-                NavigationLink(destination: chooseActivity(), label: {Image("house")
-                        .resizable()
-                        .scaledToFit()
-                        .scaleEffect(1.5)
-                        .padding([.top, .bottom], 15)
-                        .padding(.trailing, 38)
-                       
-                })
-            }.zIndex(1)
-        }.frame(width: 400, height: 60)
-            .background(Color.gray.opacity(0.25))
-            .border(width: 3, edges: [.bottom, .top], color: .teal)
-            .zIndex(0)
-                    
-    }
-}
 
 struct FlipEffectPreview: GeometryEffect {
     

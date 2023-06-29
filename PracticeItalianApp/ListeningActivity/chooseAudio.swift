@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct chooseAudio: View {
+    
+    @EnvironmentObject var audioManager: AudioManager
     var body: some View {
         GeometryReader{ geo in
             ZStack{
@@ -20,7 +22,7 @@ struct chooseAudio: View {
                 
                 VStack{
                     
-                    customTopNavBarChooseAudio()
+                    customTopNavBar()
                     
                     shortStoryContainer2().frame(width: 345, height:675).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                         .stroke(.gray, lineWidth: 6))
@@ -120,7 +122,9 @@ struct audioChoiceButton: View {
                 
                 
                 let listeningActivityVM  = ListeningActivityViewModel(audioAct: audioActivty.data)
-                NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityVM  ), label: {
+                let listeningActivityQuestionsVM = ListeningActivityQuestionsViewModel(dialogueQuestionView: dialogueViewObject(fillInDialogueQuestionElement: ListeningActivityElement.pastaCarbonara.fillInDialogueQuestion))
+
+                NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityVM, listeningActivityQuestionsVM: listeningActivityQuestionsVM), label: {
                     Image(audioImage)
                         .resizable()
                         .scaledToFit()
@@ -140,43 +144,10 @@ struct audioChoiceButton: View {
     
 }
 
-struct customTopNavBarChooseAudio: View {
-    
-    var body: some View {
-        ZStack{
-            HStack{
-                NavigationLink(destination: chooseActivity(), label: {Image("cross")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.leading, 10)
-                })
-                
-                Spacer()
-                
-                Text("Learning Activities")
-                    .bold()
-                    .font(Font.custom("Marker Felt", size: 25))
-                
-                Spacer()
-                
-                NavigationLink(destination: chooseActivity(), label: {Image("house")
-                        .resizable()
-                        .scaledToFit()
-                        .scaleEffect(1.5)
-                        .padding([.top, .bottom], 15)
-                        .padding(.trailing, 30)
-                       
-                })
-            }.zIndex(1)
-        }.frame(width: 400, height: 60)
-            .background(Color.gray.opacity(0.25))
-            .border(width: 3, edges: [.bottom, .top], color: .teal)
-
-    }
-}
 
 struct chooseAudio_Previews: PreviewProvider {
     static var previews: some View {
         chooseAudio()
+            .environmentObject(AudioManager())
     }
 }

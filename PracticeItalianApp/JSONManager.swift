@@ -87,6 +87,59 @@ enum Gender: String, Codable {
     case mascFem = "masc./fem."
 }
 
+
+
+struct ListeningActivityElement: Codable {
+    var audioName, audioTranscriptItalian, audioTranscriptEnglish: String
+    var comprehensionQuestions: [ComprehensionQuestion]
+    var fillInDialogueQuestion: [FillInDialogueQuestion]
+    var blankExplanation: [BlankExplanation]
+    var putInOrderDialogueBoxes: [PutInOrderDialogueBox]
+    
+    static let allListeningActivityElements: [ListeningActivityElement] = Bundle.main.decode(file: "ListeningActivity.json")
+    
+    static let pastaCarbonara: ListeningActivityElement = allListeningActivityElements[0]
+}
+
+
+// MARK: - BlankExplanation
+struct BlankExplanation: Codable {
+    var wordItalian, wordEnglish: String
+    var choices: [String]
+}
+
+// MARK: - ComprehensionQuestion
+struct ComprehensionQuestion: Codable {
+    var question, answer: String
+    var choices: [String]
+}
+
+// MARK: - FillInDialogueQuestion
+struct FillInDialogueQuestion: Codable, Hashable {
+    var fullSentence, questionPart1, answer, questionPart2: String
+    var answerArray: [AnswerArray]
+    var isQuestion: Bool
+    var correctChosen: Bool
+}
+
+// MARK: - AnswerArray
+struct AnswerArray: Codable, Hashable {
+    var letter: String?
+    var showLetter: Bool
+    var answer: String?
+}
+
+// MARK: - PutInOrderDialogueBox
+struct PutInOrderDialogueBox: Codable {
+    var fullSentences: [FullSentence]
+}
+
+// MARK: - FullSentence
+struct FullSentence: Codable {
+    var sentence: String
+    var position: Int
+}
+
 extension Bundle {
     func decode<T: Decodable>(file: String) -> T {
         guard let url = self.url(forResource: file, withExtension: nil) else {

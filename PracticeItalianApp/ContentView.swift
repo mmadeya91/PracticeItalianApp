@@ -100,6 +100,7 @@ struct ContentView: View {
         static var previews: some View {
             ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
                 .environmentObject(AudioManager())
+                .environmentObject(ListeningActivityManager())
         }
     }
 }

@@ -1,0 +1,229 @@
+[
+	{
+
+		"audioName": "Pasta Alla Carbonara",
+
+		"audioTranscriptItalian": "Per prima cosa mettete a bollire l'acqua per la pasta mentre si prepara il condimento. Tagliare 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante. Preparare quindi la crema di Pecorino Romano. In una ciotola mettete 4 uova intere e 100 grammi di pecorino romano. Aggiungete del pepe nero fresco e mescolate velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa. Mettete da parte il sugo e buttate la pasta nell'acqua bollente con un po' di sale e cuocetela al dente. Quando la pasta sarà cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto. Infine, togliete la padella dal fuoco e aggiungete a filo la vostra crema di pecorino continuando a mantecare gli spaghetti. Se la salsa è troppo liquida, puoi aggiungere altro formaggio. Se è troppo denso, puoi aggiungere un po' dell'acqua della pasta per ottenere la consistenza desiderata.",
+        
+		"audioTranscriptEnglish": "First, boil water for the pasta while the sauce is prepared. Cut 200 grams of guanciale into small pieces then cook in a skill on medium heat for 2 to 3 minutes until brown and crispy. Next, prepare the Pecorino Romano cream sauce. In a bowl, put 4 whole eggs and 100 grams of Pecorino Romano cheese. Add some fresh black pepper and mix quickly with a fork or whisk until the sauce is creamy. Set the sauce aside and put your pasta into the boiling water with some salt and cook until al dente. When the pasta is done, drain and place in a skillet on high heat. Mix the cooked pasta with the guanciale for about 1 minute. Finally, take the pan off the stove and slowly add in your pecorino cream while continuing to stir the spaghetti. If the sauce is too thin, you may add more cheese. If it is too thick, you may add some of the pasta water for the desired texture.",
+
+		"comprehensionQuestions": [
+			{
+				"question": "What is the first thing you do?",
+				"answer": "boil the water for the pasta",
+				"choices": ["boil the water for the pasta", "cut the guanciale into little pieces", "grate the cheese", "mix your eggs"]
+			},
+			{
+				"question": "How many grams of guaniciale do we need?",
+				"answer": "200",
+				"choices": ["200", "100", "2", "120"]
+			},
+			{
+				"question": "How many egg yolks do we need?",
+				"answer": "4",
+				"choices": ["4", "2", "3", "6"]
+			},
+			{
+				"question": "Cook the guanciale on high heat",
+				"answer": "False",
+				"choices": ["True", "False"]
+			},
+			{
+				"question": "Keep the pan on the stove while adding the precorino cream",
+				"answer": "False",
+				"choices": ["True", "False"]
+			}
+		],
+
+		"fillInDialogueQuestion": [
+			{
+				"fullSentence": "Per prima cosa mettete a bollire l'acqua per la pasta mentre si prepara il condimento.",
+				"questionPart1": "Per prima cosa mettete a ",
+				"answer": "bollire",
+				"questionPart2": " l'acqua per la pasta mentre si prepara il condimento.",
+				"answerArray": [
+					{"letter": "b", "showLetter": false}, 
+					{"letter": "o", "showLetter": false}, 
+					{"letter": "l", "showLetter": false}, 
+					{"letter": "l", "showLetter": false}, 
+					{"letter": "i", "showLetter": false}, 
+					{"letter": "r", "showLetter": false}, 
+					{"letter": "e", "showLetter": false}
+				],
+				"isQuestion": true,
+                "correctChosen": false
+
+			},
+			{
+				"fullSentence": "Tagliare 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.",
+				"questionPart1": "",
+				"answer": "Tagliare",
+				"questionPart2": " 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.",
+                "answerArray": [
+                    {"letter": "T", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "g", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+				"isQuestion": true,
+                "correctChosen": false
+			},
+			{
+				"fullSentence": "Preparare quindi la crema di Pecorino Romano. In una ciotola mettete 4 uova intere e 100 grammi di pecorino romano.",
+				"questionPart1": "",
+				"answer": "",
+				"questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+				"isQuestion": false,
+                "correctChosen": false
+			},
+			{
+				"fullSentence": "Aggiungete del pepe nero fresco e mescolate velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa.",
+				"questionPart1": "Aggiungete del pepe nero fresco e ",
+				"answer": "mescolate",
+				"questionPart2": " velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa.",
+				"answerArray": [
+					{"letter": "m", "showLetter": false}, 
+					{"letter": "e", "showLetter": false}, 
+					{"letter": "s", "showLetter": false}, 
+					{"letter": "c", "showLetter": false}, 
+					{"letter": "o", "showLetter": false}, 
+					{"letter": "l", "showLetter": false}, 
+					{"letter": "a", "showLetter": false}, 
+					{"letter": "t", "showLetter": false}, 
+					{"letter": "e", "showLetter": false}
+				],
+				"isQuestion": true,
+                "correctChosen": false
+			},
+            {
+				"fullSentence": "Mettete da parte il sugo e buttate la pasta nell'acqua bollente con un po' di sale e cuocetela al dente.",
+				"questionPart1": "",
+				"answer": "",
+				"questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+				"isQuestion": false,
+                "correctChosen": false
+			},
+            {
+				"fullSentence": "Quando la pasta sarà cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto.",
+				"questionPart1": "Quando la pasta ",
+				"answer": "sarà",
+				"questionPart2": " cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto.",
+				"answerArray": [
+					{"letter": "s", "showLetter": false}, 
+					{"letter": "a", "showLetter": false}, 
+					{"letter": "r", "showLetter": false}, 
+					{"letter": "à", "showLetter": false}
+				],
+				"isQuestion": true,
+                "correctChosen": false
+			},
+			{
+				"fullSentence": "Infine, togliete la padella dal fuoco e aggiungete a filo la vostra crema di pecorino continuando a mantecare gli spaghetti.",
+				"questionPart1": "Infine, togliete la padella dal fuoco e ",
+				"answer": "aggiungete",
+				"questionPart2": " a filo la vostra crema di pecorino continuando a mantecare gli spaghetti.",
+				"answerArray": [
+					{"letter": "a", "showLetter": false}, 
+					{"letter": "g", "showLetter": false}, 
+					{"letter": "g", "showLetter": false}, 
+					{"letter": "i", "showLetter": false}, 
+					{"letter": "u", "showLetter": false}, 
+					{"letter": "n", "showLetter": false}, 
+					{"letter": "g", "showLetter": false}, 
+					{"letter": "e", "showLetter": false}, 
+					{"letter": "t", "showLetter": false}, 
+					{"letter": "e", "showLetter": false}
+				],
+				"isQuestion": true,
+                "correctChosen": false
+			},
+			{
+				"fullSentence": "Se la salsa è troppo liquida, puoi aggiungere altro formaggio. Se è troppo denso, puoi aggiungere un po' dell'acqua della pasta per ottenere la consistenza desiderata.",
+				"questionPart1": "",
+				"answer": "",
+				"questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+				"isQuestion": false,
+                "correctChosen": false
+			}
+			
+		],
+        
+        "blankExplanation": [
+            {
+                "wordItalian": "Bollire",
+                "wordEnglish": "boil",
+                "choices": ["cook", "fry", "boil", "add", "cut"]
+            },
+            {
+                "wordItalian": "Tagliare",
+                "wordEnglish": "cut",
+                "choices": ["cook", "fry", "boil", "cut", "add"]
+            },
+            {
+                "wordItalian": "Mescolare",
+                "wordEnglish": "mix",
+                "choices": ["mix", "fry", "cut", "add", "cook"]
+            },
+            {
+           		"wordItalian": "Sarà",
+                "wordEnglish": "it will be",
+                "choices": ["it will be", "it was", "it is", "cooked", "added"]
+            },
+            {
+                "wordItalian": "Agguingare",
+                "wordEnglish": "add",
+                "choices" : ["add", "fry", "boil", "cook", "cut"]
+            }
+        ],
+        
+        "putInOrderDialogueBoxes": [
+            {
+                "fullSentences": [
+                    {"sentence": "Per prima cosa mettete a bollire l'acqua per la pasta mentre si prepara il condimento.", "position": 1},
+                    {"sentence": "Tagliare 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.", "position": 2},
+                    {"sentence": "Preparare quindi la crema di Pecorino Romano. In una ciotola mettete 4 uova intere e 100 grammi di pecorino romano.", "position": 3},
+                    {"sentence": "Aggiungete del pepe nero fresco e mescolate velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa.", "position": 4},
+                    {"sentence": "Mettete da parte il sugo e buttate la pasta nell'acqua bollente con un po' di sale e cuocetela al dente.", "position": 5},
+                    {"sentence": "Quando la pasta sarà cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto.", "position": 6},
+                    {"sentence": "Infine, togliete la padella dal fuoco e aggiungete a filo la vostra crema di pecorino continuando a mantecare gli spaghetti.", "position": 7},
+                    {"sentence": "Se la salsa è troppo liquida, puoi aggiungere altro formaggio. Se è troppo denso, puoi aggiungere un po' dell'acqua della pasta per ottenere la consistenza desiderata.", "position": 8}
+                ]
+            }
+        ]
+	}
+
+]

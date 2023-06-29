@@ -26,7 +26,7 @@ struct chooseFlashCardSet: View {
                     .opacity(1.0)
                 
                 VStack{
-                    customTopNavBar2().position(x:200, y:40)
+                    CustomNavBar().position(x:200, y:40)
                     
                     flashCardSets().frame(width: 345, height:675).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                         .stroke(.gray, lineWidth: 6))
@@ -261,35 +261,6 @@ struct EdgeBorder2: Shape {
             path.addRect(CGRect(x: x, y: y, width: w, height: h))
         }
         return path
-    }
-}
-
-struct customTopNavBar2: View {
-    var body: some View {
-        ZStack{
-            HStack{
-                NavigationLink(destination: chooseActivity(), label: {Image("cross")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.leading, 20)
-                })
-                
-                Spacer()
-                
-                NavigationLink(destination: chooseActivity(), label: {Image("house")
-                        .resizable()
-                        .scaledToFit()
-                        .scaleEffect(1.5)
-                        .padding([.top, .bottom], 15)
-                        .padding(.trailing, 38)
-                       
-                })
-            }.zIndex(1)
-        }.frame(width: 400, height: 60)
-            .background(Color.gray.opacity(0.25))
-            .border(width: 3, edges: [.bottom, .top], color: .teal)
-            .zIndex(0)
-                    
     }
 }
 

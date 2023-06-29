@@ -22,6 +22,7 @@ struct audioActivty {
     let duration: TimeInterval
     let track: String
     let image: String
+    let comprehensionQuestions: [ComprehensionQuestion]
 
-    static let data = audioActivty(title: "Pasta Carbonara", description: "Recipe to Make Pasta Carbonara", duration: 70, track: "pastaCarbonara", image: "pasta")
+    static let data = audioActivty(title: "Pasta Carbonara", description: "Recipe to Make Pasta Carbonara", duration: 70, track: "pastaCarbonara", image: "pasta", comprehensionQuestions: ListeningActivityElement.pastaCarbonara.comprehensionQuestions)
 }

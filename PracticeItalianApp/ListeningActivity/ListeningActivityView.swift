@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct ListeningActivityView: View {
+    @EnvironmentObject var audioManager: AudioManager
+    @EnvironmentObject var listeningActivityManager: ListeningActivityManager
     @StateObject var listeningActivityVM: ListeningActivityViewModel
+    @StateObject var listeningActivityQuestionsVM: ListeningActivityQuestionsViewModel
     @State private var showPlayer = false
     
     var body: some View {
         VStack(spacing: 0) {
+            
             Image("pot")
                 .resizable()
                 .scaledToFill()
-                .frame(height: UIScreen.main.bounds.height/3)
+                .frame(width: 80)
+                .padding(.top, 100)
+                .padding(.bottom, 20)
             
             ZStack {
                 
@@ -52,19 +58,25 @@ struct ListeningActivityView: View {
                     Text(listeningActivityVM.audioAct.description)
                     
                     Spacer()
+                    
+                    Text("Audio and Transcription Courtesy of Virginia Billie")
+                        .multilineTextAlignment(.center)
+                        .padding(.leading, 30)
                 }.foregroundColor(.white)
                     .padding(20)
                
             }.frame(height: UIScreen.main.bounds.height * 2 / 3)
         }.ignoresSafeArea()
-            .fullScreenCover(isPresented: $showPlayer) {listeningActivity(listeningActivityVM: listeningActivityVM)}
+            .fullScreenCover(isPresented: $showPlayer) {listeningActivity(listeningActivityVM: listeningActivityVM, listeningActivityQuestionsVM: listeningActivityQuestionsVM)}
     }
 }
 
 struct ListeningActivityView_Previews: PreviewProvider {
     static let listeningActivityVM  = ListeningActivityViewModel(audioAct: audioActivty.data)
+    static let listeningActivityQuestionsVM = ListeningActivityQuestionsViewModel(dialogueQuestionView: dialogueViewObject(fillInDialogueQuestionElement: ListeningActivityElement.pastaCarbonara.fillInDialogueQuestion))
     static var previews: some View {
-        ListeningActivityView(listeningActivityVM: listeningActivityVM)
+        ListeningActivityView(listeningActivityVM: listeningActivityVM, listeningActivityQuestionsVM: listeningActivityQuestionsVM)
             .environmentObject(AudioManager())
+            .environmentObject(ListeningActivityManager())
     }
 }

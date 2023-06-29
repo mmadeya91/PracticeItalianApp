@@ -16,6 +16,7 @@ extension URL {
 }
 
 struct shortStoryView: View {
+    @EnvironmentObject var audioManager: AudioManager
     
     @State var chosenStoryNameIn: String
     
@@ -26,6 +27,8 @@ struct shortStoryView: View {
     @State var questionNumber: Int = 0
     
     @State var storyHeight: CGFloat = 380
+    
+    @State var showShortStoryDragDrop = false
     
     var storyData: shortStoryData { shortStoryData(chosenStoryName: chosenStoryNameIn)}
     
@@ -58,13 +61,21 @@ struct shortStoryView: View {
                     testStory(shortStoryObj: self.storyObj, showPopUpScreen: self.$showPopUpScreen, linkClickedString: self.$linkClickedString, showQuestionDropdown: self.$showQuestionDropdown, storyHeight: self.$storyHeight).padding(.top, 100)
                     
                     
-                    questionsDropDownBar(storyObj: storyObj, showQuestionDropdown: self.$showQuestionDropdown, questionNumber: self.$questionNumber)
+                    questionsDropDownBar(storyObj: storyObj, showQuestionDropdown: self.$showQuestionDropdown, questionNumber: self.$questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop)
                         .padding(.top, 10)
+                    let listeningActivityVM  = ListeningActivityViewModel(audioAct: audioActivty.data)
+                    let listeningActivityQuestionsVM = ListeningActivityQuestionsViewModel(dialogueQuestionView: dialogueViewObject(fillInDialogueQuestionElement: ListeningActivityElement.pastaCarbonara.fillInDialogueQuestion))
+//                    NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityVM, listeningActivityQuestionsVM: listeningActivityQuestionsVM), label: {Text("Test").font(.title).foregroundColor(.black)
+//
+//                    })
                     
                 }
                 
             }
         }.navigationBarBackButtonHidden(true)
+            .fullScreenCover(isPresented: $showShortStoryDragDrop) {
+                ShortStoryDragDropView()
+            }
     }
 }
     
@@ -186,6 +197,7 @@ struct shortStoryView: View {
         
         @Binding var showQuestionDropdown: Bool
         @Binding var questionNumber: Int
+        @Binding var showShortStoryDragDrop: Bool
 
         var body: some View{
                 VStack{
@@ -219,7 +231,7 @@ struct shortStoryView: View {
                     
                     
                     if showQuestionDropdown {
-                        questionsView(storyObj: storyObj, questionNumber: $questionNumber).offset(y:-20).zIndex(0)
+                        questionsView(storyObj: storyObj, questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop).offset(y:-20).zIndex(0)
                     }
                 }
                 
@@ -233,6 +245,7 @@ struct shortStoryView: View {
         var storyObj: shortStoryObject
         
         @Binding var questionNumber: Int
+        @Binding var showShortStoryDragDrop: Bool
         
         var body: some View {
             ZStack{
@@ -245,7 +258,7 @@ struct shortStoryView: View {
                         .padding(.bottom, 10)
 
                     
-                    radioButtons(storyObj: storyObj, questionNumber: $questionNumber)
+                    radioButtons(storyObj: storyObj, questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop)
                 }.frame(width: 360, height: 210)
                     .background(Color.white.opacity(0.95)).cornerRadius(5)
                     .border(width: 3, edges: [.leading, .trailing, .bottom], color: .black)
@@ -260,11 +273,12 @@ struct shortStoryView: View {
         var storyObj: shortStoryObject
         
         @Binding var questionNumber: Int
+        @Binding var showShortStoryDragDrop: Bool
         
         var body: some View{
             VStack{
 
-                radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber)
+                radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop)
                 
             }
         }
@@ -277,12 +291,13 @@ struct shortStoryView: View {
         
         @State var correctChosen: Bool = false
         @Binding var questionNumber: Int
+        @Binding var showShortStoryDragDrop: Bool
         
         var body: some View{
             VStack {
                 ForEach(0..<choicesIn.count, id: \.self) { i in
                     if choicesIn[i].elementsEqual(correctAnswer) {
-                        correctShortStoryButton(choice: choicesIn[i], questionNumber: $questionNumber, correctChosen: $correctChosen)
+                        correctShortStoryButton(choice: choicesIn[i], questionNumber: $questionNumber, correctChosen: $correctChosen, showShortStoryDragDrop: $showShortStoryDragDrop)
                     } else {
                         incorrectShortStoryButton(choice: choicesIn[i], correctChosen: $correctChosen)
                     }
@@ -348,6 +363,7 @@ struct shortStoryView: View {
     struct shortStoryView_Previews: PreviewProvider {
         static var previews: some View {
             shortStoryView(chosenStoryNameIn: "Cristofo Columbo")
+                .environmentObject(AudioManager())
         }
     }
 

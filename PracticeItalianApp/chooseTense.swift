@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct chooseTense: View {
+    
     var body: some View {
         GeometryReader{ geo in
             ZStack{
