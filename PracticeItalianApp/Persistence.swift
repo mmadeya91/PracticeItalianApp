@@ -19,6 +19,29 @@ struct PersistenceController {
            newItem.englishLine2 = "test"
            newItem.italianLine1 = "ciao"
            newItem.italianLine2 = "fem"
+           
+           let newVerbItem = UserAddedVerb(context: viewContext)
+           newVerbItem.verbNameEnglish = "To take"
+           newVerbItem.verbNameItalian = "Prendere"
+           newVerbItem.presente = ["Prendo", "Prendi", "Prende", "Prendeno", "Prendiamo", "Prendete"]
+           newVerbItem.passatoProssimo = ["Ho preso", "Hai preso", "Ha preso", "Hanno preso", "Abbiamo preso", "Avete preso"]
+           newVerbItem.futuro = ["Prendero", "Prenderei", "Prendere", "Prendereno", "Prenderemo", "Prenderete"]
+           newVerbItem.imperativo = ["Prendi", "Prendi", "Prende", "Prendeni", "Prendi", "Prendi"]
+           newVerbItem.imperfetto = ["Prendevo", "Prendevi", "Prendeve", "Prendevano", "Prendevamo", "Prendevate"]
+           newVerbItem.condizionale = ["Prenderrei", "Prenderesti", "Prenderebbe", "Prenderebbero", "Prenderebiamo", "Prenderette"]
+           
+           let newVerbListItem = UserVerbList(context: viewContext)
+           newVerbListItem.verbNameEnglish = "To take"
+           newVerbListItem.verbNameItalian = "Prendere"
+           newVerbListItem.passatoProssimo = ["Ho preso", "Hai preso", "Ha preso", "Hanno preso", "Abbiamo preso", "Avete preso"]
+           newVerbListItem.futuro = ["Prendero", "Prenderei", "Prendere", "Prendereno", "Prenderemo", "Prenderete"]
+           newVerbListItem.imperativo = ["Prendi", "Prendi", "Prende", "Prendeni", "Prendi", "Prendi"]
+           newVerbListItem.imperfetto = ["Prendevo", "Prendevi", "Prendeve", "Prendevano", "Prendevamo", "Prendevate"]
+           newVerbListItem.condizionale = ["Prenderrei", "Prenderesti", "Prenderebbe", "Prenderebbero", "Prenderebiamo", "Prenderette"]
+           
+        
+           
+           
         }
         do {
             try viewContext.save()

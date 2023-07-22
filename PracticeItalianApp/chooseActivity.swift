@@ -17,33 +17,42 @@ extension Image {
             .padding()
             .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(.yellow, lineWidth: 6))
+                        .stroke(Color("DarkRed"), lineWidth: 6))
     }
 }
 
 
 struct chooseActivity: View {
-    
+    @State var animatingBear = false
     @EnvironmentObject var audioManager: AudioManager
     
     
     var body: some View {
         GeometryReader{ geo in
             ZStack{
-                Image("watercolor2")
+                Image("horizontalNature")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     .opacity(1.0)
+                
+                Image("sittingBear")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 200, height: 100)
+                    .offset(x: 85, y: animatingBear ? -260 : 0)
+                
+                
+                
                 VStack{
-                    Text("Exercises").zIndex(1)
+                    Text("Exercises")
                         .font(Font.custom("Marker Felt", size: 35))
                         .padding(.bottom, 5)
-                        .frame(width: 357, height: 60)
-                        .background(Color.teal).opacity(0.75)
+                        .frame(width: 357, height: 75)
+                        .background(Color("ForestGreen")).opacity(0.75)
                         .cornerRadius(13)
-                        .border(width: 8, edges: [.bottom], color: .yellow)
+                        .border(width: 8, edges: [.bottom], color: Color("DarkRed"))
                         .padding(.bottom, 15)
                     HStack{
                         VStack{
@@ -52,11 +61,10 @@ struct chooseActivity: View {
                             })
                             Text("Reading")
                                 .bold()
-                                .font(Font.custom("Arial Hebrew", size: 20))
-                                .frame(width: 120, height: 50)
+                                .font(Font.custom("Marker Felt", size: 20))
+                                .frame(width: 120, height: 60)
                             
-                        }
-                        Spacer()
+                        }.padding(.trailing, 20)
                         VStack{
                             
                             
@@ -66,11 +74,14 @@ struct chooseActivity: View {
                             })
                             Text("Listening")
                                 .bold()
-                                .font(Font.custom("Arial Hebrew", size: 20))
-                                .frame(width: 120, height: 50)
+                                .font(Font.custom("Marker Felt", size: 20))
+                                .frame(width: 120, height: 60)
                         }
-                    }.padding([.leading, .trailing], 45)
-                        .padding(.bottom, 75)
+                    }
+                    .padding([.leading, .trailing], 45)
+                    .padding(.top, 30)
+                    .padding(.bottom, 5)
+                    
           
                     HStack{
                         VStack{
@@ -80,25 +91,35 @@ struct chooseActivity: View {
                             })
                             Text("Flash Cards")
                                 .bold()
-                                .font(Font.custom("Arial Hebrew", size: 20))
-                                .frame(width: 120, height: 50)
-                        }
-                        Spacer()
+                                .font(Font.custom("Marker Felt", size: 20))
+                                .frame(width: 120, height: 60)
+                        }.padding(.trailing, 20)
                         VStack{
-                            NavigationLink(destination: chooseTense(), label:{
+                            NavigationLink(destination: chooseVerbList(), label:{
                                 Image("spell-check")
                                     .imageIconModifier()
                             })
-                            Text("Verb Conjugation")
+                            Text("Verb" + "\nConjugation")
                                 .bold()
-                                .font(Font.custom("Arial Hebrew", size: 20))
-                                .frame(width: 120, height: 50)
+                                .font(Font.custom("Marker Felt", size: 20))
+                                .frame(width: 120, height: 60)
                                 .multilineTextAlignment(.center)
                         }
-                    }.padding([.leading, .trailing], 45)
+                    }
+                    .padding([.leading, .trailing], 45)
+                    .padding(.bottom, 50)
+                }.frame(width:345).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                    .stroke(.black, lineWidth: 4))
+                    .shadow(radius: 10)
+                    .padding(.top, 60)
+            }
+            .onAppear{
+                withAnimation(.easeIn(duration: 1.5)){
+                    animatingBear = true
                 }
             }
-        }.navigationBarHidden(true)
+        }
+        .navigationBarHidden(true)
     }
 }
 

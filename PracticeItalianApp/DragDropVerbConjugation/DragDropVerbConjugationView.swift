@@ -1,0 +1,321 @@
+//
+//  DragDropVerbConjugationView.swift
+//  PracticeItalianApp
+//
+//  Created by Matt Madeya on 6/30/23.
+//
+
+import SwiftUI
+
+struct DragDropVerbConjugationView: View {
+    @StateObject var dragDropVerbConjugationVM: DragDropVerbConjugationViewModel
+    @Environment(\.dismiss) var dismiss
+    var isPreview: Bool
+    @State var questionNumber = 0
+    
+    var body: some View{
+        GeometryReader {geo in
+            ScrollViewReader{scroller in
+                
+                ZStack{
+                    VStack{
+                        HStack(spacing: 18){
+                            Button(action: {
+                                dismiss()
+                            }, label: {
+                                Image(systemName: "xmark")
+                                    .font(.title3)
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            
+                            Spacer()
+                            
+                            Button(action: {}, label: {
+                                Image(systemName: "suit.heart.fill")
+                                    .font(.title3)
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            
+                            Text(String(questionNumber) + "/" + String( dragDropVerbConjugationVM.currentTenseDragDropData.count))
+                                .font(.title3)
+                                .foregroundColor(.black)
+                            
+                        }.padding([.leading, .trailing], 25)
+                        ScrollView(.horizontal){
+                            
+                            HStack{
+                                ForEach(0..<dragDropVerbConjugationVM.currentTenseDragDropData.count, id: \.self) { i in
+                                    VStack{
+                                        dragDropViewBuilder(tense: dragDropVerbConjugationVM.currentTense, currentVerb: dragDropVerbConjugationVM.currentTenseDragDropData[i].currentVerb, characters: dragDropVerbConjugationVM.currentTenseDragDropData[i].choices , leftDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListLeft, rightDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListRight, questionNumber: $questionNumber).frame(width: geo.size.width)
+                                            .frame(minHeight: geo.size.height)
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
+                        .scrollDisabled(true)
+                        .frame(width: geo.size.width)
+                        .frame(minHeight: geo.size.height)
+                        .onChange(of: questionNumber) { newIndex in
+                            withAnimation{
+                                scroller.scrollTo(newIndex, anchor: .center)
+                            }
+                        }
+                        
+                        
+                    }
+                }.onAppear{
+                    if isPreview {
+                        dragDropVerbConjugationVM.currentTense = 0
+                        dragDropVerbConjugationVM.setNonMyListDragDropData()
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+struct dragDropViewBuilder: View{
+    
+    var tense: Int
+    var currentVerb: Verb
+    
+    @State var progress: CGFloat = 0
+    //choices list
+    @State var characters: [VerbConjCharacter]
+    @State var leftDropCharacters: [VerbConjCharacter]
+    @State var rightDropCharacters: [VerbConjCharacter]
+    
+    @State var draggingItem: VerbConjCharacter?
+    
+    //for drag
+    @State var shuffledRows: [[VerbConjCharacter]] = []
+    //for drop
+    @State var rows: [[VerbConjCharacter]] = []
+    
+    @State var animateWrongText: Bool = false
+    
+    @State var droppedCount: CGFloat = 0
+    @State var updating: Bool = false
+    @Binding var questionNumber: Int
+    
+    var body: some View {
+        VStack(spacing: 15) {
+            NavBar().padding(.bottom, 40)
+            
+            VStack(alignment: .leading, spacing: 30) {
+                Text("Complete the Table")
+                    .font(.title2.bold())
+                
+                
+                
+            }
+            VStack{
+                Text(currentVerb.verbName + "\n" + currentVerb.verbEngl)
+                    .font(.title2.bold()).multilineTextAlignment(.center)
+                    .frame(width: 230, height: 80)
+                    .background(.teal)
+                    .cornerRadius(15)
+                    .padding(.bottom, 20)
+                
+                VStack{
+                    HStack{
+                        Spacer()
+                        LeftDropArea().padding(.trailing, 10)
+                        Spacer()
+                        RightDropArea().padding(.leading, 40)
+                        Spacer()
+                        
+                    }
+                }
+            }.padding(.bottom, 20)
+            DragArea()
+        }
+        .padding()
+        .onAppear{
+            if rows.isEmpty{
+                //First Creating shuffled On
+                //then normal one
+                characters = characters.shuffled()
+                rows = generateGrid()
+                shuffledRows = generateGrid()
+                rows = generateGrid()
+            }
+        }
+        .offset(x: animateWrongText ? -30 : 0)
+    }
+    
+    @ViewBuilder
+    func LeftDropArea()->some View{
+        VStack(spacing:10){
+            ForEach($leftDropCharacters){$item in
+                Text(item.value)
+                    .font(.system(size: item.fontSize))
+                    .opacity(item.isShowing ? 1 : 0)
+                    .background{
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .fill(item.isShowing ? .teal : .gray.opacity(0.25))
+                            .frame(width: 160, height: 40)
+                        
+                    }
+                    .background{
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .stroke(.gray)
+                            .opacity(item.isShowing ? 1: 0)
+                            .frame(width: 160, height: 40)
+                        
+                    }
+                    .padding([.top, .bottom], 10)
+                    .onDrop(of: [.url], delegate: VerbConjDropDelegate(currentItem: $item, characters: $characters, draggingItem: $draggingItem, updating: $updating, droppedCount: $droppedCount, animateWrongText: $animateWrongText, shuffledRows: $shuffledRows, progress: $progress, questionNumber: $questionNumber))
+            }
+        }
+        
+    }
+    
+    
+    @ViewBuilder
+    func RightDropArea()->some View{
+        VStack(spacing:10){
+            ForEach($rightDropCharacters){$item in
+                Text(item.value)
+                    .font(.system(size: item.fontSize))
+                    .opacity(item.isShowing ? 1 : 0)
+                    .background{
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .fill(item.isShowing ? .teal : .gray.opacity(0.25))
+                            .frame(width: 160, height: 40)
+                        
+                    }
+                    .background{
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .stroke(.gray)
+                            .opacity(item.isShowing ? 1: 0)
+                            .frame(width: 160, height: 40)
+                        
+                    }
+                    .padding([.top, .bottom], 10)
+                    .onDrop(of: [.url], delegate: VerbConjDropDelegate(currentItem: $item, characters: $characters, draggingItem: $draggingItem, updating: $updating, droppedCount: $droppedCount, animateWrongText: $animateWrongText, shuffledRows: $shuffledRows, progress: $progress, questionNumber: $questionNumber))
+            }
+        }
+        
+    }
+    
+    
+    @ViewBuilder
+    func DragArea()->some View {
+        VStack(spacing: 12){
+            ForEach(shuffledRows, id: \.self){row in
+                HStack(spacing:10){
+                    ForEach(row){item in
+                        Text(item.value)
+                            .font(.system(size: item.fontSize))
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, item.padding)
+                            .background{
+                                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                    .stroke(.gray)
+                            }
+                            .onDrag{
+                                draggingItem = item
+                                return NSItemProvider(contentsOf: URL(string: "\(item.id)"))!
+                            }
+                            .opacity(item.isShowing ? 0 : 1)
+                            .background{
+                                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                    .fill(item.isShowing ? .gray.opacity(0.25) : .clear)
+                                
+                            }
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func NavBar() -> some View{
+        
+        GeometryReader{proxy in
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(.gray.opacity(0.25))
+                
+                Capsule()
+                    .fill(Color.green)
+                    .frame(width: proxy.size.width * progress)
+            }
+        }.frame(height: 20)
+        
+    }
+    
+    func generateGrid()->[[VerbConjCharacter]]{
+        
+        for item in characters.enumerated() {
+            let textSize = textSize(character: item.element)
+            
+            characters[item.offset].textSize = textSize
+            
+        }
+        
+        var gridArray: [[VerbConjCharacter]] = []
+        var tempArray: [VerbConjCharacter] = []
+        
+        var currentWidth: CGFloat = 0
+        
+        let totalScreenWidth: CGFloat = UIScreen.main.bounds.width - 30
+        
+        for character in characters {
+            currentWidth += character.textSize
+            
+            if currentWidth < totalScreenWidth{
+                tempArray.append(character)
+            }else {
+                gridArray.append(tempArray)
+                tempArray = []
+                currentWidth = character.textSize
+                tempArray.append(character)
+            }
+        }
+        
+        if !tempArray.isEmpty{
+            gridArray.append(tempArray)
+        }
+        
+        return gridArray
+    }
+    
+    
+    func textSize(character: VerbConjCharacter)->CGFloat{
+        let font = UIFont.systemFont(ofSize: character.fontSize)
+        
+        let attributes = [NSAttributedString.Key.font : font]
+        
+        let size = (character.value as NSString).size(withAttributes: attributes)
+        
+        return size.width + (character.padding * 2) + 15
+    }
+    
+    func updateShuffledArray(character: VerbConjCharacter){
+        for index in shuffledRows.indices{
+            for subIndex in shuffledRows[index].indices{
+                if shuffledRows[index][subIndex].id == character.id{
+                    shuffledRows[index][subIndex].isShowing = true
+                }
+            }
+        }
+    }
+    
+}
+
+
+struct DragDropVerbConjugationView_Previews: PreviewProvider {
+    static var dragDropVM: DragDropVerbConjugationViewModel = DragDropVerbConjugationViewModel()
+    
+    static var previews: some View {
+        DragDropVerbConjugationView(dragDropVerbConjugationVM:  dragDropVM, isPreview: true)
+    }
+}

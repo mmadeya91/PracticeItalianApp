@@ -6,21 +6,20 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct verbConjMultipleChoiceView: View{
     
-    var tenseIn: Int
+    @StateObject var verbConjMultipleChoiceVM: VerbConjMultipleChoiceViewModel
     
     @State private var pressed = false
     @State private var counter: Int = 0
+    @State private var myListIsEmpty: Bool = false
     
     var body: some View {
         
         let tenseName = ["Presente", "Passato Prossimo", "Imperfetto", "Futuro", "Conditionale", "Imperativo"]
-        
-        let mcD = multipleChoiceData(tense: tenseIn)
-        
-        let mcOArray: [multipleChoiceObject] = mcD.createArrayOfMCD(numberOfVerbs: 15, tense: mcD.tense)
+
         
         GeometryReader{ geo in
             ZStack{
@@ -34,13 +33,58 @@ struct verbConjMultipleChoiceView: View{
   
                 VStack{
                     
-                    customTopNavBar8(tenseIn: tenseIn, tenseName: tenseName[tenseIn]).offset(y:-35)
-                    
                     VStack{
-                        progressBarMultipleChoice(counter: self.$counter, totalQuestions: mcOArray.count)
                         
-                        scrollViewBuilderMultipleChoice(mcOArray: mcOArray, counter: self.$counter, tense: tenseIn).padding(.top, 30)
-                            .padding([.leading, .trailing], 10)
+                        ScrollViewReader {scrollView in
+                            ScrollView(.horizontal){
+                                HStack{
+                                    ForEach(0..<verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count, id: \.self) { i in
+                                        multipleChoiceView(mcOIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i])
+                                            .padding([.leading, .trailing], 10)
+                                    }
+                                    
+                                }
+                            }.scrollDisabled(true)
+                            HStack{
+                                Button(action: {
+                                    withAnimation{
+                                        if counter > 0 {
+                                            counter = counter - 1
+                                        }
+                                        scrollView.scrollTo(counter)
+                                    }
+                                }, label:
+                                        {Image(systemName: "arrow.backward").resizable()
+                                        .bold()
+                                        .scaledToFit()
+                                        .frame(width: 65, height: 65)
+                                        .foregroundColor(Color.black)
+                                    
+                                    
+                                    
+                                }).padding(.leading, 90)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        if counter < 15 {
+                                            counter = counter + 1
+                                        }
+                                        scrollView.scrollTo(counter)
+                                    }
+                                }, label:
+                                        {Image(systemName: "arrow.forward").resizable()
+                                        .bold()
+                                        .scaledToFit()
+                                        .frame(width: 65, height: 65)
+                                        .foregroundColor(Color.black)
+                                    
+                                    
+                                    
+                                }).padding(.trailing, 90)
+                            }.padding(.top, 50)
+                        }
                         
                         addToMyListConjVerbButton().padding(.top, 20)
                     }.padding(.top, 50)
@@ -49,70 +93,12 @@ struct verbConjMultipleChoiceView: View{
             }
         }
     }
+
 }
     
-    struct scrollViewBuilderMultipleChoice: View{
-        
-        var mcOArray: [multipleChoiceObject]
-        
-        @Binding var counter: Int
-        var tense: Int
-        
-        var body: some View{
-            ScrollViewReader {scrollView in
-                ScrollView(.horizontal){
-                    HStack{
-                        ForEach(0..<mcOArray.count, id: \.self) { i in
-                            multipleChoiceView(mcOIn: mcOArray[i])
-                                .padding([.leading, .trailing], 10)
-                        }
-                    }
-                }.scrollDisabled(true)
-                HStack{
-                    Button(action: {
-                        withAnimation{
-                            if counter > 0 {
-                                counter = counter - 1
-                            }
-                            scrollView.scrollTo(counter)
-                        }
-                    }, label:
-                            {Image(systemName: "arrow.backward").resizable()
-                            .bold()
-                            .scaledToFit()
-                            .frame(width: 65, height: 65)
-                            .foregroundColor(Color.black)
-                        
-                        
-                        
-                    }).padding(.leading, 90)
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        withAnimation{
-                            if counter < mcOArray.count - 1 {
-                                counter = counter + 1
-                            }
-                            scrollView.scrollTo(counter)
-                        }
-                    }, label:
-                            {Image(systemName: "arrow.forward").resizable()
-                            .bold()
-                            .scaledToFit()
-                            .frame(width: 65, height: 65)
-                            .foregroundColor(Color.black)
-                        
-                        
-                        
-                    }).padding(.trailing, 90)
-                }.padding(.top, 50)
-            }
-        }
-    }
     
     struct multipleChoiceView: View {
-        var mcOIn: multipleChoiceObject
+        var mcOIn: multipleChoiceVerbObject
         var body: some View{
             VStack{
                 multipleChoiceViewVerbtoConj(verbNameIt: mcOIn.verbNameIt, pronoun: mcOIn.pronoun, verbNameEng: mcOIn.verbNameEng)
@@ -185,35 +171,6 @@ struct verbConjMultipleChoiceView: View{
         }
     }
 
-    struct progressBarMultipleChoice: View {
-        
-        @Binding var counter: Int
-        let totalQuestions: Int
-        
-        var body: some View {
-            
-            VStack {
-                
-                Text(String(counter + 1) + "/" + String(totalQuestions))
-                    .font(Font.custom("Arial Hebrew", size: 25))
-                    .bold()
-                    .offset(y:35)
-                
-                ProgressView("", value: Double(counter), total: Double(totalQuestions - 1))
-                    .tint(Color.orange)
-                    .scaleEffect(x: 1, y: 4)
-                    .padding([.leading, .trailing], 10)
-                    .padding(.bottom, 70)
-                    
-                
-                
-            }.frame(width: 350, height: 70)
-                .background(.white.opacity(0.8))
-                .border(.orange, width: 3)
-                .cornerRadius(10)
-               
-        }
-    }
 
 struct addToMyListConjVerbButton: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -244,48 +201,11 @@ struct addToMyListConjVerbButton: View {
     }
 }
     
-    struct customTopNavBar8: View {
-        
-        var tenseIn: Int
-        var tenseName: String
-        
-        var body: some View {
-            ZStack{
-                HStack{
-                    NavigationLink(destination: chooseVCActivity(tense: tenseIn), label: {Image("cross")
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.leading, 20)
-                    })
-                    
-                    Spacer()
-                    
-                    Text(tenseName)
-                        .bold()
-                        .font(Font.custom("Zapfino", size: 18))
-                    
-                    Spacer()
-                    
-                    NavigationLink(destination: chooseActivity(), label: {Image("house")
-                            .resizable()
-                            .scaledToFit()
-                            .scaleEffect(1.5)
-                            .padding([.top, .bottom], 15)
-                            .padding(.trailing, 38)
-                           
-                    })
-                }.zIndex(1)
-            }.frame(width: 400, height: 60)
-                .background(Color.gray.opacity(0.25))
-                .border(width: 3, edges: [.bottom, .top], color: .teal)
-
-        }
-    }
-    
     
     struct verbConjMultipleChoice_Previews: PreviewProvider {
+        static var _verbConjMultipleChoiceVM = VerbConjMultipleChoiceViewModel()
         static var previews: some View {
-            verbConjMultipleChoiceView(tenseIn: 0)
+            verbConjMultipleChoiceView(verbConjMultipleChoiceVM: _verbConjMultipleChoiceVM)
         }
     }
     

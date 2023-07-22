@@ -17,7 +17,7 @@ struct availableShortStories: View {
     var body: some View {
         GeometryReader{ geo in
             ZStack{
-                Image("homeWallpaper")
+                Image("verticalNature")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
@@ -25,11 +25,26 @@ struct availableShortStories: View {
                     .opacity(1.0)
                 
                 VStack{
-                    shortStoryContainer().frame(width: 345, height:675).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                        .stroke(.gray, lineWidth: 6))
-                        .shadow(radius: 10)
-                        .padding(.top, 40)
-                }
+                    HStack(spacing: 18){
+                        NavigationLink(destination: chooseActivity(), label: {
+                            Image(systemName: "chevron.backward.circle")
+                                .font(.system(size: 35))
+                                .foregroundColor(.black)
+                        }).padding(.leading, 25)
+                        
+                        Spacer()
+                        
+                        NavigationLink(destination: chooseActivity(), label: {
+                            Image(systemName: "house.circle")
+                                .font(.system(size: 35))
+                                .foregroundColor(.black)
+                        }).padding(.trailing, 25)
+                    }
+                    shortStoryContainer().frame(width: 345, height:600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                        .stroke(.black, lineWidth: 4))
+                    .shadow(radius: 10)
+                    .padding(.top, 40)
+                }.padding(.bottom, 50)
                 
             }
         }.navigationBarBackButtonHidden(true)
@@ -43,16 +58,14 @@ struct shortStoryContainer: View {
                 
                 Text("Short Stories").zIndex(1)
                     .font(Font.custom("Marker Felt", size: 30))
-                    .frame(width: 350, height: 60)
-                    .background(Color.teal).opacity(0.75)
-                    .border(width: 8, edges: [.bottom], color: .yellow)
+                    .frame(width: 350, height: 70)
+                    .background(Color("ForestGreen")).opacity(0.75)
+                    .border(width: 8, edges: [.bottom], color: Color("DarkRed"))
                 
                 bookHStack()
                 
-                
-                
             }.zIndex(1)
-
+            
         }
     }
 }
@@ -63,24 +76,54 @@ struct bookHStack: View {
         let bookTitles: [String] = ["Cristofo Columbo", "test1", "test2", "test3", "test4", "test5"]
         
         ScrollView{
-            HStack{
-                bookButton(shortStoryName: bookTitles[0])
-                Spacer()
-                bookButton(shortStoryName:bookTitles[1])
-            }.padding([.leading, .trailing], 60)
-                .padding(.top, 10)
-            HStack{
-                bookButton(shortStoryName: bookTitles[2])
-                Spacer()
-                bookButton(shortStoryName: bookTitles[3])
-            }.padding([.leading, .trailing], 60)
-            HStack{
-                bookButton(shortStoryName:bookTitles[4])
-                Spacer()
-                bookButton(shortStoryName: bookTitles[5])
-            }.padding([.leading, .trailing], 60)
+            VStack{
+                VStack{
+                    Text("Beginner")
+                        .font(Font.custom("Marker Felt", size: 30))
+                        .underline()
+                        .frame(width: 160, height: 40)
+                        .background(.teal)
+                        .cornerRadius(10)
+                    
+                    HStack{
+                        bookButton(shortStoryName: bookTitles[0])
+                        Spacer()
+                        bookButton(shortStoryName:bookTitles[1])
+                    }.padding([.leading, .trailing], 60)
+                    HStack{
+                        bookButton(shortStoryName: bookTitles[2])
+                        Spacer()
+                        bookButton(shortStoryName: bookTitles[3])
+                    }.padding([.leading, .trailing], 60)
+                }.padding(.bottom, 30)
+                VStack{
+                    Text("Intermediate")
+                        .font(Font.custom("Marker Felt", size: 30))
+                        .frame(width: 175, height: 30)
+                        .border(width: 3, edges: [.bottom], color: Color("DarkRed"))
+                    
+                    HStack{
+                        bookButton(shortStoryName: bookTitles[2])
+                        Spacer()
+                        bookButton(shortStoryName: bookTitles[3])
+                    }.padding([.leading, .trailing], 60)
+                }
+                VStack{
+                    Text("Hard")
+                        .font(Font.custom("Marker Felt", size: 30))
+                        .frame(width: 75, height: 30)
+                        .padding(.top, 50)
+                        .border(width: 3, edges: [.bottom], color: Color("DarkRed"))
+                    
+                    HStack{
+                        bookButton(shortStoryName:bookTitles[4])
+                        Spacer()
+                        bookButton(shortStoryName: bookTitles[5])
+                    }.padding([.leading, .trailing], 60)
+                }
+            }
         }
-               
+        
     }
     
 }
@@ -97,25 +140,25 @@ struct bookButton: View {
             
             Text(shortStoryName)
                 .font(Font.custom("Marker Felt", size: 20))
-                .frame(width: 70, height: 85)
+                .frame(width: 90, height: 80)
                 .multilineTextAlignment(.center)
                 .offset(y:15)
             
             
             NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName), label: {
-                Image("book_Fotor")
+                Image("book3")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 70, height: 85)
+                    .frame(width: 90, height: 90)
             })
-                
-                .scaleEffect(pressed ? 1.25 : 1.0)
-                .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
-                    withAnimation(.easeIn(duration: 0.75)) {
-                        self.pressed = pressing
-                    }
-                }, perform: { })
-        
+            
+            .scaleEffect(pressed ? 1.25 : 1.0)
+            .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
+                withAnimation(.easeIn(duration: 0.75)) {
+                    self.pressed = pressing
+                }
+            }, perform: { })
+            
         }
     }
     
@@ -124,7 +167,7 @@ struct bookButton: View {
 struct EdgeBorder: Shape {
     var width: CGFloat
     var edges: [Edge]
-
+    
     func path(in rect: CGRect) -> Path {
         var path = Path()
         for edge in edges {
@@ -134,21 +177,21 @@ struct EdgeBorder: Shape {
                 case .trailing: return rect.maxX - width
                 }
             }
-
+            
             var y: CGFloat {
                 switch edge {
                 case .top, .leading, .trailing: return rect.minY
                 case .bottom: return rect.maxY - width
                 }
             }
-
+            
             var w: CGFloat {
                 switch edge {
                 case .top, .bottom: return rect.width
                 case .leading, .trailing: return width
                 }
             }
-
+            
             var h: CGFloat {
                 switch edge {
                 case .top, .bottom: return width

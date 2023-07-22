@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A193062F-341F-48FE-A703-359766638BA7"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PracticeItalianApp/Preview Content/ShortStory/plugInTest.swift"
@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "391B2D2C-4D9F-487E-8C97-9D3069CD806E"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PracticeItalianApp/Preview Content/ListeningActivity/listeningActivity.swift"
@@ -71,47 +71,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3903483B-DEDC-4543-871A-6B4B4EEB415F"
-            shouldBeEnabled = "Yes"
+            uuid = "168B5752-5BBC-4F66-B072-D57A5FFA838E"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PracticeItalianApp/SpellVerb/SpellConjVerbViewModel.swift"
+            filePath = "PracticeItalianApp/ListeningActivityPutInOrder/DropViewDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "setSpellVerbData(tense:)"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "dropEntered(info:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "18B49F89-933A-4EAB-AC85-111A6A775B3F"
-            shouldBeEnabled = "Yes"
+            uuid = "F4499CC8-88BC-41B3-8219-DF38FBE38914"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PracticeItalianApp/SpellVerb/SpellConjVerbViewModel.swift"
+            filePath = "PracticeItalianApp/ListeningActivityPutInOrder/DropViewDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "setSpellVerbData(tense:)"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "dropUpdated(info:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4EF05644-AB53-4309-B698-CE8AE39D8E58"
+            uuid = "0088939F-ADC0-46E1-BD5F-7C5B5B1345BE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PracticeItalianApp/ListeningActivityPutInOrder/DropViewDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "performDrop(info:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "19AFC564-784F-45AD-9C73-15B86FB0A979"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PracticeItalianApp/SpellVerb/SpellConjugatedVerbView.swift"
+            filePath = "PracticeItalianApp/CreateVerbTemplate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "finalSaveCheck()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4314F3E-2E6D-4E9A-880D-51DE26DFAEEF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PracticeItalianApp/CreateVerbTemplate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>

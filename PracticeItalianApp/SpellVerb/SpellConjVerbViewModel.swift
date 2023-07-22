@@ -6,15 +6,22 @@
 //
 
 import Foundation
+import SwiftUI
+import CoreData
 
 final class SpellConjVerbViewModel: ObservableObject {
+    @Environment(\.managedObjectContext) private var viewContext
     
     @Published private(set) var currentTenseSpellConjVerbData: [spellConjVerbObject] = [spellConjVerbObject]()
     
     @Published var currentHintLetterArray: [hintLetterObj] = [hintLetterObj]()
     
-    private(set) var SpellConjVerbData: [verbObject] = verbObject.allVerbObject
+    @Published var isMyList: Bool = false
+    @Published var currentTense: Int = 0
     
+    private(set) var SpellConjVerbData: [verbObject] = verbObject.allVerbObject
+    private(set) var allUserMadeVerbs: [verbObject] = [verbObject]()
+
     func setSpellVerbData(tense: Int) {
         
         var SpellConjVerbViewData: [spellConjVerbObject] = [spellConjVerbObject]()
@@ -23,7 +30,7 @@ final class SpellConjVerbViewModel: ObservableObject {
         
         var i: Int = 0
         
-        while i < 15 {
+        while i < 14 {
             
             let randomInt: Int = Int.random(in: 0..<6)
             let randomInt2: Int = Int.random(in: 0..<SpellConjVerbData.count)
@@ -34,36 +41,84 @@ final class SpellConjVerbViewModel: ObservableObject {
             
             var correctTenseList: [String] = [String]()
             
-            var tenseNameIn: String = ""
             
-            switch tense {
+            switch currentTense {
                 
             case 0:
-                tenseNameIn = "Presente"
                 correctTenseList = verbToDisplay.presenteConjList
             case 1:
-                tenseNameIn = "Passato Prossimo"
                 correctTenseList = verbToDisplay.passatoProssimoConjList
             case 2:
-                tenseNameIn = "Futuro"
                 correctTenseList = verbToDisplay.futuroConjList
             case 3:
-                tenseNameIn = "Imperfetto"
+     
                 correctTenseList = verbToDisplay.imperfettoConjList
             case 4:
-                tenseNameIn = "Presente Condizionale"
                 correctTenseList = verbToDisplay.presenteCondizionaleConjList
             case 5:
-                tenseNameIn = "Imperativo"
                 correctTenseList = verbToDisplay.imperativoConjList
                 
             default:
-                tenseNameIn = ""
+                correctTenseList = verbToDisplay.presenteConjList
             }
             
             let correctAnswer: String = correctTenseList[randomInt]
             
-            var correctAnswerIntoArray: [String] = correctAnswer.map { String($0) }
+            let correctAnswerIntoArray: [String] = correctAnswer.map { String($0) }
+            
+            
+            let spellConjVerbObject = spellConjVerbObject(verbNameItalian: verbToDisplay.verb.verbName, verbNameEnglish: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, pronoun: pickPronoun, hintLetterArray: createArrayOfHintLetterObj(letterArray: correctAnswerIntoArray))
+            
+            SpellConjVerbViewData.append(spellConjVerbObject)
+            
+            i+=1
+        }
+        
+        currentTenseSpellConjVerbData = SpellConjVerbViewData
+        
+    }
+    
+    func setMyListSpellVerbData() {
+        
+        var SpellConjVerbViewData: [spellConjVerbObject] = [spellConjVerbObject]()
+        
+        let pronouns: [String] = ["Io", "Tu", "Lui, Lei, Lei", "Noi", "Voi", "Loro"]
+        
+        var i: Int = 0
+        
+        while i < 14 {
+            
+            let randomInt: Int = Int.random(in: 0..<6)
+            let randomInt2: Int = Int.random(in: 0..<allUserMadeVerbs.count)
+            
+            let pickPronoun: String = pronouns[randomInt]
+            
+            let verbToDisplay: verbObject = allUserMadeVerbs[randomInt2]
+            
+            var correctTenseList: [String] = [String]()
+            
+            switch currentTense {
+                
+            case 0:
+                correctTenseList = verbToDisplay.presenteConjList
+            case 1:
+                correctTenseList = verbToDisplay.passatoProssimoConjList
+            case 2:
+                correctTenseList = verbToDisplay.futuroConjList
+            case 3:
+                correctTenseList = verbToDisplay.imperfettoConjList
+            case 4:
+                correctTenseList = verbToDisplay.presenteCondizionaleConjList
+            case 5:
+                correctTenseList = verbToDisplay.imperativoConjList
+                
+            default:
+                correctTenseList = verbToDisplay.presenteConjList
+            }
+            
+            let correctAnswer: String = correctTenseList[randomInt]
+            
+            let correctAnswerIntoArray: [String] = correctAnswer.map { String($0) }
             
             
             let spellConjVerbObject = spellConjVerbObject(verbNameItalian: verbToDisplay.verb.verbName, verbNameEnglish: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, pronoun: pickPronoun, hintLetterArray: createArrayOfHintLetterObj(letterArray: correctAnswerIntoArray))
@@ -78,7 +133,7 @@ final class SpellConjVerbViewModel: ObservableObject {
     }
     
     func showHint(){
-        var count = currentHintLetterArray.count
+        let count = currentHintLetterArray.count
         
         for i in 0...count-1 {
             currentHintLetterArray[i].showLetter = true
@@ -101,6 +156,14 @@ final class SpellConjVerbViewModel: ObservableObject {
         
         return hintLetterObjArray
         
+    }
+    
+    func createVerbObjects(myListIn: FetchedResults<UserVerbList>){
+        var tempVerbObjArray: [verbObject] = [verbObject]()
+        for verbObj in myListIn {
+            tempVerbObjArray.append(verbObject(verb: Verb(verbName: verbObj.verbNameItalian!, verbEngl: verbObj.verbNameEnglish!), presenteConjList: verbObj.presente!, passatoProssimoConjList: verbObj.passatoProssimo!, futuroConjList: verbObj.futuro!, imperfettoConjList: verbObj.imperfetto!, presenteCondizionaleConjList: verbObj.condizionale!, imperativoConjList: verbObj.imperativo!))
+        }
+       allUserMadeVerbs = tempVerbObjArray
     }
 }
 

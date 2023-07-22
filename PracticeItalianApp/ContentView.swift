@@ -22,11 +22,11 @@ struct ContentView: View {
         NavigationView{
             GeometryReader{ geo in
                 ZStack{
-                    Image("homeWallpaper")
+                    Image("vectorRome")
                         .resizable()
                         .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                        .frame(width: geo.size.width, height: 1000, alignment: .center)
                         .opacity(1.0)
                     VStack{
                         

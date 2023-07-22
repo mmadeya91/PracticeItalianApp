@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct SpellConjugatedVerbView: View {
-    @ObservedObject var spellConjVerbVM: SpellConjVerbViewModel = SpellConjVerbViewModel()
     
-    var tense: Int
-    var tenseString: String = ""
+    @ObservedObject var spellConjVerbVM: SpellConjVerbViewModel
+    
+    @State var progress: CGFloat = 0
+
     @State var userAnswer: String = ""
     @State var currentQuestionNumber = 0
     @State var pressed = false
     @State var selected = false
     @State var hintGiven: Bool = false
     @State var hintButtonText = "Give me a Hint!"
+    
+    @Environment(\.dismiss) var dismiss
     
     
     var body: some View {
@@ -33,8 +36,11 @@ struct SpellConjugatedVerbView: View {
                         .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                         .opacity(1.0)
                     VStack{
-                        CustomNavBar()
+                        NavBar().padding([.leading, .trailing], 20)
                         VStack{
+                            
+                            Text(getTenseString(tenseIn: spellConjVerbVM.currentTense))
+                            
                             Spacer()
                             
                             ScrollView(.horizontal) {
@@ -42,6 +48,7 @@ struct SpellConjugatedVerbView: View {
                                     ForEach(0..<spellConjVerbVM.currentTenseSpellConjVerbData.count, id: \.self) {i in
                                         questionView(vbItalian: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameItalian, vbEnglish: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameEnglish, pronoun: spellConjVerbVM.currentTenseSpellConjVerbData[i].pronoun).padding(.leading, 10)
                                     }
+                                    
                                 }
                             }
                             
@@ -80,6 +87,9 @@ struct SpellConjugatedVerbView: View {
                                         
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                             currentQuestionNumber += 1
+                                            
+                                            progress = (CGFloat(currentQuestionNumber) / CGFloat(spellConjVerbVM.currentTenseSpellConjVerbData.count))
+                                            
                                             spellConjVerbVM.setHintLetter(letterArray: spellConjVerbVM.currentTenseSpellConjVerbData[currentQuestionNumber].hintLetterArray)
                                             withAnimation(.easeInOut(duration: 5)) {
                                                 scrollView.scrollTo(currentQuestionNumber)
@@ -116,7 +126,7 @@ struct SpellConjugatedVerbView: View {
                                 
                                 Button(action: {
                                     
-                                    var currentHLACount = spellConjVerbVM.currentHintLetterArray.count
+                                    let currentHLACount = spellConjVerbVM.currentHintLetterArray.count
                                     
                                     if !hintGiven {
                                         var array = [Int](0...currentHLACount-1)
@@ -161,12 +171,63 @@ struct SpellConjugatedVerbView: View {
                     
                     
                 }
-            }.onAppear{spellConjVerbVM.setSpellVerbData(tense: tense)
-                spellConjVerbVM.setHintLetter(letterArray: spellConjVerbVM.currentTenseSpellConjVerbData[0].hintLetterArray)
             }
         }
     }
+    @ViewBuilder
+    func NavBar() -> some View{
+        HStack(spacing: 18){
+            Button(action: {
+                dismiss()
+            }, label: {
+                Image(systemName: "xmark")
+                    .font(.title3)
+                    .foregroundColor(.gray)
+                
+            })
+            
+            GeometryReader{proxy in
+                      ZStack(alignment: .leading) {
+                         Capsule()
+                             .fill(.gray.opacity(0.25))
+                          
+                          Capsule()
+                              .fill(Color.green)
+                              .frame(width: proxy.size.width * progress)
+                      }
+                  }.frame(height: 20)
+            
+            Button(action: {}, label: {
+                Image(systemName: "suit.heart.fill")
+                    .font(.title3)
+                    .foregroundColor(.gray)
+                
+            })
+        }
+    }
+    
+    func getTenseString(tenseIn: Int)->String{
+        switch tenseIn {
+        case 0:
+            return "Presente"
+        case 1:
+            return "Passato Prossimo"
+        case 2:
+            return "Futuro"
+        case 3:
+            return "Imperfetto"
+        case 4:
+            return "Presente Condizionale"
+        case 5:
+            return "Imperativo"
+        default:
+            return "No Tense"
+        }
+    }
+    
 }
+
+
 
 struct questionView: View {
     var vbItalian: String
@@ -188,7 +249,8 @@ struct questionView: View {
 
 
 struct SpellConjugatedVerbView_Previews: PreviewProvider {
+    static var _spellConjVerbVM = SpellConjVerbViewModel()
     static var previews: some View {
-        SpellConjugatedVerbView(tense: 0)
+        SpellConjugatedVerbView(spellConjVerbVM: _spellConjVerbVM)
     }
 }

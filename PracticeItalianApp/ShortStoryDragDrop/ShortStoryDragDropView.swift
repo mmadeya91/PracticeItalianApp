@@ -7,20 +7,95 @@
 
 import SwiftUI
 
-struct ShortStoryDragDropView: View {
+struct ShortStoryDragDropView: View{
+    @StateObject var shortStoryDragDropVM: ShortStoryDragDropViewModel
+    @Environment(\.dismiss) var dismiss
+    var isPreview: Bool
+    @State var questionNumber = 0
     
-    
+    var body: some View{
+        GeometryReader {geo in
+            ScrollViewReader{scroller in
+                
+                ZStack{
+                    VStack{
+                        HStack(spacing: 18){
+                            Button(action: {
+                                dismiss()
+                            }, label: {
+                                Image(systemName: "xmark")
+                                    .font(.title3)
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            
+                            Spacer()
+                            
+                            Button(action: {}, label: {
+                                Image(systemName: "suit.heart.fill")
+                                    .font(.title3)
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            
+                            Text(String(questionNumber) + "/" + String( shortStoryDragDropVM.currentDragDropQuestions.count))
+                                .font(.title3)
+                                .foregroundColor(.black)
+                            
+                        }.padding([.leading, .trailing], 25)
+                        ScrollView(.horizontal){
+                            
+                            HStack{
+                                ForEach(0..<shortStoryDragDropVM.currentDragDropQuestions.count, id: \.self) { i in
+                                    VStack{
+                                        shortStoryDragDropViewBuilder(characters: shortStoryDragDropVM.currentDragDropQuestions[i].dragDropQuestionChoices, questionNumber: $questionNumber, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence).frame(width: geo.size.width)
+                                            .frame(minHeight: geo.size.height)
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
+                        .scrollDisabled(true)
+                        .frame(width: geo.size.width)
+                        .frame(minHeight: geo.size.height)
+                        .onChange(of: questionNumber) { newIndex in
+                            withAnimation{
+                                scroller.scrollTo(newIndex, anchor: .center)
+                            }
+                        }
+                        
+                        
+                    }
+                }.onAppear{
+                    shortStoryDragDropVM.setData()
+                }
+            }
+        }
+    }
+}
+
+struct shortStoryDragDropViewBuilder: View {
+        
     @State var progress: CGFloat = 0
-    @State var characters: [Character] = characters_
+    
+    //choices
+    @State var characters: [dragDropShortStoryCharacter]
     
     //for drag
-    @State var shuffledRows: [[Character]] = []
+    @State var shuffledRows: [[dragDropShortStoryCharacter]] = []
     //for drop
-    @State var rows: [[Character]] = []
+    @State var rows: [[dragDropShortStoryCharacter]] = []
+    
+    @State var draggingItem: dragDropShortStoryCharacter?
+    @State var updating: Bool = false
     
     @State var animateWrongText: Bool = false
     
     @State var droppedCount: CGFloat = 0
+    @Binding var questionNumber: Int
+    
+    var englishSentence: String
     
     var body: some View {
         VStack(spacing: 15) {
@@ -28,6 +103,8 @@ struct ShortStoryDragDropView: View {
             
             VStack(alignment: .leading, spacing: 30) {
                 Text("Form this sentence")
+                    .font(.title2.bold())
+                Text(englishSentence)
                     .font(.title2.bold())
             }
             DropArea()
@@ -40,8 +117,8 @@ struct ShortStoryDragDropView: View {
                 //First Creating shuffled On
                 //then normal one
                 characters = characters.shuffled()
+                rows = generateGrid()
                 shuffledRows = generateGrid()
-                characters = characters_
                 rows = generateGrid()
             }
         }
@@ -68,36 +145,8 @@ struct ShortStoryDragDropView: View {
                                     .stroke(.gray)
                                     .opacity(item.isShowing ? 1: 0)
                             }
-                            .onDrop(of: [.url], isTargeted: .constant(false)){
-                                providers in
-                                
-                                if let first = providers.first{
-                                    let _ = first.loadObject(ofClass: URL.self) {
-                                        value,error in
-                                        
-                                        guard let url = value else{return}
-                                        if item.id == "\(url)"{
-                                            droppedCount += 1
-                                            let progress = (droppedCount / CGFloat(characters.count))
-                                            withAnimation{
-                                                item.isShowing = true
-                                                updateShuffledArray(character: item)
-                                                self.progress = progress
-                                                
-                                            }
-                                        }else{
-                                            animateView()
-                                        }
-                                    }
-                                }
-                                
-                                return false
-                            }
+                            .onDrop(of: [.url], delegate: ShortStoryDragDropDelegate(currentItem: $item, characters: $characters, draggingItem: $draggingItem, updating: $updating, droppedCount: $droppedCount, animateWrongText: $animateWrongText, shuffledRows: $shuffledRows, progress: $progress, questionNumber: $questionNumber))
                     }
-                }
-                
-                if rows.last != row{
-                    Divider()
                 }
             }
         }
@@ -128,9 +177,6 @@ struct ShortStoryDragDropView: View {
                     }
                 }
                 
-                if shuffledRows.last != row{
-                    Divider()
-                }
             }
         }
     }
@@ -138,13 +184,6 @@ struct ShortStoryDragDropView: View {
     @ViewBuilder
     func NavBar() -> some View{
         HStack(spacing: 18){
-            Button(action: {}, label: {
-                Image(systemName: "xmark")
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                
-            })
-            
             GeometryReader{proxy in
                       ZStack(alignment: .leading) {
                          Capsule()
@@ -155,17 +194,11 @@ struct ShortStoryDragDropView: View {
                               .frame(width: proxy.size.width * progress)
                       }
                   }.frame(height: 20)
-            
-            Button(action: {}, label: {
-                Image(systemName: "suit.heart.fill")
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                
-            })
+
         }
     }
     
-    func generateGrid()->[[Character]]{
+    func generateGrid()->[[dragDropShortStoryCharacter]]{
         for item in characters.enumerated() {
             let textSize = textSize(character: item.element)
             
@@ -173,8 +206,8 @@ struct ShortStoryDragDropView: View {
             
         }
         
-        var gridArray: [[Character]] = []
-        var tempArray: [Character] = []
+        var gridArray: [[dragDropShortStoryCharacter]] = []
+        var tempArray: [dragDropShortStoryCharacter] = []
         
         var currentWidth: CGFloat = 0
         
@@ -200,7 +233,7 @@ struct ShortStoryDragDropView: View {
         return gridArray
     }
     
-    func textSize(character: Character)->CGFloat{
+    func textSize(character: dragDropShortStoryCharacter)->CGFloat{
         let font = UIFont.systemFont(ofSize: character.fontSize)
         
         let attributes = [NSAttributedString.Key.font : font]
@@ -210,7 +243,7 @@ struct ShortStoryDragDropView: View {
         return size.width + (character.padding * 2) + 15
     }
     
-    func updateShuffledArray(character: Character){
+    func updateShuffledArray(character: dragDropShortStoryCharacter){
         for index in shuffledRows.indices{
             for subIndex in shuffledRows[index].indices{
                 if shuffledRows[index][subIndex].id == character.id{
@@ -234,8 +267,9 @@ struct ShortStoryDragDropView: View {
 }
 
 struct ShortStoryDragDropView_Previews: PreviewProvider {
+    static var shortStoryDragDropVM: ShortStoryDragDropViewModel = ShortStoryDragDropViewModel(chosenStory: 0)
     static var previews: some View {
-        ShortStoryDragDropView()
+        ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: true)
     }
 }
 

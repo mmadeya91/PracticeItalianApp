@@ -7,13 +7,12 @@
 
 import Foundation
 
-struct verbObject: Codable {
+struct verbObject: Codable{
     var verb: Verb
     var presenteConjList, passatoProssimoConjList, futuroConjList, imperfettoConjList: [String]
     var presenteCondizionaleConjList, imperativoConjList: [String]
     
     static let allVerbObject: [verbObject] = Bundle.main.decode(file: "ItalianAppVerbData.json")
-    
     
 }
     
@@ -28,8 +27,16 @@ struct storyObject: Codable {
     let wordLinks: [WordLink]
     let questionsObjs: [QuestionsObj]
     let fillInBlankQuestions: [FillInBlankQuestion]
+    var dragAndDropQuestions: [DragAndDropQuestion]
     
     static let allStoryObjects: [storyObject] = Bundle.main.decode(file: "shortStoryAppData.json")
+    static let columbo: storyObject = allStoryObjects[0]
+}
+
+// MARK: - DragAndDropQuestion
+struct DragAndDropQuestion: Codable {
+    var englishSentence: String
+    var choices: [String]
 }
 
 

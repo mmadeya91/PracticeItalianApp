@@ -30,6 +30,8 @@ struct shortStoryView: View {
     
     @State var showShortStoryDragDrop = false
     
+    @StateObject var shortStoryDragDropVM = ShortStoryDragDropViewModel(chosenStory: 0)
+    
     var storyData: shortStoryData { shortStoryData(chosenStoryName: chosenStoryNameIn)}
     
     var storyObj: shortStoryObject {storyData.collectShortStoryData(storyName: storyData.chosenStoryName)}
@@ -74,7 +76,7 @@ struct shortStoryView: View {
             }
         }.navigationBarBackButtonHidden(true)
             .fullScreenCover(isPresented: $showShortStoryDragDrop) {
-                ShortStoryDragDropView()
+                ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false)
             }
     }
 }

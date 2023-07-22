@@ -11,11 +11,31 @@
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
+    <entity name="UserAddedVerb" representedClassName="UserAddedVerb" syncable="YES" codeGenerationType="class">
+        <attribute name="condizionale" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="futuro" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="imperativo" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="imperfetto" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="passatoProssimo" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="presente" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="verbNameEnglish" optional="YES" attributeType="String"/>
+        <attribute name="verbNameItalian" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="UserFlashCardAccuracy" representedClassName="UserFlashCardAccuracy" syncable="YES" codeGenerationType="class"/>
     <entity name="UserMadeFlashCard" representedClassName="UserMadeFlashCard" syncable="YES" codeGenerationType="class">
         <attribute name="englishLine1" optional="YES" attributeType="String"/>
         <attribute name="englishLine2" optional="YES" attributeType="String"/>
         <attribute name="italianLine1" optional="YES" attributeType="String"/>
         <attribute name="italianLine2" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="UserVerbList" representedClassName="UserVerbList" syncable="YES" codeGenerationType="class">
+        <attribute name="condizionale" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="futuro" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="imperativo" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="imperfetto" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="passatoProssimo" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="presente" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="verbNameEnglish" optional="YES" attributeType="String"/>
+        <attribute name="verbNameItalian" optional="YES" attributeType="String"/>
     </entity>
 </model>

@@ -20,6 +20,12 @@
 		28F4D2CD29D249C50080608F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CC29D249C50080608F /* Persistence.swift */; };
 		28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D2CE29D249C50080608F /* PracticeItalianApp.xcdatamodeld */; };
 		7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */; };
+		7C0334D42A53217500119990 /* ListViewOfAvailableVerbs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0334D32A53217500119990 /* ListViewOfAvailableVerbs.swift */; };
+		7C0334D62A5325FD00119990 /* CreateVerbTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0334D52A5325FD00119990 /* CreateVerbTemplate.swift */; };
+		7C0DDE502A6046F50098F27D /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7C0DDE4F2A6046F50098F27D /* Algorithms */; };
+		7C0DDE522A6450180098F27D /* DragDropVerbConjugationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0DDE512A6450180098F27D /* DragDropVerbConjugationViewModel.swift */; };
+		7C0DDE542A66F5D10098F27D /* ShortStoryDragDropViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0DDE532A66F5D10098F27D /* ShortStoryDragDropViewModel.swift */; };
+		7C0DDE562A66F5E50098F27D /* ShortStoryDragDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0DDE552A66F5E50098F27D /* ShortStoryDragDropDelegate.swift */; };
 		7C31868E2A24059600E94F60 /* FlashCardAccDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */; };
 		7C31869D2A28E05C00E94F60 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C31869C2A28E05C00E94F60 /* ItalianAppVerbData.json */; };
 		7C31869F2A28E06400E94F60 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C31869E2A28E06400E94F60 /* shortStoryAppData.json */; };
@@ -33,8 +39,10 @@
 		7C6937AB2A460B70007999C2 /* SpellConjVerbViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6937AA2A460B70007999C2 /* SpellConjVerbViewModel.swift */; };
 		7C77DB602A0E804D00E9E766 /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB5F2A0E804D00E9E766 /* GifImage.swift */; };
 		7C77DB642A0E841200E9E766 /* italAppGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7C77DB632A0E841200E9E766 /* italAppGif.gif */; };
-		7C77DB682A0EB61F00E9E766 /* chooseTense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB672A0EB61F00E9E766 /* chooseTense.swift */; };
 		7C77DB6A2A0EB6A200E9E766 /* chooseVCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */; };
+		7C8EA7DC2A56086900A286D8 /* chooseVerbList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EA7DB2A56086900A286D8 /* chooseVerbList.swift */; };
+		7C8EA7DE2A574EBC00A286D8 /* ChooseVCActivityMyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EA7DD2A574EBC00A286D8 /* ChooseVCActivityMyList.swift */; };
+		7C8EA7E02A58B84A00A286D8 /* VerbConjMultipleChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EA7DF2A58B84A00A286D8 /* VerbConjMultipleChoiceViewModel.swift */; };
 		7C9B488B2A32170A009AE5EA /* ListeningActivtyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B488A2A32170A009AE5EA /* ListeningActivtyViewModel.swift */; };
 		7C9B488D2A321D50009AE5EA /* ListeningActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B488C2A321D50009AE5EA /* ListeningActivityView.swift */; };
 		7C9B488F2A3220C5009AE5EA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B488E2A3220C5009AE5EA /* Extensions.swift */; };
@@ -51,6 +59,9 @@
 		7CA544DF2A11D37800DB6441 /* flashCardActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */; };
 		7CA544E52A12EA1700DB6441 /* flashCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA544E42A12EA1700DB6441 /* flashCardData.swift */; };
 		7CB4C1012A31097100C10F1B /* chooseAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB4C1002A31097100C10F1B /* chooseAudio.swift */; };
+		7CB7664B2A4F249000ACF783 /* ShortStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7664A2A4F249000ACF783 /* ShortStoryViewModel.swift */; };
+		7CB7664E2A4F253B00ACF783 /* DragDropVerbConjugationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7664D2A4F253B00ACF783 /* DragDropVerbConjugationView.swift */; };
+		7CB766522A51130E00ACF783 /* VerbConjDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB766512A51130E00ACF783 /* VerbConjDropDelegate.swift */; };
 		7CB79B432A1E8F8C00B09EB7 /* correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CB79B422A1E8F8A00B09EB7 /* correct.mp3 */; };
 		7CB79B492A1E95C000B09EB7 /* introMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CB79B482A1E95C000B09EB7 /* introMusic.mp3 */; };
 		7CB8F28F2A0F62470017A740 /* chooseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8F28E2A0F62470017A740 /* chooseActivity.swift */; };
@@ -96,6 +107,11 @@
 		28F4D2CC29D249C50080608F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		28F4D2CF29D249C50080608F /* PracticeItalianApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PracticeItalianApp.xcdatamodel; sourceTree = "<group>"; };
 		7C00131A2A0ABCA900E27CB4 /* availableShortStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = availableShortStories.swift; sourceTree = "<group>"; };
+		7C0334D32A53217500119990 /* ListViewOfAvailableVerbs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewOfAvailableVerbs.swift; sourceTree = "<group>"; };
+		7C0334D52A5325FD00119990 /* CreateVerbTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVerbTemplate.swift; sourceTree = "<group>"; };
+		7C0DDE512A6450180098F27D /* DragDropVerbConjugationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropVerbConjugationViewModel.swift; sourceTree = "<group>"; };
+		7C0DDE532A66F5D10098F27D /* ShortStoryDragDropViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortStoryDragDropViewModel.swift; sourceTree = "<group>"; };
+		7C0DDE552A66F5E50098F27D /* ShortStoryDragDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortStoryDragDropDelegate.swift; sourceTree = "<group>"; };
 		7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardAccDataManager.swift; sourceTree = "<group>"; };
 		7C31869C2A28E05C00E94F60 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItalianAppVerbData.json; sourceTree = "<group>"; };
 		7C31869E2A28E06400E94F60 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shortStoryAppData.json; sourceTree = "<group>"; };
@@ -109,8 +125,10 @@
 		7C6937AA2A460B70007999C2 /* SpellConjVerbViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellConjVerbViewModel.swift; sourceTree = "<group>"; };
 		7C77DB5F2A0E804D00E9E766 /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
 		7C77DB632A0E841200E9E766 /* italAppGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = italAppGif.gif; sourceTree = "<group>"; };
-		7C77DB672A0EB61F00E9E766 /* chooseTense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseTense.swift; sourceTree = "<group>"; };
 		7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseVCActivity.swift; sourceTree = "<group>"; };
+		7C8EA7DB2A56086900A286D8 /* chooseVerbList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseVerbList.swift; sourceTree = "<group>"; };
+		7C8EA7DD2A574EBC00A286D8 /* ChooseVCActivityMyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVCActivityMyList.swift; sourceTree = "<group>"; };
+		7C8EA7DF2A58B84A00A286D8 /* VerbConjMultipleChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbConjMultipleChoiceViewModel.swift; sourceTree = "<group>"; };
 		7C9B488A2A32170A009AE5EA /* ListeningActivtyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningActivtyViewModel.swift; sourceTree = "<group>"; };
 		7C9B488C2A321D50009AE5EA /* ListeningActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningActivityView.swift; sourceTree = "<group>"; };
 		7C9B488E2A3220C5009AE5EA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -127,6 +145,9 @@
 		7CA544DE2A11D37800DB6441 /* flashCardActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashCardActivity.swift; sourceTree = "<group>"; };
 		7CA544E42A12EA1700DB6441 /* flashCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashCardData.swift; sourceTree = "<group>"; };
 		7CB4C1002A31097100C10F1B /* chooseAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseAudio.swift; sourceTree = "<group>"; };
+		7CB7664A2A4F249000ACF783 /* ShortStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortStoryViewModel.swift; sourceTree = "<group>"; };
+		7CB7664D2A4F253B00ACF783 /* DragDropVerbConjugationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropVerbConjugationView.swift; sourceTree = "<group>"; };
+		7CB766512A51130E00ACF783 /* VerbConjDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbConjDropDelegate.swift; sourceTree = "<group>"; };
 		7CB79B422A1E8F8A00B09EB7 /* correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correct.mp3; sourceTree = "<group>"; };
 		7CB79B482A1E95C000B09EB7 /* introMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = introMusic.mp3; sourceTree = "<group>"; };
 		7CB8F28E2A0F62470017A740 /* chooseActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseActivity.swift; sourceTree = "<group>"; };
@@ -162,6 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C0DDE502A6046F50098F27D /* Algorithms in Frameworks */,
 				7CF067392A36B3E500D0CF53 /* SwiftUIFlowLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +210,7 @@
 		28F4D2C229D249C00080608F /* PracticeItalianApp */ = {
 			isa = PBXGroup;
 			children = (
+				7CB7664C2A4F250B00ACF783 /* DragDropVerbConjugation */,
 				28F4D2C329D249C00080608F /* PracticeItalianAppApp.swift */,
 				28F4D2C529D249C00080608F /* ContentView.swift */,
 				28F4D2CC29D249C50080608F /* Persistence.swift */,
@@ -214,7 +237,6 @@
 				7C77DB5F2A0E804D00E9E766 /* GifImage.swift */,
 				7C9B488E2A3220C5009AE5EA /* Extensions.swift */,
 				7C3186A22A28E34400E94F60 /* RightWrongButtons.swift */,
-				7C77DB672A0EB61F00E9E766 /* chooseTense.swift */,
 				7C77DB692A0EB6A200E9E766 /* chooseVCActivity.swift */,
 				7CB8F28E2A0F62470017A740 /* chooseActivity.swift */,
 				28E88FFC29F9D5F000D07103 /* JSONManager.swift */,
@@ -223,6 +245,10 @@
 				7CF0674F2A3BB54500D0CF53 /* ListeningActivity.json */,
 				7C31869E2A28E06400E94F60 /* shortStoryAppData.json */,
 				7C3186A02A28E06900E94F60 /* flashCardData.json */,
+				7C0334D32A53217500119990 /* ListViewOfAvailableVerbs.swift */,
+				7C0334D52A5325FD00119990 /* CreateVerbTemplate.swift */,
+				7C8EA7DB2A56086900A286D8 /* chooseVerbList.swift */,
+				7C8EA7DD2A574EBC00A286D8 /* ChooseVCActivityMyList.swift */,
 			);
 			path = PracticeItalianApp;
 			sourceTree = "<group>";
@@ -241,6 +267,7 @@
 				287829002A002197007B3D60 /* verbConjMultipleChoiceView.swift */,
 				287828F829FB160E007B3D60 /* multipleChoiceData.swift */,
 				287828FA29FB2754007B3D60 /* multipleChoiceObject.swift */,
+				7C8EA7DF2A58B84A00A286D8 /* VerbConjMultipleChoiceViewModel.swift */,
 			);
 			path = " MultipleChoice";
 			sourceTree = "<group>";
@@ -285,6 +312,7 @@
 				7CBA411F2A09CED300462A34 /* shortStoryData.swift */,
 				7CBA411D2A09CE4F00462A34 /* shortStoryObject.swift */,
 				7CBBDDF72A2A6F8F00A08FFC /* shortStoryPlugInQuestions.swift */,
+				7CB7664A2A4F249000ACF783 /* ShortStoryViewModel.swift */,
 			);
 			path = ShortStory;
 			sourceTree = "<group>";
@@ -320,8 +348,20 @@
 			children = (
 				7C9DEE0B2A4DFEE00058C9BC /* Character.swift */,
 				7C9DEE0D2A4E00030058C9BC /* ShortStoryDragDropView.swift */,
+				7C0DDE532A66F5D10098F27D /* ShortStoryDragDropViewModel.swift */,
+				7C0DDE552A66F5E50098F27D /* ShortStoryDragDropDelegate.swift */,
 			);
 			path = ShortStoryDragDrop;
+			sourceTree = "<group>";
+		};
+		7CB7664C2A4F250B00ACF783 /* DragDropVerbConjugation */ = {
+			isa = PBXGroup;
+			children = (
+				7CB7664D2A4F253B00ACF783 /* DragDropVerbConjugationView.swift */,
+				7CB766512A51130E00ACF783 /* VerbConjDropDelegate.swift */,
+				7C0DDE512A6450180098F27D /* DragDropVerbConjugationViewModel.swift */,
+			);
+			path = DragDropVerbConjugation;
 			sourceTree = "<group>";
 		};
 		7CB79B3F2A1E8F6200B09EB7 /* Sounds */ = {
@@ -386,6 +426,7 @@
 			name = PracticeItalianApp;
 			packageProductDependencies = (
 				7CF067382A36B3E500D0CF53 /* SwiftUIFlowLayout */,
+				7C0DDE4F2A6046F50098F27D /* Algorithms */,
 			);
 			productName = PracticeItalianApp;
 			productReference = 28F4D2C029D249C00080608F /* PracticeItalianApp.app */;
@@ -417,6 +458,7 @@
 			mainGroup = 28F4D2B729D249C00080608F;
 			packageReferences = (
 				7CF067372A36B3E500D0CF53 /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */,
+				7C0DDE4E2A6046F50098F27D /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = 28F4D2C129D249C00080608F /* Products */;
 			projectDirPath = "";
@@ -467,7 +509,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C6937AB2A460B70007999C2 /* SpellConjVerbViewModel.swift in Sources */,
-				7C77DB682A0EB61F00E9E766 /* chooseTense.swift in Sources */,
 				7CF067362A35559B00D0CF53 /* listeningActivityQuestions.swift in Sources */,
 				28F4D2CD29D249C50080608F /* Persistence.swift in Sources */,
 				7C77DB602A0E804D00E9E766 /* GifImage.swift in Sources */,
@@ -475,8 +516,12 @@
 				7CBBDDF82A2A6F8F00A08FFC /* shortStoryPlugInQuestions.swift in Sources */,
 				7CC881BD2A1E86820010CF64 /* SoundManager.swift in Sources */,
 				7CF0673F2A3AC6D500D0CF53 /* ListeningActivityData.swift in Sources */,
+				7C0DDE522A6450180098F27D /* DragDropVerbConjugationViewModel.swift in Sources */,
 				28F4D2D029D249C50080608F /* PracticeItalianApp.xcdatamodeld in Sources */,
+				7C0DDE562A66F5E50098F27D /* ShortStoryDragDropDelegate.swift in Sources */,
+				7C0334D62A5325FD00119990 /* CreateVerbTemplate.swift in Sources */,
 				7CA544E52A12EA1700DB6441 /* flashCardData.swift in Sources */,
+				7C0DDE542A66F5D10098F27D /* ShortStoryDragDropViewModel.swift in Sources */,
 				7C9DEE0C2A4DFEE00058C9BC /* Character.swift in Sources */,
 				7CB8F28F2A0F62470017A740 /* chooseActivity.swift in Sources */,
 				7CBA41172A054CDD00462A34 /* shortStoryView.swift in Sources */,
@@ -486,19 +531,25 @@
 				7CBA411E2A09CE4F00462A34 /* shortStoryObject.swift in Sources */,
 				7C639EB22A17EFB300DFD8CF /* AudioManager.swift in Sources */,
 				7C3186A32A28E34400E94F60 /* RightWrongButtons.swift in Sources */,
+				7C8EA7DC2A56086900A286D8 /* chooseVerbList.swift in Sources */,
 				7C9DEE092A4B3E710058C9BC /* SpellConjugatedVerbView.swift in Sources */,
 				7C9DEE0E2A4E00030058C9BC /* ShortStoryDragDropView.swift in Sources */,
 				7C639EB42A17F5D600DFD8CF /* PlaybackControlButton.swift in Sources */,
+				7C8EA7DE2A574EBC00A286D8 /* ChooseVCActivityMyList.swift in Sources */,
 				7C00131B2A0ABCA900E27CB4 /* availableShortStories.swift in Sources */,
 				287829012A002197007B3D60 /* verbConjMultipleChoiceView.swift in Sources */,
 				7C9B488D2A321D50009AE5EA /* ListeningActivityView.swift in Sources */,
 				7C9B488F2A3220C5009AE5EA /* Extensions.swift in Sources */,
+				7C0334D42A53217500119990 /* ListViewOfAvailableVerbs.swift in Sources */,
 				28F4D2C629D249C00080608F /* ContentView.swift in Sources */,
 				287828FB29FB2754007B3D60 /* multipleChoiceObject.swift in Sources */,
 				7C31868E2A24059600E94F60 /* FlashCardAccDataManager.swift in Sources */,
 				7C639EAA2A1552DB00DFD8CF /* myListFlashCardActivity.swift in Sources */,
+				7CB766522A51130E00ACF783 /* VerbConjDropDelegate.swift in Sources */,
+				7C8EA7E02A58B84A00A286D8 /* VerbConjMultipleChoiceViewModel.swift in Sources */,
 				287828F929FB160E007B3D60 /* multipleChoiceData.swift in Sources */,
 				7CC19D862A42A9A000F2F071 /* LAPutDialogueInOrderViewModel.swift in Sources */,
+				7CB7664B2A4F249000ACF783 /* ShortStoryViewModel.swift in Sources */,
 				7C9B488B2A32170A009AE5EA /* ListeningActivtyViewModel.swift in Sources */,
 				287828FF2A001623007B3D60 /* spellVerbObject.swift in Sources */,
 				28E88FFD29F9D5F000D07103 /* JSONManager.swift in Sources */,
@@ -508,6 +559,7 @@
 				7C43BCBA2A147E6F001378F4 /* createFlashCard.swift in Sources */,
 				7CF067412A3AC73400D0CF53 /* ListeningActivtyDataObject.swift in Sources */,
 				7CA544DF2A11D37800DB6441 /* flashCardActivity.swift in Sources */,
+				7CB7664E2A4F253B00ACF783 /* DragDropVerbConjugationView.swift in Sources */,
 				7CC19D8A2A42AE4700F2F071 /* DropViewDelegate.swift in Sources */,
 				7C9DEE072A4A0ED10058C9BC /* CustomNavBar.swift in Sources */,
 				7CF0673D2A37970000D0CF53 /* ListeningActivityQuestionsViewModel.swift in Sources */,
@@ -719,6 +771,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7C0DDE4E2A6046F50098F27D /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		7CF067372A36B3E500D0CF53 /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/globulus/swiftui-flow-layout";
@@ -730,6 +790,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7C0DDE4F2A6046F50098F27D /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C0DDE4E2A6046F50098F27D /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
 		7CF067382A36B3E500D0CF53 /* SwiftUIFlowLayout */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7CF067372A36B3E500D0CF53 /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */;
