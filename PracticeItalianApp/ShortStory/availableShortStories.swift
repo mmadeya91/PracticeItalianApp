@@ -27,17 +27,19 @@ struct availableShortStories: View {
                 VStack{
                     HStack(spacing: 18){
                         NavigationLink(destination: chooseActivity(), label: {
-                            Image(systemName: "chevron.backward.circle")
-                                .font(.system(size: 35))
-                                .foregroundColor(.black)
+                            Image("backButton")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
                         }).padding(.leading, 25)
                         
                         Spacer()
                         
                         NavigationLink(destination: chooseActivity(), label: {
-                            Image(systemName: "house.circle")
-                                .font(.system(size: 35))
-                                .foregroundColor(.black)
+                            Image("home3")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
                         }).padding(.trailing, 25)
                     }
                     shortStoryContainer().frame(width: 345, height:600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
@@ -82,7 +84,6 @@ struct bookHStack: View {
                         .font(Font.custom("Marker Felt", size: 30))
                         .underline()
                         .frame(width: 160, height: 40)
-                        .background(.teal)
                         .cornerRadius(10)
                     
                     HStack{

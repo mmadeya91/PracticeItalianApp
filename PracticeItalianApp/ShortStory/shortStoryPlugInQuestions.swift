@@ -62,8 +62,6 @@ struct shortStoryPlugInQuestions: View {
         GeometryReader { geo in
             ZStack(alignment: .topLeading) {
                 
-                customTopNavBar3(chosenStoryNameIn: storyNameIn)
-                
                 correctButton(choiceString: shortStoryObjIn.plugInQuestionlist[activeIdx].missingWord, sSO: shortStoryObjIn, activeIdx: $activeIdx, fontOpacity: $fontOpacity, rects: $rects, toggled: $toggled, offsetArray: $offSetArray, offsetObj: offSetArray[0]).zIndex(1)
 
 

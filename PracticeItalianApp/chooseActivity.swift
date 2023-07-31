@@ -24,6 +24,7 @@ extension Image {
 
 struct chooseActivity: View {
     @State var animatingBear = false
+    @State var showChatBubble = false
     @EnvironmentObject var audioManager: AudioManager
     
     
@@ -36,6 +37,13 @@ struct chooseActivity: View {
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     .opacity(1.0)
+                
+                Image("bubbleChat2")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 100, height: 40)
+                    .offset(x: -25, y: -330)
+                    .opacity(showChatBubble ? 1.0 : 0.0)
                 
                 Image("sittingBear")
                     .resizable()
@@ -116,6 +124,10 @@ struct chooseActivity: View {
             .onAppear{
                 withAnimation(.easeIn(duration: 1.5)){
                     animatingBear = true
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    
+                    showChatBubble = true
                 }
             }
         }

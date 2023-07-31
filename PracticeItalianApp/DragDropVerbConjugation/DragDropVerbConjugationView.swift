@@ -12,45 +12,56 @@ struct DragDropVerbConjugationView: View {
     @Environment(\.dismiss) var dismiss
     var isPreview: Bool
     @State var questionNumber = 0
+    @State var wrongChosen = false
+    @State var correctChosen = false
+    @State var animatingBear = false
     
     var body: some View{
         GeometryReader {geo in
+            
+            Image("verticalNature")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            
             ScrollViewReader{scroller in
                 
                 ZStack{
+                    
                     VStack{
                         HStack(spacing: 18){
                             Button(action: {
                                 dismiss()
                             }, label: {
                                 Image(systemName: "xmark")
-                                    .font(.title3)
+                                    .font(.system(size: 25))
                                     .foregroundColor(.gray)
                                 
                             })
                             
                             Spacer()
                             
-                            Button(action: {}, label: {
-                                Image(systemName: "suit.heart.fill")
-                                    .font(.title3)
-                                    .foregroundColor(.gray)
-                                
-                            })
-                            
                             Text(String(questionNumber) + "/" + String( dragDropVerbConjugationVM.currentTenseDragDropData.count))
                                 .font(.title3)
                                 .foregroundColor(.black)
                             
+                            
+                            Image("italyFlag")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+        
                         }.padding([.leading, .trailing], 25)
                         ScrollView(.horizontal){
                             
                             HStack{
                                 ForEach(0..<dragDropVerbConjugationVM.currentTenseDragDropData.count, id: \.self) { i in
                                     VStack{
-                                        dragDropViewBuilder(tense: dragDropVerbConjugationVM.currentTense, currentVerb: dragDropVerbConjugationVM.currentTenseDragDropData[i].currentVerb, characters: dragDropVerbConjugationVM.currentTenseDragDropData[i].choices , leftDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListLeft, rightDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListRight, questionNumber: $questionNumber).frame(width: geo.size.width)
+                                        dragDropViewBuilder(tense: dragDropVerbConjugationVM.currentTense, currentVerb: dragDropVerbConjugationVM.currentTenseDragDropData[i].currentVerb, characters: dragDropVerbConjugationVM.currentTenseDragDropData[i].choices , leftDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListLeft, rightDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListRight, questionNumber: $questionNumber, correctChosen: $correctChosen, wrongChosen: $wrongChosen).frame(width: geo.size.width)
                                             .frame(minHeight: geo.size.height)
                                     }
+                                        .offset(y:-85)
                                     
                                 }
                             }
@@ -66,8 +77,51 @@ struct DragDropVerbConjugationView: View {
                         }
                         
                         
+                    }.zIndex(1)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("WashedWhite"))
+                        .frame(width: 365, height: 425)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .offset(y: 50)
+                        .zIndex(0)
+                    
+                    Image("sittingBear")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 200, height: 100)
+                        .offset(x: 110, y: animatingBear ? 350 : 750)
+                    
+                    if correctChosen{
+                        
+                        let randomInt = Int.random(in: 1..<4)
+                        
+                        Image("bubbleChatRight"+String(randomInt))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(y: 280)
                     }
+                          
+                    if wrongChosen{
+                        
+                        let randomInt2 = Int.random(in: 1..<4)
+                        
+                        Image("bubbleChatWrong"+String(randomInt2))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(y: 280)
+                    }
+                    
+                    
                 }.onAppear{
+                    withAnimation(.spring()){
+                        animatingBear = true
+                    }
                     if isPreview {
                         dragDropVerbConjugationVM.currentTense = 0
                         dragDropVerbConjugationVM.setNonMyListDragDropData()
@@ -102,6 +156,8 @@ struct dragDropViewBuilder: View{
     @State var droppedCount: CGFloat = 0
     @State var updating: Bool = false
     @Binding var questionNumber: Int
+    @Binding var correctChosen: Bool
+    @Binding var wrongChosen: Bool
     
     var body: some View {
         VStack(spacing: 15) {
@@ -120,6 +176,10 @@ struct dragDropViewBuilder: View{
                     .frame(width: 230, height: 80)
                     .background(.teal)
                     .cornerRadius(15)
+                    .overlay( /// apply a rounded border
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(.black, lineWidth: 4)
+                    )
                     .padding(.bottom, 20)
                 
                 VStack{
@@ -131,7 +191,7 @@ struct dragDropViewBuilder: View{
                         Spacer()
                         
                     }
-                }
+                }.offset(x:7)
             }.padding(.bottom, 20)
             DragArea()
         }
@@ -170,7 +230,7 @@ struct dragDropViewBuilder: View{
                         
                     }
                     .padding([.top, .bottom], 10)
-                    .onDrop(of: [.url], delegate: VerbConjDropDelegate(currentItem: $item, characters: $characters, draggingItem: $draggingItem, updating: $updating, droppedCount: $droppedCount, animateWrongText: $animateWrongText, shuffledRows: $shuffledRows, progress: $progress, questionNumber: $questionNumber))
+                    .onDrop(of: [.url], delegate: VerbConjDropDelegate(currentItem: $item, characters: $characters, draggingItem: $draggingItem, updating: $updating, droppedCount: $droppedCount, animateWrongText: $animateWrongText, shuffledRows: $shuffledRows, progress: $progress, questionNumber: $questionNumber, correctChosen: $correctChosen, wrongChosen: $wrongChosen))
             }
         }
         
@@ -198,7 +258,7 @@ struct dragDropViewBuilder: View{
                         
                     }
                     .padding([.top, .bottom], 10)
-                    .onDrop(of: [.url], delegate: VerbConjDropDelegate(currentItem: $item, characters: $characters, draggingItem: $draggingItem, updating: $updating, droppedCount: $droppedCount, animateWrongText: $animateWrongText, shuffledRows: $shuffledRows, progress: $progress, questionNumber: $questionNumber))
+                    .onDrop(of: [.url], delegate: VerbConjDropDelegate(currentItem: $item, characters: $characters, draggingItem: $draggingItem, updating: $updating, droppedCount: $droppedCount, animateWrongText: $animateWrongText, shuffledRows: $shuffledRows, progress: $progress, questionNumber: $questionNumber, correctChosen: $correctChosen, wrongChosen: $wrongChosen))
             }
         }
         

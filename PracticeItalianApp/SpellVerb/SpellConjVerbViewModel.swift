@@ -22,7 +22,7 @@ final class SpellConjVerbViewModel: ObservableObject {
     private(set) var SpellConjVerbData: [verbObject] = verbObject.allVerbObject
     private(set) var allUserMadeVerbs: [verbObject] = [verbObject]()
 
-    func setSpellVerbData(tense: Int) {
+    func setSpellVerbData() {
         
         var SpellConjVerbViewData: [spellConjVerbObject] = [spellConjVerbObject]()
         

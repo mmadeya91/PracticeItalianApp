@@ -9,167 +9,269 @@ import SwiftUI
 import CoreData
 
 struct verbConjMultipleChoiceView: View{
+    @Environment(\.managedObjectContext) private var viewContext
     
     @StateObject var verbConjMultipleChoiceVM: VerbConjMultipleChoiceViewModel
     
     @State private var pressed = false
+    @State private var progress: CGFloat = 0.0
     @State private var counter: Int = 0
     @State private var myListIsEmpty: Bool = false
+    @State var isPreview: Bool
+    @State var animatingBear = false
+    @State var saved = false
+    @State var correctChosen = false
+    @State var wrongChosen = false
     
     var body: some View {
         
-        let tenseName = ["Presente", "Passato Prossimo", "Imperfetto", "Futuro", "Conditionale", "Imperativo"]
-
         
-        GeometryReader{ geo in
+        GeometryReader{geo in
+            Image("verticalNature")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             ZStack{
-                Image("homeWallpaper")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                    .opacity(1.0)
-                
-  
                 VStack{
-                    
-                    VStack{
-                        
-                        ScrollViewReader {scrollView in
-                            ScrollView(.horizontal){
-                                HStack{
-                                    ForEach(0..<verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count, id: \.self) { i in
-                                        multipleChoiceView(mcOIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i])
-                                            .padding([.leading, .trailing], 10)
-                                    }
-                                    
-                                }
-                            }.scrollDisabled(true)
+                    NavBar()
+                    ScrollViewReader {scroller in
+                        ScrollView(.horizontal){
                             HStack{
-                                Button(action: {
-                                    withAnimation{
-                                        if counter > 0 {
-                                            counter = counter - 1
-                                        }
-                                        scrollView.scrollTo(counter)
+                                ForEach(0..<verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count, id: \.self) { i in
+                                    
+                                    VStack{
+                                        Text(verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameIt + " - " + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].pronoun + "\n(" + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameEng)
+                                            .bold()
+                                            .font(Font.custom("Arial Hebrew", size: 20))
+                                            .frame(width:260, height: 100)
+                                            .background(Color.teal)
+                                            .cornerRadius(10)
+                                            .foregroundColor(Color.white)
+                                            .multilineTextAlignment(.center)
+                                            .overlay( /// apply a rounded border
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .stroke(.black, lineWidth: 4)
+                                            )
+                                        
+                                            .padding(.bottom, 50)
+                                            .shadow(radius: 10)
+                            
+                                        
+                                        
+                                        choicesView(choicesIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].choiceList, correctAnswerIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].correctAnswer, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
                                     }
-                                }, label:
-                                        {Image(systemName: "arrow.backward").resizable()
-                                        .bold()
-                                        .scaledToFit()
-                                        .frame(width: 65, height: 65)
-                                        .foregroundColor(Color.black)
-                                    
-                                    
-                                    
-                                }).padding(.leading, 90)
+                                    .frame(width: geo.size.width)
+                                    .frame(minHeight: geo.size.height)
                                 
-                                Spacer()
+                                }
                                 
-                                Button(action: {
-                                    withAnimation{
-                                        if counter < 15 {
-                                            counter = counter + 1
-                                        }
-                                        scrollView.scrollTo(counter)
-                                    }
-                                }, label:
-                                        {Image(systemName: "arrow.forward").resizable()
-                                        .bold()
-                                        .scaledToFit()
-                                        .frame(width: 65, height: 65)
-                                        .foregroundColor(Color.black)
-                                    
-                                    
-                                    
-                                }).padding(.trailing, 90)
-                            }.padding(.top, 50)
+                            }.offset(y: -100)
                         }
+                        .scrollDisabled(true)
+                        .frame(width: geo.size.width)
+                        .frame(minHeight: geo.size.height)
+                        .onChange(of: counter) { newIndex in
+                            withAnimation{
+                                scroller.scrollTo(newIndex, anchor: .center)
+                            }
+                        }
+                       
                         
-                        addToMyListConjVerbButton().padding(.top, 20)
-                    }.padding(.top, 50)
+                        
+                    }
                     
+                    Button(action: {
+                        
+                        addVerbItem(verbToSave: counter)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            saved = false
+                        }
+                        saved = true
+                        
+                    }, label: {
+                        Text("Add Verb to MyList")
+                            .font(Font.custom("Arial Hebrew", size: 17))
+                            .padding(.top, 3)
+                            .foregroundColor(Color.black)
+                            .frame(width: 200, height: 45)
+                            .background(Color.orange.opacity(0.80))
+                    
+                    }).offset(y:-260)
+                    
+                   
+      
+                }
+                .zIndex(1)
+                
+                
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color("WashedWhite"))
+                    .frame(width: 365, height: 200)
+                    .overlay( /// apply a rounded border
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(.black, lineWidth: 4)
+                    )
+                    .offset(y: -25)
+                    .zIndex(0)
+                
+                    
+                    Image("sittingBear")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 200, height: 100)
+                        .offset(x: 95, y: animatingBear ? 350 : 750)
+                    
+                    if saved {
+                        
+                        Image("bubbleChatSaved")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(y: 250)
+                            
+                    }
+                
+                if correctChosen{
+                    
+                    let randomInt = Int.random(in: 1..<4)
+                    
+                    Image("bubbleChatRight"+String(randomInt))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 40)
+                        .offset(y: 250)
+                }
+                      
+                if wrongChosen{
+                    
+                    let randomInt2 = Int.random(in: 1..<4)
+                    
+                    Image("bubbleChatWrong"+String(randomInt2))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 40)
+                        .offset(y: 250)
+                }
+                      
+                
+                
+                
+            }.onAppear{
+                withAnimation(.easeIn){
+                    animatingBear = true
+                }
+                if isPreview{
+                    verbConjMultipleChoiceVM.setMultipleChoiceData()
                 }
             }
         }
     }
-
+    
+    func addVerbItem(verbToSave: Int) {
+        
+        let newUserMadeVerb = UserVerbList(context: viewContext)
+        newUserMadeVerb.verbNameItalian = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].verbNameIt
+        newUserMadeVerb.verbNameEnglish = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].verbNameEng
+        newUserMadeVerb.presente = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].pres
+        newUserMadeVerb.passatoProssimo = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].pass
+        newUserMadeVerb.futuro = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].fut
+        newUserMadeVerb.imperfetto = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].imp
+        newUserMadeVerb.imperativo = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].impera
+        newUserMadeVerb.condizionale = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].cond
+        
+        do {
+            try viewContext.save()
+        } catch {
+            print("error saving")
+        }
+        
+    }
+    
+    @ViewBuilder
+    func NavBar() -> some View{
+        HStack(spacing: 18){
+            Spacer()
+            Button(action: {
+                
+            }, label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 25))
+                    .foregroundColor(.gray)
+                
+            })
+            
+            GeometryReader{proxy in
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(.gray.opacity(0.25))
+                    
+                    Capsule()
+                        .fill(Color.green)
+                        .frame(width: proxy.size.width * CGFloat(progress))
+                }
+            }.frame(height: 13)
+                .onChange(of: counter){ newValue in
+                    progress = CGFloat(newValue) / CGFloat(verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count)
+                }
+            
+            Image("italyFlag")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+            Spacer()
+        }
+    }
+    
 }
+
+
+struct choicesView: View{
     
+    var choicesIn: [String]
+    var correctAnswerIn: String
+    @Binding var counter: Int
+    @Binding var wrongChosen: Bool
+    @Binding var correctChosen: Bool
     
-    struct multipleChoiceView: View {
-        var mcOIn: multipleChoiceVerbObject
-        var body: some View{
-            VStack{
-                multipleChoiceViewVerbtoConj(verbNameIt: mcOIn.verbNameIt, pronoun: mcOIn.pronoun, verbNameEng: mcOIn.verbNameEng)
-                choicesView(choicesIn: mcOIn.choiceList.shuffled(), correctAnswerIn: mcOIn.correctAnswer)
-            }
+    var body: some View{
+        HStack{
+            multipleChoiceButton(choiceString: choicesIn[0], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+            multipleChoiceButton(choiceString: choicesIn[1], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
         }
-    }
-        
-    struct multipleChoiceViewVerbtoConj: View{
-        
-        var verbNameIt: String
-        var pronoun: String
-        var verbNameEng: String
-        
-        var body: some View{
-            
-                Text(verbNameIt + " - " + pronoun + "\n(" + verbNameEng)
-                    .bold()
-                    .font(Font.custom("Arial Hebrew", size: 20))
-                    .frame(width:260, height: 100)
-                    .background(Color.teal)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 20)
-                    .shadow(radius: 10)
-            
+        HStack{
+            multipleChoiceButton(choiceString: choicesIn[2], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+            multipleChoiceButton(choiceString: choicesIn[3], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
         }
-    }
-    
-    
-    struct choicesView: View{
-        
-        var choicesIn: [String]
-        var correctAnswerIn: String
-        
-        var body: some View{
-            HStack{
-                multipleChoiceButton(choiceString: choicesIn[0], correctAnswer: correctAnswerIn)
-                multipleChoiceButton(choiceString: choicesIn[1], correctAnswer: correctAnswerIn)
-            }
-            HStack{
-                multipleChoiceButton(choiceString: choicesIn[2], correctAnswer: correctAnswerIn)
-                multipleChoiceButton(choiceString: choicesIn[3], correctAnswer: correctAnswerIn)
-            }
-            HStack{
-                multipleChoiceButton(choiceString: choicesIn[4], correctAnswer: correctAnswerIn)
-                multipleChoiceButton(choiceString: choicesIn[5], correctAnswer: correctAnswerIn)
-            }
-            
+        HStack{
+            multipleChoiceButton(choiceString: choicesIn[4], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+            multipleChoiceButton(choiceString: choicesIn[5], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
         }
+        
     }
+}
+
+
+struct multipleChoiceButton: View{
     
+    var choiceString: String
+    var correctAnswer: String
+    @Binding var counter: Int
+    @Binding var wrongChosen: Bool
+    @Binding var correctChosen: Bool
     
-    struct multipleChoiceButton: View{
+    var body: some View{
         
-        var choiceString: String
-        var correctAnswer: String
+        let isCorrect: Bool = choiceString.elementsEqual(correctAnswer)
         
-        var body: some View{
-            
-            let isCorrect: Bool = choiceString.elementsEqual(correctAnswer)
-            
-            if isCorrect {
-                correctMCButton(choiceString: choiceString)
-            } else {
-                incorrectMCButton(choiceString: choiceString)
-            }
-           
+        if isCorrect {
+            correctMCButton(choiceString: choiceString, counter: $counter, correctChosen: $correctChosen)
+        } else {
+            incorrectMCButton(choiceString: choiceString, wrongChosen: $wrongChosen)
         }
+        
     }
+}
 
 
 struct addToMyListConjVerbButton: View {
@@ -189,8 +291,8 @@ struct addToMyListConjVerbButton: View {
     
     func deleteItems(cardToDelete: UserMadeFlashCard) {
         withAnimation {
-
-                    viewContext.delete(cardToDelete)
+            
+            viewContext.delete(cardToDelete)
             
             do {
                 try viewContext.save()
@@ -200,13 +302,13 @@ struct addToMyListConjVerbButton: View {
         }
     }
 }
-    
-    
-    struct verbConjMultipleChoice_Previews: PreviewProvider {
-        static var _verbConjMultipleChoiceVM = VerbConjMultipleChoiceViewModel()
-        static var previews: some View {
-            verbConjMultipleChoiceView(verbConjMultipleChoiceVM: _verbConjMultipleChoiceVM)
-        }
+
+
+struct verbConjMultipleChoice_Previews: PreviewProvider {
+    static var _verbConjMultipleChoiceVM = VerbConjMultipleChoiceViewModel()
+    static var previews: some View {
+        verbConjMultipleChoiceView(verbConjMultipleChoiceVM: _verbConjMultipleChoiceVM, isPreview: true)
     }
-    
+}
+
 

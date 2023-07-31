@@ -18,6 +18,8 @@ struct VerbConjDropDelegate: DropDelegate{
     @Binding var shuffledRows: [[VerbConjCharacter]]
     @Binding var progress: CGFloat
     @Binding var questionNumber: Int
+    @Binding var correctChosen: Bool
+    @Binding var wrongChosen: Bool
     
 
     func performDrop(info: DropInfo) -> Bool {
@@ -33,7 +35,9 @@ struct VerbConjDropDelegate: DropDelegate{
                     if droppedCount == 6{
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             questionNumber += 1
+                            correctChosen = false
                         }
+                        correctChosen = true
                     }
                     
                     let progress = (droppedCount / 6)
@@ -45,6 +49,10 @@ struct VerbConjDropDelegate: DropDelegate{
 
                     }
                 }else{
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        wrongChosen = false
+                    }
+                    wrongChosen = true
                     SoundManager.instance.playSound(sound: .wrong)
                     animateView()
                 }

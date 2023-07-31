@@ -15,34 +15,32 @@ struct ShortStoryDragDropView: View{
     
     var body: some View{
         GeometryReader {geo in
+            Image("verticalNature")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            HStack{
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 25))
+                        .foregroundColor(.gray)
+                    
+                })
+                Spacer()
+                Image("italyFlag")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+            }.padding([.leading, .trailing], 15)
             ScrollViewReader{scroller in
                 
                 ZStack{
+                    
                     VStack{
-                        HStack(spacing: 18){
-                            Button(action: {
-                                dismiss()
-                            }, label: {
-                                Image(systemName: "xmark")
-                                    .font(.title3)
-                                    .foregroundColor(.gray)
-                                
-                            })
-                            
-                            Spacer()
-                            
-                            Button(action: {}, label: {
-                                Image(systemName: "suit.heart.fill")
-                                    .font(.title3)
-                                    .foregroundColor(.gray)
-                                
-                            })
-                            
-                            Text(String(questionNumber) + "/" + String( shortStoryDragDropVM.currentDragDropQuestions.count))
-                                .font(.title3)
-                                .foregroundColor(.black)
-                            
-                        }.padding([.leading, .trailing], 25)
+              
                         ScrollView(.horizontal){
                             
                             HStack{
@@ -57,8 +55,6 @@ struct ShortStoryDragDropView: View{
                             
                         }
                         .scrollDisabled(true)
-                        .frame(width: geo.size.width)
-                        .frame(minHeight: geo.size.height)
                         .onChange(of: questionNumber) { newIndex in
                             withAnimation{
                                 scroller.scrollTo(newIndex, anchor: .center)
@@ -66,7 +62,19 @@ struct ShortStoryDragDropView: View{
                         }
                         
                         
-                    }
+                    }.zIndex(1)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("WashedWhite"))
+                        .frame(width: 360, height: 650)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .zIndex(0)
+                        
+                    
+                    
                 }.onAppear{
                     shortStoryDragDropVM.setData()
                 }
@@ -99,13 +107,17 @@ struct shortStoryDragDropViewBuilder: View {
     
     var body: some View {
         VStack(spacing: 15) {
-            NavBar()
+            NavBar().padding(.bottom, 20)
             
-            VStack(alignment: .leading, spacing: 30) {
+            VStack {
                 Text("Form this sentence")
                     .font(.title2.bold())
+                    .padding(.bottom, 30)
+                    
                 Text(englishSentence)
                     .font(.title2.bold())
+                    .padding([.leading, .trailing], 15)
+                    .multilineTextAlignment(.leading)
             }
             DropArea()
                 .padding(.vertical, 30)
@@ -184,18 +196,20 @@ struct shortStoryDragDropViewBuilder: View {
     @ViewBuilder
     func NavBar() -> some View{
         HStack(spacing: 18){
+            Spacer()
             GeometryReader{proxy in
-                      ZStack(alignment: .leading) {
-                         Capsule()
-                             .fill(.gray.opacity(0.25))
-                          
-                          Capsule()
-                              .fill(Color.green)
-                              .frame(width: proxy.size.width * progress)
-                      }
-                  }.frame(height: 20)
-
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(.gray.opacity(0.25))
+                    
+                    Capsule()
+                        .fill(Color.green)
+                        .frame(width: proxy.size.width * CGFloat(progress))
+                }
+            }.frame(height: 13)
+            Spacer()
         }
+        
     }
     
     func generateGrid()->[[dragDropShortStoryCharacter]]{

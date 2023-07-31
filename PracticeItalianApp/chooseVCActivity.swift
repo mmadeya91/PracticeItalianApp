@@ -134,11 +134,11 @@ struct chooseVCActivity: View {
         }.fullScreenCover(isPresented: $showActivity) {
             switch chooseVCActivityVM.chosenActivity {
             case 0:
-                verbConjMultipleChoiceView(verbConjMultipleChoiceVM: verbConjMultipleChoiceVM)
+                verbConjMultipleChoiceView(verbConjMultipleChoiceVM: verbConjMultipleChoiceVM, isPreview: false)
             case 1:
                 DragDropVerbConjugationView(dragDropVerbConjugationVM: dragDropVerbConjugationVM, isPreview: false)
             case 2:
-                SpellConjugatedVerbView(spellConjVerbVM: spellConjVerbVM)
+                SpellConjugatedVerbView(spellConjVerbVM: spellConjVerbVM, isPreview: false)
             default:
                 ChooseVCActivityMyList()
             }

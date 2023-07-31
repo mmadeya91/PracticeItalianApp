@@ -14,13 +14,18 @@ struct incorrectMCButton: View {
     @State var defColor = Color.teal
     @State private var pressed: Bool = false
     @State var selected = false
+    @Binding var wrongChosen: Bool
 
     
     var body: some View {
         
         Button(action: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                wrongChosen = false
+            }
             
-            defColor = Color.red
+            defColor = Color("wrongRed")
+            wrongChosen = true
             
             withAnimation((Animation.default.repeatCount(5).speed(6))) {
                 selected.toggle()
@@ -28,13 +33,14 @@ struct incorrectMCButton: View {
             SoundManager.instance.playSound(sound: .wrong)
             selected.toggle()
             
+            
         }, label: {
             Text(choiceString)
                 .font(Font.custom("Arial Hebrew", size: 18))
                 .padding(.top, 6)
                 .padding([.leading, .trailing], 2)
             
-        }).frame(width:170, height: 40)
+        }).frame(width:165, height: 40)
              .background(defColor)
              .foregroundColor(Color.white)
              .cornerRadius(20)
@@ -53,6 +59,8 @@ struct correctMCButton: View {
     @State var defColor = Color.teal
     @State private var pressed: Bool = false
     @State var selected = false
+    @Binding var counter: Int
+    @Binding var correctChosen: Bool
     
     var body: some View {
         
@@ -64,7 +72,7 @@ struct correctMCButton: View {
                 .padding(.top, 6)
                 .padding([.leading, .trailing], 2)
             
-        }).frame(width:170, height: 40)
+        }).frame(width:165, height: 40)
             .background(defColor)
             .foregroundColor(Color.white)
             .cornerRadius(20)
@@ -78,8 +86,15 @@ struct correctMCButton: View {
                 if pressing {
     
                 } else {
-                    defColor = Color.green
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                        counter += 1
+                        correctChosen = false
+                    }
+                    defColor = Color("correctGreen")
                     SoundManager.instance.playSound(sound: .correct)
+                    correctChosen = true
+                 
+                  
                 }
             }, perform: { })
     }
@@ -95,6 +110,7 @@ struct correctShortStoryButton: View {
     @Binding var questionNumber: Int
     @Binding var correctChosen: Bool
     @Binding var showShortStoryDragDrop: Bool
+    @Binding var progress: CGFloat
     
     var body: some View{
         
@@ -117,6 +133,7 @@ struct correctShortStoryButton: View {
             
             //correctChosen.toggle()
             correctChosen = false
+         
 
         }, label: {
             
@@ -387,8 +404,7 @@ struct spellConjVerbButton: View {
 struct RightWrongButtons_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
-            incorrectMCButton(choiceString: "testWrong")
-            correctMCButton(choiceString: "testRight")
+            Text("test")
         }
     }
 }

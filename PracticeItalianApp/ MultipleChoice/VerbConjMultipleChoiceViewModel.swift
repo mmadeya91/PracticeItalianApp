@@ -76,7 +76,7 @@ final class VerbConjMultipleChoiceViewModel: ObservableObject {
                 tenseNameIn = ""
             }
             
-            let multipleChoiceObject = multipleChoiceVerbObject(pronoun: pickPronoun, verbNameIt: verbToDisplay.verb.verbName, verbNameEng: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, choiceList: choiceList, tenseName: tenseNameIn)
+            let multipleChoiceObject = multipleChoiceVerbObject(pronoun: pickPronoun, verbNameIt: verbToDisplay.verb.verbName, verbNameEng: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, choiceList: choiceList, tenseName: tenseNameIn, pres: verbArrays[0], pass: verbArrays[1], fut: verbArrays[2], imp: verbArrays[3], impera: verbArrays[4], cond: verbArrays[5])
             
             tempMCVO.append(multipleChoiceObject)
             
@@ -123,7 +123,7 @@ final class VerbConjMultipleChoiceViewModel: ObservableObject {
             let choice5: String = allConjList.filter(){$0 != correctAnswer && $0 != choice2 && $0 != choice3 && $0 != choice4}.randomElement()!
             let choice6: String = allConjList.filter(){$0 != correctAnswer && $0 != choice2 && $0 != choice3 && $0 != choice4 && $0 != choice5}.randomElement()!
             
-            let choiceList: [String] = [correctAnswer, choice2, choice3, choice4, choice5, choice6]
+            let choiceList: [String] = [correctAnswer, choice2, choice3, choice4, choice5, choice6].shuffled()
             
             var tenseNameIn: String = ""
             
@@ -146,7 +146,7 @@ final class VerbConjMultipleChoiceViewModel: ObservableObject {
                 tenseNameIn = ""
             }
             
-            let multipleChoiceObject = multipleChoiceVerbObject(pronoun: pickPronoun, verbNameIt: verbToDisplay.verb.verbName, verbNameEng: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, choiceList: choiceList, tenseName: tenseNameIn)
+            let multipleChoiceObject = multipleChoiceVerbObject(pronoun: pickPronoun, verbNameIt: verbToDisplay.verb.verbName, verbNameEng: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, choiceList: choiceList, tenseName: tenseNameIn, pres: verbArrays[0], pass: verbArrays[1], fut: verbArrays[2], imp: verbArrays[3], impera: verbArrays[4], cond: verbArrays[5])
             
             tempMCVO.append(multipleChoiceObject)
             
@@ -178,6 +178,12 @@ struct multipleChoiceVerbObject: Identifiable{
     let correctAnswer: String
     let choiceList: [String]
     let tenseName: String
+    let pres: [String]
+    let pass: [String]
+    let fut: [String]
+    let imp: [String]
+    let impera: [String]
+    let cond: [String]
     
     
 }
