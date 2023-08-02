@@ -53,6 +53,10 @@ struct DragDropVerbConjugationView: View {
                                 .frame(width: 40, height: 40)
         
                         }.padding([.leading, .trailing], 25)
+                        
+                        Text(getTenseString(tenseIn: dragDropVerbConjugationVM.currentTense))
+                            .font(Font.custom("Chalkboard SE", size: 25))
+                        
                         ScrollView(.horizontal){
                             
                             HStack{
@@ -61,7 +65,7 @@ struct DragDropVerbConjugationView: View {
                                         dragDropViewBuilder(tense: dragDropVerbConjugationVM.currentTense, currentVerb: dragDropVerbConjugationVM.currentTenseDragDropData[i].currentVerb, characters: dragDropVerbConjugationVM.currentTenseDragDropData[i].choices , leftDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListLeft, rightDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListRight, questionNumber: $questionNumber, correctChosen: $correctChosen, wrongChosen: $wrongChosen).frame(width: geo.size.width)
                                             .frame(minHeight: geo.size.height)
                                     }
-                                        .offset(y:-85)
+                                        .offset(y:-90)
                                     
                                 }
                             }
@@ -81,7 +85,7 @@ struct DragDropVerbConjugationView: View {
                     
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color("WashedWhite"))
-                        .frame(width: 365, height: 425)
+                        .frame(width: 365, height: 440)
                         .overlay( /// apply a rounded border
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(.black, lineWidth: 4)
@@ -93,7 +97,7 @@ struct DragDropVerbConjugationView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200, height: 100)
-                        .offset(x: 110, y: animatingBear ? 350 : 750)
+                        .offset(x: 130, y: animatingBear ? 350 : 750)
                     
                     if correctChosen{
                         
@@ -130,6 +134,25 @@ struct DragDropVerbConjugationView: View {
             }
         }
     }
+    func getTenseString(tenseIn: Int)->String{
+        switch tenseIn {
+        case 0:
+            return "Presente"
+        case 1:
+            return "Passato Prossimo"
+        case 2:
+            return "Futuro"
+        case 3:
+            return "Imperfetto"
+        case 4:
+            return "Presente Condizionale"
+        case 5:
+            return "Imperativo"
+        default:
+            return "No Tense"
+        }
+    }
+    
 }
 
 
@@ -161,7 +184,7 @@ struct dragDropViewBuilder: View{
     
     var body: some View {
         VStack(spacing: 15) {
-            NavBar().padding(.bottom, 40)
+            NavBar().padding(.bottom, 20)
             
             VStack(alignment: .leading, spacing: 30) {
                 Text("Complete the Table")

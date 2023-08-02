@@ -10,28 +10,47 @@ import SwiftUI
 struct chooseAudio: View {
     
     @EnvironmentObject var audioManager: AudioManager
+    @State var animatingBear = false
     var body: some View {
         GeometryReader{ geo in
             ZStack{
-                Image("homeWallpaper")
+                Image("horizontalNature")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     .opacity(1.0)
                 
+                Image("sittingBear")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 200, height: 100)
+                    .offset(x: 85, y: animatingBear ? -230 : 0)
+                
+                
                 VStack{
                     
-                    customTopNavBar()
+                    NavigationLink(destination: chooseActivity(), label: {
+                        Image("backButton")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                    }).padding(.trailing, 290)
                     
-                    shortStoryContainer2().frame(width: 345, height:675).background(Color.white.opacity(1.0)).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                        .stroke(.gray, lineWidth: 6))
-                        .shadow(radius: 10)
-
+                    shortStoryContainer2().frame(width:345).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                        .stroke(.black, lineWidth: 4))
+                    .shadow(radius: 10)
+                    .padding(.top, 90)
+                    .padding(.bottom, 80)
+                    
                 }
                 
-            }
-        }.navigationBarBackButtonHidden(true)
+            }.onAppear{
+                withAnimation(.easeIn(duration: 1.5)){
+                    animatingBear = true
+                }
+            }.navigationBarBackButtonHidden(true)
+        }
     }
 }
 
@@ -42,9 +61,10 @@ struct shortStoryContainer2: View {
                 
                 Text("Short Stories")
                     .font(Font.custom("Marker Felt", size: 30))
+                    .foregroundColor(Color("WashedWhite"))
                     .frame(width: 350, height: 60)
-                    .background(Color.teal).opacity(0.75)
-                    .border(width: 8, edges: [.bottom], color: .yellow)
+                    .background(Color("DarkNavy")).opacity(0.75)
+                    .border(width: 8, edges: [.bottom], color: .teal)
                 
                 audioHStack()
                 
@@ -116,9 +136,11 @@ struct audioChoiceButton: View {
             VStack(spacing: 0){
                 
                 Text(shortStoryName)
-                    .font(Font.custom("Marker Felt", size: 18))
-                    .frame(width: 110, height: 50).background(.white).cornerRadius(10)
+                    .font(Font.custom("Futura", size: 15))
+                    .padding([.leading, .trailing], 2)
+                    .frame(width: 110, height: 50).background(Color("WashedWhite")).cornerRadius(10)
                     .multilineTextAlignment(.center)
+                    .padding(.top, 6)
                 
                 
                 let listeningActivityVM  = ListeningActivityViewModel(audioAct: audioActivty.data)
@@ -128,8 +150,11 @@ struct audioChoiceButton: View {
                     Image(audioImage)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 70, height: 80)
+                        .frame(width: 55, height: 70)
+                        .padding(.top, 6)
+                    
                 })
+                .padding(.top, 5)
                 
                 
                 
@@ -138,7 +163,11 @@ struct audioChoiceButton: View {
             RoundedRectangle(cornerRadius: 15)
                 .fill(.teal.opacity(0.6))
                 .frame(width: 130, height: 160)
-                .shadow(radius: 5)
+                .shadow(radius: 10)
+                .overlay( /// apply a rounded border
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(.black, lineWidth: 4)
+                )
         )
     }
     

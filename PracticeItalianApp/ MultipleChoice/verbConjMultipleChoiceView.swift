@@ -32,9 +32,16 @@ struct verbConjMultipleChoiceView: View{
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
                 .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            
+            
+                
             ZStack{
                 VStack{
                     NavBar()
+                    
+                    Text(getTenseString(tenseIn: verbConjMultipleChoiceVM.currentTense))
+                        .font(Font.custom("Chalkboard SE", size: 25))
+                    
                     ScrollViewReader {scroller in
                         ScrollView(.horizontal){
                             HStack{
@@ -95,7 +102,8 @@ struct verbConjMultipleChoiceView: View{
                             .padding(.top, 3)
                             .foregroundColor(Color.black)
                             .frame(width: 200, height: 45)
-                            .background(Color.orange.opacity(0.80))
+                            .background(Color.orange)
+                            .cornerRadius(15)
                     
                     }).offset(y:-260)
                     
@@ -112,7 +120,7 @@ struct verbConjMultipleChoiceView: View{
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(.black, lineWidth: 4)
                     )
-                    .offset(y: -25)
+                    .offset(y: 5)
                     .zIndex(0)
                 
                     
@@ -186,6 +194,25 @@ struct verbConjMultipleChoiceView: View{
             print("error saving")
         }
         
+    }
+    
+    func getTenseString(tenseIn: Int)->String{
+        switch tenseIn {
+        case 0:
+            return "Presente"
+        case 1:
+            return "Passato Prossimo"
+        case 2:
+            return "Futuro"
+        case 3:
+            return "Imperfetto"
+        case 4:
+            return "Presente Condizionale"
+        case 5:
+            return "Imperativo"
+        default:
+            return "No Tense"
+        }
     }
     
     @ViewBuilder

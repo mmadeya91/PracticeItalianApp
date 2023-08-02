@@ -26,7 +26,7 @@ struct ListeningActivityView: View {
             
             ZStack {
                 
-                Color(red: 24/255, green: 23/255, blue: 22/255)
+                Color("DarkNavy")
                 
                 VStack(alignment: .leading, spacing: 24){
                     
@@ -59,7 +59,7 @@ struct ListeningActivityView: View {
                     
                     Spacer()
                     
-                    Text("Audio and Transcription Courtesy of Virginia Billie")
+                    Text("Audio and Transcriptions by" + "\nVirginia Billie")
                         .multilineTextAlignment(.center)
                         .padding(.leading, 30)
                 }.foregroundColor(.white)

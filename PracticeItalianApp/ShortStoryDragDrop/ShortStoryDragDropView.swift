@@ -34,6 +34,7 @@ struct ShortStoryDragDropView: View{
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
+                    .shadow(radius: 10)
             }.padding([.leading, .trailing], 15)
             ScrollViewReader{scroller in
                 
@@ -66,12 +67,13 @@ struct ShortStoryDragDropView: View{
                     
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color("WashedWhite"))
-                        .frame(width: 360, height: 650)
+                        .frame(width: 360, height: 370)
                         .overlay( /// apply a rounded border
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(.black, lineWidth: 4)
                         )
                         .zIndex(0)
+                        .offset(y:130)
                         
                     
                     
@@ -106,18 +108,27 @@ struct shortStoryDragDropViewBuilder: View {
     var englishSentence: String
     
     var body: some View {
-        VStack(spacing: 15) {
+        VStack {
             NavBar().padding(.bottom, 20)
             
             VStack {
                 Text("Form this sentence")
                     .font(.title2.bold())
-                    .padding(.bottom, 30)
+                    .padding(.bottom, 60)
                     
                 Text(englishSentence)
-                    .font(.title2.bold())
-                    .padding([.leading, .trailing], 15)
-                    .multilineTextAlignment(.leading)
+                    .bold()
+                    .font(Font.custom("Marker Felt", size: 20))
+                    .padding([.leading, .trailing], 3)
+                    .frame(width:300, height: 110)
+                    .background(Color.teal)
+                    .cornerRadius(10)
+                    .foregroundColor(Color("WashedWhite"))
+                    .multilineTextAlignment(.center)
+                    .overlay( /// apply a rounded border
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(.black, lineWidth: 4)
+                    )
             }
             DropArea()
                 .padding(.vertical, 30)

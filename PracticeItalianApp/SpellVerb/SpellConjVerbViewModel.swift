@@ -67,7 +67,7 @@ final class SpellConjVerbViewModel: ObservableObject {
             let correctAnswerIntoArray: [String] = correctAnswer.map { String($0) }
             
             
-            let spellConjVerbObject = spellConjVerbObject(verbNameItalian: verbToDisplay.verb.verbName, verbNameEnglish: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, pronoun: pickPronoun, hintLetterArray: createArrayOfHintLetterObj(letterArray: correctAnswerIntoArray))
+            let spellConjVerbObject = spellConjVerbObject(verbNameItalian: verbToDisplay.verb.verbName, verbNameEnglish: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, pronoun: pickPronoun, hintLetterArray: createArrayOfHintLetterObj(letterArray: correctAnswerIntoArray), pres: verbToDisplay.presenteConjList, pass: verbToDisplay.passatoProssimoConjList, fut: verbToDisplay.futuroConjList, imp: verbToDisplay.imperfettoConjList, impera: verbToDisplay.imperativoConjList, cond: verbToDisplay.presenteCondizionaleConjList)
             
             SpellConjVerbViewData.append(spellConjVerbObject)
             
@@ -121,7 +121,7 @@ final class SpellConjVerbViewModel: ObservableObject {
             let correctAnswerIntoArray: [String] = correctAnswer.map { String($0) }
             
             
-            let spellConjVerbObject = spellConjVerbObject(verbNameItalian: verbToDisplay.verb.verbName, verbNameEnglish: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, pronoun: pickPronoun, hintLetterArray: createArrayOfHintLetterObj(letterArray: correctAnswerIntoArray))
+            let spellConjVerbObject = spellConjVerbObject(verbNameItalian: verbToDisplay.verb.verbName, verbNameEnglish: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, pronoun: pickPronoun, hintLetterArray: createArrayOfHintLetterObj(letterArray: correctAnswerIntoArray), pres: verbToDisplay.presenteConjList, pass: verbToDisplay.passatoProssimoConjList, fut: verbToDisplay.futuroConjList, imp: verbToDisplay.imperfettoConjList, impera: verbToDisplay.imperativoConjList, cond: verbToDisplay.presenteCondizionaleConjList)
             
             SpellConjVerbViewData.append(spellConjVerbObject)
             
@@ -177,6 +177,13 @@ struct spellConjVerbObject: Identifiable{
     let correctAnswer: String
     let pronoun: String
     let hintLetterArray: [hintLetterObj]
+    let pres: [String]
+    let pass: [String]
+    let fut: [String]
+    let imp: [String]
+    let impera: [String]
+    let cond: [String]
+    
     
     
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SpellConjugatedVerbView: View {
-    
+    @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var spellConjVerbVM: SpellConjVerbViewModel
     
     @State var progress: CGFloat = 0
@@ -23,6 +23,7 @@ struct SpellConjugatedVerbView: View {
     @State var isPreview:Bool
     @State var correctChosen = false
     @State var wrongChosen = false
+    @State var saved = false
     
     @Environment(\.dismiss) var dismiss
     
@@ -40,7 +41,7 @@ struct SpellConjugatedVerbView: View {
                         NavBar().padding([.leading, .trailing], 20)
                             
                             Text(getTenseString(tenseIn: spellConjVerbVM.currentTense))
-                                .font(Font.custom("Chalkboard SE", size: 17))
+                                .font(Font.custom("Chalkboard SE", size: 25))
                             
                                 ScrollViewReader{scroller in
                                     ScrollView(.horizontal) {
@@ -95,94 +96,131 @@ struct SpellConjugatedVerbView: View {
                         .font(Font.custom("Marker Felt", size: 50))
                         .shadow(color: Color.black, radius: 12, x: 0, y:10)
                         .frame(width: 350)
+                        .zIndex(1)
                     
-                    HStack{
-                        Button(action: {
-                            if  userAnswer.lowercased().elementsEqual(spellConjVerbVM.currentTenseSpellConjVerbData[currentQuestionNumber].correctAnswer.lowercased()) {
+                    VStack{
+                        HStack{
+                            Button(action: {
                                 
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    currentQuestionNumber += 1
+                                if correctChosen || wrongChosen {
                                     correctChosen = false
-                                    
-                                    progress = (CGFloat(currentQuestionNumber) / CGFloat(spellConjVerbVM.currentTenseSpellConjVerbData.count))
-                                    
-                                    spellConjVerbVM.setHintLetter(letterArray: spellConjVerbVM.currentTenseSpellConjVerbData[currentQuestionNumber].hintLetterArray)
-                                    
-                                    hintGiven = false
-                                    hintButtonText = "Give me a Hint!"
-                                    userAnswer = ""
-                                }
-                                spellConjVerbVM.showHint()
-                                correctChosen = true
-                                SoundManager.instance.playSound(sound: .correct)
-                                
-                            }else {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                                     wrongChosen = false
                                 }
-                                selected.toggle()
-                                wrongChosen = true
-                                SoundManager.instance.playSound(sound: .wrong)
-                            }
-                        }, label: {
-                            Text("Check")
-                            
-                        }).font(Font.custom("Marker Felt", size:  18))
-                            .frame(width:180, height: 40)
-                            .background(Color.teal)
-                            .foregroundColor(Color.white)
-                            .cornerRadius(20)
-                            .shadow(radius: 10)
-                            .padding(.trailing, 5)
-
-                        
-                        Button(action: {
-                            
-                            let currentHLACount = spellConjVerbVM.currentHintLetterArray.count
-                            
-                            if !hintGiven {
-                                var array = [Int](0...currentHLACount-1)
-                                array.shuffle()
-                                if currentHLACount == 1 {
-                                    spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
-                                }
-                                if currentHLACount == 2 {
-                                    spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
-                                    spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
-                                }
                                 
-                                if currentHLACount > 2 {
-                                    spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
-                                    spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
-                                    spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                if  userAnswer.lowercased().elementsEqual(spellConjVerbVM.currentTenseSpellConjVerbData[currentQuestionNumber].correctAnswer.lowercased()) {
+                                    
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                        currentQuestionNumber += 1
+                                        correctChosen = false
+                                        
+                                        progress = (CGFloat(currentQuestionNumber) / CGFloat(spellConjVerbVM.currentTenseSpellConjVerbData.count))
+                                        
+                                        spellConjVerbVM.setHintLetter(letterArray: spellConjVerbVM.currentTenseSpellConjVerbData[currentQuestionNumber].hintLetterArray)
+                                        
+                                        hintGiven = false
+                                        hintButtonText = "Give me a Hint!"
+                                        userAnswer = ""
+                                    }
+                                    spellConjVerbVM.showHint()
+                                    correctChosen = true
+                                    SoundManager.instance.playSound(sound: .correct)
+                                    
+                                }else {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                        wrongChosen = false
+                                    }
+                                    SoundManager.instance.playSound(sound: .wrong)
+                                    wrongChosen = true
                                 }
+                            }, label: {
+                                Text("Check")
                                 
-                                hintButtonText = "Show Me!"
-                                hintGiven = true
-                            }else{
-                                
-                                spellConjVerbVM.showHint()
-                            }
-                            
-                        }, label: {
-                            
-                            Text(hintButtonText)
-                                .font(Font.custom("Chalkboard SE", size: 18))
-                                .frame(width:180, height: 40)
+                            }).font(Font.custom("Marker Felt", size:  18))
+                                .frame(width:160, height: 40)
                                 .background(Color.teal)
                                 .foregroundColor(Color.white)
                                 .cornerRadius(20)
-                              
+                                .shadow(radius: 10)
+                                .padding(.trailing, 5)
                             
-                        })
-                    }.offset(y: 100).zIndex(1)
+                            
+                            Button(action: {
+                                
+                                let currentHLACount = spellConjVerbVM.currentHintLetterArray.count
+                                
+                                if !hintGiven {
+                                    var array = [Int](0...currentHLACount-1)
+                                    array.shuffle()
+                                    if currentHLACount == 1 {
+                                        spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                    }
+                                    if currentHLACount == 2 {
+                                        spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                        spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                    }
+                                    
+                                    if currentHLACount > 2 {
+                                        spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                        spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                        spellConjVerbVM.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                    }
+                                    
+                                    hintButtonText = "Show Me!"
+                                    hintGiven = true
+                                }else{
+                                    
+                                    spellConjVerbVM.showHint()
+                                }
+                                
+                            }, label: {
+                                
+                                Text(hintButtonText)
+                                    .font(Font.custom("Chalkboard SE", size: 18))
+                                    .frame(width:160, height: 40)
+                                    .background(Color.teal)
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(20)
+                                
+                                
+                            })
+                        }.offset(y: 100).zIndex(1)
+                        
+                        Button(action: {
+                            
+                            addVerbItem(verbToSave: currentQuestionNumber)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                saved = false
+                            }
+                            saved = true
+                            
+                        }, label: {
+                            Text("Add Verb to MyList")
+                                .font(Font.custom("Chalkboard SE", size: 18))
+                                .padding(.top, 3)
+                                .frame(width: 190, height: 40)
+                                .foregroundColor(Color.white)
+                                .background(Color.teal)
+                                .cornerRadius(20)
+                        
+                        }).zIndex(1).offset(y: 120)
+                    }.zIndex(1)
                     
                     Image("sittingBear")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200, height: 100)
                         .offset(x: 110, y: animatingBear ? 350 : 750)
+                    
+                    if saved {
+                        
+                        Image("bubbleChatSaved")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(y: 235)
+                            
+                    }
                     
                     if correctChosen{
                         
@@ -192,7 +230,7 @@ struct SpellConjugatedVerbView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 280)
+                            .offset(y: 235)
                     }
                           
                     if wrongChosen{
@@ -203,7 +241,7 @@ struct SpellConjugatedVerbView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 280)
+                            .offset(y: 235)
                     }
                  
                     
@@ -220,6 +258,29 @@ struct SpellConjugatedVerbView: View {
             }
         
     }
+    
+    func addVerbItem(verbToSave: Int) {
+        
+        let newUserMadeVerb = UserVerbList(context: viewContext)
+        newUserMadeVerb.verbNameItalian = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].verbNameItalian
+        newUserMadeVerb.verbNameEnglish = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].verbNameEnglish
+        newUserMadeVerb.presente = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].pres
+        newUserMadeVerb.passatoProssimo = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].pass
+        newUserMadeVerb.futuro = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].fut
+        newUserMadeVerb.imperfetto = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].imp
+        newUserMadeVerb.imperativo = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].impera
+        newUserMadeVerb.condizionale = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].cond
+        
+        do {
+            try viewContext.save()
+        } catch {
+            print("error saving")
+        }
+        
+    }
+    
+    
+    
     @ViewBuilder
     func NavBar() -> some View{
         HStack(spacing: 18){
