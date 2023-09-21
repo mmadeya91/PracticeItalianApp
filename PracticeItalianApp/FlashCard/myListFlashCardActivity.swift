@@ -30,40 +30,108 @@ struct myListFlashCardActivity: View {
     @State  var showButtonSet = false
     @State var nextBackClicked = false
     @State var correctShowGif = false
+    @State var progress: CGFloat = 0
+    
+    @State var saved = false
+    @State var animatingBear = false
+    @State var correctChosen = false
     
     @State  var counter: Int = 0
+
     
     var body: some View {
-        
-        ZStack{
-            VStack {
-                
-                if isEmpty {
-                    customTopNavBar()
-                    Spacer()
-                    noCardsInList()
-                        .padding(.bottom, 260)
-                }else{
-                    
-                    customTopNavBar()
-                    Spacer()
-                    progressBarMyList(counter: self.$counter, totalCards: myListCards.count)
-                    Spacer()
-                    scrollViewBuilderMyList(flipped: self.$flipped, animate3d: self.$animate3d, counter: self.$counter, showGif: self.$correctShowGif, myListCards: myListCards).padding(.bottom, 160).padding(.top, 40)
-                    Spacer()
-                }
-                
-            }
+        GeometryReader{geo in
+            Image("verticalNature")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             
-            if correctShowGif {
-                GifImage("thumbUp")
-                    .offset(x:100, y:630)
-                    .animation(Animation.easeIn, value: correctShowGif)
-                   
+            
+            ZStack{
+                VStack{
+                    
+                    NavBar().padding(.top, 35)
+                    
+                    scrollViewBuilderMyList(flipped: self.$flipped, animate3d: self.$animate3d, counter: self.$counter, showGif: self.$correctShowGif, saved: self.$saved, correctChosen: self.$correctChosen, myListCards: myListCards).padding(.bottom, 160).padding(.top, 40)
+                    
+                    
+                }.frame(width: geo.size.width)
+                    .frame(minHeight: geo.size.height)
+                
+                Image("sittingBear")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 200, height: 100)
+                    .offset(x: 95, y: animatingBear ? 380 : 750)
+                
+                if saved {
+                    
+                    Image("bubbleChatSaved")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 40)
+                        .offset(y: 250)
+                        
+                }
+            
+            if correctChosen{
+                
+                let randomInt = Int.random(in: 1..<4)
+                
+                Image("bubbleChatRight"+String(randomInt))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 100, height: 40)
+                    .offset(y: 310)
             }
-        }.navigationBarBackButtonHidden(true)
+                
+                
+            }
+            .onAppear{
+                withAnimation(.spring()){
+                    animatingBear = true
+                }
+            }
+            .navigationBarBackButtonHidden(true)
+        }
+    
     }
     
+    @ViewBuilder
+    func NavBar() -> some View{
+        HStack(spacing: 18){
+            Spacer()
+            Button(action: {
+                
+            }, label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 25))
+                    .foregroundColor(.gray)
+                
+            })
+            
+            GeometryReader{proxy in
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(.gray.opacity(0.25))
+                    
+                    Capsule()
+                        .fill(Color.green)
+                        .frame(width: proxy.size.width * CGFloat(progress))
+                }
+            }.frame(height: 13)
+                .onChange(of: counter){ newValue in
+                    progress = CGFloat(newValue) / CGFloat(myListCards.count)
+                }
+            
+            Image("italyFlag")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+            Spacer()
+        }
+    }
 }
 
 
@@ -80,6 +148,8 @@ struct scrollViewBuilderMyList: View {
     @Binding var animate3d: Bool
     @Binding var counter: Int
     @Binding var showGif: Bool
+    @Binding var saved: Bool
+    @Binding var correctChosen: Bool
     
     var myListCards: FetchedResults<UserMadeFlashCard>
     
@@ -89,7 +159,7 @@ struct scrollViewBuilderMyList: View {
             ScrollView(.horizontal){
                 HStack{
                     ForEach(0..<myListCards.count, id: \.self) {i in
-                        cardViewMyList(flipped: $flipped, animate3d: $animate3d, counterTest: i, myListCards: myListCards).padding([.leading, .trailing], 20)
+                        cardViewMyList(flipped: $flipped, animate3d: $animate3d, counterTest: i, myListCards: myListCards).padding([.leading, .trailing], 35)
                             
                     }
                 }
@@ -106,11 +176,12 @@ struct scrollViewBuilderMyList: View {
                                     counter = counter + 1
                                 }
                                 withAnimation{
-                                    scrollView.scrollTo(counter)
+                                    scrollView.scrollTo(counter, anchor: .center)
                                 }
                             }
                             
                             self.selected.toggle()
+                            SoundManager.instance.playSound(sound: .wrong)
 
                         }
                     }, label:
@@ -123,7 +194,30 @@ struct scrollViewBuilderMyList: View {
                         
                         
                         
-                    }).padding(.leading, 90)
+                    }).padding(.leading, 50)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        deleteItems(cardToDelete: myListCards[counter])
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            animate3d.toggle()
+                            if counter < myListCards.count - 1 {
+                                counter = counter + 1
+                            }
+                            withAnimation{
+                                scrollView.scrollTo(counter, anchor: .center)
+                            }
+                        }
+                    }, label: {
+                        Text("Remove from List").padding(.top, 5)
+                            .font(Font.custom("Arial Hebrew", size: 15))
+                            .foregroundColor(Color.black)
+                            .frame(width: 150, height: 40)
+                            .background(Color.orange)
+                            .cornerRadius(20)
+                        
+                    })
                     
                     Spacer()
                     
@@ -140,10 +234,11 @@ struct scrollViewBuilderMyList: View {
                             withAnimation{
                                 scrollView.scrollTo(counter)
                             }
+                            correctChosen = false
+                            
                         }
                             SoundManager.instance.playSound(sound: .correct)
-                        
-                            showGif.toggle()
+                            correctChosen = true
                         
                     }, label:
                             {Image("checked")
@@ -154,28 +249,8 @@ struct scrollViewBuilderMyList: View {
                         
                         
                         
-                    }).padding(.trailing, 90)
+                    }).padding(.trailing, 50)
                 }
-                Button(action: {
-                    deleteItems(cardToDelete: myListCards[counter])
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        animate3d.toggle()
-                        if counter < myListCards.count - 1 {
-                            counter = counter + 1
-                        }
-                        withAnimation{
-                            scrollView.scrollTo(counter)
-                        }
-                    }
-                }, label: {
-                    Text("Remove from List").padding(.top, 5)
-                        .font(Font.custom("Arial Hebrew", size: 20))
-                        .foregroundColor(Color.black)
-                        .frame(width: 200, height: 40)
-                        .background(Color.orange)
-                        .cornerRadius(20)
-                    
-                }).padding(.top, 20)
             }.opacity(flipped ? 1 : 0).animation(.easeIn(duration: 0.3), value: flipped)
         }
       
@@ -243,21 +318,22 @@ struct flashCardItalMyList: View {
         VStack{
             Text(userMadeFlashCards[counterTest].italianLine1!)
                 .font(Font.custom("Marker Felt", size: 40))
-                .foregroundColor(Color.black)
-                .padding(.bottom, 30)
+                .padding(.top, 70)
                 .padding([.leading, .trailing], 10)
             
+            starAndAccuracy(cardName: userMadeFlashCards[counterTest].italianLine1!)
             
-            Text(userMadeFlashCards[counterTest].italianLine2!)
-                .font(Font.custom("Marker Felt", size: 30))
-                .foregroundColor(Color.black)
-                .padding(.top, 2)
-                .padding([.leading, .trailing], 10)
             
-        }.frame(width: 325, height: 250)
-            .background(Color.teal)
+
+        } .frame(width: 325, height: 250)
+            .background(Color("WashedWhite"))
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.black, lineWidth: 7)
+            )
             .cornerRadius(20)
-            .padding()
+            .shadow(radius: 10)
+            .padding([.top, .bottom], 75)
     }
 }
 
@@ -283,122 +359,104 @@ struct flashCardEngMyList: View {
                 .padding(.top, 2)
                 .padding([.leading, .trailing], 10)
             
-        }.frame(width: 325, height: 250)
-            .background(Color.teal)
+        } .frame(width: 325, height: 250)
+            .background(Color("WashedWhite"))
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.black, lineWidth: 7)
+            )
             .cornerRadius(20)
-            .padding()
+            .shadow(radius: 10)
+            .padding([.top, .bottom], 75)
     }
 }
 
-struct rightWrongButtonSet5: View{
-    var body: some View{
-        
-        HStack{
-            
-            Button(action: {
-                
-            }, label:
-                    {Image("cancel")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                
-                
-                
-            }).padding(.leading, 80)
-            
-            
-            Spacer()
-            
-            Button(action: {
-                
-            }, label:
-                    {Image("checked")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                
-                
-            }).padding(.trailing, 80)
-            
-        }
-        
-    }
-}
-
-
-struct nextPreviousButtonSet5: View{
+struct starAndAccuracyMyList: View {
     
-    @Binding var counter: Int
-    @Binding var nextBackClicked: Bool
-    
-    var myListCards: FetchedResults<UserMadeFlashCard>
+    var cardName: String
     
     var body: some View{
-        HStack{
-            Button(action: {
-                withAnimation{
-                    if counter > 0 {
-                        counter = counter - 1
-                        nextBackClicked.toggle()
-                    }
-                }
-            }, label:
-                    {Image(systemName: "arrow.backward").resizable()
-                    .bold()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                    .foregroundColor(Color.black)
-                
-                
-                
-            }).padding(.leading, 90)
+        let fCAM = FlashCardAccDataManager(cardName: cardName)
+        let isEmpty = fCAM.isEmptyFlashCardAccData()
+        
+
+        if isEmpty {
+            HStack{
+                Image("emptyStar")
+                    .imageStarModifier()
+                Image("emptyStar")
+                    .imageStarModifier()
+                Image("emptyStar")
+                    .imageStarModifier()
+                Spacer()
+                Text("0/0")
+                    .font(Font.custom("Arial Hebrew", size: 30))
+            }.padding([.leading, .trailing], 20)
+                .padding(.top, 55)
+        } else {
             
-            Spacer()
+            let fetchedResults = fCAM.getAccData()
+            let numOfStars = fCAM.getNumOfStars(card: fetchedResults)
             
-            Button(action: {
-                withAnimation{
-                    if counter < myListCards.count - 1 {
-                        counter = counter + 1
-                        nextBackClicked.toggle()
+            switch numOfStars {
+                case 0:
+                    HStack{
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Spacer()
+                        Text(String(fetchedResults.correct) + " / " + String(fetchedResults.cardAttempts))
+                    }.padding([.leading, .trailing], 20).padding(.top, 55)
+                
+                case 1:
+                    HStack{
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Spacer()
+                        Text(String(fetchedResults.correct) + " / " + String(fetchedResults.cardAttempts))
+                    
+                    }.padding([.leading, .trailing], 20).padding(.top, 55)
+                case 2:
+                    HStack{
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("emptyStar")
+                            .imageStarModifier()
+                        Spacer()
+                        Text(String(fetchedResults.correct) + " / " + String(fetchedResults.cardAttempts))
+                    
+                    }.padding([.leading, .trailing], 20).padding(.top, 55)
+                case 3:
+                    HStack{
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Image("fullStar")
+                            .imageStarModifier()
+                        Spacer()
+                        Text(String(fetchedResults.correct) + " / " + String(fetchedResults.cardAttempts))
+                    }.padding([.leading, .trailing], 20).padding(.top, 55)
+                default:
+                    HStack{
+                        Text("Error")
                     }
-                }
-            }, label:
-                    {Image(systemName: "arrow.forward").resizable()
-                    .bold()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                    .foregroundColor(Color.black)
-                
-                
-                
-            }).padding(.trailing, 90)
+            }
+            
         }
+        
     }
 }
 
-struct progressBarMyList: View {
-
-    @Binding var counter: Int
-    let totalCards: Int
-
-    var body: some View {
-        VStack {
-
-            Text(String(counter + 1) + "/" + String(totalCards)).offset(y:20)
-                .font(Font.custom("Arial Hebrew", size: 28))
-                .bold()
-
-            ProgressView("", value: Double(counter), total: Double(totalCards - 1))
-                .tint(Color.orange)
-                .frame(width: 300)
-                .scaleEffect(x: 1, y: 4)
-
-
-
-        }
-    }
-}
 
 struct myListFlashCardActivity_Previews: PreviewProvider {
    static var previews: some View {

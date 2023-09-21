@@ -21,88 +21,99 @@ struct createFlashCard: View {
     @State var backUserInput2: String = ""
     
     var body: some View {
-        
-        VStack{
-            
+        GeometryReader {geo in
+            Image("verticalNature")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             VStack{
                 
-                Text("Front")
-                    .font(Font.custom("Marker Felt", size: 30))
-                    .padding(.top, 15)
-                    .padding(.bottom, 20)
+                VStack{
+                    
+                    Text("Front")
+                        .font(Font.custom("Marker Felt", size: 30))
+                        .padding(.top, 15)
+                        .padding(.bottom, 20)
+                    
+                    TextField("", text: $frontUserInput1)
+                        .background(Color.white.cornerRadius(10))
+                        .opacity(0.75)
+                        .shadow(color: Color.black, radius: 12, x: 0, y:10)
+                        .font(Font.custom("Marker Felt", size: 35))
+                        .padding([.leading, .trailing], 30)
+                    
+                    
+                    Spacer()
+                    
+                    TextField("", text: $frontUserInput2)
+                        .background(Color.white.cornerRadius(10))
+                        .opacity(0.75)
+                        .shadow(color: Color.black, radius: 12, x: 0, y:10)
+                        .font(Font.custom("Marker Felt", size: 35))
+                        .padding([.leading, .trailing], 30)
+                        .padding(.bottom, 60)
+                    
+                }.frame(width: 325, height: 240)
+                    .background(Color("WashedWhite"))
+                    .overlay( RoundedRectangle(cornerRadius: 20)
+                        .stroke(.black, lineWidth: 4))
+                    .cornerRadius(20)
+                    .shadow(radius: 10)
+                    .padding(.top, 50)
                 
-                TextField("", text: $frontUserInput1)
-                    .background(Color.white.cornerRadius(10))
-                    .opacity(0.75)
-                    .shadow(color: Color.black, radius: 12, x: 0, y:10)
-                    .font(Font.custom("Marker Felt", size: 35))
-                    .padding([.leading, .trailing], 30)
-
+                
+                VStack{
+                    
+                    Text("Back")
+                        .font(Font.custom("Marker Felt", size: 30))
+                        .padding(.top, 15)
+                        .padding(.bottom, 20)
+                    
+                    TextField("", text: $backUserInput1)
+                        .background(Color.white.cornerRadius(10))
+                        .opacity(0.75)
+                        .shadow(color: Color.black, radius: 12, x: 0, y:10)
+                        .font(Font.custom("Marker Felt", size: 35))
+                        .padding([.leading, .trailing], 30)
+                    
+                    Spacer()
+                    
+                    TextField("", text: $backUserInput2)
+                        .background(Color.white.cornerRadius(10))
+                        .opacity(0.75)
+                        .shadow(color: Color.black, radius: 12, x: 0, y:10)
+                        .font(Font.custom("Marker Felt", size: 35))
+                        .padding([.leading, .trailing], 30)
+                        .padding(.bottom, 60)
+                    
+                }.frame(width: 325, height: 240)
+                    .background(Color("WashedWhite"))
+                    .overlay( RoundedRectangle(cornerRadius: 20)
+                        .stroke(.black, lineWidth: 4))
+                    .cornerRadius(20)
+                    .shadow(radius: 10)
+                    .padding(.top, 20)
                 
                 Spacer()
                 
-                TextField("", text: $frontUserInput2)
-                    .background(Color.white.cornerRadius(10))
-                    .opacity(0.75)
-                    .shadow(color: Color.black, radius: 12, x: 0, y:10)
-                    .font(Font.custom("Marker Felt", size: 35))
-                    .padding([.leading, .trailing], 30)
-                    .padding(.bottom, 60)
-                
-            }.frame(width: 325, height: 240)
-                .background(Color.teal)
-                .cornerRadius(20)
-                .shadow(radius: 10)
-                .padding(.top, 50)
-
-            
-            VStack{
-                
-                Text("Back")
-                    .font(Font.custom("Marker Felt", size: 30))
+                HStack{
+                    saveButton(fPI1: self.frontUserInput2, fPI2: self.frontUserInput2, bUI1: self.backUserInput1, bUI2: self.backUserInput2)
+                    previewButton(showingSheet: self.$showingSheet)
+                }.padding(.top, 20
+                )
+                clearButton(fui1: self.$frontUserInput1, fui2: self.$frontUserInput2, bui1: self.$backUserInput1, bui2: self.$backUserInput2)
                     .padding(.top, 15)
-                    .padding(.bottom, 20)
                 
-                TextField("", text: $backUserInput1)
-                    .background(Color.white.cornerRadius(10))
-                    .opacity(0.75)
-                    .shadow(color: Color.black, radius: 12, x: 0, y:10)
-                    .font(Font.custom("Marker Felt", size: 35))
-                    .padding([.leading, .trailing], 30)
+                    .sheet(isPresented: $showingSheet) {
+                        SheetView(flipped: self.$flipped, animate3d: self.$animate3d, fPI1: frontUserInput1, fPI2: frontUserInput2, bUI1: backUserInput1, bUI2: backUserInput2)
+                    }
                 
                 Spacer()
-                
-                TextField("", text: $backUserInput2)
-                    .background(Color.white.cornerRadius(10))
-                    .opacity(0.75)
-                    .shadow(color: Color.black, radius: 12, x: 0, y:10)
-                    .font(Font.custom("Marker Felt", size: 35))
-                    .padding([.leading, .trailing], 30)
-                    .padding(.bottom, 60)
-                
-            }.frame(width: 325, height: 240)
-                .background(Color.teal)
-                .cornerRadius(20)
-                .shadow(radius: 10)
-                .padding(.top, 20)
+            }.navigationBarBackButtonHidden(true)
+                .padding(.leading, 30)
             
-            Spacer()
-            
-            HStack{
-                saveButton(fPI1: self.frontUserInput2, fPI2: self.frontUserInput2, bUI1: self.backUserInput1, bUI2: self.backUserInput2)
-                previewButton(showingSheet: self.$showingSheet)
-            }.padding(.top, 20
-            )
-            clearButton(fui1: self.$frontUserInput1, fui2: self.$frontUserInput2, bui1: self.$backUserInput1, bui2: self.$backUserInput2)
-                .padding(.top, 15)
-            
-            .sheet(isPresented: $showingSheet) {
-                SheetView(flipped: self.$flipped, animate3d: self.$animate3d, fPI1: frontUserInput1, fPI2: frontUserInput2, bUI1: backUserInput1, bUI2: backUserInput2)
-            }
-            
-            Spacer()
-        }.navigationBarBackButtonHidden(true)
-        
+        }
     }
 }
 
@@ -117,22 +128,27 @@ struct SheetView: View {
     var bUI2: String
     
     var body: some View {
-        
-        ZStack(alignment: .topLeading){
-            
-            Color.black.opacity(0.4).ignoresSafeArea()
-            
-            Button(action: {
-                dismiss()
-            }, label: {
-                Image(systemName: "xmark")
-                    .font(.largeTitle)
-                    .tint(Color.white)
+        GeometryReader {geo in
+            Image("verticalNature")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            ZStack(alignment: .topLeading){
                 
-            }).padding()
-            
-            cardViewPreview(flipped: $flipped, animate3d: $animate3d, fPI1: fPI1, fPI2: fPI2, bUI1: bUI1, bUI2: bUI2).padding([.leading, .trailing], 40)
-                .padding(.top, 200)
+                
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    Image(systemName: "xmark")
+                        .font(.largeTitle)
+                        .tint(Color.white)
+                    
+                }).padding()
+                
+                cardViewPreview(flipped: $flipped, animate3d: $animate3d, fPI1: fPI1, fPI2: fPI2, bUI1: bUI1, bUI2: bUI2).padding([.leading, .trailing], 40)
+                    .padding(.top, 200)
+            }
         }
     }
 }
@@ -153,7 +169,7 @@ struct cardViewPreview: View {
             flashCardItalPreview(frontUserInput1: fPI1, frontUserInput2: fPI2).opacity(flipped ? 0.0 : 1.0)
             flashCardEngPreview(backUserInput1: bUI1, backUserInput2: bUI2).opacity(flipped ? 1.0 : 0.0)
         }
-        .modifier(FlipEffect(flipped: $flipped, angle: animate3d ? 180 : 0, axis: (x: 1, y: 0)))
+        .modifier(FlipEffect(flipped: $flipped, angle: animate3d ? 180 : 0, axis: (x: 0, y: 1)))
         .onTapGesture {
             withAnimation(Animation.linear(duration: 0.8)) {
                 self.animate3d.toggle()
@@ -184,7 +200,9 @@ struct flashCardItalPreview: View {
                 .padding([.leading, .trailing], 10)
             
         }.frame(width: 325, height: 250)
-            .background(Color.teal)
+            .background(Color("WashedWhite"))
+            .overlay( RoundedRectangle(cornerRadius: 20)
+                .stroke(.black, lineWidth: 4))
             .cornerRadius(20)
             .shadow(radius: 10)
         
@@ -198,6 +216,7 @@ struct flashCardEngPreview: View {
     var backUserInput2: String
     
     var body: some View{
+        
         VStack{
             Text(backUserInput1)
                 .font(Font.custom("Marker Felt", size: 40))
@@ -213,10 +232,13 @@ struct flashCardEngPreview: View {
                 .padding([.leading, .trailing], 10)
             
         }.frame(width: 325, height: 250)
-            .background(Color.teal)
+            .background(Color("WashedWhite"))
+            .overlay( RoundedRectangle(cornerRadius: 20)
+                .stroke(.black, lineWidth: 4))
             .cornerRadius(20)
             .shadow(radius: 10)
     }
+    
 }
 
 struct saveButton: View{
@@ -233,9 +255,15 @@ struct saveButton: View{
             addItem(f1: fPI1, f2: fPI2, b1: bUI1, b2: bUI2)
         }, label: {
             Text("Save to My List")
-                .frame(width: 180, height: 50)
-                .background(Color.orange)
+                .font(Font.custom("Arial Hebrew", size: 18))
+                .padding(.top, 5)
+                .foregroundColor(Color("WashedWhite"))
+                .frame(width: 160, height: 45)
+                .overlay( RoundedRectangle(cornerRadius: 20)
+                    .stroke(.black, lineWidth: 4))
+                .background(Color.teal)
                 .cornerRadius(20)
+                .shadow(radius: 10)
         })
         
         
@@ -275,9 +303,15 @@ struct clearButton: View{
             
         }, label: {
             Text("Clear")
-                .frame(width: 180, height: 50)
-                .background(Color.orange)
+                .font(Font.custom("Arial Hebrew", size: 18))
+                .padding(.top, 5)
+                .foregroundColor(Color("WashedWhite"))
+                .frame(width: 160, height: 45)
+                .overlay( RoundedRectangle(cornerRadius: 20)
+                    .stroke(.black, lineWidth: 4))
+                .background(Color.teal)
                 .cornerRadius(20)
+                .shadow(radius: 10)
         })
     }
 }
@@ -293,9 +327,15 @@ struct previewButton: View{
             }
         }, label: {
             Text("Preview")
-                .frame(width: 180, height: 50)
-                .background(Color.orange)
+                .font(Font.custom("Arial Hebrew", size: 18))
+                .padding(.top, 5)
+                .foregroundColor(Color("WashedWhite"))
+                .frame(width: 160, height: 45)
+                .overlay( RoundedRectangle(cornerRadius: 20)
+                    .stroke(.black, lineWidth: 4))
+                .background(Color.teal)
                 .cornerRadius(20)
+                .shadow(radius: 10)
         })
     }
 }

@@ -43,6 +43,34 @@ struct PersistenceController {
            
            
         }
+        
+        let tempString: [String] = ["Food", "Animals", "Clothing", "Family", "Common Nouns", "Common Adjectives", "Common Adverbs", "Common Verbs", "Common Phrases", "My List", "Make Your Own"]
+        
+        for setName in tempString {
+            let newFlashCardSetAccuracyItem = FlashCardSetAccuracy(context: viewContext)
+            newFlashCardSetAccuracyItem.correct = 0
+            newFlashCardSetAccuracyItem.incorrect = 0
+            newFlashCardSetAccuracyItem.setName = setName
+        }
+        
+        let userCoinMockData = UserCoins(context: viewContext)
+            userCoinMockData.coins = 10
+            userCoinMockData.id = UUID()
+        
+        let userUnlockedData = UserUnlockedDataSets(context: viewContext)
+        userUnlockedData.dataSetName = "Bellagio"
+        userUnlockedData.isUnlocked = false
+        let userUnlockedData2 = UserUnlockedDataSets(context: viewContext)
+        userUnlockedData2.dataSetName = "Uffizi"
+        userUnlockedData2.isUnlocked = false
+        let userUnlockedData3 = UserUnlockedDataSets(context: viewContext)
+        userUnlockedData3.dataSetName = "Rinascimento"
+        userUnlockedData3.isUnlocked = false
+        let userUnlockedData4 = UserUnlockedDataSets(context: viewContext)
+        userUnlockedData4.dataSetName = "Food"
+        userUnlockedData4.isUnlocked = false
+        
+        
         do {
             try viewContext.save()
         } catch {

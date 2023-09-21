@@ -7,7 +7,11 @@
         <attribute name="correct" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="incorrect" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="FlashCardSetAccuracy" representedClassName="FlashCardSetAccuracy" syncable="YES" codeGenerationType="class"/>
+    <entity name="FlashCardSetAccuracy" representedClassName="FlashCardSetAccuracy" syncable="YES" codeGenerationType="class">
+        <attribute name="correct" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="incorrect" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="setName" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
@@ -21,12 +25,20 @@
         <attribute name="verbNameEnglish" optional="YES" attributeType="String"/>
         <attribute name="verbNameItalian" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="UserCoins" representedClassName="UserCoins" syncable="YES" codeGenerationType="class">
+        <attribute name="coins" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
     <entity name="UserFlashCardAccuracy" representedClassName="UserFlashCardAccuracy" syncable="YES" codeGenerationType="class"/>
     <entity name="UserMadeFlashCard" representedClassName="UserMadeFlashCard" syncable="YES" codeGenerationType="class">
         <attribute name="englishLine1" optional="YES" attributeType="String"/>
         <attribute name="englishLine2" optional="YES" attributeType="String"/>
         <attribute name="italianLine1" optional="YES" attributeType="String"/>
         <attribute name="italianLine2" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="UserUnlockedDataSets" representedClassName="UserUnlockedDataSets" syncable="YES" codeGenerationType="class">
+        <attribute name="dataSetName" optional="YES" attributeType="String"/>
+        <attribute name="isUnlocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
     <entity name="UserVerbList" representedClassName="UserVerbList" syncable="YES" codeGenerationType="class">
         <attribute name="condizionale" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>

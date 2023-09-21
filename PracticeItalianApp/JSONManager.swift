@@ -23,7 +23,7 @@ struct Verb: Codable {
 
 
 struct storyObject: Codable {
-    let storyName, story: String
+    let storyName, story, storyEnglish: String
     let wordLinks: [WordLink]
     let questionsObjs: [QuestionsObj]
     let fillInBlankQuestions: [FillInBlankQuestion]
@@ -47,11 +47,18 @@ struct QuestionsObj: Codable {
     var mC: Bool?
 }
 
+// MARK: - FillInBlankQuestion
 struct FillInBlankQuestion: Codable {
-    let englishLine1, questionPart1, missingWord: String
-    let questionPart2: String
-    let choices: [String]
+    let englishLine1, question, missingWord: String
+    let plugInChoices: [PlugInChoice]
 }
+
+// MARK: - PlugInChoice
+struct PlugInChoice: Codable {
+    let choice: String
+    let isCorrect: Bool
+}
+
 
 
 struct WordLink: Codable {

@@ -56,21 +56,47 @@ struct ListViewOfAvailableVerbs: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            HStack(spacing: 18){
-                Button(action: {
-                    dismiss()
-                }, label: {
-                    Image(systemName: "xmark")
-                        .font(.title)
-                        .foregroundColor(.gray)
-                        .padding(.leading, 20)
-                    
-                    
-                })
-                
-            }.padding(.bottom, 25)
+            ZStack{
+                GeometryReader {geo in
+                    Image("verticalNature")
+                        .resizable()
+                        .scaledToFill()
+                        .padding(.bottom, 100)
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+
+                    VStack{
+                        HStack(spacing: 18){
+                            Spacer()
+                            Button(action: {
+                                dismiss()
+                            }, label: {
+                                Image(systemName: "xmark")
+                                    .font(.title)
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing, 200)
+                                
+                                
+                            })
+                            Spacer()
+                            Image("italyFlag")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .shadow(radius: 10)
+                            Spacer()
+                            
+                        }
+                        Text("MyList")
+                            .font(Font.custom("Chalkboard SE", size: 35))
+                            .padding(.leading, 13)
+                            .padding(.top, 10)
+                    }
+                }
+            }.frame(width: 390, height: 180)
             
             NavigationView{
+                
                 VStack{
                         List{
                             let compactedArray: [UserVerbList] = listViewOfAvailableVerbsVM.fetchedUserAddedVerbs
@@ -95,20 +121,21 @@ struct ListViewOfAvailableVerbs: View {
                                 Text("Oops, loos like there's no data...")
                             }
                         })
-                        .navigationBarTitle("MyList")
+                       // .navigationBarTitle("MyList")
                         .navigationBarItems(leading: HStack{
                             Button(action: {
                                 self.isEditing.toggle()
                             }, label: {
                                 Text(isEditing ? "Done" : "Edit")
+                                    .font(Font.custom("Arial Hebrew", size: 22))
                                     .frame(width: 80, height: 40)
+                                    .padding(.top, 20)
                             })
-                        }, trailing: Button(action: onAdd) { Image(systemName: "plus") })
+                        }, trailing: Button(action: onAdd) { Image(systemName: "plus").resizable().scaledToFill().frame(width: 25, height: 25).padding(.trailing, 10).padding(.bottom, 10).padding(.top, 25) })
                         .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
-                        .padding(.top, 20)
+                        .padding(.top, 10)
                 }
             }
-            
             
             HStack{
                 
@@ -116,11 +143,24 @@ struct ListViewOfAvailableVerbs: View {
                     showCreateVerb.toggle()
                 }, label: {
                     Text("Create Verb")
+                        .font(Font.custom("Arial Hebrew", size: 17))
+                        .padding(.top, 5)
+                        .foregroundColor(.black)
+                        .frame(width: 150, height: 40)
+                        .background(Color("WashedWhite"))
+                        .cornerRadius(10)
+                        .overlay( RoundedRectangle(cornerRadius: 10)
+                            .stroke(.black, lineWidth: 2))
+                        .shadow(radius: 10)
+                        .padding(.top, 15)
                     
-                })
+                }).padding(.top, 15)
+                    .padding(.leading, 10)
                 
-            }.frame(width: 300)
-                .background(.white)
+            }.frame(width: 390, height: 50)
+                .background(Color("pastelBlue"))
+                .border(width: 4, edges: [.top], color: .black)
+            
             
             
             
@@ -208,27 +248,30 @@ struct availableVerbsSheet: View {
     
     
     var body: some View{
+        
         ZStack(alignment: .topLeading){
-            
-            Button(action: {
-                dismiss()
-            }, label: {
-                Image(systemName: "xmark")
-                    .font(.largeTitle)
-                    .tint(Color.black)
-                
-            }).padding().zIndex(1)
-            
-            VStack{
-                Text("Choose from the available Italian verbs to add to your unique practice list!")
-                    .font(Font.custom("Chalkboard SE", size: 20))
-                    .multilineTextAlignment(.center)
-                    .padding(15)
-                    .frame(width: 340)
-                    .background(.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 10)
-                    .padding(.top, 65)
+            VStack(spacing: 0){
+                VStack(spacing: 0){
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Image(systemName: "xmark")
+                            .font(.largeTitle)
+                            .tint(Color.black)
+                        
+                    }).padding(.trailing, 300).padding(.bottom, 15)
+                    Text("Choose from the available Italian verbs to add to your unique practice list!")
+                        .font(Font.custom("Chalkboard SE", size: 20))
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(width: 340)
+                        .background(.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                        .overlay( RoundedRectangle(cornerRadius: 10)
+                            .stroke(.black, lineWidth: 2))
+                }.frame(width:400, height: 200)
+                    .background(Color("pastelBlue"))
                 List{
                     ForEach(0..<listViewVerbs.count, id: \.self) {i in
                         HStack{
@@ -244,17 +287,35 @@ struct availableVerbsSheet: View {
                 }
                 .padding(.top, 10)
                 
-                Button(action: {
-                    for ver in listViewVerbs {
-                        if ver.isToggled{
-                            addNewUserAddedVerb(verbIn: ver)
-                        }
-                        
-                    }
-                }, label: {
-                    Text("Save")
+                HStack{
                     
-                })
+                    Button(action: {
+                        for ver in listViewVerbs {
+                            if ver.isToggled{
+                                addNewUserAddedVerb(verbIn: ver)
+                            }
+                            
+                        }
+                    }, label: {
+                        Text("Save")
+                            .font(Font.custom("Arial Hebrew", size: 17))
+                            .padding(.top, 5)
+                            .foregroundColor(.black)
+                            .frame(width: 150, height: 40)
+                            .background(Color("WashedWhite"))
+                            .cornerRadius(10)
+                            .overlay( RoundedRectangle(cornerRadius: 10)
+                                .stroke(.black, lineWidth: 2))
+                            .shadow(radius: 10)
+                            .padding(.top, 15)
+                        
+                    }).padding(.top, 15)
+                        .padding(.leading, 10)
+                    
+                }.frame(width: 390, height: 50)
+                    .background(Color("pastelBlue"))
+                    .border(width: 4, edges: [.top], color: .black)
+                
                 
             }
             

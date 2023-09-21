@@ -31,13 +31,10 @@ struct DragDropVerbConjugationView: View {
                     
                     VStack{
                         HStack(spacing: 18){
-                            Button(action: {
-                                dismiss()
-                            }, label: {
+                            NavigationLink(destination: chooseVerbList(), label: {
                                 Image(systemName: "xmark")
                                     .font(.system(size: 25))
                                     .foregroundColor(.gray)
-                                
                             })
                             
                             Spacer()
@@ -56,6 +53,7 @@ struct DragDropVerbConjugationView: View {
                         
                         Text(getTenseString(tenseIn: dragDropVerbConjugationVM.currentTense))
                             .font(Font.custom("Chalkboard SE", size: 25))
+                            .underline()
                         
                         ScrollView(.horizontal){
                             

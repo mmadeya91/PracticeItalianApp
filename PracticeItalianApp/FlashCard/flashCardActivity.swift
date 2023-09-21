@@ -21,37 +21,122 @@ struct flashCardActivity: View {
     
     @State var flashCardObj: flashCardObject
     
+    var flashCardSetName: String
+    
     @State  var flipped = false
     @State  var animate3d = false
     @State  var showButtonSet = false
     @State var nextBackClicked = false
     @State var correctShowGif = false
+    @State var progress: CGFloat = 0
+    
+    @State var saved = false
+    @State var animatingBear = false
+    @State var correctChosen = false
     
     @State  var counter: Int = 0
+
     
     var body: some View {
-        ZStack{
-            VStack{
-                customTopNavBar()
-                Spacer()
-                progressBar(counter: self.$counter, totalCards: flashCardObj.words.count)
-                Spacer()
-                scrollViewBuilder(flipped: self.$flipped, animate3d: self.$animate3d, flashCardObj: self.$flashCardObj, counter: self.$counter, showGif: self.$correctShowGif).padding(.bottom, 160).padding(.top, 40)
-                Spacer()
+        GeometryReader{geo in
+            Image("verticalNature")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            
+            
+            ZStack{
+                VStack{
+                    
+                    NavBar().padding(.top, 35)
+                    
+                    scrollViewBuilder(flipped: self.$flipped, animate3d: self.$animate3d, flashCardObj: self.$flashCardObj, counter: self.$counter, showGif: self.$correctShowGif, saved: self.$saved, correctChosen: self.$correctChosen, setName: flashCardSetName).padding(.bottom, 160).padding(.top, 40)
+                        .padding([.leading, .trailing], 15)
+                    
+                    
+                    
+                }.frame(width: geo.size.width)
+                .frame(minHeight: geo.size.height)
+                
+                Image("sittingBear")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 200, height: 100)
+                    .offset(x: 95, y: animatingBear ? 380 : 750)
+                
+                if saved {
+                    
+                    Image("bubbleChatSaved")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 40)
+                        .offset(y: 250)
+                        
+                }
+            
+            if correctChosen{
+                
+                let randomInt = Int.random(in: 1..<4)
+                
+                Image("bubbleChatRight"+String(randomInt))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 100, height: 40)
+                    .offset(y: 310)
+            }
+                
                 
             }
-            
-            
-            if correctShowGif {
-                GifImage("thumbUp")
-                    .offset(x:100, y:630)
-                    .animation(Animation.easeIn, value: correctShowGif)
-                   
+            .onAppear{
+                withAnimation(.spring()){
+                    animatingBear = true
+                }
             }
-            
-        }.navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(true)
+        }
     
     }
+    
+    @ViewBuilder
+    func NavBar() -> some View{
+        HStack(spacing: 18){
+            Spacer()
+            Button(action: {
+                
+            }, label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 25))
+                    .foregroundColor(.gray)
+                
+            })
+            
+            GeometryReader{proxy in
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(.gray.opacity(0.25))
+                    
+                    Capsule()
+                        .fill(Color.green)
+                        .frame(width: proxy.size.width * CGFloat(progress))
+                }
+            }.frame(height: 13)
+                .onChange(of: counter){ newValue in
+                    progress = CGFloat(newValue) / CGFloat(flashCardObj.words.count)
+                }
+            
+            Image("italyFlag")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+            Spacer()
+        }.padding(.trailing, 5)
+    }
+    
+    func storeSetAccuracyData(){
+        
+    }
+    
 }
 
 struct scrollViewBuilder: View {
@@ -65,6 +150,10 @@ struct scrollViewBuilder: View {
     @Binding var flashCardObj: flashCardObject
     @Binding var counter: Int
     @Binding var showGif: Bool
+    @Binding var saved: Bool
+    @Binding var correctChosen: Bool
+    
+    var setName: String
     
     var body: some View{
         
@@ -75,15 +164,14 @@ struct scrollViewBuilder: View {
                 HStack{
                     ForEach(0..<flashCardObj.words.count, id: \.self) {i in
                         cardView(flipped: $flipped, animate3d: $animate3d, counterTest: i , flashCardObj: $flashCardObj)
-                            .padding(.leading, leadingPad)
-                            .padding(.trailing, trailingPad)
+                            
                     }
                 }
             }.scrollDisabled(true)
             VStack{
                 HStack{
                     Button(action: {
-  
+                        SoundManager.instance.playSound(sound: .wrong)
                         withAnimation{
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
@@ -92,15 +180,15 @@ struct scrollViewBuilder: View {
                                     counter = counter + 1
                                 }
                                 withAnimation{
-                                    scrollView.scrollTo(counter)
+                                    scrollView.scrollTo(counter, anchor: .center)
                                 }
                             }
                             
                             if fCAM.isEmptyFlashCardAccData() {
-                                fCAM.addNewCardAccEntityIncorrect()
+                                fCAM.addNewCardAccEntityIncorrect(setName: setName)
                             }else{
                                 
-                                fCAM.updateIncorrectInput(card: fCAM.getAccData())
+                                fCAM.updateIncorrectInput(card: fCAM.getAccData(), setName: setName)
                             }
                             
                             self.selected.toggle()
@@ -116,7 +204,11 @@ struct scrollViewBuilder: View {
                         
                         
                         
-                    }).padding(.leading, 90)
+                    }).padding(.leading, 60)
+                    
+                    Spacer()
+                    
+                    saveToMyListButton(italLine1: flashCardObj.words[counter].wordItal,  engLine1: flashCardObj.words[counter].wordEng, engLine2: flashCardObj.words[counter].gender.rawValue, saved: $saved)
                     
                     Spacer()
                     
@@ -126,20 +218,21 @@ struct scrollViewBuilder: View {
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             animate3d.toggle()
-                            showGif.toggle()
+                            correctChosen = false
                             if counter < flashCardObj.words.count - 1 {
                                 counter = counter + 1
                             }
                             withAnimation{
-                                scrollView.scrollTo(counter)
+                                scrollView.scrollTo(counter, anchor: .center)
                             }
                         }
                             SoundManager.instance.playSound(sound: .correct)
+                            correctChosen = true
                         
                         if fCAM.isEmptyFlashCardAccData() {
-                            fCAM.addNewCardAccEntityCorrect()
+                            fCAM.addNewCardAccEntityCorrect(setName: setName)
                         } else {
-                            fCAM.updateCorrectInput(card: fCAM.getAccData())
+                            fCAM.updateCorrectInput(card: fCAM.getAccData(), setName: setName)
                         }
                         
                         
@@ -154,11 +247,10 @@ struct scrollViewBuilder: View {
                         
                         
                         
-                    }).padding(.trailing, 90)
+                    }).padding(.trailing, 60)
                 }
                 
-                saveToMyListButton(italLine1: flashCardObj.words[counter].wordItal,  engLine1: flashCardObj.words[counter].wordEng, engLine2: flashCardObj.words[counter].gender.rawValue).padding(.top, 20)
-                
+    
             }.opacity(flipped ? 1 : 0).animation(.easeIn(duration: 0.3), value: flipped)
         }
       
@@ -240,10 +332,14 @@ struct flashCardItal: View {
             
             
         } .frame(width: 325, height: 250)
-            .background(Color.teal)
+            .background(Color("WashedWhite"))
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.black, lineWidth: 7)
+            )
             .cornerRadius(20)
             .shadow(radius: 10)
-            .padding()
+            .padding([.top, .bottom], 75)
         
         
     }
@@ -271,7 +367,11 @@ struct flashCardEng: View {
                 .padding([.leading, .trailing], 10)
             
         }.frame(width: 325, height: 250)
-            .background(Color.teal)
+            .background(Color("WashedWhite"))
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.black, lineWidth: 7)
+            )
             .cornerRadius(20)
             .shadow(radius: 10)
             .padding()
@@ -373,14 +473,20 @@ struct saveToMyListButton: View{
     var engLine1: String
     var engLine2: String
     
+    @Binding var saved: Bool
+    
     var body: some View{
         Button(action: {
-            
+            addItem()
+            saved = true
+            DispatchQueue.main.async {
+                saved = false
+            }
             
         }, label: {
             Text("Save to My List")
                 .bold()
-                .frame(width: 190, height: 50)
+                .frame(width: 150, height: 50)
                 .background(.orange)
                 .foregroundColor(.black)
                 .cornerRadius(20)
@@ -407,109 +513,11 @@ struct saveToMyListButton: View{
     }
 }
 
-//struct nextPreviousButtonSet: View{
-//
-//    @Binding var fcO: flashCardObject
-//    @Binding var counter: Int
-//    @Binding var nextBackClicked: Bool
-//
-//    var body: some View{
-//        HStack{
-//            Button(action: {
-//                withAnimation{
-//                    if counter > 0 {
-//                        counter = counter - 1
-//                        nextBackClicked.toggle()
-//                    }
-//                }
-//            }, label:
-//                    {Image(systemName: "arrow.backward").resizable()
-//                    .bold()
-//                    .scaledToFit()
-//                    .frame(width: 65, height: 65)
-//                    .foregroundColor(Color.black)
-//
-//
-//
-//            }).padding(.leading, 90)
-//
-//            Spacer()
-//
-//            Button(action: {
-//                withAnimation{
-//                    if counter < fcO.words.count - 1 {
-//                        counter = counter + 1
-//                        nextBackClicked.toggle()
-//                    }
-//                }
-//            }, label:
-//                    {Image(systemName: "arrow.forward").resizable()
-//                    .bold()
-//                    .scaledToFit()
-//                    .frame(width: 65, height: 65)
-//                    .foregroundColor(Color.black)
-//
-//
-//
-//            }).padding(.trailing, 90)
-//        }
-//    }
-//}
 
-struct progressBar: View {
-    
-    @Binding var counter: Int
-    let totalCards: Int
-    
-    var body: some View {
-        VStack {
-            
-            Text(String(counter + 1) + "/" + String(totalCards)).offset(y:20)
-                .font(Font.custom("Arial Hebrew", size: 28))
-                .bold()
-            
-            ProgressView("", value: Double(counter), total: Double(totalCards - 1))
-                .tint(Color.orange)
-                .frame(width: 300)
-                .scaleEffect(x: 1, y: 4)
-                
-            
-            
-        }
-    }
-}
 
-struct customTopNavBar: View {
-    var body: some View {
-        ZStack{
-            HStack{
-                NavigationLink(destination: chooseFlashCardSet(), label: {Image("cross")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.leading, 20)
-                })
-                
-                Spacer()
-                
-                NavigationLink(destination: chooseActivity(), label: {Image("house")
-                        .resizable()
-                        .scaledToFit()
-                        .scaleEffect(1.5)
-                        .padding([.top, .bottom], 15)
-                        .padding(.trailing, 38)
-                       
-                })
-            }.zIndex(1)
-        }.frame(width: 400, height: 60)
-            .background(Color.gray.opacity(0.25))
-            .border(width: 3, edges: [.bottom, .top], color: .teal)
-            .zIndex(0)
-                    
-    }
-}
 
 struct flashCardActivity_Previews: PreviewProvider {
     static var previews: some View {
-        flashCardActivity(flashCardObj: flashCardObject.Food)
+        flashCardActivity(flashCardObj: flashCardObject.Food, flashCardSetName: "Food")
     }
 }

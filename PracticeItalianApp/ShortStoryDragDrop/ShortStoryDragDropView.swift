@@ -12,6 +12,10 @@ struct ShortStoryDragDropView: View{
     @Environment(\.dismiss) var dismiss
     var isPreview: Bool
     @State var questionNumber = 0
+    @State var showPlayer = false
+    @State var showUserCheck = false
+    
+    let shortStoryVM = ShortStoryViewModel(currentStoryIn: 0)
     
     var body: some View{
         GeometryReader {geo in
@@ -22,20 +26,34 @@ struct ShortStoryDragDropView: View{
                 .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             HStack{
                 Button(action: {
-                    dismiss()
+                    withAnimation(.linear){
+                        showUserCheck.toggle()
+                    }
                 }, label: {
                     Image(systemName: "xmark")
                         .font(.system(size: 25))
                         .foregroundColor(.gray)
                     
                 })
+
+                    
                 Spacer()
                 Image("italyFlag")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
                     .shadow(radius: 10)
-            }.padding([.leading, .trailing], 15)
+            }.padding([.leading, .trailing], 15).zIndex(1)
+            
+            if showUserCheck {
+                userCheckNavigationPopUp(showUserCheck: $showUserCheck)
+                    .transition(.slide)
+                    .animation(.easeIn)
+                    .padding(.leading, 60)
+                    .padding(.top, 60)
+                    .zIndex(2)
+            }
+            
             ScrollViewReader{scroller in
                 
                 ZStack{
@@ -47,7 +65,11 @@ struct ShortStoryDragDropView: View{
                             HStack{
                                 ForEach(0..<shortStoryDragDropVM.currentDragDropQuestions.count, id: \.self) { i in
                                     VStack{
-                                        shortStoryDragDropViewBuilder(characters: shortStoryDragDropVM.currentDragDropQuestions[i].dragDropQuestionChoices, questionNumber: $questionNumber, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence).frame(width: geo.size.width)
+                                        
+                                        
+                                        
+                                        
+                                        shortStoryDragDropViewBuilder(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence).frame(width: geo.size.width)
                                             .frame(minHeight: geo.size.height)
                                     }
                                     
@@ -59,6 +81,10 @@ struct ShortStoryDragDropView: View{
                         .onChange(of: questionNumber) { newIndex in
                             withAnimation{
                                 scroller.scrollTo(newIndex, anchor: .center)
+                            }
+                            
+                            if questionNumber == shortStoryDragDropVM.currentDragDropQuestions.count {
+                                showPlayer = true
                             }
                         }
                         
@@ -77,8 +103,15 @@ struct ShortStoryDragDropView: View{
                         
                     
                     
-                }.onAppear{
+                }
+                .fullScreenCover(isPresented: $showPlayer) {
+                    NavigationView{
+                        ShortStoryPlugInView(shortStoryPlugInVM: shortStoryVM)
+                    }
+                }
+                .onAppear{
                     shortStoryDragDropVM.setData()
+                    shortStoryDragDropVM.setChoiceArrayDataSet()
                 }
             }
         }
@@ -90,7 +123,9 @@ struct shortStoryDragDropViewBuilder: View {
     @State var progress: CGFloat = 0
     
     //choices
-    @State var characters: [dragDropShortStoryCharacter]
+    @State var charactersSet: [[dragDropShortStoryCharacter]]
+    
+    @State var characters: [dragDropShortStoryCharacter] = []
     
     //for drag
     @State var shuffledRows: [[dragDropShortStoryCharacter]] = []
@@ -135,7 +170,26 @@ struct shortStoryDragDropViewBuilder: View {
             DragArea()
         }
         .padding()
+        .onChange(of: questionNumber) { newIndex in
+            rows.removeAll()
+            shuffledRows.removeAll()
+            characters = charactersSet[newIndex]
+            if rows.isEmpty{
+                //First Creating shuffled On
+                //then normal one
+                characters = characters.shuffled()
+                rows = generateGrid()
+                shuffledRows = generateGrid()
+                rows = generateGrid()
+            }
+    
+        }
         .onAppear{
+            if questionNumber == 0{
+                characters = charactersSet[0]
+            }else{
+                characters = charactersSet[questionNumber]
+            }
             if rows.isEmpty{
                 //First Creating shuffled On
                 //then normal one
@@ -288,6 +342,62 @@ struct shortStoryDragDropViewBuilder: View {
                 animateWrongText = false
             }
         }
+    }
+}
+
+struct userCheckNavigationPopUp: View{
+    @Binding var showUserCheck: Bool
+    
+    var body: some View{
+        
+        
+        ZStack{
+            VStack{
+                
+                
+                Text("Are you Sure you want to Leave the Page?")
+                    .bold()
+                    .font(Font.custom("Arial Hebrew", size: 17))
+                    .foregroundColor(Color.black)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 20)
+                    .padding(.bottom, 10)
+                    .padding([.leading, .trailing], 5)
+                
+                Text("You will be returned to the 'select story page' and progress on this exercise will be lost")
+                    .font(Font.custom("Arial Hebrew", size: 15))
+                    .foregroundColor(Color.black)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 10)
+                    .padding([.leading, .trailing], 5)
+                
+                HStack{
+                    Spacer()
+                    NavigationLink(destination: availableShortStories(), label: {
+                        Text("Yes")
+                            .font(Font.custom("Arial Hebrew", size: 15))
+                            .foregroundColor(Color.blue)
+                    })
+                    Spacer()
+                    Button(action: {showUserCheck.toggle()}, label: {
+                        Text("No")
+                            .font(Font.custom("Arial Hebrew", size: 15))
+                            .foregroundColor(Color.blue)
+                    })
+                    Spacer()
+                }
+            }
+                
+    
+        }.frame(width: 265, height: 200)
+            .background(Color.white)
+            .cornerRadius(20)
+            .shadow(radius: 20)
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.black, lineWidth: 3)
+            )
+        
     }
 }
 

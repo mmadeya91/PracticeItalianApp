@@ -48,6 +48,8 @@ struct shortStoryView: View {
     
     @State var showShortStoryDragDrop = false
     
+    @State var showEnglish = false
+    
     @StateObject var shortStoryDragDropVM = ShortStoryDragDropViewModel(chosenStory: 0)
     
     var storyData: shortStoryData { shortStoryData(chosenStoryName: chosenStoryNameIn)}
@@ -68,7 +70,18 @@ struct shortStoryView: View {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     
                     
-                
+                Button(action: {
+                    withAnimation(.easeIn){
+                        showEnglish.toggle()
+                    }
+                }, label: {
+                    Image(systemName: showEnglish ? "eye.slash" : "eye")
+                        .resizable()
+                        .scaledToFill()
+                        .foregroundColor(.black)
+                        .frame(width: 20, height: 20)
+                }).zIndex(2)
+                    .offset(x:132, y: -230)
                 
                 if showPopUpScreen{
                     popUpView(storyObj: self.storyObj, linkClickedString: self.$linkClickedString, showPopUpScreen: self.$showPopUpScreen).transition(.slide).animation(.easeIn).zIndex(2)
@@ -81,23 +94,27 @@ struct shortStoryView: View {
                     NavBar().padding(.bottom, 40)
                     
                     ScrollView(.vertical, showsIndicators: false) {
-                        
-                        Text("Cristofo Columbo")
-                            .font(Font.custom("Arial Hebrew", size: 25))
-                            .padding(.top, 30)
-                            .overlay(
-                                Rectangle()
-                                    .fill(Color.black)
-                                    .frame(width: 210, height: 1)
-                                , alignment: .bottom
-                            )
-                        
-                        Text(.init(storyObj.storyString))
-                            .modifier(textModifer())
-                            .environment(\.openURL, OpenURLAction { url in
-                                handleURL(url, name: url.valueOf("word")!)
-                                
-                            })
+                            Text("Cristofo Columbo")
+                                .font(Font.custom("Arial Hebrew", size: 25))
+                                .padding(.top, 30)
+                                .overlay(
+                                    Rectangle()
+                                        .fill(Color.black)
+                                        .frame(width: 210, height: 1)
+                                    , alignment: .bottom
+                                )
+
+                        if !showEnglish {
+                            Text(.init(storyObj.storyString))
+                                .modifier(textModifer())
+                                .environment(\.openURL, OpenURLAction { url in
+                                    handleURL(url, name: url.valueOf("word")!)
+                                    
+                                })
+                        }else{
+                            Text(.init(storyObj.storyStringEnglish))
+                                .modifier(textModifer())
+                        }
                         
                         
                     }.frame(width: 330, height: showQuestionDropdown ? storyHeight :520).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
@@ -130,22 +147,26 @@ struct shortStoryView: View {
                                     .scaledToFit()
                                     .frame(width: 60, height: 55)
                             }).offset(x:-35)
+                                .disabled(showShortStoryDragDrop)
                         }.offset(x:20)
                             .zIndex(1)
                         
                         //QUESTIONS VIEW
-                        if showQuestionDropdown {
+                        if showQuestionDropdown && !showShortStoryDragDrop{
                             
                             VStack(alignment: .leading){
-                                Text(storyObj.questionList[questionNumber].question)
-                                    .font(Font.custom("Arial Hebrew", size: 16))
-                                    .bold()
-                                    .padding([.leading, .trailing], 10 )
-                                    .padding(.top, 5)
-                                    .padding(.bottom, 10)
+      
+                                    Text(storyObj.questionList[questionNumber].question)
+                                        .font(Font.custom("Arial Hebrew", size: 16))
+                                        .bold()
+                                        .padding([.leading, .trailing], 10 )
+                                        .padding(.top, 5)
+                                        .padding(.bottom, 10)
+                                    
+                                    
+                                    radioButtons(storyObj: storyObj, questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+       
                                 
-                                
-                                radioButtons(storyObj: storyObj, questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
                             }
                             .frame(width: 335, height: 210)
                             .background(Color.white.opacity(0.95))
@@ -175,13 +196,12 @@ struct shortStoryView: View {
     func NavBar() -> some View{
         HStack(spacing: 18){
             Spacer()
-            Button(action: {
-                
-            }, label: {
+            NavigationLink(destination: availableShortStories(), label: {
                 Image(systemName: "xmark")
                     .font(.system(size: 25))
                     .foregroundColor(.gray)
-                
+                    
+                    
             })
             
             GeometryReader{proxy in
@@ -221,7 +241,7 @@ struct popUpView: View{
         
         
         
-        ZStack(alignment: .leading){
+        ZStack{
             Button(action: {
                 showPopUpScreen.toggle()
             }, label: {
@@ -229,9 +249,8 @@ struct popUpView: View{
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .padding(.bottom, 140)
-                    .padding(.leading, 10)
-            })
+
+            }).offset(x: -115, y:-65).zIndex(1)
             VStack{
                 
                 
@@ -267,7 +286,7 @@ struct popUpView: View{
                 
                 
                 
-            }
+            }.zIndex(0)
         }.frame(width: 300, height: 200)
             .background(Color.white)
             .cornerRadius(20)

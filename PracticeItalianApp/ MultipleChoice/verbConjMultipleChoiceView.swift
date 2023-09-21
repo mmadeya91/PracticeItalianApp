@@ -10,7 +10,7 @@ import CoreData
 
 struct verbConjMultipleChoiceView: View{
     @Environment(\.managedObjectContext) private var viewContext
-    
+    @ObservedObject var globalModel = GlobalModel()
     @StateObject var verbConjMultipleChoiceVM: VerbConjMultipleChoiceViewModel
     
     @State private var pressed = false
@@ -22,6 +22,9 @@ struct verbConjMultipleChoiceView: View{
     @State var saved = false
     @State var correctChosen = false
     @State var wrongChosen = false
+    @State var currentVerbIta = "temp"
+    @State var showAlreadyExists: Bool = false
+    @State var showFinishedActivityPage = false
     
     var body: some View {
         
@@ -40,7 +43,9 @@ struct verbConjMultipleChoiceView: View{
                     NavBar()
                     
                     Text(getTenseString(tenseIn: verbConjMultipleChoiceVM.currentTense))
-                        .font(Font.custom("Chalkboard SE", size: 25))
+                        .font(Font.custom("Chalkboard SE", size: 30))
+                        .underline()
+                        .padding(.top, 20)
                     
                     ScrollViewReader {scroller in
                         ScrollView(.horizontal){
@@ -48,6 +53,8 @@ struct verbConjMultipleChoiceView: View{
                                 ForEach(0..<verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count, id: \.self) { i in
                                     
                                     VStack{
+                                    
+                                        
                                         Text(verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameIt + " - " + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].pronoun + "\n(" + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameEng)
                                             .bold()
                                             .font(Font.custom("Arial Hebrew", size: 20))
@@ -66,46 +73,80 @@ struct verbConjMultipleChoiceView: View{
                             
                                         
                                         
-                                        choicesView(choicesIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].choiceList, correctAnswerIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].correctAnswer, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+                                        choicesView(choicesIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].choiceList, correctAnswerIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].correctAnswer, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen).offset(x:3)
                                     }
                                     .frame(width: geo.size.width)
                                     .frame(minHeight: geo.size.height)
                                 
                                 }
                                 
-                            }.offset(y: -100)
+                            }.offset(y: -180)
                         }
                         .scrollDisabled(true)
                         .frame(width: geo.size.width)
                         .frame(minHeight: geo.size.height)
                         .onChange(of: counter) { newIndex in
-                            withAnimation{
-                                scroller.scrollTo(newIndex, anchor: .center)
+                            if newIndex == verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                    showFinishedActivityPage = true
+                                }
+                                progress = CGFloat(verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count)
+                            }else{
+                                currentVerbIta = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[newIndex].verbNameIt
+                                withAnimation{
+                                    scroller.scrollTo(newIndex, anchor: .center)
+                                }
                             }
+                            
+ 
                         }
                        
                         
                         
                     }
                     
+                    
                     Button(action: {
-                        
-                        addVerbItem(verbToSave: counter)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            saved = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            showAlreadyExists = false
                         }
-                        saved = true
+                        if addVerbItem(verbToSave: counter){
+                            showAlreadyExists = true
+                        }else{
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                saved = false
+                            }
+                            saved = true
+                        }
                         
                     }, label: {
-                        Text("Add Verb to MyList")
+                        Text("Add " + currentVerbIta + " to MyList")
                             .font(Font.custom("Arial Hebrew", size: 17))
                             .padding(.top, 3)
+                            .padding([.leading, .trailing], 20)
                             .foregroundColor(Color.black)
-                            .frame(width: 200, height: 45)
+                            .frame(height: 45)
                             .background(Color.orange)
-                            .cornerRadius(15)
+                            .cornerRadius(20)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.black, lineWidth: 4)
+                            )
+                            .shadow(radius: 10)
+                        
                     
-                    }).offset(y:-260)
+                    }).offset(y:-350)
+                    
+                    Text(currentVerbIta + " is already in MyList!")
+                        .font(Font.custom("Arial Hebrew", size: 20))
+                        .padding(.top, 3)
+                        .padding([.top, .bottom], 5)
+                        .padding([.leading, .trailing], 15)
+                        .background(Color("WashedWhite"))
+                        .foregroundColor(.black)
+                        .cornerRadius(15)
+                        .opacity(showAlreadyExists ? 1 : 0)
+                        .offset(y:-330)
                     
                    
       
@@ -120,7 +161,7 @@ struct verbConjMultipleChoiceView: View{
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(.black, lineWidth: 4)
                     )
-                    .offset(y: 5)
+                    .offset(y: -75)
                     .zIndex(0)
                 
                     
@@ -128,7 +169,7 @@ struct verbConjMultipleChoiceView: View{
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200, height: 100)
-                        .offset(x: 95, y: animatingBear ? 350 : 750)
+                        .offset(x: 95, y: animatingBear ? 320 : 750)
                     
                     if saved {
                         
@@ -136,7 +177,7 @@ struct verbConjMultipleChoiceView: View{
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 250)
+                            .offset(y: 240)
                             
                     }
                 
@@ -148,7 +189,7 @@ struct verbConjMultipleChoiceView: View{
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 40)
-                        .offset(y: 250)
+                        .offset(y: 240)
                 }
                       
                 if wrongChosen{
@@ -159,42 +200,67 @@ struct verbConjMultipleChoiceView: View{
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 40)
-                        .offset(y: 250)
+                        .offset(y: 240)
                 }
                       
                 
                 
                 
-            }.onAppear{
+            }
+            .fullScreenCover(isPresented: $showFinishedActivityPage) {
+                NavigationView{
+                    ActivityCompletePage()
+                }
+            }
+            .onAppear{
                 withAnimation(.easeIn){
                     animatingBear = true
                 }
                 if isPreview{
                     verbConjMultipleChoiceVM.setMultipleChoiceData()
+                    currentVerbIta = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[0].verbNameIt
+                }else{
+                    currentVerbIta = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[0].verbNameIt
                 }
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
     
-    func addVerbItem(verbToSave: Int) {
+    func addVerbItem(verbToSave: Int)->Bool {
         
-        let newUserMadeVerb = UserVerbList(context: viewContext)
-        newUserMadeVerb.verbNameItalian = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].verbNameIt
-        newUserMadeVerb.verbNameEnglish = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].verbNameEng
-        newUserMadeVerb.presente = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].pres
-        newUserMadeVerb.passatoProssimo = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].pass
-        newUserMadeVerb.futuro = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].fut
-        newUserMadeVerb.imperfetto = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].imp
-        newUserMadeVerb.imperativo = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].impera
-        newUserMadeVerb.condizionale = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].cond
-        
-        do {
-            try viewContext.save()
-        } catch {
-            print("error saving")
+        if itemExists(verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].verbNameIt) {
+            return true
+        }else{
+            
+            let newUserMadeVerb = UserVerbList(context: viewContext)
+            newUserMadeVerb.verbNameItalian = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].verbNameIt
+            newUserMadeVerb.verbNameEnglish = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].verbNameEng
+            newUserMadeVerb.presente = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].pres
+            newUserMadeVerb.passatoProssimo = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].pass
+            newUserMadeVerb.futuro = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].fut
+            newUserMadeVerb.imperfetto = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].imp
+            newUserMadeVerb.imperativo = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].impera
+            newUserMadeVerb.condizionale = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[verbToSave].cond
+            
+            
+            do {
+                try viewContext.save()
+            } catch {
+                print("error saving")
+            }
+            
+            return false
         }
         
+        
     }
+    
+    private func itemExists(_ item: String) -> Bool {
+          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserVerbList")
+          fetchRequest.predicate = NSPredicate(format: "verbNameItalian == %@", item)
+          return ((try? viewContext.count(for: fetchRequest)) ?? 0) > 0
+      }
     
     func getTenseString(tenseIn: Int)->String{
         switch tenseIn {
@@ -219,13 +285,10 @@ struct verbConjMultipleChoiceView: View{
     func NavBar() -> some View{
         HStack(spacing: 18){
             Spacer()
-            Button(action: {
-                
-            }, label: {
+            NavigationLink(destination: chooseVerbList(), label: {
                 Image(systemName: "xmark")
                     .font(.system(size: 25))
                     .foregroundColor(.gray)
-                
             })
             
             GeometryReader{proxy in
@@ -246,6 +309,7 @@ struct verbConjMultipleChoiceView: View{
                 .resizable()
                 .scaledToFit()
                 .frame(width: 40, height: 40)
+                .shadow(radius: 10)
             Spacer()
         }
     }
@@ -301,40 +365,13 @@ struct multipleChoiceButton: View{
 }
 
 
-struct addToMyListConjVerbButton: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    var body: some View{
-        Button(action: {}, label: {
-            Text("Save to my List")
-                .font(Font.custom("Arial Hebrew", size: 20))
-                .foregroundColor(Color.black)
-                .frame(width: 200, height: 40)
-                .background(Color.orange)
-                .cornerRadius(20)
-            
-        })
-    }
-    
-    func deleteItems(cardToDelete: UserMadeFlashCard) {
-        withAnimation {
-            
-            viewContext.delete(cardToDelete)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                
-            }
-        }
-    }
-}
+
 
 
 struct verbConjMultipleChoice_Previews: PreviewProvider {
     static var _verbConjMultipleChoiceVM = VerbConjMultipleChoiceViewModel()
     static var previews: some View {
-        verbConjMultipleChoiceView(verbConjMultipleChoiceVM: _verbConjMultipleChoiceVM, isPreview: true)
+        verbConjMultipleChoiceView(verbConjMultipleChoiceVM: _verbConjMultipleChoiceVM, isPreview: true).environmentObject(GlobalModel())
     }
 }
 

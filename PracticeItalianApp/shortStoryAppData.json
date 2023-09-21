@@ -5,7 +5,8 @@
 
 		"story": "  Cristoforo Colombo [nasce](myappurl://action?word=nasce) nel 1451 vicino a Genova, nel nord Italia. A 14 anni [diventa](myappurl://action?word=diventa) marinaio e viaggia in numerosi Paesi. Per Cristoforo Colombo la Terra è rotonda e verso la fine del ‘400, vuole viaggiare verso l’India e vuole farlo con un viaggio verso [ovest](myappurl://action?word=ovest). La [spedizione](myappurl://action?word=spedizione) è costosa e Colombo prima chiede aiuto al re del Portogallo e poi alla regina Isabella di Castiglia. Nel 1492, dopo mesi di navigazione, [scopre](myappurl://action?word=scopre) però un nuovo continente: l’America, che viene chiamata il Nuovo Mondo. Cristoforo Colombo fa altri viaggi in America ma ormai non è più così amato e così [muore](myappurl://action?word=muore) nel 1506 [povero e dimenticato](myappurl://action?word=poveroedimenticato) da tutti.",
         
-		
+		"storyEnglish": "   Christopher Columbus born in 1451 near Genova, in northern Italy. At 14 years old he becomes a sailor and travels to numerous countries. For Christopher Columbus the Earth is round and near the end of the 1400, he wants to travel towards India a wants to do it with a trip towards the west. The expedition is expensive and Columbo first asks help from the King of Portogul and then to Queen Isabella of Castiglia. In 1492, after months of navigation, he discovers a new continent. The Americas, that he came to call the New World. Christopher Columbus did another trip to America but now he is not so loved and so he dies in 1506 poor and forgotten by all.",
+        
 		"wordLinks": [{
 				"wordNameIt": "nasce",
 				"infinitive": "Nascere",
@@ -79,41 +80,71 @@
 		],
         
         "fillInBlankQuestions": [
-            {
-                "englishLine1": "To be born - Presente (Lui)",
-                "questionPart1": "Cristoforo Colombo ",
-                "missingWord" : "nasce",
-                "questionPart2": " nel 1451 vicino a Genova, nel nord Italia.",
-                "choices": ["muore","scopre", "nasco", "rotonda", "viene"]
-            },
-            {
-                "englishLine1": "To become - Presente (Lui)",
-                "questionPart1": "A 14 anni ",
-                "missingWord" : "diventa",
-                "questionPart2": " marinaio e viaggia in numerosi Paesi.",
-                "choices": ["ovest","chiede", "nasco", "amato", "prima"]
-            },
-            {
-                "englishLine1": "Expeditions",
-                "questionPart1": "La ",
-                "missingWord" : "spedizione",
-                "questionPart2": " è costosa...",
-                "choices": ["viaggi", "diventa", "scopre", "nasco", "povero"]
-            },
-            {
-                "englishLine1": "To discover - Presente (Lui)",
-                "questionPart1": "Nel 1492, dopo mesi di navigazione, ",
-                "missingWord" : "scopre",
-                "questionPart2": " però un nuovo continente...",
-                "choices": ["muore", "chiamata", "tutti", "nasco", "ovest"]
-            },
-            {
-                "englishLine1": "To die - Presente (Lui)",
-                "questionPart1": "Cristoforo Colombo fa altri viaggi in America ma ormai non è più così amato e così ",
-                "missingWord" : "muore",
-                "questionPart2": " nel 1506...",
-                "choices": ["ormai", "nasce", "scopre", "nasco", "ovest"]
-            }
+                {
+                     "englishLine1": "To be born - Presente (Lui)",
+                     "question": "Cristoforo Colombo nasce nel 1451 vicino a Genova, nel nord Italia.",
+                     "missingWord": "nasce",
+                     "plugInChoices": [
+                         {"choice": "muore", "isCorrect": false},
+                         {"choice": "scopre", "isCorrect": false},
+                         {"choice": "nasce", "isCorrect": true},
+                         {"choice": "rotonda", "isCorrect": false},
+                         {"choice": "viene", "isCorrect": false},
+                         {"choice": "nord", "isCorrect": false}
+                     ]
+                 },
+                 {
+                     "englishLine1": "To become - Presente (Lui)",
+                     "question": "A 14 anni diventa marinaio e viaggia in numerosi Paesi.",
+                     "missingWord": "diventa",
+                     "plugInChoices": [
+                         {"choice": "ovest", "isCorrect": false},
+                         {"choice": "chiede", "isCorrect": false},
+                         {"choice": "nasco", "isCorrect": false},
+                         {"choice": "amato", "isCorrect": false},
+                         {"choice": "prima", "isCorrect": false},
+                         {"choice": "diventa", "isCorrect": true}
+                     ]
+                 },
+                 {
+                     "englishLine1": "Expeditions",
+                     "question": "La spedizione è costosa...",
+                     "missingWord": "spedizione",
+                     "plugInChoices": [
+                         {"choice": "viaggi", "isCorrect": false},
+                         {"choice": "diventa", "isCorrect": false},
+                         {"choice": "scopre", "isCorrect": false},
+                         {"choice": "nasco", "isCorrect": false},
+                         {"choice": "povero", "isCorrect": false},
+                         {"choice": "spedizione", "isCorrect": true}
+                     ]
+                 },
+                 {
+                     "englishLine1": "To discover - Presente (Lui)",
+                     "question": "Nel 1492, dopo mesi di navigazione, scopre però un nuovo continente... ",
+                     "missingWord": "scopre",
+                     "plugInChoices": [
+                         {"choice": "muore", "isCorrect": false},
+                         {"choice": "chiamata", "isCorrect": false},
+                         {"choice": "tutti", "isCorrect": false},
+                         {"choice": "nasco", "isCorrect": false},
+                         {"choice": "ovest", "isCorrect": false},
+                         {"choice": "scopre", "isCorrect": true}
+                     ]
+                 },
+                 {
+                     "englishLine1": "To die - Presente (Lui)",
+                     "question": "Cristoforo Colombo fa altri viaggi in America ma ormai non è più così amato e così muore nel 1506...",
+                     "missingWord": "muore",
+                     "plugInChoices": [
+                         {"choice": "muore", "isCorrect": true},
+                         {"choice": "ormai", "isCorrect": false},
+                         {"choice": "nasce", "isCorrect": false},
+                         {"choice": "scopre", "isCorrect": false},
+                         {"choice": "nasco", "isCorrect": false},
+                         {"choice": "ovest", "isCorrect": false}
+                     ]
+                 }
         ],
         
         "dragAndDropQuestions": [

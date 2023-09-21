@@ -54,5 +54,6 @@ struct dialogueBox: Identifiable, Equatable {
    let id = UUID().uuidString
     let dialogueText: String
     let position: Int
+    var wrongColor = false
     var positionWrong = false
 }

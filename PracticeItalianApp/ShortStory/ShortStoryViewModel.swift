@@ -8,12 +8,65 @@
 import Foundation
 
 final class ShortStoryViewModel: ObservableObject {
-    @Published private(set) var currentTenseMCConjVerbData: [multipleChoiceVerbObject] = [multipleChoiceVerbObject]()
-    @Published var isMyList: Bool = false
-    @Published var currentTense: Int = 0
+    @Published private(set) var currentPlugInStoryData: [shortStoryPlugInDataObj] = [shortStoryPlugInDataObj]()
+    @Published private(set) var currentPlugInQuestions: [FillInBlankQuestion] = [FillInBlankQuestion]()
+    @Published private(set) var currentPlugInQuestionsChoices: [[pluginShortStoryCharacter]] = [[pluginShortStoryCharacter]]()
+    @Published private(set) var currentHints: [String] = [String]()
+    @Published private(set) var currentStory: String
     
-    private(set) var allNonUserMadeVerbs: [verbObject] = verbObject.allVerbObject
-    private(set) var allUserMadeVerbs: [verbObject] = [verbObject]()
+    init(currentStoryIn: Int){
+        switch currentStoryIn {
+        case 0:
+            currentStory = "Cristofo Columbo"
+        default:
+            currentStory = "Cristofo Columbo"
+        }
+    }
+    
+
+    
+    func setShortStoryData(storyName: String) {
+        
+        var tempArray: [shortStoryPlugInDataObj] = [shortStoryPlugInDataObj]()
+        var tempChoicesArray: [[pluginShortStoryCharacter]] = [[pluginShortStoryCharacter]]()
+        var tempHintArray: [String] = [String]()
+        
+        let shortStoryList: [storyObject] = storyObject.allStoryObjects
+        
+        var chosenStoryObject: storyObject = shortStoryList[0]
+        
+        let storyString = chosenStoryObject.story
+
+        let wordLinks: [WordLink] = chosenStoryObject.wordLinks
+
+        let questions: [QuestionsObj] = chosenStoryObject.questionsObjs
+        
+        let plugInQuestions: [FillInBlankQuestion] = chosenStoryObject.fillInBlankQuestions
+        
+        currentPlugInQuestions = plugInQuestions
+        
+        for question in plugInQuestions {
+            var tempChoices: [pluginShortStoryCharacter] = [pluginShortStoryCharacter]()
+            
+            tempHintArray.append(question.englishLine1)
+            
+            for choice in question.plugInChoices{
+                var newPlugInCharacter = pluginShortStoryCharacter(value: choice.choice, isCorrect: choice.isCorrect)
+                tempChoices.append(newPlugInCharacter)
+            }
+            
+            tempChoicesArray.append(tempChoices)
+        }
+        
+        var newObj = shortStoryPlugInDataObj(storyString: storyString, wordLinksArray: wordLinks, questionList: questions, plugInQuestionlist: plugInQuestions)
+        
+        tempArray.append(newObj)
+        
+        currentPlugInStoryData = tempArray
+        currentPlugInQuestionsChoices = tempChoicesArray
+        currentHints = tempHintArray
+        
+    }
     
     
     
@@ -27,8 +80,23 @@ final class ShortStoryViewModel: ObservableObject {
     
     
     
+}
+
+struct pluginShortStoryCharacter: Identifiable, Hashable, Equatable {
+    var id = UUID().uuidString
+    var value: String
+    var isCorrect: Bool
+    var padding: CGFloat = 10
+    var textSize: CGFloat = .zero
+    var fontSize: CGFloat = 19
+    var isShowing: Bool = false
     
-    
-    
-    
+}
+
+struct shortStoryPlugInDataObj: Identifiable{
+    var id = UUID().uuidString
+    var storyString: String
+    var wordLinksArray: [WordLink]
+    var questionList: [QuestionsObj]
+    var plugInQuestionlist: [FillInBlankQuestion]
 }

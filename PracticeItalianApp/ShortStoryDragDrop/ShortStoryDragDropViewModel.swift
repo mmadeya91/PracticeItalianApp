@@ -9,6 +9,7 @@ import SwiftUI
 
 final class ShortStoryDragDropViewModel: ObservableObject{
     @Published private(set) var currentDragDropQuestions: [dragDropShortStoryObject] = [dragDropShortStoryObject]()
+    @Published private(set) var currentDragDropChoicesList: [[dragDropShortStoryCharacter]] = [[dragDropShortStoryCharacter]]()
     @Published private(set) var currentStoryData: storyObject
     
     init(chosenStory: Int){
@@ -25,6 +26,7 @@ final class ShortStoryDragDropViewModel: ObservableObject{
         var questionChoices: [dragDropShortStoryCharacter] = [dragDropShortStoryCharacter]()
         
         for question in currentStoryData.dragAndDropQuestions {
+            questionChoices.removeAll()
             for choice in question.choices {
                 questionChoices.append(dragDropShortStoryCharacter(value: choice))
             }
@@ -34,6 +36,16 @@ final class ShortStoryDragDropViewModel: ObservableObject{
         }
         
         currentDragDropQuestions = tempQuestionArray
+    }
+    
+    func setChoiceArrayDataSet(){
+        var tempArray: [[dragDropShortStoryCharacter]] = [[dragDropShortStoryCharacter]]()
+        for storyObject in currentDragDropQuestions {
+            tempArray.append(storyObject.dragDropQuestionChoices)
+        }
+        
+        currentDragDropChoicesList = tempArray
+        
     }
 }
 

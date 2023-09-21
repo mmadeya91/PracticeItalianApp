@@ -40,6 +40,7 @@ final class FlashCardAccDataManager {
         
     }
     
+    
     func getAccData() -> FlashCardAccuracy{
         
         let fR = FlashCardAccuracy.fetchRequest()
@@ -59,7 +60,7 @@ final class FlashCardAccDataManager {
 
     }
     
-    func addNewCardAccEntityCorrect(){
+    func addNewCardAccEntityCorrect(setName: String){
         let newFlashCardAccData = FlashCardAccuracy(context: viewContext)
         newFlashCardAccData.cardName = self.cardName
         newFlashCardAccData.cardAttempts = 1
@@ -69,7 +70,7 @@ final class FlashCardAccDataManager {
         self.saveFlashCardAccData()
     }
     
-    func addNewCardAccEntityIncorrect(){
+    func addNewCardAccEntityIncorrect(setName: String){
         let newFlashCardAccData = FlashCardAccuracy(context: viewContext)
         newFlashCardAccData.cardName = self.cardName
         newFlashCardAccData.cardAttempts = 1
@@ -77,9 +78,11 @@ final class FlashCardAccDataManager {
         newFlashCardAccData.incorrect = 1
         
         self.saveFlashCardAccData()
+        
     }
+
     
-    func updateCorrectInput(card: FlashCardAccuracy) {
+    func updateCorrectInput(card: FlashCardAccuracy, setName: String) {
             
             card.correct += 1
             card.cardAttempts += 1
@@ -87,7 +90,7 @@ final class FlashCardAccDataManager {
         self.saveFlashCardAccData()
     }
     
-    func updateIncorrectInput(card: FlashCardAccuracy) {
+    func updateIncorrectInput(card: FlashCardAccuracy, setName: String) {
 
             card.incorrect += 1
             card.cardAttempts += 1
@@ -96,7 +99,7 @@ final class FlashCardAccDataManager {
         
     }
     
-    func deleteFlashAccData(cardAccData: FlashCardAccuracy) {
+    func deleteFlashAccData(cardAccData: FlashCardAccuracy, setName: String) {
         viewContext.delete(cardAccData)
         
         self.saveFlashCardAccData()

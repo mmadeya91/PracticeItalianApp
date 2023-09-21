@@ -56,5 +56,46 @@ class flashCardData{
         
     }
     
+    func getSetName(index: Int) -> String {
+    
+        
+        switch index {
+        case 0:
+            return "Food"
+
+        case 1:
+            return "Animals"
+
+        case 2:
+            return "Clothing"
+        
+        case 3:
+            return "Family"
+            
+        case 4:
+            return "CommonNouns"
+            
+        case 5:
+            return "CommonAdjectives"
+            
+        case 6:
+            return "CommonAdverbs"
+            
+        case 7:
+            return "CommonVerbs"
+            
+        case 8:
+            return "CommonPhrases"
+
+        default:
+            return "CommonNouns"
+        }
+        
+        
+        
+        
+        
+    }
+    
     
 }

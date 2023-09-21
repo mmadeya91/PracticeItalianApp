@@ -44,6 +44,11 @@ struct incorrectMCButton: View {
              .background(defColor)
              .foregroundColor(Color.white)
              .cornerRadius(20)
+             .overlay( /// apply a rounded border
+                 RoundedRectangle(cornerRadius: 20)
+                     .stroke(.black, lineWidth: 3)
+             )
+         
              .shadow(radius: 5)
              .padding(.trailing, 5)
              .offset(x: selected ? -5 : 0)
@@ -76,6 +81,11 @@ struct correctMCButton: View {
             .background(defColor)
             .foregroundColor(Color.white)
             .cornerRadius(20)
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.black, lineWidth: 3)
+            )
+        
             .shadow(radius: 5)
             .padding(.trailing, 5)
             .scaleEffect(pressed ? 1.25 : 1.0)
@@ -124,15 +134,20 @@ struct correctShortStoryButton: View {
                     questionNumber = questionNumber + 1
                     correctChosen.toggle()
                 }else{
-                    showShortStoryDragDrop = true
+                    progress = 1
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                        showShortStoryDragDrop = true
+                    }
                 }
                 
-                colorOpacity = 0.0
-                chosenOpacity = 0.0
+                if progress != 1 {
+                    colorOpacity = 0.0
+                    chosenOpacity = 0.0
+                }
             }
             
-            //correctChosen.toggle()
-            correctChosen = false
+            
+                correctChosen = false
          
 
         }, label: {
@@ -241,6 +256,7 @@ struct correctLAComprehensionButton: View {
     @State private var pressed: Bool = false
     @Binding var questionNumber: Int
     @Binding var correctChosen: Bool
+    @Binding var showDiag: Bool
     
     var body: some View{
         
@@ -248,20 +264,22 @@ struct correctLAComprehensionButton: View {
         Button(action: {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                
-                withAnimation(.linear(duration: 1.5)) {
-                    if questionNumber != 4 {
+                correctChosen = false
+                withAnimation(.linear) {
+                    
                         questionNumber = questionNumber + 1
-                        correctChosen.toggle()
+                    if questionNumber == 4 {
+                        showDiag = true
                     }
+                    
                 }
                 
                 colorOpacity = 0.0
                 chosenOpacity = 0.0
             }
             
-            //correctChosen.toggle()
-            correctChosen = false
+            correctChosen = true
+            
 
         }, label: {
             
@@ -309,12 +327,19 @@ struct incorrectLAComprehensionButton: View {
     @State var chosenOpacity = 0.0
     @State var selected = false
     @Binding var correctChosen: Bool
+    @Binding var wrongChosen: Bool
     
     var body: some View{
         
 
         Button(action: {
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                
+               wrongChosen = false
+            }
+            
+                wrongChosen = true
                 chosenOpacity = 1.0
                 colorOpacity = 0.4
                 SoundManager.instance.playSound(sound: .wrong)

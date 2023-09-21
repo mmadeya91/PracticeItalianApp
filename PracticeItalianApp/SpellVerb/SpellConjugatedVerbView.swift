@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SpellConjugatedVerbView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -24,12 +25,14 @@ struct SpellConjugatedVerbView: View {
     @State var correctChosen = false
     @State var wrongChosen = false
     @State var saved = false
+    @State var showAlreadyExists = false
+    @State var currentVerbIta = "temp"
     
     @Environment(\.dismiss) var dismiss
     
     
     var body: some View {
-        
+     
             GeometryReader{ geo in
                 Image("verticalNature")
                     .resizable()
@@ -38,47 +41,49 @@ struct SpellConjugatedVerbView: View {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 ZStack{
                     VStack{
-                        NavBar().padding([.leading, .trailing], 20)
-                            
-                            Text(getTenseString(tenseIn: spellConjVerbVM.currentTense))
-                                .font(Font.custom("Chalkboard SE", size: 25))
-                            
-                                ScrollViewReader{scroller in
-                                    ScrollView(.horizontal) {
-                                        HStack{
-                                            ForEach(0..<spellConjVerbVM.currentTenseSpellConjVerbData.count, id: \.self) {i in
+                        NavBar().padding([.leading, .trailing], 20).zIndex(2)
+                        
+                        Text(getTenseString(tenseIn: spellConjVerbVM.currentTense))
+                            .font(Font.custom("Chalkboard SE", size: 25))
+                            .underline()
+                        
+                        ScrollViewReader{scroller in
+                            ScrollView(.horizontal) {
+                                HStack{
+                                    ForEach(0..<spellConjVerbVM.currentTenseSpellConjVerbData.count, id: \.self) {i in
+                                        
+                                        VStack(spacing: 0){
+                                            questionView(vbItalian: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameItalian, vbEnglish: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameEnglish, pronoun: spellConjVerbVM.currentTenseSpellConjVerbData[i].pronoun).padding(.bottom, 25)
+                                                .padding(.top, 70)
+                                            
+                                            HStack{
                                                 
-                                                VStack(spacing: 0){
-                                                    questionView(vbItalian: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameItalian, vbEnglish: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameEnglish, pronoun: spellConjVerbVM.currentTenseSpellConjVerbData[i].pronoun).padding(.bottom, 25)
-                                                        .padding(.top, 100)
+                                                ForEach($spellConjVerbVM.currentHintLetterArray, id: \.self) { $answerArray in
+                                                    Text(answerArray.letter)
+                                                        .font(Font.custom("Chalkboard SE", size: 25))
+                                                        .foregroundColor(.black.opacity(answerArray.showLetter ? 1.0 : 0.0))
+                                                        .underline(color: .black)
                                                     
-                                                    HStack{
-                                                        
-                                                        ForEach($spellConjVerbVM.currentHintLetterArray, id: \.self) { $answerArray in
-                                                            Text(answerArray.letter)
-                                                                .font(Font.custom("Chalkboard SE", size: 25))
-                                                                .foregroundColor(.black.opacity(answerArray.showLetter ? 1.0 : 0.0))
-                                                                .underline(color: .black)
-                                                            
-                                                        }.padding(.bottom, 100)
-                                                        
-                                                    }
-                                                    
-                                                }.frame(width: geo.size.width)
-                                                    .frame(minHeight: geo.size.height)
+                                                }.padding(.bottom, 90)
+                                                
                                             }
                                             
-                                        }
+                                        }.frame(width: geo.size.width)
+                                            .frame(minHeight: geo.size.height)
                                     }
-                                    .offset(y: -200)
-                                    .scrollDisabled(true)
-                                    .onChange(of: currentQuestionNumber) { newIndex in
-                                        withAnimation{
-                                            scroller.scrollTo(newIndex, anchor: .center)
-                                        }
-                                    }
+                                    
                                 }
-
+                            }
+                            .offset(y: -200)
+                            .scrollDisabled(true)
+                            .onChange(of: currentQuestionNumber) { newIndex in
+                                currentVerbIta = spellConjVerbVM.currentTenseSpellConjVerbData[newIndex].verbNameItalian
+                                withAnimation{
+                                    scroller.scrollTo(newIndex, anchor: .center)
+                                }
+                            }
+                        }
+                        
                     }.zIndex(1)
                     
                     RoundedRectangle(cornerRadius: 20)
@@ -88,7 +93,7 @@ struct SpellConjugatedVerbView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(.black, lineWidth: 4)
                         )
-                        .offset(y: -115)
+                        .offset(y: -125)
                         .zIndex(0)
                     
                     TextField("", text: $userAnswer)
@@ -96,42 +101,45 @@ struct SpellConjugatedVerbView: View {
                         .font(Font.custom("Marker Felt", size: 50))
                         .shadow(color: Color.black, radius: 12, x: 0, y:10)
                         .frame(width: 350)
+                        .padding(.bottom, 25)
                         .zIndex(1)
                     
                     VStack{
                         HStack{
                             Button(action: {
-                                
-                                if correctChosen || wrongChosen {
-                                    correctChosen = false
-                                    wrongChosen = false
-                                }
-                                
-                                if  userAnswer.lowercased().elementsEqual(spellConjVerbVM.currentTenseSpellConjVerbData[currentQuestionNumber].correctAnswer.lowercased()) {
+                                if userAnswer != "" {
                                     
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                        currentQuestionNumber += 1
+                                    if correctChosen || wrongChosen {
                                         correctChosen = false
-                                        
-                                        progress = (CGFloat(currentQuestionNumber) / CGFloat(spellConjVerbVM.currentTenseSpellConjVerbData.count))
-                                        
-                                        spellConjVerbVM.setHintLetter(letterArray: spellConjVerbVM.currentTenseSpellConjVerbData[currentQuestionNumber].hintLetterArray)
-                                        
-                                        hintGiven = false
-                                        hintButtonText = "Give me a Hint!"
-                                        userAnswer = ""
-                                    }
-                                    spellConjVerbVM.showHint()
-                                    correctChosen = true
-                                    SoundManager.instance.playSound(sound: .correct)
-                                    
-                                }else {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                         wrongChosen = false
                                     }
-                                    SoundManager.instance.playSound(sound: .wrong)
-                                    wrongChosen = true
+                                    
+                                    if  userAnswer.lowercased().elementsEqual(spellConjVerbVM.currentTenseSpellConjVerbData[currentQuestionNumber].correctAnswer.lowercased()) {
+                                        
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                            currentQuestionNumber += 1
+                                            correctChosen = false
+                                            
+                                            progress = (CGFloat(currentQuestionNumber) / CGFloat(spellConjVerbVM.currentTenseSpellConjVerbData.count))
+                                            
+                                            spellConjVerbVM.setHintLetter(letterArray: spellConjVerbVM.currentTenseSpellConjVerbData[currentQuestionNumber].hintLetterArray)
+                                            
+                                            hintGiven = false
+                                            hintButtonText = "Give me a Hint!"
+                                            userAnswer = ""
+                                        }
+                                        spellConjVerbVM.showHint()
+                                        correctChosen = true
+                                        SoundManager.instance.playSound(sound: .correct)
+                                        
+                                    }else {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                            wrongChosen = false
+                                        }
+                                        SoundManager.instance.playSound(sound: .wrong)
+                                        wrongChosen = true
+                                    }
                                 }
                             }, label: {
                                 Text("Check")
@@ -141,8 +149,13 @@ struct SpellConjugatedVerbView: View {
                                 .background(Color.teal)
                                 .foregroundColor(Color.white)
                                 .cornerRadius(20)
+                                .overlay( /// apply a rounded border
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(.black, lineWidth: 4)
+                                )
                                 .shadow(radius: 10)
                                 .padding(.trailing, 5)
+                                .padding(.top, 15)
                             
                             
                             Button(action: {
@@ -181,29 +194,58 @@ struct SpellConjugatedVerbView: View {
                                     .background(Color.teal)
                                     .foregroundColor(Color.white)
                                     .cornerRadius(20)
+                                    .overlay( /// apply a rounded border
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(.black, lineWidth: 4)
+                                    )
+                                    .padding(.top, 15)
                                 
                                 
                             })
                         }.offset(y: 100).zIndex(1)
                         
                         Button(action: {
-                            
-                            addVerbItem(verbToSave: currentQuestionNumber)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                saved = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                showAlreadyExists = false
                             }
-                            saved = true
+                            if addVerbItem(verbToSave: currentQuestionNumber){
+                                showAlreadyExists = true
+                            }else{
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    saved = false
+                                }
+                                saved = true
+                            }
                             
                         }, label: {
-                            Text("Add Verb to MyList")
-                                .font(Font.custom("Chalkboard SE", size: 18))
+                            Text("Add " + currentVerbIta + " to MyList")
+                                .font(Font.custom("Marker Felt", size:  18))
                                 .padding(.top, 3)
-                                .frame(width: 190, height: 40)
-                                .foregroundColor(Color.white)
+                                .padding([.leading, .trailing], 20)
+                                .frame(height: 45)
                                 .background(Color.teal)
+                                .foregroundColor(Color.white)
+                                .overlay( /// apply a rounded border
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(.black, lineWidth: 4)
+                                )
                                 .cornerRadius(20)
+                                .shadow(radius: 10)
+                                .padding(.trailing, 5)
+                            
+                            
+                        }).offset(y:120)
                         
-                        }).zIndex(1).offset(y: 120)
+                        Text(currentVerbIta + " is already in MyList!")
+                            .font(Font.custom("Arial Hebrew", size: 20))
+                            .padding(.top, 3)
+                            .padding([.top, .bottom], 5)
+                            .padding([.leading, .trailing], 15)
+                            .background(Color("WashedWhite"))
+                            .foregroundColor(.black)
+                            .cornerRadius(15)
+                            .opacity(showAlreadyExists ? 1 : 0)
+                            .offset(y:140)
                     }.zIndex(1)
                     
                     Image("sittingBear")
@@ -219,7 +261,7 @@ struct SpellConjugatedVerbView: View {
                             .scaledToFill()
                             .frame(width: 100, height: 40)
                             .offset(y: 235)
-                            
+                        
                     }
                     
                     if correctChosen{
@@ -232,7 +274,7 @@ struct SpellConjugatedVerbView: View {
                             .frame(width: 100, height: 40)
                             .offset(y: 235)
                     }
-                          
+                    
                     if wrongChosen{
                         
                         let randomInt2 = Int.random(in: 1..<4)
@@ -243,7 +285,7 @@ struct SpellConjugatedVerbView: View {
                             .frame(width: 100, height: 40)
                             .offset(y: 235)
                     }
-                 
+                    
                     
                 }.onAppear{
                     withAnimation(.spring()){
@@ -253,44 +295,58 @@ struct SpellConjugatedVerbView: View {
                         spellConjVerbVM.currentTense = 0
                         spellConjVerbVM.setSpellVerbData()
                         spellConjVerbVM.setHintLetter(letterArray: spellConjVerbVM.currentTenseSpellConjVerbData[0].hintLetterArray)
+                        currentVerbIta = spellConjVerbVM.currentTenseSpellConjVerbData[0].verbNameItalian
+                    }else{
+                        currentVerbIta = spellConjVerbVM.currentTenseSpellConjVerbData[0].verbNameItalian
                     }
                 }
-            }
+            }.navigationBarBackButtonHidden(true)
+       
         
     }
     
-    func addVerbItem(verbToSave: Int) {
+    func addVerbItem(verbToSave: Int)-> Bool {
         
-        let newUserMadeVerb = UserVerbList(context: viewContext)
-        newUserMadeVerb.verbNameItalian = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].verbNameItalian
-        newUserMadeVerb.verbNameEnglish = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].verbNameEnglish
-        newUserMadeVerb.presente = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].pres
-        newUserMadeVerb.passatoProssimo = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].pass
-        newUserMadeVerb.futuro = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].fut
-        newUserMadeVerb.imperfetto = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].imp
-        newUserMadeVerb.imperativo = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].impera
-        newUserMadeVerb.condizionale = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].cond
-        
-        do {
-            try viewContext.save()
-        } catch {
-            print("error saving")
+        if itemExistsSpellVerb(spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].verbNameItalian) {
+            return true
+        }else{
+            
+            let newUserMadeVerb = UserVerbList(context: viewContext)
+            newUserMadeVerb.verbNameItalian = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].verbNameItalian
+            newUserMadeVerb.verbNameEnglish = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].verbNameEnglish
+            newUserMadeVerb.presente = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].pres
+            newUserMadeVerb.passatoProssimo = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].pass
+            newUserMadeVerb.futuro = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].fut
+            newUserMadeVerb.imperfetto = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].imp
+            newUserMadeVerb.imperativo = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].impera
+            newUserMadeVerb.condizionale = spellConjVerbVM.currentTenseSpellConjVerbData[verbToSave].cond
+            
+            do {
+                try viewContext.save()
+            } catch {
+                print("error saving")
+            }
+            return false
+            
         }
         
     }
+    
+    private func itemExistsSpellVerb(_ item: String) -> Bool {
+          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserVerbList")
+          fetchRequest.predicate = NSPredicate(format: "verbNameItalian == %@", item)
+          return ((try? viewContext.count(for: fetchRequest)) ?? 0) > 0
+      }
     
     
     
     @ViewBuilder
     func NavBar() -> some View{
         HStack(spacing: 18){
-            Button(action: {
-                dismiss()
-            }, label: {
+            NavigationLink(destination: chooseVerbList(), label: {
                 Image(systemName: "xmark")
-                    .font(.title3)
+                    .font(.system(size: 25))
                     .foregroundColor(.gray)
-                
             })
             
             GeometryReader{proxy in
@@ -308,6 +364,7 @@ struct SpellConjugatedVerbView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 40, height: 40)
+                .shadow(radius: 10)
         }
     }
     

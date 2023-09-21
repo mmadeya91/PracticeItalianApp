@@ -213,14 +213,12 @@
         "putInOrderDialogueBoxes": [
             {
                 "fullSentences": [
-                    {"sentence": "Per prima cosa mettete a bollire l'acqua per la pasta mentre si prepara il condimento.", "position": 1},
-                    {"sentence": "Tagliare 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.", "position": 2},
-                    {"sentence": "Preparare quindi la crema di Pecorino Romano. In una ciotola mettete 4 uova intere e 100 grammi di pecorino romano.", "position": 3},
-                    {"sentence": "Aggiungete del pepe nero fresco e mescolate velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa.", "position": 4},
-                    {"sentence": "Mettete da parte il sugo e buttate la pasta nell'acqua bollente con un po' di sale e cuocetela al dente.", "position": 5},
-                    {"sentence": "Quando la pasta sarà cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto.", "position": 6},
-                    {"sentence": "Infine, togliete la padella dal fuoco e aggiungete a filo la vostra crema di pecorino continuando a mantecare gli spaghetti.", "position": 7},
-                    {"sentence": "Se la salsa è troppo liquida, puoi aggiungere altro formaggio. Se è troppo denso, puoi aggiungere un po' dell'acqua della pasta per ottenere la consistenza desiderata.", "position": 8}
+                    {"sentence": "Per prima cosa mettete a bollire l'acqua per la pasta mentre si prepara il condimento. Tagliare 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.", "position": 1},
+                    {"sentence": "Preparare quindi la crema di Pecorino Romano. In una ciotola mettete 4 uova intere e 100 grammi di pecorino romano.", "position": 2},
+                    {"sentence": "Aggiungete del pepe nero fresco e mescolate velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa. Mettete da parte il sugo e buttate la pasta nell'acqua bollente con un po' di sale e cuocetela al dente.", "position": 3},
+                    {"sentence": "Quando la pasta sarà cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto.", "position": 4},
+                    {"sentence": "Infine, togliete la padella dal fuoco e aggiungete a filo la vostra crema di pecorino continuando a mantecare gli spaghetti.", "position": 5},
+                    {"sentence": "Se la salsa è troppo liquida, puoi aggiungere altro formaggio. Se è troppo denso, puoi aggiungere un po' dell'acqua della pasta per ottenere la consistenza desiderata.", "position": 6}
                 ]
             }
         ]

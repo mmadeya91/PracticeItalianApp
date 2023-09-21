@@ -30,13 +30,13 @@ struct ShortStoryDragDropDelegate: DropDelegate {
                 if currentItem.id == "\(url)"{
                     droppedCount += 1
                     
-                    if droppedCount == 6{
+                    if Int(droppedCount) == characters.count {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             questionNumber += 1
                         }
                     }
                     
-                    let progress = (droppedCount / 6)
+                    let progress = (droppedCount / CGFloat(characters.count))
                     withAnimation{
                         currentItem.isShowing = true
                         SoundManager.instance.playSound(sound: .correct)

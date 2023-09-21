@@ -13,11 +13,12 @@ extension Image {
         self
             .resizable()
             .scaledToFit()
-            .frame(width: 100, height: 100)
-            .padding()
+            .padding(10)
+            .frame(width: 115, height: 120)
+            .background(.white)
             .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color("DarkRed"), lineWidth: 6))
+                        .stroke(.black, lineWidth: 6))
     }
 }
 
@@ -26,7 +27,9 @@ struct chooseActivity: View {
     @State var animatingBear = false
     @State var showChatBubble = false
     @EnvironmentObject var audioManager: AudioManager
+    @EnvironmentObject var globalModel: GlobalModel
     
+    let flashCardSetAccObj = FlashCardSetAccDataManager()
     
     var body: some View {
         GeometryReader{ geo in
@@ -38,30 +41,52 @@ struct chooseActivity: View {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     .opacity(1.0)
                 
+                HStack{
+                    Image("coin2")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 40, height: 40)
+                        .padding(.leading, 15)
+                    
+                    Text(String(globalModel.userCoins))
+                        .font(Font.custom("Arial Hebrew", size: 22))
+                    
+                    Spacer()
+                    Image("italyFlag")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .shadow(radius: 10)
+                        .padding()
+                    
+                }.zIndex(2).offset(y:-360)
+                
                 Image("bubbleChat2")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 40)
-                    .offset(x: -25, y: -330)
+                    .offset(x: -30, y: -315)
                     .opacity(showChatBubble ? 1.0 : 0.0)
                 
                 Image("sittingBear")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 200, height: 100)
-                    .offset(x: 85, y: animatingBear ? -260 : 0)
+                    .offset(x: 70, y: animatingBear ? -250 : 0)
                 
                 
                 
                 VStack{
                     Text("Exercises")
                         .font(Font.custom("Marker Felt", size: 35))
+                        .foregroundColor(.white)
                         .padding(.bottom, 5)
                         .frame(width: 357, height: 75)
-                        .background(Color("ForestGreen")).opacity(0.75)
+                        .background(Color("DarkNavy")).opacity(0.75)
                         .cornerRadius(13)
-                        .border(width: 8, edges: [.bottom], color: Color("DarkRed"))
+                        .border(width: 8, edges: [.bottom], color: .teal)
                         .padding(.bottom, 15)
+                    
                     HStack{
                         VStack{
                             NavigationLink(destination: availableShortStories(), label: {Image("reading-book")
@@ -117,7 +142,7 @@ struct chooseActivity: View {
                     .padding([.leading, .trailing], 45)
                     .padding(.bottom, 50)
                 }.frame(width:345).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                    .stroke(.black, lineWidth: 4))
+                    .stroke(.black, lineWidth: 5))
                     .shadow(radius: 10)
                     .padding(.top, 60)
             }
@@ -129,6 +154,9 @@ struct chooseActivity: View {
                     
                     showChatBubble = true
                 }
+                
+                flashCardSetAccObj.checkSetData()
+                
             }
         }
         .navigationBarHidden(true)
@@ -137,8 +165,10 @@ struct chooseActivity: View {
 
 struct chooseActivity_Previews: PreviewProvider {
     static var previews: some View {
-        chooseActivity()
-                .environmentObject(AudioManager())
+        chooseActivity().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(AudioManager())
+            .environmentObject(GlobalModel())
+   
           
     }
 }

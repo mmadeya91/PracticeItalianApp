@@ -10,12 +10,14 @@ import Foundation
 class shortStoryObject {
     
     var storyString: String
+    var storyStringEnglish: String
     var wordLinksArray: [WordLink]
     var questionList: [QuestionsObj]
     var plugInQuestionlist: [FillInBlankQuestion]
     
-    init(storyString: String, wordLinksArray: [WordLink], questionList: [QuestionsObj], plugInQuestionlist: [FillInBlankQuestion]) {
+    init(storyString: String, storyStringEnglish: String, wordLinksArray: [WordLink], questionList: [QuestionsObj], plugInQuestionlist: [FillInBlankQuestion]) {
         self.storyString = storyString
+        self.storyStringEnglish = storyStringEnglish
         self.wordLinksArray = wordLinksArray
         self.questionList = questionList
         self.plugInQuestionlist = plugInQuestionlist
