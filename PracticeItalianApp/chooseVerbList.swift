@@ -122,6 +122,40 @@ struct chooseVerbList: View {
     }
 }
 
+struct verbSetNavigationButtons: View{
+    @EnvironmentObject var globalModel: GlobalModel
+    
+    @Binding var attemptToBuyPopUp: Bool
+    @Binding var attemptedBuyName: String
+    
+    var chosenVerbSetName: String
+    var imageString: String
+    
+    var body: some View {
+        
+        VStack{
+            VStack{
+                NavigationLink(destination: chooseVCActivity(), label: {Image("reading-book")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 65, height: 65)
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(60)
+                        .overlay( RoundedRectangle(cornerRadius: 60)
+                            .stroke(.black, lineWidth: 3))
+                        .shadow(radius: 10)
+                })
+                Text("20 Most Used Italian Verbs")
+                    .bold()
+                    .font(Font.custom("Arial Hebrew", size: 18))
+                    .frame(width: 120, height: 50)
+                    .multilineTextAlignment(.center)
+            }
+        }
+    }
+}
+
 struct chooseVerbList_Previews: PreviewProvider {
     static var previews: some View {
         chooseVerbList().environmentObject(GlobalModel())

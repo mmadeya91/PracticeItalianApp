@@ -45,19 +45,17 @@ struct ShortStoryDragDropView: View{
                     .shadow(radius: 10)
             }.padding([.leading, .trailing], 15).zIndex(1)
             
-            if showUserCheck {
-                userCheckNavigationPopUp(showUserCheck: $showUserCheck)
-                    .transition(.slide)
-                    .animation(.easeIn)
-                    .padding(.leading, 60)
-                    .padding(.top, 60)
-                    .zIndex(2)
-            }
-            
             ScrollViewReader{scroller in
                 
                 ZStack{
-                    
+                    if showUserCheck {
+                        userCheckNavigationPopUp(showUserCheck: $showUserCheck)
+                            .transition(.slide)
+                            .animation(.easeIn)
+                            .padding(.leading, 60)
+                            .padding(.top, 60)
+                            .zIndex(2)
+                    }
                     VStack{
               
                         ScrollView(.horizontal){
@@ -69,7 +67,7 @@ struct ShortStoryDragDropView: View{
                                         
                                         
                                         
-                                        shortStoryDragDropViewBuilder(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence).frame(width: geo.size.width)
+                                        shortStoryDragDropViewBuilder(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence,questionNumberCount: shortStoryDragDropVM.currentDragDropQuestions.count).frame(width: geo.size.width)
                                             .frame(minHeight: geo.size.height)
                                     }
                                     
@@ -141,6 +139,7 @@ struct shortStoryDragDropViewBuilder: View {
     @Binding var questionNumber: Int
     
     var englishSentence: String
+    var questionNumberCount: Int
     
     var body: some View {
         VStack {
@@ -173,7 +172,11 @@ struct shortStoryDragDropViewBuilder: View {
         .onChange(of: questionNumber) { newIndex in
             rows.removeAll()
             shuffledRows.removeAll()
-            characters = charactersSet[newIndex]
+            if questionNumber == questionNumberCount {
+                
+            }else{
+                characters = charactersSet[newIndex]
+            }
             if rows.isEmpty{
                 //First Creating shuffled On
                 //then normal one
@@ -373,19 +376,19 @@ struct userCheckNavigationPopUp: View{
                 
                 HStack{
                     Spacer()
-                    NavigationLink(destination: availableShortStories(), label: {
-                        Text("Yes")
-                            .font(Font.custom("Arial Hebrew", size: 15))
-                            .foregroundColor(Color.blue)
-                    })
+                        NavigationLink(destination: availableShortStories(), label: {
+                            Text("Yes")
+                                .font(Font.custom("Arial Hebrew", size: 15))
+                                .foregroundColor(Color.blue)
+                        })
+                        Spacer()
+                        Button(action: {showUserCheck.toggle()}, label: {
+                            Text("No")
+                                .font(Font.custom("Arial Hebrew", size: 15))
+                                .foregroundColor(Color.blue)
+                        })
+                    }
                     Spacer()
-                    Button(action: {showUserCheck.toggle()}, label: {
-                        Text("No")
-                            .font(Font.custom("Arial Hebrew", size: 15))
-                            .foregroundColor(Color.blue)
-                    })
-                    Spacer()
-                }
             }
                 
     

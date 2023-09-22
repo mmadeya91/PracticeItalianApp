@@ -157,8 +157,8 @@
             "choices": ["A 14 anni", "diventa", "marinaio", "e", "viaggia", "in", "numerosi", "Paesi"]
             },
             {
-            "englishSentence": "Christopher Columbus does many other trips to America but now he is not so loved and so he dies in 1506.",
-            "choices": ["Christofo Columbo", "fa", "altri", "viaggi", "in", "America", "ma ormai", "non", "è", "più", "così", "amato", "e", "così", "muore", "nel 1506"]
+            "englishSentence": "...but now he is not so loved and so he dies in 1506.",
+            "choices": ["Christofo Columbo", "ma ormai", "non", "è", "più", "così", "amato", "e", "così", "muore", "nel 1506"]
             }
         ]
 	}

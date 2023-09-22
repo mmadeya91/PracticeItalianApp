@@ -58,18 +58,17 @@ struct PersistenceController {
             userCoinMockData.id = UUID()
         
         let userUnlockedData = UserUnlockedDataSets(context: viewContext)
-        userUnlockedData.dataSetName = "Bellagio"
+        userUnlockedData.dataSetName = "Stili di Bellagio"
         userUnlockedData.isUnlocked = false
         let userUnlockedData2 = UserUnlockedDataSets(context: viewContext)
-        userUnlockedData2.dataSetName = "Uffizi"
+        userUnlockedData2.dataSetName = "Indicazioni per gli Uffizi"
         userUnlockedData2.isUnlocked = false
         let userUnlockedData3 = UserUnlockedDataSets(context: viewContext)
-        userUnlockedData3.dataSetName = "Rinascimento"
+        userUnlockedData3.dataSetName = "Il Rinascimento"
         userUnlockedData3.isUnlocked = false
         let userUnlockedData4 = UserUnlockedDataSets(context: viewContext)
         userUnlockedData4.dataSetName = "Food"
         userUnlockedData4.isUnlocked = false
-        
         
         do {
             try viewContext.save()

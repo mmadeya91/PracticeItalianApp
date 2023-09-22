@@ -284,16 +284,16 @@ struct flashCardHStack: View {
             HStack{
                 toMakeYourOwnButton(flashCardSetName: flashCardSetTitles[10], flashCardSetIcon: flashCardIcons[10], setAccData: setAccData)
                 Spacer()
-  
+                
             }.padding([.leading, .trailing], 45)
         }
-               
+        
     }
     
 }
 
 struct flashCardButton: View {
-    
+    @EnvironmentObject var globalModel: GlobalModel
     
     var flashCardSetName: String
     var flashCardSetIcon: String
@@ -311,42 +311,43 @@ struct flashCardButton: View {
         let flashCardSetAccObj = FlashCardSetAccDataManager()
         
         if flashCardSetName.elementsEqual("Food"){
-            VStack{
-                
-                Text(flashCardSetName)
-                    .font(Font.custom("Marker Felt", size: 20))
-                    .frame(width: 100, height: 85)
-                    .multilineTextAlignment(.center)
-                    .offset(y:15)
-    
-                            Button(action: {
-                                attemptToBuyPopUp.toggle()
-                                attemptedBuyName = flashCardSetName
-                            }, label: {
-                                Image(flashCardSetIcon)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 65, height: 65)
-                                    .padding()
-                                    .background(.white)
-                                    .cornerRadius(60)
-                                    .overlay( RoundedRectangle(cornerRadius: 60)
-                                        .stroke(.black, lineWidth: 3))
-                                    .shadow(radius: 10)
-                                    .opacity(0.40)
-                            }).overlay(
-                                VStack(spacing: 0){
-                                    Image("coin2")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 45, height: 45)
-                                    Text("25")
-                                        .font(Font.custom("Arial Hebrew", size: 30))
-                                        .bold()
-                                }.offset(y:5)
-                        )
-
-            }
+            if !checkIfUnlocked(dataSetName: flashCardSetName){
+                VStack{
+                    
+                    Text(flashCardSetName)
+                        .font(Font.custom("Marker Felt", size: 20))
+                        .frame(width: 100, height: 85)
+                        .multilineTextAlignment(.center)
+                        .offset(y:15)
+                    
+                    Button(action: {
+                        attemptToBuyPopUp.toggle()
+                        attemptedBuyName = flashCardSetName
+                    }, label: {
+                        Image(flashCardSetIcon)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 65, height: 65)
+                            .padding()
+                            .background(.white)
+                            .cornerRadius(60)
+                            .overlay( RoundedRectangle(cornerRadius: 60)
+                                .stroke(.black, lineWidth: 3))
+                            .shadow(radius: 10)
+                            .opacity(0.40)
+                    }).overlay(
+                        VStack(spacing: 0){
+                            Image("coin2")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 45, height: 45)
+                            Text("25")
+                                .font(Font.custom("Arial Hebrew", size: 30))
+                                .bold()
+                        }.offset(y:5)
+                    )
+                    
+                }
             }else{
                 VStack{
                     
@@ -369,12 +370,48 @@ struct flashCardButton: View {
                                 .stroke(.black, lineWidth: 3))
                             .shadow(radius: 10)
                     })
-                                   Text(String(format: "%.0f", flashCardSetAccObj.calculateSetAccuracy(setAccObj: setAccData[arrayIndex])) + "%")
-                                   
+                    Text(String(format: "%.0f", flashCardSetAccObj.calculateSetAccuracy(setAccObj: setAccData[arrayIndex])) + "%")
+                    
+                }
+            }
+        }else{
+            VStack{
+                
+                Text(flashCardSetName)
+                    .font(Font.custom("Marker Felt", size: 20))
+                    .frame(width: 100, height: 85)
+                    .multilineTextAlignment(.center)
+                    .offset(y:15)
+                
+                
+                NavigationLink(destination: flashCardActivity(flashCardObj: dataObj.collectChosenFlashSetData(index: arrayIndex), flashCardSetName: dataObj.getSetName(index: arrayIndex)), label: {
+                    Image(flashCardSetIcon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 65, height: 65)
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(60)
+                        .overlay( RoundedRectangle(cornerRadius: 60)
+                            .stroke(.black, lineWidth: 3))
+                        .shadow(radius: 10)
+                })
+                Text(String(format: "%.0f", flashCardSetAccObj.calculateSetAccuracy(setAccObj: setAccData[arrayIndex])) + "%")
+                
             }
             
-                                   
+            
         }
+}
+    
+    func checkIfUnlocked(dataSetName: String)->Bool{
+        var tempBool = false
+        for i in 0...globalModel.currentUnlockableDataSets.count - 1 {
+            if globalModel.currentUnlockableDataSets[i].setName == dataSetName {
+                tempBool = globalModel.currentUnlockableDataSets[i].isUnlocked
+            }
+        }
+       return tempBool
     }
     
 }

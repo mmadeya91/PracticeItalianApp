@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct chooseAudio: View {
-    
+    @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var audioManager: AudioManager
     @EnvironmentObject var globalModel: GlobalModel
     @State var animatingBear = false
     @State var showInfoPopup = false
+    @State var attemptToBuyPopUp = false
+    @State var attemptedBuyName = "temp"
+    @State private var notEnoughCoins = false
+    
+    @FetchRequest(
+        entity: UserUnlockedDataSets.entity(),
+        sortDescriptors: []
+    ) var fetchedUserUnlockedData: FetchedResults<UserUnlockedDataSets>
+    
+    @FetchRequest(
+        entity: UserCoins.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "id", ascending: true)]
+    ) var fetchedUserCoins: FetchedResults<UserCoins>
+    
     var body: some View {
         GeometryReader{ geo in
             ZStack{
@@ -25,15 +39,15 @@ struct chooseAudio: View {
                     .padding(.bottom, 50)
                 
                 HStack(spacing: 18){
-               
-                        NavigationLink(destination: chooseActivity(), label: {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 25))
-                                .foregroundColor(.black)
-                            
-                        }).padding(.leading, 25).padding(.top, 15)
- 
-                
+                    
+                    NavigationLink(destination: chooseActivity(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 25))
+                            .foregroundColor(.black)
+                        
+                    }).padding(.leading, 25).padding(.top, 15)
+                    
+                    
                     
                     Spacer()
                     VStack{
@@ -47,7 +61,7 @@ struct chooseAudio: View {
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 40, height: 40)
-     
+                            
                             
                             Text(String(globalModel.userCoins))
                                 .font(Font.custom("Arial Hebrew", size: 22))
@@ -65,7 +79,7 @@ struct chooseAudio: View {
                 VStack{
                     
                     
-                    shortStoryContainer2(showInfoPopUp: $showInfoPopup).frame(width:345, height: 600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                    shortStoryContainer2(showInfoPopUp: $showInfoPopup, attemptToBuyPupUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width:345, height: 600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                         .stroke(.black, lineWidth: 4))
                     .shadow(radius: 10)
                     .padding(.top, 100)
@@ -89,6 +103,41 @@ struct chooseAudio: View {
                         .transition(.slide).animation(.easeIn).zIndex(2)
                 }
                 
+                if attemptToBuyPopUp{
+                    VStack{
+                        VStack{
+                            Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' flash card set?")
+                                .multilineTextAlignment(.center)
+                                .padding()
+                            
+                            if notEnoughCoins{
+                                Text("Sorry! You don't have enough coins!")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                            }
+                            
+                            HStack{
+                                Button(action: {
+                                    checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
+                                }, label: {Text("Yes")})
+                                Button(action: {
+                                    attemptToBuyPopUp = false
+                                }, label: {Text("No")})
+                            }
+                            
+                        }
+                    }.frame(width: 300, height: 285)
+                        .background(Color("WashedWhite"))
+                        .cornerRadius(20)
+                        .shadow(radius: 20)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 3)
+                        )
+                        .transition(.slide).animation(.easeIn).zIndex(2)
+                    
+                }
+                
             }.onAppear{
                 withAnimation(.easeIn(duration: 1.5)){
                     animatingBear = true
@@ -96,10 +145,57 @@ struct chooseAudio: View {
             }.navigationBarBackButtonHidden(true)
         }
     }
+    
+    func unlockData(chosenDataSet: String){
+        for dataSet in fetchedUserUnlockedData {
+            if dataSet.dataSetName == chosenDataSet {
+                dataSet.isUnlocked = true
+                updateGlobalModel(chosenDataSet: chosenDataSet)
+                do {
+                    try viewContext.save()
+                } catch {
+
+                    let nsError = error as NSError
+                }
+            }
+        }
+    }
+    
+    func updateGlobalModel(chosenDataSet: String){
+        for i in 0...globalModel.currentUnlockableDataSets.count-1 {
+            if globalModel.currentUnlockableDataSets[i].setName == chosenDataSet {
+                globalModel.currentUnlockableDataSets[i].isUnlocked = true
+            }
+        }
+    }
+    
+    func checkAndUpdateUserCoins(userCoins: Int, chosenDataSet: String)->Bool{
+        if globalModel.userCoins >= 25 {
+            fetchedUserCoins[0].coins = Int32(globalModel.userCoins - 25)
+            globalModel.userCoins = globalModel.userCoins - 25
+            unlockData(chosenDataSet: chosenDataSet)
+            do {
+                try viewContext.save()
+            } catch {
+
+                let nsError = error as NSError
+            }
+            return true
+        }else{
+            notEnoughCoins = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                attemptToBuyPopUp = false
+                 notEnoughCoins = false
+            }
+            return false
+        }
+    }
 }
 
 struct shortStoryContainer2: View {
     @Binding var showInfoPopUp: Bool
+    @Binding var attemptToBuyPupUp: Bool
+    @Binding var attemptedBuyName: String
     var body: some View{
         ZStack{
             VStack{
@@ -127,15 +223,17 @@ struct shortStoryContainer2: View {
                     .border(width: 8, edges: [.bottom], color: .teal)
                 
                 
-                audioHStack()
+                audioHStack(attemptToBuyPopUp: $attemptToBuyPupUp, attemptedBuyName: $attemptedBuyName)
                 
             }
-
+            
         }
     }
 }
 
 struct audioHStack: View {
+    @Binding var attemptToBuyPopUp: Bool
+    @Binding var attemptedBuyName: String
     var body: some View{
         
         let bookTitles: [String] = ["Pasta alla Carbonara", "Cosa Desidera?", "Indicazioni per gli Uffizi", "Stili di Bellagio", "Il Rinascimento"]
@@ -148,10 +246,10 @@ struct audioHStack: View {
                     .padding(.top, 10)
                     .border(width: 3, edges: [.bottom], color: .teal)
                 HStack{
-                    audioChoiceButton(shortStoryName: bookTitles[0], audioImage: "pot")
+                    audioChoiceButton(shortStoryName: bookTitles[0], audioImage: "pot", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                     Spacer()
-                    audioChoiceButton(shortStoryName:bookTitles[1], audioImage: "dinner")
-                }.padding([.leading, .trailing], 28)
+                    audioChoiceButton(shortStoryName:bookTitles[1], audioImage: "dinner", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                }.padding([.leading, .trailing], 35)
                     .padding(.top, 30)
                     .padding(.bottom, 20)
                 
@@ -161,9 +259,9 @@ struct audioHStack: View {
                     .border(width: 3, edges: [.bottom], color: .teal)
                 
                 HStack{
-                    audioChoiceButton(shortStoryName: bookTitles[2], audioImage: "directions")
+                    audioChoiceButton(shortStoryName: bookTitles[2], audioImage: "directions", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                     Spacer()
-                    audioChoiceButton(shortStoryName: bookTitles[3], audioImage: "clothesStore")
+                    audioChoiceButton(shortStoryName: bookTitles[3], audioImage: "clothesStore", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                 }.padding([.leading, .trailing], 28)
                     .padding(.top, 20)
                 
@@ -174,59 +272,135 @@ struct audioHStack: View {
                     .border(width: 3, edges: [.bottom], color: .teal)
                 
                 HStack{
-                    audioChoiceButton(shortStoryName:bookTitles[4], audioImage: "renaissance")
+                    audioChoiceButton(shortStoryName:bookTitles[4], audioImage: "renaissance", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                 }.padding([.leading, .trailing], 28)
                     .padding(.bottom, 10)
-                    .padding(.top, 30)
+                    .padding(.top, 20)
             }
         }
-               
+        
     }
     
 }
 
 struct audioChoiceButton: View {
-    
+    @EnvironmentObject var globalModel: GlobalModel
     
     var shortStoryName: String
     var audioImage: String
     
+    @Binding var attemptToBuyPopUp: Bool
+    @Binding var attemptedBuyName: String
+    
+    let lockedStories: [String] = ["Indicazioni per gli Uffizi", "Stili di Bellagio", "Il Rinascimento"]
+    
     var body: some View{
+        let listeningActivityVM  = ListeningActivityViewModel(audioAct: audioActivty.data)
+        let listeningActivityQuestionsVM = ListeningActivityQuestionsViewModel(dialogueQuestionView: dialogueViewObject(fillInDialogueQuestionElement: ListeningActivityElement.pastaCarbonara.fillInDialogueQuestion))
         ZStack {
-            
-            VStack(spacing: 0){
+            if lockedStories.contains(shortStoryName){
+                if !checkIfUnlockedAudio(dataSetName: shortStoryName){
+                    VStack(spacing: 0){
+                        
+                        Button(action: {
+                            attemptToBuyPopUp.toggle()
+                            attemptedBuyName = shortStoryName
+                        }, label: {
+                            Image(audioImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 65, height: 65)
+                                .padding()
+                                .background(.white)
+                                .cornerRadius(60)
+                                .overlay( RoundedRectangle(cornerRadius: 60)
+                                    .stroke(.black, lineWidth: 3))
+                                .shadow(radius: 10)
+                                .opacity(0.40)
+                        }).overlay(
+                            VStack(spacing: 0){
+                                Image("coin2")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 45, height: 45)
+                                Text("25")
+                                    .font(Font.custom("Arial Hebrew", size: 30))
+                                    .bold()
+                            }.offset(y:5)
+                        )
+                        
+                        Text(shortStoryName)
+                            .font(Font.custom("Marker Felt", size: 20))
+                            .frame(width: 120, height: 85)
+                            .multilineTextAlignment(.center)
+                           
+                        
+                    }.padding()
+                    
+                }else{
+                    VStack(spacing: 0){
+                        
+                        NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityVM, listeningActivityQuestionsVM: listeningActivityQuestionsVM), label: {
+                            Image(audioImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 65, height: 65)
+                                .padding()
+                                .background(.white)
+                                .cornerRadius(60)
+                                .overlay( RoundedRectangle(cornerRadius: 60)
+                                    .stroke(.black, lineWidth: 3))
+                                .shadow(radius: 10)
+                        }).padding(.top, 5)
+                        
+                        Text(shortStoryName)
+                            .font(Font.custom("Marker Felt", size: 20))
+                            .frame(width: 100, height: 85)
+                            .multilineTextAlignment(.center)
 
-                
-                let listeningActivityVM  = ListeningActivityViewModel(audioAct: audioActivty.data)
-                let listeningActivityQuestionsVM = ListeningActivityQuestionsViewModel(dialogueQuestionView: dialogueViewObject(fillInDialogueQuestionElement: ListeningActivityElement.pastaCarbonara.fillInDialogueQuestion))
-
-                NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityVM, listeningActivityQuestionsVM: listeningActivityQuestionsVM), label: {
-                    Image(audioImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 75, height: 75)
+                        
+                    }
+                }
+            }else{
+                VStack(spacing: 0){
+                    NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityVM, listeningActivityQuestionsVM: listeningActivityQuestionsVM), label: {
+                        Image(audioImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 75, height: 75)
+                        
+                            .padding()
+                            .background(.white)
+                            .cornerRadius(60)
+                            .overlay( RoundedRectangle(cornerRadius: 60)
+                                .stroke(.black, lineWidth: 3))
+                            .shadow(radius: 10)
+                        
+                        
+                    })
                     
-                        .padding()
-                        .background(.white)
-                        .cornerRadius(60)
-                        .overlay( RoundedRectangle(cornerRadius: 60)
-                            .stroke(.black, lineWidth: 3))
-                        .shadow(radius: 10)
                     
                     
-                })
-                .padding(.top, 5)
-                
-                
-                Text(shortStoryName)
-                    .font(Font.custom("Futura", size: 18))
-                    .frame(width: 130, height: 80)
-                    .multilineTextAlignment(.center)
+                    Text(shortStoryName)
+                        .font(Font.custom("Futura", size: 18))
+                        .frame(width: 130, height: 80)
+                        .multilineTextAlignment(.center)
+                }
                 
             }
         }
     }
     
+    func checkIfUnlockedAudio(dataSetName: String)->Bool{
+        var tempBool = false
+        for i in 0...globalModel.currentUnlockableDataSets.count - 1 {
+            if globalModel.currentUnlockableDataSets[i].setName == dataSetName {
+                tempBool = globalModel.currentUnlockableDataSets[i].isUnlocked
+            }
+        }
+       return tempBool
+    }
+
 }
 
 
@@ -234,7 +408,7 @@ struct chooseAudio_Previews: PreviewProvider {
     static var previews: some View {
         chooseAudio()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-                .environmentObject(AudioManager())
-                .environmentObject(GlobalModel())
+            .environmentObject(AudioManager())
+            .environmentObject(GlobalModel())
     }
 }

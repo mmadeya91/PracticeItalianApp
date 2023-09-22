@@ -11,10 +11,23 @@ import CoreData
 class GlobalModel: ObservableObject {
     @Published var userCoins = 0
     
-    @Published var currentUnlockableDataSets: [dataSetObject] = [dataSetObject(setName: "Uffizi", isUnlocked: false),
-         dataSetObject(setName: "Bellagio", isUnlocked: false),
-         dataSetObject(setName: "Rinascimento", isUnlocked: false),
-         dataSetObject(setName: "Food", isUnlocked: false)]
+    @Published var currentUnlockableDataSets:
+    [
+        //Audio Fles
+        dataSetObject] = [dataSetObject(setName: "Indicazioni per gli Uffizi", isUnlocked: false),
+         dataSetObject(setName: "Stili di Bellagio", isUnlocked: false),
+         dataSetObject(setName: "Il Rinascimento", isUnlocked: false),
+        //FlashCardSets
+         dataSetObject(setName: "Food", isUnlocked: false),
+        //ShortStories
+         dataSetObject(setName: "test2", isUnlocked: false),
+         dataSetObject(setName: "test3", isUnlocked: false),
+         dataSetObject(setName: "test4", isUnlocked: false),
+         dataSetObject(setName: "test4", isUnlocked: false),
+         dataSetObject(setName: "test5", isUnlocked: false)
+    ]
+    
+    
     
     struct dataSetObject: Identifiable{
         var id = UUID()
@@ -135,19 +148,34 @@ struct ContentView: View {
     
     func addUserUnlockedDataifNew(){
         if !userUnlockedDataExists() {
- 
+            //AudioFiles
             let userUnlockedData = UserUnlockedDataSets(context: viewContext)
-            userUnlockedData.dataSetName = "Bellagio"
+            userUnlockedData.dataSetName = "Stili di Bellagio"
             userUnlockedData.isUnlocked = false
             let userUnlockedData2 = UserUnlockedDataSets(context: viewContext)
-            userUnlockedData2.dataSetName = "Uffizi"
+            userUnlockedData2.dataSetName = "Indicazioni per gli Uffizi"
             userUnlockedData2.isUnlocked = false
             let userUnlockedData3 = UserUnlockedDataSets(context: viewContext)
-            userUnlockedData3.dataSetName = "Rinascimento"
+            userUnlockedData3.dataSetName = "Il Rinascimento"
             userUnlockedData3.isUnlocked = false
+            //FlashCardSets
             let userUnlockedData4 = UserUnlockedDataSets(context: viewContext)
             userUnlockedData4.dataSetName = "Food"
             userUnlockedData4.isUnlocked = false
+            //ShortStories
+            let userUnlockedData5 = UserUnlockedDataSets(context: viewContext)
+            userUnlockedData5.dataSetName = "test2"
+            userUnlockedData5.isUnlocked = false
+            let userUnlockedData6 = UserUnlockedDataSets(context: viewContext)
+            userUnlockedData6.dataSetName = "test3"
+            userUnlockedData6.isUnlocked = false
+            let userUnlockedData7 = UserUnlockedDataSets(context: viewContext)
+            userUnlockedData7.dataSetName = "test4"
+            userUnlockedData7.isUnlocked = false
+            let userUnlockedData8 = UserUnlockedDataSets(context: viewContext)
+            userUnlockedData8.dataSetName = "test5"
+            userUnlockedData8.isUnlocked = false
+          
      
             do {
                 try viewContext.save()

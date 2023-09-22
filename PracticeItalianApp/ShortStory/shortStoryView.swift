@@ -81,7 +81,7 @@ struct shortStoryView: View {
                         .foregroundColor(.black)
                         .frame(width: 20, height: 20)
                 }).zIndex(2)
-                    .offset(x:132, y: -230)
+                    .offset(x:132, y: showQuestionDropdown ? -265 : -230)
                 
                 if showPopUpScreen{
                     popUpView(storyObj: self.storyObj, linkClickedString: self.$linkClickedString, showPopUpScreen: self.$showPopUpScreen).transition(.slide).animation(.easeIn).zIndex(2)

@@ -14,9 +14,25 @@ extension View {
 }
 
 struct availableShortStories: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @ObservedObject var globalModel = GlobalModel()
     @State var animatingBear = false
     @State var showInfoPopup = false
+    @State var attemptToBuyPopUp = false
+    @State var attemptedBuyName = "temp"
+    @State var notEnoughCoins = false
+    
+    @FetchRequest(
+        entity: UserUnlockedDataSets.entity(),
+        sortDescriptors: []
+    ) var fetchedUserUnlockedData: FetchedResults<UserUnlockedDataSets>
+    
+    @FetchRequest(
+        entity: UserCoins.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "id", ascending: true)]
+    ) var fetchedUserCoins: FetchedResults<UserCoins>
+    
     
     var body: some View {
         GeometryReader{ geo in
@@ -67,7 +83,7 @@ struct availableShortStories: View {
                 
                 VStack{
                     
-                    shortStoryContainer(showInfoPopup: $showInfoPopup).frame(width:345, height: 600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                    shortStoryContainer(showInfoPopup: $showInfoPopup, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width:345, height: 600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                         .stroke(.black, lineWidth: 4))
                     .shadow(radius: 10)
                     .padding(.top, 100)
@@ -89,6 +105,41 @@ struct availableShortStories: View {
                         .transition(.slide).animation(.easeIn).zIndex(2)
                 }
                 
+                if attemptToBuyPopUp{
+                    VStack{
+                        VStack{
+                            Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' flash card set?")
+                                .multilineTextAlignment(.center)
+                                .padding()
+                            
+                            if notEnoughCoins{
+                                Text("Sorry! You don't have enough coins!")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                            }
+                            
+                            HStack{
+                                Button(action: {
+                                    checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
+                                }, label: {Text("Yes")})
+                                Button(action: {
+                                    attemptToBuyPopUp = false
+                                }, label: {Text("No")})
+                            }
+                            
+                        }
+                    }.frame(width: 300, height: 285)
+                        .background(Color("WashedWhite"))
+                        .cornerRadius(20)
+                        .shadow(radius: 20)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 3)
+                        )
+                        .transition(.slide).animation(.easeIn).zIndex(2)
+                    
+                }
+                
             }.onAppear{
                 withAnimation(.spring()){
                     animatingBear = true
@@ -96,10 +147,57 @@ struct availableShortStories: View {
             }
         }.navigationBarBackButtonHidden(true)
     }
+    
+    func unlockData(chosenDataSet: String){
+        for dataSet in fetchedUserUnlockedData {
+            if dataSet.dataSetName == chosenDataSet {
+                dataSet.isUnlocked = true
+                updateGlobalModel(chosenDataSet: chosenDataSet)
+                do {
+                    try viewContext.save()
+                } catch {
+
+                    let nsError = error as NSError
+                }
+            }
+        }
+    }
+    
+    func updateGlobalModel(chosenDataSet: String){
+        for i in 0...globalModel.currentUnlockableDataSets.count-1 {
+            if globalModel.currentUnlockableDataSets[i].setName == chosenDataSet {
+                globalModel.currentUnlockableDataSets[i].isUnlocked = true
+            }
+        }
+    }
+    
+    func checkAndUpdateUserCoins(userCoins: Int, chosenDataSet: String)->Bool{
+        if globalModel.userCoins >= 25 {
+            fetchedUserCoins[0].coins = Int32(globalModel.userCoins - 25)
+            globalModel.userCoins = globalModel.userCoins - 25
+            unlockData(chosenDataSet: chosenDataSet)
+            do {
+                try viewContext.save()
+            } catch {
+
+                let nsError = error as NSError
+            }
+            return true
+        }else{
+            notEnoughCoins = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                attemptToBuyPopUp = false
+                 notEnoughCoins = false
+            }
+            return false
+        }
+    }
 }
 
 struct shortStoryContainer: View {
     @Binding var showInfoPopup: Bool
+    @Binding var attemptToBuyPopUp: Bool
+    @Binding var attemptedBuyName: String
     var body: some View{
         ZStack{
             VStack{
@@ -125,7 +223,7 @@ struct shortStoryContainer: View {
                     .background(Color("DarkNavy")).opacity(0.75)
                     .border(width: 8, edges: [.bottom], color: .teal)
                 
-                bookHStack()
+                bookHStack(attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                 
             }.zIndex(1)
             
@@ -134,6 +232,8 @@ struct shortStoryContainer: View {
 }
 
 struct bookHStack: View {
+    @Binding var attemptToBuyPopUp: Bool
+    @Binding var attemptedBuyName: String
     var body: some View{
         
         let bookTitles: [String] = ["Cristofo Columbo", "test1", "test2", "test3", "test4", "test5"]
@@ -149,16 +249,16 @@ struct bookHStack: View {
                         .padding(.bottom, 25)
                     
                     HStack{
-                        bookButton(shortStoryName: bookTitles[0])
+                        bookButton(shortStoryName: bookTitles[0], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                         Spacer()
-                        bookButton(shortStoryName:bookTitles[1])
-                    }.padding([.leading, .trailing], 45)
+                        bookButton(shortStoryName:bookTitles[1], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
+                    }.padding([.leading, .trailing], 65)
                         .padding(.bottom, 10)
                     HStack{
-                        bookButton(shortStoryName: bookTitles[2])
+                        bookButton(shortStoryName: bookTitles[2], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                         Spacer()
-                        bookButton(shortStoryName: bookTitles[3])
-                    }.padding([.leading, .trailing], 45)
+                        bookButton(shortStoryName: bookTitles[3], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
+                    }.padding([.leading, .trailing], 55)
                 }
                 VStack{
                     Text("Intermediate")
@@ -168,9 +268,9 @@ struct bookHStack: View {
                         .padding(.bottom, 25)
                     
                     HStack{
-                        bookButton(shortStoryName: bookTitles[2])
+                        bookButton(shortStoryName: bookTitles[2], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                         Spacer()
-                        bookButton(shortStoryName: bookTitles[3])
+                        bookButton(shortStoryName: bookTitles[3], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                     }.padding([.leading, .trailing], 55)
                 }
                 VStack{
@@ -181,9 +281,9 @@ struct bookHStack: View {
                         .padding(.bottom, 25)
                     
                     HStack{
-                        bookButton(shortStoryName:bookTitles[4])
+                        bookButton(shortStoryName:bookTitles[4], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                         Spacer()
-                        bookButton(shortStoryName: bookTitles[5])
+                        bookButton(shortStoryName: bookTitles[5], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                     }.padding([.leading, .trailing], 55)
                 }
             }
@@ -195,46 +295,119 @@ struct bookHStack: View {
 
 struct bookButton: View {
     
+    @EnvironmentObject var globalModel: GlobalModel
+    
+    let lockedStories: [String] = ["test2", "test3", "test4", "test5"]
     
     var shortStoryName: String
+    @Binding var attemptToBuyPopUp: Bool
+    @Binding var attemptedBuyName: String
     @State var pressed = false
     
     var body: some View{
-        
-        VStack(spacing: 0){
-            
-            NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName), label: {
-                Image("book3")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 75, height: 75)
-                
-                    .padding()
-                    .background(.white)
-                    .cornerRadius(60)
-                    .overlay( RoundedRectangle(cornerRadius: 60)
-                        .stroke(.black, lineWidth: 3))
-                    .shadow(radius: 10)
+        ZStack {
+            if lockedStories.contains(shortStoryName){
+                if !checkIfUnlockedAudio(dataSetName: shortStoryName){
+                    VStack(spacing: 0){
+                        
+                        Button(action: {
+                            attemptToBuyPopUp.toggle()
+                            attemptedBuyName = shortStoryName
+                        }, label: {
+                            Image("book3")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 65, height: 65)
+                                .padding()
+                                .background(.white)
+                                .cornerRadius(60)
+                                .overlay( RoundedRectangle(cornerRadius: 60)
+                                    .stroke(.black, lineWidth: 3))
+                                .shadow(radius: 10)
+                                .opacity(0.40)
+                        }).overlay(
+                            VStack(spacing: 0){
+                                Image("coin2")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 45, height: 45)
+                                Text("25")
+                                    .font(Font.custom("Arial Hebrew", size: 30))
+                                    .bold()
+                            }.offset(y:5)
+                        )
+                        
+                        Text(shortStoryName)
+                            .font(Font.custom("Marker Felt", size: 20))
+                            .frame(width: 120, height: 85)
+                            .multilineTextAlignment(.center)
+                           
+                        
+                    }.padding()
                     
-                    
-            })
-            
-            .scaleEffect(pressed ? 1.25 : 1.0)
-            .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: { pressing in
-                withAnimation(.easeIn(duration: 0.75)) {
-                    self.pressed = pressing
-                }
-            }, perform: { })
-            
-            Text(shortStoryName)
-                .font(Font.custom("Marker Felt", size: 20))
-                .frame(width: 130, height: 80)
-                .multilineTextAlignment(.center)
+                }else{
+                    VStack(spacing: 0){
+                        
+                        NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName), label: {
+                            Image("book3")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 65, height: 65)
+                                .padding()
+                                .background(.white)
+                                .cornerRadius(60)
+                                .overlay( RoundedRectangle(cornerRadius: 60)
+                                    .stroke(.black, lineWidth: 3))
+                                .shadow(radius: 10)
+                        }).padding(.top, 5)
+                        
+                        Text(shortStoryName)
+                            .font(Font.custom("Marker Felt", size: 20))
+                            .frame(width: 100, height: 85)
+                            .multilineTextAlignment(.center)
 
-            
+                        
+                    }
+                }
+            }else{
+                VStack(spacing: 0){
+                    NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName), label: {
+                        Image("book3")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 75, height: 75)
+                        
+                            .padding()
+                            .background(.white)
+                            .cornerRadius(60)
+                            .overlay( RoundedRectangle(cornerRadius: 60)
+                                .stroke(.black, lineWidth: 3))
+                            .shadow(radius: 10)
+                        
+                        
+                    })
+                    
+                    
+                    
+                    Text(shortStoryName)
+                        .font(Font.custom("Futura", size: 18))
+                        .frame(width: 130, height: 80)
+                        .multilineTextAlignment(.center)
+                }
+                
+            }
         }
     }
     
+    func checkIfUnlockedAudio(dataSetName: String)->Bool{
+        var tempBool = false
+        for i in 0...globalModel.currentUnlockableDataSets.count - 1 {
+            if globalModel.currentUnlockableDataSets[i].setName == dataSetName {
+                tempBool = globalModel.currentUnlockableDataSets[i].isUnlocked
+            }
+        }
+       return tempBool
+    }
 }
 
 struct EdgeBorder: Shape {
