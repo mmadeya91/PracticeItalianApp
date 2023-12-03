@@ -18,101 +18,97 @@ struct ShortStoryDragDropView: View{
     let shortStoryVM = ShortStoryViewModel(currentStoryIn: 0)
     
     var body: some View{
-        GeometryReader {geo in
-            Image("verticalNature")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            HStack{
-                Button(action: {
-                    withAnimation(.linear){
-                        showUserCheck.toggle()
-                    }
-                }, label: {
-                    Image(systemName: "xmark")
-                        .font(.system(size: 25))
-                        .foregroundColor(.gray)
-                    
-                })
-
-                    
-                Spacer()
-                Image("italyFlag")
+            GeometryReader {geo in
+                Image("verticalNature")
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .shadow(radius: 10)
-            }.padding([.leading, .trailing], 15).zIndex(1)
-            
-            ScrollViewReader{scroller in
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                HStack{
+                    Button(action: {
+                        withAnimation(.linear){
+                            showUserCheck.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 25))
+                            .foregroundColor(.gray)
+                        
+                    })
+                    
+                    
+                    Spacer()
+                    Image("italyFlag")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .shadow(radius: 10)
+                }.padding([.leading, .trailing], 15).zIndex(1)
                 
-                ZStack{
-                    if showUserCheck {
-                        userCheckNavigationPopUp(showUserCheck: $showUserCheck)
-                            .transition(.slide)
-                            .animation(.easeIn)
-                            .padding(.leading, 60)
-                            .padding(.top, 60)
-                            .zIndex(2)
-                    }
-                    VStack{
-              
-                        ScrollView(.horizontal){
+                ScrollViewReader{scroller in
+                    
+                    ZStack{
+                        if showUserCheck {
+                            userCheckNavigationPopUp(showUserCheck: $showUserCheck)
+                                .transition(.slide)
+                                .animation(.easeIn)
+                                .padding(.leading, 60)
+                                .padding(.top, 60)
+                                .zIndex(2)
+                        }
+                        VStack{
                             
-                            HStack{
-                                ForEach(0..<shortStoryDragDropVM.currentDragDropQuestions.count, id: \.self) { i in
-                                    VStack{
+                            ScrollView(.horizontal){
+                                
+                                HStack{
+                                    ForEach(0..<shortStoryDragDropVM.currentDragDropQuestions.count, id: \.self) { i in
+                                        VStack{
+                                            
+                                            
+                                            
+                                            
+                                            shortStoryDragDropViewBuilder(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence,questionNumberCount: shortStoryDragDropVM.currentDragDropQuestions.count).frame(width: geo.size.width)
+                                                .frame(minHeight: geo.size.height)
+                                        }
                                         
-                                        
-                                        
-                                        
-                                        shortStoryDragDropViewBuilder(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence,questionNumberCount: shortStoryDragDropVM.currentDragDropQuestions.count).frame(width: geo.size.width)
-                                            .frame(minHeight: geo.size.height)
                                     }
-                                    
+                                }
+                                
+                            }
+                            .scrollDisabled(true)
+                            .onChange(of: questionNumber) { newIndex in
+                                withAnimation{
+                                    scroller.scrollTo(newIndex, anchor: .center)
+                                }
+                                
+                                if questionNumber == shortStoryDragDropVM.currentDragDropQuestions.count {
+                                    showPlayer = true
                                 }
                             }
                             
-                        }
-                        .scrollDisabled(true)
-                        .onChange(of: questionNumber) { newIndex in
-                            withAnimation{
-                                scroller.scrollTo(newIndex, anchor: .center)
-                            }
-                            
-                            if questionNumber == shortStoryDragDropVM.currentDragDropQuestions.count {
-                                showPlayer = true
-                            }
-                        }
+                            NavigationLink(destination: ShortStoryPlugInView(shortStoryPlugInVM: shortStoryVM),isActive: $showPlayer,label:{}
+                                                              ).isDetailLink(false)
+                        }.zIndex(1)
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color("WashedWhite"))
+                            .frame(width: 360, height: 370)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.black, lineWidth: 4)
+                            )
+                            .zIndex(0)
+                            .offset(y:130)
                         
                         
-                    }.zIndex(1)
-                    
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color("WashedWhite"))
-                        .frame(width: 360, height: 370)
-                        .overlay( /// apply a rounded border
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(.black, lineWidth: 4)
-                        )
-                        .zIndex(0)
-                        .offset(y:130)
                         
-                    
-                    
-                }
-                .fullScreenCover(isPresented: $showPlayer) {
-                    NavigationView{
-                        ShortStoryPlugInView(shortStoryPlugInVM: shortStoryVM)
+                    }
+                    .onAppear{
+                        shortStoryDragDropVM.setData()
+                        shortStoryDragDropVM.setChoiceArrayDataSet()
                     }
                 }
-                .onAppear{
-                    shortStoryDragDropVM.setData()
-                    shortStoryDragDropVM.setChoiceArrayDataSet()
-                }
             }
-        }
     }
 }
 
@@ -375,7 +371,7 @@ struct userCheckNavigationPopUp: View{
                     .padding([.leading, .trailing], 5)
                 
                 HStack{
-                    Spacer()
+                        Spacer()
                         NavigationLink(destination: availableShortStories(), label: {
                             Text("Yes")
                                 .font(Font.custom("Arial Hebrew", size: 15))
@@ -387,8 +383,9 @@ struct userCheckNavigationPopUp: View{
                                 .font(Font.custom("Arial Hebrew", size: 15))
                                 .foregroundColor(Color.blue)
                         })
+                        Spacer()
                     }
-                    Spacer()
+                    
             }
                 
     

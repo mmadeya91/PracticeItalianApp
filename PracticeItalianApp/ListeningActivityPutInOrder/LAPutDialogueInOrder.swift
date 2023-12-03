@@ -13,7 +13,6 @@ struct LAPutDialogueInOrder: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var listeningActivityManager: ListeningActivityManager
     
-    @ObservedObject var ListeningActivityQuestionsVM: ListeningActivityQuestionsViewModel
     @ObservedObject var globalModel = GlobalModel()
 
     @State var draggingItem: dialogueBox?
@@ -219,13 +218,10 @@ struct LAPutDialogueInOrder: View {
                         .frame(width: 100, height: 40)
                         .offset(x: -45, y: -310)
                 }
-                      
+                   
+                NavigationLink(destination: ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
+                                                  ).isDetailLink(false)
                 
-            }
-            .fullScreenCover(isPresented: $showFinishedActivityPage) {
-                NavigationView{
-                    ActivityCompletePage()
-                }
             }
             .onAppear{
                 withAnimation(.spring()){
@@ -270,10 +266,9 @@ struct dialogueBoxView: View {
 
 
 struct LAPutDialogueInOrder_Previews: PreviewProvider {
-    static let ListeningActivityQuestionsVM = ListeningActivityQuestionsViewModel(dialogueQuestionView: dialogueViewObject(fillInDialogueQuestionElement: ListeningActivityElement.pastaCarbonara.fillInDialogueQuestion))
-    static let LAPutDialogueInOrderVM = LAPutDialogueInOrderViewModel(dialoguePutInOrderVM: dialoguePutInOrderObj(stringArray: ListeningActivityElement.pastaCarbonara.putInOrderDialogueBoxes[0].fullSentences))
+    static let LAPutDialogueInOrderVM = LAPutDialogueInOrderViewModel(dialoguePutInOrderVM: dialoguePutInOrderObj(stringArray: ListeningActivityElement.cosaDesidera.putInOrderDialogueBoxes[0].fullSentences))
     static var previews: some View {
-        LAPutDialogueInOrder(ListeningActivityQuestionsVM: ListeningActivityQuestionsVM, LAPutDialogueInOrderVM: LAPutDialogueInOrderVM)
+        LAPutDialogueInOrder(LAPutDialogueInOrderVM: LAPutDialogueInOrderVM)
             .environmentObject(ListeningActivityManager())
             .environmentObject(GlobalModel())
     }

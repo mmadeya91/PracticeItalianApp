@@ -130,11 +130,9 @@ struct ShortStoryPlugInView: View{
                             .offset(x: -20, y: -260)
                     }
                     
-                }
-                .fullScreenCover(isPresented: $showFinishedActivityPage) {
-                    NavigationView{
-                        ActivityCompletePage()
-                    }
+                    NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
+                                                      ).isDetailLink(false)
+                    
                 }
                 .onAppear{
                     shortStoryPlugInVM.setShortStoryData(storyName: "Cristofo Columbo")

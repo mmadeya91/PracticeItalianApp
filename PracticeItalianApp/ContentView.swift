@@ -6,7 +6,14 @@
 //
 
 import SwiftUI
+import SwiftUIKit
 import CoreData
+
+public protocol FullScreenCoverProvider {
+    
+    var cover: AnyView { get }
+}
+
 
 class GlobalModel: ObservableObject {
     @Published var userCoins = 0
@@ -43,6 +50,7 @@ class GlobalModel: ObservableObject {
 struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var globalModel: GlobalModel
     
     @State var animate: Bool = false
@@ -66,18 +74,19 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             GeometryReader{ geo in
-                ZStack{
+                ZStack(alignment: .topLeading){
                     Image("vectorRome")
                         .resizable()
                         .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: 1000, alignment: .center)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                         .opacity(1.0)
                     VStack{
                         
                         homePageText()
                             .padding(.bottom, 100)
-                            .padding(.top, 100)
+                            .padding(.top, 175)
+                            .padding(.leading, 14)
                         
          
                         Button {
@@ -109,9 +118,10 @@ struct ContentView: View {
                     
                     if showBearAni {
                         GifImage("italAppGif")
-                            .offset(x: CGFloat(-var_x*700+240), y: 500)
+                            .offset(x: CGFloat(-var_x*700+240), y: 400)
                             .animation(.linear(duration: 11 ))
                             .onAppear { self.var_x *= -1}
+                            
                     }
  
    
@@ -121,7 +131,7 @@ struct ContentView: View {
                    //togglePageReload.toggle()
                 }
             }
-        }
+        }.navigationViewStyle(.stack)
             
         
     }

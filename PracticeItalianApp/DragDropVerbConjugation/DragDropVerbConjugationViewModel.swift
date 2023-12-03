@@ -197,6 +197,6 @@ struct VerbConjCharacter: Identifiable, Hashable, Equatable {
     var textSize: CGFloat = .zero
     var fontSize: CGFloat = 19
     var isShowing: Bool = false
-    
 }
+
 

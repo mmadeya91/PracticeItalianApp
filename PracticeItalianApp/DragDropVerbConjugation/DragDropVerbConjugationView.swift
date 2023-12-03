@@ -15,6 +15,9 @@ struct DragDropVerbConjugationView: View {
     @State var wrongChosen = false
     @State var correctChosen = false
     @State var animatingBear = false
+    @State var showFinishedActivityPage = false
+    
+  
     
     var body: some View{
         GeometryReader {geo in
@@ -73,9 +76,17 @@ struct DragDropVerbConjugationView: View {
                         .frame(width: geo.size.width)
                         .frame(minHeight: geo.size.height)
                         .onChange(of: questionNumber) { newIndex in
-                            withAnimation{
-                                scroller.scrollTo(newIndex, anchor: .center)
+                            
+                            if newIndex > dragDropVerbConjugationVM.currentTenseDragDropData.count - 1 {
+                                showFinishedActivityPage = true
+                            }else{
+                                
+                                withAnimation{
+                                    scroller.scrollTo(newIndex, anchor: .center)
+                                }
                             }
+                            
+                        
                         }
                         
                         
@@ -119,6 +130,8 @@ struct DragDropVerbConjugationView: View {
                             .offset(y: 280)
                     }
                     
+                    NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
+                                                      ).isDetailLink(false)
                     
                 }.onAppear{
                     withAnimation(.spring()){
@@ -179,6 +192,8 @@ struct dragDropViewBuilder: View{
     @Binding var questionNumber: Int
     @Binding var correctChosen: Bool
     @Binding var wrongChosen: Bool
+    
+    @State var dropCounter = 1
     
     var body: some View {
         VStack(spacing: 15) {
@@ -248,14 +263,45 @@ struct dragDropViewBuilder: View{
                             .stroke(.gray)
                             .opacity(item.isShowing ? 1: 0)
                             .frame(width: 160, height: 40)
+                            
                         
                     }
                     .padding([.top, .bottom], 10)
                     .onDrop(of: [.url], delegate: VerbConjDropDelegate(currentItem: $item, characters: $characters, draggingItem: $draggingItem, updating: $updating, droppedCount: $droppedCount, animateWrongText: $animateWrongText, shuffledRows: $shuffledRows, progress: $progress, questionNumber: $questionNumber, correctChosen: $correctChosen, wrongChosen: $wrongChosen))
+         
+            
             }
         }
         
     }
+    
+//    func getCorrectPerson(personIn: Int)->String{
+//
+//        switch personIn {
+//        case 1:
+//            return "Io"
+//            dropCounter = dropCounter + 1
+//        case 2:
+//            return "Tu"
+//            dropCounter = dropCounter + 1
+//        case 3:
+//            return "Lui/Lei/Lei"
+//            dropCounter = dropCounter + 1
+//        case 4:
+//            dropCounter = dropCounter + 1
+//            return "Noi"
+//        case 5:
+//            dropCounter = dropCounter + 1
+//            return "Voi"
+//        case 6:
+//            dropCounter = dropCounter + 1
+//            return "Loro"
+//        default:
+//            dropCounter = dropCounter + 1
+//            return "Io"
+//        }
+//
+//    }
     
     
     @ViewBuilder

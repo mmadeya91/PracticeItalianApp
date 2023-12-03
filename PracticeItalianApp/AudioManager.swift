@@ -20,10 +20,14 @@ final class AudioManager: ObservableObject{
     
     @Published private(set) var isLooping: Bool = false
     
-    @Published private(set) var isSlowPlayback: Bool = false
+    @Published private(set) var isSlowPlayback: Bool = false {
+        didSet {
+            print("isSlowPlayBack", isSlowPlayback)
+        }
+    }
     
     func startPlayer(track: String, isPreview: Bool = false) {
-        guard let url = Bundle.main.url(forResource: track, withExtension: "wav") else {
+        guard let url = Bundle.main.url(forResource: track, withExtension: "mp3") else {
             print("Resource not found: \(track)")
             return
         }
@@ -58,6 +62,23 @@ final class AudioManager: ObservableObject{
             player.enableRate = true
             player.play()
             isPlaying = true
+        }
+    }
+    
+    func slowSpeed() {
+        guard let player = player else {
+            print("Instance of audio player not found")
+            return
+        }
+
+        if !isSlowPlayback {
+            player.enableRate = true
+            player.rate = 0.5
+            isSlowPlayback = true
+        }else {
+            player.enableRate = true
+            player.rate = 1.0
+            isSlowPlayback = false
         }
     }
     

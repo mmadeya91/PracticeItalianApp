@@ -33,6 +33,7 @@ struct flashCardActivity: View {
     @State var saved = false
     @State var animatingBear = false
     @State var correctChosen = false
+    @State var showFinishedActivityPage = false
     
     @State  var counter: Int = 0
 
@@ -86,11 +87,21 @@ struct flashCardActivity: View {
                     .offset(y: 310)
             }
                 
+                NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
+                                                  ).isDetailLink(false)
                 
             }
             .onAppear{
                 withAnimation(.spring()){
                     animatingBear = true
+                }
+            }
+            .onChange(of: counter) { questionNumber in
+                 
+                if questionNumber > flashCardObj.words.count - 1{
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        showFinishedActivityPage = true
+                    }
                 }
             }
             .navigationBarBackButtonHidden(true)
@@ -102,12 +113,10 @@ struct flashCardActivity: View {
     func NavBar() -> some View{
         HStack(spacing: 18){
             Spacer()
-            Button(action: {
-                
-            }, label: {
+            NavigationLink(destination: chooseFlashCardSet(), label: {
                 Image(systemName: "xmark")
                     .font(.system(size: 25))
-                    .foregroundColor(.gray)
+                    .foregroundColor(.black)
                 
             })
             

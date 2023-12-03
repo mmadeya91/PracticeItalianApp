@@ -6,6 +6,8 @@
 		"audioTranscriptItalian": "Per prima cosa mettete a bollire l'acqua per la pasta mentre si prepara il condimento. Tagliare 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante. Preparare quindi la crema di Pecorino Romano. In una ciotola mettete 4 uova intere e 100 grammi di pecorino romano. Aggiungete del pepe nero fresco e mescolate velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa. Mettete da parte il sugo e buttate la pasta nell'acqua bollente con un po' di sale e cuocetela al dente. Quando la pasta sarà cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto. Infine, togliete la padella dal fuoco e aggiungete a filo la vostra crema di pecorino continuando a mantecare gli spaghetti. Se la salsa è troppo liquida, puoi aggiungere altro formaggio. Se è troppo denso, puoi aggiungere un po' dell'acqua della pasta per ottenere la consistenza desiderata.",
         
 		"audioTranscriptEnglish": "First, boil water for the pasta while the sauce is prepared. Cut 200 grams of guanciale into small pieces then cook in a skill on medium heat for 2 to 3 minutes until brown and crispy. Next, prepare the Pecorino Romano cream sauce. In a bowl, put 4 whole eggs and 100 grams of Pecorino Romano cheese. Add some fresh black pepper and mix quickly with a fork or whisk until the sauce is creamy. Set the sauce aside and put your pasta into the boiling water with some salt and cook until al dente. When the pasta is done, drain and place in a skillet on high heat. Mix the cooked pasta with the guanciale for about 1 minute. Finally, take the pan off the stove and slowly add in your pecorino cream while continuing to stir the spaghetti. If the sauce is too thin, you may add more cheese. If it is too thick, you may add some of the pasta water for the desired texture.",
+        
+        "audioCutArrays": ["pasta1", "pasta2", "pasta3", "pasta4", "pasta5", "pasta6", "pasta6", "pasta7", "pasta8"],
 
 		"comprehensionQuestions": [
 			{
@@ -55,9 +57,9 @@
 
 			},
 			{
-				"fullSentence": "Tagliare 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.",
+				"fullSentence": "Tagliate 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.",
 				"questionPart1": "",
-				"answer": "Tagliare",
+				"answer": "Tagliate",
 				"questionPart2": " 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.",
                 "answerArray": [
                     {"letter": "T", "showLetter": false},
@@ -66,7 +68,7 @@
                     {"letter": "l", "showLetter": false},
                     {"letter": "i", "showLetter": false},
                     {"letter": "a", "showLetter": false},
-                    {"letter": "r", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
                     {"letter": "e", "showLetter": false}
                 ],
 				"isQuestion": true,
@@ -222,6 +224,1245 @@
                 ]
             }
         ]
-	}
+	},
+    
+    {
+
+        "audioName": "Cosa Desidera?",
+
+        "audioTranscriptItalian": "Cameriere: Buonasera! \nCliente: Salve, Ha un tavolo per uno? \nCameriere: Ne abbiamo uno fuori, va bene? \nCliente: Certamente \nCameriere: Mi segua perfavore. \nCameriere: Cosa desidera? \nCliente: Che piatti tipici italiani ha per cena oggi? \nCameriere: Abbiamo melanzane alla parmigiana, gnocchi al pesto, e la specialità di oggi è un buonissimo bucatini alla amatriciana. \nCliente: Hmm, i bucatini all'amatriciana sembrano deliziosi! Ne prendo uno per favore. \nCameriere: Meraviglioso, vuole qualcosa da bere con quello? Un aperitivo magari? \nCliente: Prendo un bicchiere di vino rosso e una bottiglia di acqua naturale per favore. \nCameriere: Meraviglioso, ora prendo il suo vino. \nCliente Grazie \nCameriere: Prego",
+        
+        "audioTranscriptEnglish": "Waiter: Good evening! \nCustomer: Hello! Do you have a table for one? \nWaiter: We have one outside, is that okay? \nCustomer: Certainly \nWaiter: Follow me please \nWaiter: What do you desire? \nCustomer: What typical Italian dishes do you have for dinner today? \nWaiter: We have eggplant parmesan, gnocchi al pesto, and today’s special is a very good bucatini alla amatriciana. \nCustomer: Hmm, the bucatini alla amatriciana sounds delicious! I will take one please. \nWaiter: Wonderful, do you want anything to drink with that? An aperitif maybe? \nCustomer: I will take a glass of red wine, and a bottle of natural water please. \nWaiter: Wonderful, I will get your wine now. \nCustomer Thank you \nWaiter: Prego",
+        
+        "audioCutArrays": ["cosaDesidera1", "cosaDesidera2", "cosaDesidera3", "cosaDesidera4", "cosaDesidera5", "cosaDesidera6", "cosaDesidera7", "cosaDesidera8", "cosaDesidera9", "cosaDesidera10", "cosaDesidera11", "cosaDesidera12", "cosaDesidera13", "cosaDesidera14"],
+
+        "comprehensionQuestions": [
+            {
+                "question": "Is a table available for the customer?",
+                "answer": "True",
+                "choices": ["True", "False"]
+            },
+            {
+                "question": "Is the table inside or outside?",
+                "answer": "Outside",
+                "choices": ["Inside", "Outside"]
+            },
+            {
+                "question": "What where two typical dishes available to the customer?",
+                "answer": "Eggplant Parmesan, Gnocchi al Pesto",
+                "choices": ["Eggplant Parmesan, Gnocchi al Pesto", "Eggplant Parmesan, Lasagna", "Chicken Parmesan, Gnocchi al Pesto", "Spaghetti alle Bolognese, Ravioli"]
+            },
+            {
+                "question": "Is there a special today?",
+                "answer": "True",
+                "choices": ["True", "False"]
+            },
+            {
+                "question": "Did the customer only want a glass of red wine?",
+                "answer": "False",
+                "choices": ["True", "False"]
+            }
+        ],
+
+        "fillInDialogueQuestion": [
+            {
+                "fullSentence": "Buonasera!",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Salve, ha un tavolo per uno?",
+                "questionPart1": "Salve, ",
+                "answer": "ha",
+                "questionPart2": " un tavolo per uno?",
+                "answerArray": [
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "a", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Ne abbiamo uno fuori, va bene?",
+                "questionPart1": "Ne abbiamo uno ",
+                "answer": "fuori",
+                "questionPart2": ", va bene?",
+                "answerArray": [
+                    {"letter": "f", "showLetter": false},
+                    {"letter": "u", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "i", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Certamente.",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Mi segua perfavore.",
+                "questionPart1": "Mi ",
+                "answer": "segua",
+                "questionPart2": "perfavore.",
+                "answerArray": [
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "g", "showLetter": false},
+                    {"letter": "u", "showLetter": false},
+                    {"letter": "a", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Cosa desidera?",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Che piatti tipici italiani ha per cena oggi?",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Abbiamo melanzane alla parmigiana, gnocchi al pesto, e la specialità di oggi è un buonissimo bucatini alla amatriciana.",
+                "questionPart1": "Abbiamo ",
+                "answer": "melanzane",
+                "questionPart2": " alla parmigiana, gnocchi al pesto, e la specialità di oggi è un buonissimo bucatini alla amatriciana.",
+                "answerArray": [
+                    {"letter": "m", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "z", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                    
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Hmm, i bucatini all'amatriciana sembrano deliziosi! Ne prendo uno per favore.",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Meraviglioso, vuole qualcosa da bere con quello? Un aperitivo magari?",
+                "questionPart1": "Meraviglioso, ",
+                "answer": "vuole",
+                "questionPart2": " qualcosa da bere con quello? Un aperitivo magari?",
+                "answerArray": [
+                    {"letter": "v", "showLetter": false},
+                    {"letter": "u", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Prendo un bicchiere di vino rosso e una bottiglia di acqua naturale per favore.",
+                "questionPart1": "Prendo un ",
+                "answer": "bicciere",
+                "questionPart2": " di vino rosso e una bottiglia di acqua naturale per favore.",
+                "answerArray": [
+                    {"letter": "b", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Meraviglioso, ora prendo il suo vino.",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Grazie",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Prego",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            }
+            
+        ],
+        
+        "blankExplanation": [
+            {
+                "wordItalian": "Fuori",
+                "wordEnglish": "outside",
+                "choices": ["inside", "outside", "next to", "behind", "in front"]
+            },
+            {
+                "wordItalian": "Seguire",
+                "wordEnglish": "follow",
+                "choices": ["follow", "sort", "walk", "welcome", "enter"]
+            },
+            {
+                "wordItalian": "Melanzane",
+                "wordEnglish": "eggplant",
+                "choices": ["mix", "eggplant", "carrot", "melon", "butter"]
+            },
+            {
+                   "wordItalian": "Bicciere",
+                "wordEnglish": "glass",
+                "choices": ["bottle", "glass", "cup", "can", "bicycle"]
+            },
+            {
+                "wordItalian": "Agguingare",
+                "wordEnglish": "add",
+                "choices" : ["add", "fry", "boil", "cook", "cut"]
+            }
+        ],
+        
+        "putInOrderDialogueBoxes": [
+            {
+                "fullSentences": [
+                    {"sentence": "Buonasera! - Salve, ha un tavolo per uno?", "position": 1},
+                    {"sentence": "Ne abbiamo uno fuori, va bene? - Certamente. - Mi segua perfavore.", "position": 2},
+                    {"sentence": "Cosa desidera? - Che piatti tipici italiani ha per cena oggi?", "position": 3},
+                    {"sentence": "Abbiamo melanzane alla parmigiana, gnocchi al pesto, e la specialità di oggi è un buonissimo bucatini alla amatriciana.", "position": 4},
+                    {"sentence": "Hmm, i bucatini all'amatriciana sembrano deliziosi! Ne prendo uno per favore.", "position": 5},
+                    {"sentence": "Meraviglioso, vuole qualcosa da bere con quello? Un aperitivo magari?", "position": 6},
+                    {"sentence": "Prendo un bicchiere di vino rosso e una bottiglia di acqua naturale per favore. - Meraviglioso, ora prendo il suo vino.", "position": 7},
+                    {"sentence": "Grazie. - Prego.", "position": 8}
+                ]
+            }
+        ]
+    },
+    
+    {
+
+        "audioName": "Indicazioni per gli Uffizi",
+
+        "audioTranscriptItalian": "Mateo: Mi scusi \nSconosciuto: Sì? Come posso aiutarla? \nMateo: Grazie, sto cercando di arrivare alla Galleria degli Uffizi, ma mi sono perso. Può darmi indicazioni? \nSconosciuto: Certo, ci sei molto vicino. Forse 5 o 10 minuti a piedi da qui. \nSconosciuto: Devi camminare dritto su la via dei Benci fino al primo incrocio. \nSconosciuto: Poi girare a sinistra su Borgo dei Greci e proseguire dritto fino a raggiungere un altro incrocio. \nSconosciuto: Lì, girerai a destra in via del Leoni. \nSconosciuto. Segui quella strada verso sud e passerai davanti al ristorante Braceria Auditore. \nSconosciuto: Il ristorante è vicino alla galleria, se fai ancora qualche metro lungo la strada dovresti vedere le indicazioni per il museo. \nSconosciuto: Capito? \nMatteo: Sì! Grazie mille. \nSconosciuto: Prego, non c’è di che.",
+        
+        "audioTranscriptEnglish": "Mateo: Excuse me! \nStranger: Yes? How can I help you? Mateo: Thank you, I am trying to get to the Galleria degli Uffizi, but I am lost. Can you give me directions? \nStranger: Certainly, you are very close. Maybe 5 or 10 minutes by foot from here. \nStranger: You need to walk straight ahead on la via dei Benci until you reach the first intersection. \nStranger: Then turn left on Borgo dei Greci and continue straight until you reach another intersection. \nStranger: There, you will make a right onto via del Leoni. \nStranger. Follow that street south, and you will pass il ristorante Braceria Auditore. \nStranger: The restaurant is next to the galleria, if you walk a few more meters down the street, you should see signs for the museum. \nStranger: Understand? \nMateo: Yes! Thank you very much. \nStranger: Prego",
+        
+        "audioCutArrays": ["uffizi1", "uffizi2", "uffizi3", "uffizi4", "uffizi5", "cuffizi6", "uffizi7", "uffizi", "uffizi9", "uffizi10", "cosaDesidera11", "uffizi12"],
+
+        "comprehensionQuestions": [
+            {
+                "question": "Is the stranger about 30 minutes from the Galleria degli Uffizi?",
+                "answer": "False",
+                "choices": ["True", "False"]
+            },
+            {
+                "question": "What is the name of the street he first needs to walk down?",
+                "answer": "Via dei Benci",
+                "choices": ["Via dei Benci", "Via dei Saponai", "Via Vinegia", "Via del Leoni"]
+            },
+            {
+                "question": "What street does Mateo need to turn left on?",
+                "answer": "Via del Leoni",
+                "choices": ["Via dei Benci", "Via dei Saponai", "Via Vinegia", "Via del Leoni"]
+            },
+            {
+                "question": "Mateo should follow the street south until he passes Braceria Auditore",
+                "answer": "True",
+                "choices": ["True", "False"]
+            },
+            {
+                "question": "Where is the restaurant located in reference to the Uffizi?",
+                "answer": "Next to",
+                "choices": ["Next to", "Behind", "In front of"]
+            }
+        ],
+
+        "fillInDialogueQuestion": [
+            {
+                "fullSentence": "Mi scusi",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Sì? Come posso aiutarla?",
+                "questionPart1": "Sì? Come posso ",
+                "answer": "aiutarla",
+                "questionPart2": "?",
+                "answerArray": [
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "u", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Grazie, sto cercando di arrivare alla Galleria degli Uffizi, ma mi sono perso. Può darmi indicazioni?",
+                "questionPart1": "Grazie, sto cercando di arrivare alla Galleria degli Uffizi, ma mi sono ",
+                "answer": "perso",
+                "questionPart2": ". Può darmi indicazioni?",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "o", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Certo, ci sei molto vicino. Forse 5 o 10 minuti a piedi da qui.",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Devi camminare dritto su la via dei Benci fino al primo incrocio.",
+                "questionPart1": "Devi camminare ",
+                "answer": "dritto",
+                "questionPart2": " su la via dei Benci fino al primo incrocio.",
+                "answerArray": [
+                    {"letter": "d", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "o", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Poi girare a sinistra su Borgo dei Greci e proseguire dritto fino a raggiungere un altro incrocio.",
+                "questionPart1": "Poi girare a ",
+                "answer": "sinistra",
+                "questionPart2": " su Borgo dei Greci e proseguire dritto fino a raggiungere un altro incrocio.",
+                "answerArray": [
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "a", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Lì, girerai a destra in via del Leoni.",
+                "questionPart1": "Lì, girerai a",
+                "answer": "destra",
+                "questionPart2": " in via del Leoni.",
+                "answerArray": [
+                    {"letter": "d", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "a", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Segui quella strada verso sud e passerai davanti al ristorante Braceria Auditore.",
+                "questionPart1": "Segui quella strada verso sud e passerai ",
+                "answer": "davanti",
+                "questionPart2": " al ristorante Braceria Auditore.",
+                "answerArray": [
+                    {"letter": "d", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "v", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "i", "showLetter": false}
+                    
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Il ristorante è vicino alla galleria, se fai ancora qualche metro lungo la strada dovresti vedere le indicazioni per il museo.",
+                "questionPart1": "Il ristorante è",
+                "answer": "vicino",
+                "questionPart2": " alla galleria, se fai ancora qualche metro lungo la strada dovresti vedere le indicazioni per il museo.",
+                "answerArray": [
+                    {"letter": "v", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "o", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Capito?",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Sì! Grazie mille.",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Prego, non c’è di che.",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            }
+            
+        ],
+        
+        "blankExplanation": [
+            {
+                "wordItalian": "Aiutare",
+                "wordEnglish": "to help",
+                "choices": ["to help", "to be", "to have", "to walk", "to talk"]
+            },
+            {
+                "wordItalian": "Perdere",
+                "wordEnglish": "to lose",
+                "choices": ["to lose", "to follow", "to walk", "to ask", "to have"]
+            },
+            {
+                "wordItalian": "Dritto",
+                "wordEnglish": "straight",
+                "choices": ["straight", "left", "right", "backwards", "near"]
+            },
+            {
+                   "wordItalian": "Sinistra",
+                "wordEnglish": "left",
+                "choices": ["straight", "left", "right", "backwards", "near"]
+            },
+            {
+                "wordItalian": "Destra",
+                "wordEnglish": "right",
+                "choices" : ["straight", "left", "right", "backwards", "near"]
+            },
+            {
+                   "wordItalian": "Davanti",
+                "wordEnglish": "left",
+                "choices": ["straight", "left", "right", "in front of", "near"]
+            },
+            {
+                   "wordItalian": "Vicino",
+                "wordEnglish": "left",
+                "choices": ["straight", "left", "right", "backwards", "near"]
+            }
+        ],
+        
+        "putInOrderDialogueBoxes": [
+            {
+                "fullSentences": [
+                    {"sentence": "Mi scusi - Sì? Come posso aiutarla?", "position": 1},
+                    {"sentence": "Grazie, sto cercando di arrivare alla Galleria degli Uffizi, ma mi sono perso. Può darmi indicazioni?", "position": 2},
+                    {"sentence": "Certo, ci sei molto vicino. Forse 5 o 10 minuti a piedi da qui.", "position": 3},
+                    {"sentence": "Devi camminare dritto su la via dei Benci fino al primo incrocio.", "position": 4},
+                    {"sentence": "Poi girare a sinistra su Borgo dei Greci e proseguire dritto fino a raggiungere un altro incrocio.", "position": 5},
+                    {"sentence": "Lì, girerai a destra in via del Leoni.", "position": 6},
+                    {"sentence": "Segui quella strada verso sud e passerai davanti al ristorante Braceria Auditore.", "position": 7},
+                    {"sentence": "Il ristorante è vicino alla galleria, se fai ancora qualche metro lungo la strada dovresti vedere le indicazioni per il museo.", "position": 8},
+                    {"sentence": "Capito? - Sì! Grazie mille.", "position": 9},
+                    {"sentence": "Prego, non c’è di che.", "position": 10}
+                ]
+            }
+        ]
+    },
+    
+    {
+
+        "audioName": "Stili di Bellagio",
+
+        "audioTranscriptItalian": "Ciao a tutti! Venite a visitare il nostro nuovo negozio “Stili di Bellagio”. Abbiamo molte belle mode per uomini e donne. Maglioni di cotone di tante taglie e colori diversi. Abiti di seta con fiori per l'estate e bei tailleur per uomo. Abbiamo anche scarpe di molti stili e trame diversi. Scarpe da ginnastica per l'allenamento e scarpe in pelle per uscire o per l'ufficio. Abbiamo molti camerini e ti invitiamo a entrare e provare i nostri vestiti. Se qualcosa è troppo stretto o troppo grande, troveremo la taglia giusta per te! Se ti piace guardare le vetrine, abbiamo anche alcuni dei nostri migliori vestiti nelle vetrine dei negozi. Siamo aperti dalle 9:00 alle 17:00 e ci troviamo accanto alla gelateria di via Roma. ti aspettiamo vieni a trovarci!",
+        
+        "audioTranscriptEnglish": "Hello all! Please come and visit our new store “Styles of Bellagio” We have many beautiful fashions for men and women. Cotton sweaters of many different sizes and colors. Silk dresses with flowers for the summer and handsome suits for men. We also have shoes of many different styles and textures. Gym shoes for exercising and leather shoes for going out or for the office. We have many dressing rooms and encourage you to come inside and try on our clothing. If something is too tight or too large, we will find the right size for you! If you like to window shop, we have some of our best clothes in the shop windows as well. We are open from 9am to 5pm and can be found next to the ice cream shop on via Roma. Please come and see us!",
+        
+        "audioCutArrays": ["bellagio1", "bellagio2", "bellagio3", "bellagio4", "bellagio5", "bellagio6", "bellagio7", "bellagio8", "bellagio9", "bellagio10", "bellagio11"],
+
+        "comprehensionQuestions": [
+            {
+                "question": "Does Stili di Bellagio only have women's clothing?",
+                "answer": "False",
+                "choices": ["True", "False"]
+            },
+            {
+                "question": "The dresses with flowers are made of what material?",
+                "answer": "silk",
+                "choices": ["silk", "cotton", "leather", "wool"]
+            },
+            {
+                "question": "What type of shoes do they have for going out or for the office",
+                "answer": "via del Leoni",
+                "choices": ["leather", "boots", "tennis shoes", "sandals"]
+            },
+            {
+                "question": "Does the shop only have one dressing room?",
+                "answer": "False",
+                "choices": ["True", "False"]
+            },
+            {
+                "question": "What are the stores hours?",
+                "answer": "9am to 5pm",
+                "choices": ["8am to 4pm", "9am to 6pm", "6am to 5pm", "10am to 9pm"]
+            }
+        ],
+
+        "fillInDialogueQuestion": [
+            {
+                "fullSentence": "Ciao a tutti! Venite a visitare il nostro nuovo negozio “Stili di Bellagio",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Abbiamo molte belle mode per uomini e donne",
+                "questionPart1": "Abbiamo molte belle ",
+                "answer": "mode",
+                "questionPart2": " per uomini e donne",
+                "answerArray": [
+                    {"letter": "m", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "d", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Maglioni di cotone di tante taglie e colori diversi.",
+                "questionPart1": "",
+                "answer": "Maglione",
+                "questionPart2": " di cotone di tante taglie e colori diversi.",
+                "answerArray": [
+                    {"letter": "M", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "g", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Abiti di seta con fiori per l'estate e bei tailleur per uomo.",
+                "questionPart1": "Abiti di ",
+                "answer": "seta",
+                "questionPart2": " con fiori per l'estate e bei tailleur per uomo.",
+                "answerArray": [
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "a", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Abbiamo anche scarpe di molti stili e trame diversi.",
+                "questionPart1": "Abbiamo anche ",
+                "answer": "scarpe",
+                "questionPart2": " di molti stili e trame diversi.",
+                "answerArray": [
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Scarpe da ginnastica per l'allenamento e scarpe in pelle per uscire o per l'ufficio.",
+                "questionPart1": "Scarpe da ginnastica per l'allenamento e scarpe in ",
+                "answer": "pelle",
+                "questionPart2": " per uscire o per l'ufficio.",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Abbiamo molti camerini e ti invitiamo a entrare e provare i nostri vestiti.",
+                "questionPart1": "Abbiamo molti ",
+                "answer": "camerini",
+                "questionPart2": " e ti invitiamo a entrare e provare i nostri vestiti.",
+                "answerArray": [
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "m", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "i", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Se qualcosa è troppo stretto o troppo grande, troveremo la taglia giusta per te!",
+                "questionPart1": "Se qualcosa è troppo ",
+                "answer": "stretto",
+                "questionPart2": " o troppo grande, troveremo la taglia giusta per te!",
+                "answerArray": [
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "o", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Se ti piace guardare le vetrine, abbiamo anche alcuni dei nostri migliori vestiti nelle vetrine dei negozi.",
+                "questionPart1": "Se ti piace guardare le ",
+                "answer": "vetrine",
+                "questionPart2": " abbiamo anche alcuni dei nostri migliori vestiti nelle vetrine dei negozi.",
+                "answerArray": [
+                    {"letter": "v", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                    
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Siamo aperti dalle 9:00 alle 17:00 e ci troviamo accanto alla gelateria di via Roma.",
+                "questionPart1": "Siamo ",
+                "answer": "aperti",
+                "questionPart2": " dalle 9:00 alle 17:00 e ci troviamo accanto alla gelateria di via Roma.",
+                "answerArray": [
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "i", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "ti aspettiamo vieni a trovarci!",
+                "questionPart1": "ti",
+                "answer": "aspettiamo",
+                "questionPart2": "vieni a trovarci",
+                "answerArray": [
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "m", "showLetter": false},
+                    {"letter": "o", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            }
+            
+        ],
+        
+        "blankExplanation": [
+            {
+                "wordItalian": "Mode",
+                "wordEnglish": "fashions",
+                "choices": ["middle", "fun", "shirts", "shoes", "store"]
+            },
+            {
+                "wordItalian": "Maglione",
+                "wordEnglish": "sweater",
+                "choices": ["shirt", "pants", "shoes", "coat", "gloves"]
+            },
+            {
+                "wordItalian": "Seta",
+                "wordEnglish": "silk",
+                "choices": ["leather", "silk", "cotton", "wool", "soft"]
+            },
+            {
+                   "wordItalian": "Scarpe",
+                "wordEnglish": "shoes",
+                "choices": ["shirt", "pants", "shoes", "coat", "gloves"]
+            },
+            {
+                "wordItalian": "Pelle",
+                "wordEnglish": "leather",
+                "choices" : ["leather", "silk", "cotton", "wool", "soft"]
+            },
+            {
+                   "wordItalian": "Camera",
+                "wordEnglish": "dressing room",
+                "choices": ["dressing room", "living room", "window", "wool", "bedroom"]
+            },
+            {
+                   "wordItalian": "Stretto",
+                "wordEnglish": "tight",
+                "choices": ["tight", "loose", "big", "size", "straight"]
+            },
+            {
+                   "wordItalian": "Ventrine",
+                "wordEnglish": "shop window",
+                "choices": ["door", "dressing room", "sign", "shoes", "sweaters"]
+            },
+            {
+                   "wordItalian": "Aperti",
+                "wordEnglish": "dressing room",
+                "choices": ["open", "close", "store", "window", "air"]
+            },
+            {
+                   "wordItalian": "Aspettare",
+                "wordEnglish": "to wait",
+                "choices": ["to wait", "to come", "to buy", "to sell", "to open"]
+            }
+        ],
+        
+        "putInOrderDialogueBoxes": [
+            {
+                "fullSentences": [
+                    {"sentence": "Ciao a tutti!", "position": 1},
+                    {"sentence": "Venite a visitare il nostro nuovo negozio “Stili di Bellagio", "position": 2},
+                    {"sentence": "Abbiamo molte belle mode per uomini e donne. Maglioni di cotone di tante taglie e colori diversi.", "position": 3},
+                    {"sentence": "Abiti di seta con fiori per l'estate e bei tailleur per uomo.", "position": 4},
+                    {"sentence": "Abbiamo anche scarpe di molti stili e trame diversi.", "position": 5},
+                    {"sentence": "Scarpe da ginnastica per l'allenamento e scarpe in pelle per uscire o per l'ufficio.", "position": 6},
+                    {"sentence": "Abbiamo molti camerini e ti invitiamo a entrare e provare i nostri vestiti.", "position": 7},
+                    {"sentence": "Se qualcosa è troppo stretto o troppo grande, troveremo la taglia giusta per te!", "position": 8},
+                    {"sentence": "Se ti piace guardare le vetrine, abbiamo anche alcuni dei nostri migliori vestiti nelle vetrine dei negozi.", "position": 9},
+                    {"sentence": "Siamo aperti dalle 9:00 alle 17:00 e ci troviamo accanto alla gelateria di via Roma.", "position": 10},
+                    {"sentence": "Ti aspettiamo vieni a trovarci!", "position": 11}
+                ]
+            }
+        ]
+    },
+    
+    {
+
+        "audioName": "Il Rinascimento",
+
+        "audioTranscriptItalian": "Il Rinascimento italiano è stato un periodo della storia italiana che si è verificato nei secoli XV e XVI. Il rinascimento iniziò in Toscana, ma il cuore del movimento stava avvenendo nella città di Firenze. Il Rinascimento italiano è famoso per le sue conquiste nella pittura, nella musica, nella scultura, nella letteratura e in molte altre forme di arte e scienza. Alcuni degli artisti italiani più famosi di quel tempo includono Leonardo da Vinci, Michelangelo, Donatello e Piero della Francesca. Gran parte del Rinascimento includeva il movimento culturale chiamato 'Umanesimo'. La sua filosofia era di far avvicinare le persone sia alla scienza che alle arti classiche. Uno dei motivi per cui iniziò il rinascimento in Italia fu durante quel periodo, l'Italia era diventata molto ricca e quelle persone benestanti erano disposte a spendere i loro soldi per sostenere artisti e scienziati nella loro ricerca dell'umanesimo. Il Rinascimento si diffuse in tutta Europa ed è responsabile della crescita della conoscenza e dell'arte in tutto il mondo.",
+        
+        "audioTranscriptEnglish": "The Italian Renaissance was a period of Italian history that occurred in the 15th and 16th centuries. The renaissance started in Tuscany, but the heart of the movement was happening in the city of Florence. The Italian renaissance is famous for its achievements in painting, music, sculpture, literature and many other forms of art and science. Some of the most famous Italian artists from that time include Leonardo da Vinci, Michelangelo, Donatello, and Piero della Francesca. A large part of the renaissance included the cultural movement called ‘Humanism’. It was the philosophy that people should try to become more educated in both science and classical arts. One of the reasons that the renaissance began in Italy was during that period, Italy had become very wealthy, and those wealthy people were willing to spend their money to support artists and scientists in their pursuit of humanism. The Renaissance spread throughout Europe and is responsible for the growth of knowledge and art all over the world.",
+        
+        "audioCutArrays": ["reno1", "reno2", "reno3", "reno4", "reno5", "reno6", "reno7", "reno8", "reno9"],
+
+        "comprehensionQuestions": [
+            {
+                "question": "Where did the renaissance start?",
+                "answer": "Tuscany",
+                "choices": ["Tuscany", "Florence", "Venice", "Milan"]
+            },
+            {
+                "question": "Which one these cultural topics was not mentioned in the dialogue",
+                "answer": "economics",
+                "choices": ["economics", "music", "painting", "literature"]
+            },
+            {
+                "question": "What was the name of the cultural movenemnt made famouse during the renaissance?",
+                "answer": "Humanism",
+                "choices": ["Altruism", "Humanism", "Realism", "Surrealism"]
+            },
+            {
+                "question": "One of the reasons the renaissance began in Italy was began there were many rich people willing to spend money on the arts",
+                "answer": "True",
+                "choices": ["True", "False"]
+            },
+            {
+                "question": "Which is not a famous artist mentioned in the dialogue",
+                "answer": "Medici",
+                "choices": ["Michelangelo", "Leonardo da Vinci", "Piero della Francesa", "Raphael"]
+            }
+        ],
+
+        "fillInDialogueQuestion": [
+            {
+                "fullSentence": "Il Rinascimento italiano è stato un periodo della storia italiana che si è verificato nei secoli XV e XVI.",
+                "questionPart1": "Il Rinascimento italiano è stato un periodo della storia italiana che si è verificato nei ",
+                "answer": "secoli",
+                "questionPart2": " XV e XVI.",
+                "answerArray": [
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "i", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Il rinascimento iniziò in Toscana, ma il cuore del movimento stava avvenendo nella città di Firenze.",
+                "questionPart1": "Il rinascimento iniziò in Toscana, ma il ",
+                "answer": "cuore",
+                "questionPart2": " del movimento stava avvenendo nella città di Firenze.",
+                "answerArray": [
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "u", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Il Rinascimento italiano è famoso per le sue conquiste nella pittura, nella musica, nella scultura, nella letteratura e in molte altre forme di arte e scienza.",
+                "questionPart1": "Il Rinascimento italiano è famoso per le sue ",
+                "answer": "conquiste",
+                "questionPart2": " nella pittura, nella musica, nella scultura, nella letteratura e in molte altre forme di arte e scienza.",
+                "answerArray": [
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "q", "showLetter": false},
+                    {"letter": "u", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Alcuni degli artisti italiani più famosi di quel tempo includono Leonardo da Vinci, Michelangelo, Donatello e Piero della Francesca.",
+                "questionPart1": "",
+                "answer": "",
+                "questionPart2": "",
+                "answerArray": [
+                    {"letter": "p", "showLetter": false},
+                    {"letter": "l", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "o", "showLetter": false},
+                    {"letter": "l", "showLetter": false}
+                ],
+                "isQuestion": false,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Gran parte del Rinascimento includeva il movimento culturale chiamato 'Umanesimo'.",
+                "questionPart1": "Gran parte del Rinascimento includeva il movimento culturale ",
+                "answer": "chiamato",
+                "questionPart2": " 'Umanesimo'.",
+                "answerArray": [
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "h", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "m", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "o", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "La sua filosofia era di far avvicinare le persone sia alla scienza che alle arti classiche.",
+                "questionPart1": "La sua filosofia era di far ",
+                "answer": "pelle",
+                "questionPart2": " le persone sia alla scienza che alle arti classiche.",
+                "answerArray": [
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "v", "showLetter": false},
+                    {"letter": "v", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "e", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Uno dei motivi per cui iniziò il rinascimento in Italia fu durante quel periodo, l'Italia era diventata molto ricca.",
+                "questionPart1": "Uno dei motivi per cui iniziò il rinascimento in Italia fu durante quel periodo, l'Italia era ",
+                "answer": "diventata",
+                "questionPart2": " molto ricca.",
+                "answerArray": [
+                    {"letter": "d", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "v", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "n", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "a", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "a", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Quelle persone benestanti erano disposte a spendere i loro soldi per sostenere artisti e scienziati nella loro ricerca dell'umanesimo.",
+                "questionPart1": "Quelle persone benestanti erano disposte a spendere i loro soldi per sostenere artisti e scienziati nella loro ",
+                "answer": "ricerca",
+                "questionPart2": " dell'umanesimo.",
+                "answerArray": [
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "a", "showLetter": false}
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            },
+            {
+                "fullSentence": "Il Rinascimento si diffuse in tutta Europa ed è responsabile della crescita della conoscenza e dell'arte in tutto il mondo.",
+                "questionPart1": "Il Rinascimento si diffuse in tutta Europa ed è responsabile della ",
+                "answer": "crescita",
+                "questionPart2": " della conoscenza e dell'arte in tutto il mondo.",
+                "answerArray": [
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "r", "showLetter": false},
+                    {"letter": "e", "showLetter": false},
+                    {"letter": "s", "showLetter": false},
+                    {"letter": "c", "showLetter": false},
+                    {"letter": "i", "showLetter": false},
+                    {"letter": "t", "showLetter": false},
+                    {"letter": "a", "showLetter": false}
+                    
+                ],
+                "isQuestion": true,
+                "correctChosen": false
+
+            }
+            
+        ],
+        
+        "blankExplanation": [
+            {
+                "wordItalian": "Secoli",
+                "wordEnglish": "centuries",
+                "choices": ["centuries", "ages", "sections", "years", "history"]
+            },
+            {
+                "wordItalian": "Cuore",
+                "wordEnglish": "heart",
+                "choices": ["heart", "arm", "leg", "head", "stomach"]
+            },
+            {
+                "wordItalian": "Conquiste",
+                "wordEnglish": "conquests",
+                "choices": ["conquests", "jobs", "improvements", "accomplishments", "failures"]
+            },
+            {
+                   "wordItalian": "Chiamare",
+                "wordEnglish": "to call",
+                "choices": ["to call", "to talk", "to describe", "to become", "to grow"]
+            },
+            {
+                "wordItalian": "Avvicinare",
+                "wordEnglish": "to approach",
+                "choices" : ["to approach", "to add", "to become", "to grow", "to call"]
+            },
+            {
+                   "wordItalian": "Diventare",
+                "wordEnglish": "to become",
+                "choices": ["to become", "to approach", "to grow", "to call", "to search"]
+            },
+            {
+                   "wordItalian": "Ricerca",
+                "wordEnglish": "research",
+                "choices": ["research", "search", "find", "discover", "turn"]
+            },
+            {
+                   "wordItalian": "Crescita",
+                "wordEnglish": "growth",
+                "choices": ["decline", "growth", "search", "discover", "approach"]
+            }
+        ],
+        
+        "putInOrderDialogueBoxes": [
+            {
+                "fullSentences": [
+                    {"sentence": "Il Rinascimento italiano è stato un periodo della storia italiana che si è verificato nei secoli XV e XVI.", "position": 1},
+                    {"sentence": "Il rinascimento iniziò in Toscana, ma il cuore del movimento stava avvenendo nella città di Firenze.", "position": 2},
+                    {"sentence": "Il Rinascimento italiano è famoso per le sue conquiste nella pittura, nella musica, nella scultura, nella letteratura e in molte altre forme di arte e scienza.", "position": 3},
+                    {"sentence": "Alcuni degli artisti italiani più famosi di quel tempo includono Leonardo da Vinci, Michelangelo, Donatello e Piero della Francesca.", "position": 4},
+                    {"sentence": "Gran parte del Rinascimento includeva il movimento culturale chiamato 'Umanesimo'. ", "position": 5},
+                    {"sentence": "La sua filosofia era di far avvicinare le persone sia alla scienza che alle arti classiche.", "position": 6},
+                    {"sentence": "Uno dei motivi per cui iniziò il rinascimento in Italia fu durante quel periodo, l'Italia era diventata molto ricca", "position": 7},
+                    {"sentence": "quelle persone benestanti erano disposte a spendere i loro soldi per sostenere artisti e scienziati nella loro ricerca dell'umanesimo.", "position": 8},
+                    {"sentence": "Il Rinascimento si diffuse in tutta Europa ed è responsabile della crescita della conoscenza e dell'arte in tutto il mondo.", "position": 9}
+                ]
+            }
+        ]
+    }
+    
 
 ]

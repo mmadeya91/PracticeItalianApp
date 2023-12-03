@@ -286,6 +286,8 @@ struct audioHStack: View {
 struct audioChoiceButton: View {
     @EnvironmentObject var globalModel: GlobalModel
     
+    @StateObject var listeningActivityViewModel = ListeningActivityViewModel(audioAct: audioActivty.pastaCarbonara)
+    
     var shortStoryName: String
     var audioImage: String
     
@@ -295,8 +297,6 @@ struct audioChoiceButton: View {
     let lockedStories: [String] = ["Indicazioni per gli Uffizi", "Stili di Bellagio", "Il Rinascimento"]
     
     var body: some View{
-        let listeningActivityVM  = ListeningActivityViewModel(audioAct: audioActivty.data)
-        let listeningActivityQuestionsVM = ListeningActivityQuestionsViewModel(dialogueQuestionView: dialogueViewObject(fillInDialogueQuestionElement: ListeningActivityElement.pastaCarbonara.fillInDialogueQuestion))
         ZStack {
             if lockedStories.contains(shortStoryName){
                 if !checkIfUnlockedAudio(dataSetName: shortStoryName){
@@ -340,7 +340,7 @@ struct audioChoiceButton: View {
                 }else{
                     VStack(spacing: 0){
                         
-                        NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityVM, listeningActivityQuestionsVM: listeningActivityQuestionsVM), label: {
+                        NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityViewModel, shortStoryName: shortStoryName, isPreview: false), label: {
                             Image(audioImage)
                                 .resizable()
                                 .scaledToFit()
@@ -352,6 +352,9 @@ struct audioChoiceButton: View {
                                     .stroke(.black, lineWidth: 3))
                                 .shadow(radius: 10)
                         }).padding(.top, 5)
+                            .simultaneousGesture(TapGesture().onEnded{
+                                listeningActivityViewModel.setAudioData(chosenAudio: shortStoryName)
+                            })
                         
                         Text(shortStoryName)
                             .font(Font.custom("Marker Felt", size: 20))
@@ -363,7 +366,7 @@ struct audioChoiceButton: View {
                 }
             }else{
                 VStack(spacing: 0){
-                    NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityVM, listeningActivityQuestionsVM: listeningActivityQuestionsVM), label: {
+                    NavigationLink(destination: ListeningActivityView(listeningActivityVM: listeningActivityViewModel, shortStoryName: shortStoryName, isPreview: false), label: {
                         Image(audioImage)
                             .resizable()
                             .scaledToFit()
@@ -377,6 +380,8 @@ struct audioChoiceButton: View {
                             .shadow(radius: 10)
                         
                         
+                    }).simultaneousGesture(TapGesture().onEnded{
+                        listeningActivityViewModel.setAudioData(chosenAudio: shortStoryName)
                     })
                     
                     

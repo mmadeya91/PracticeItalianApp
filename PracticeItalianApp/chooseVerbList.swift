@@ -9,7 +9,7 @@ import SwiftUI
 
 struct chooseVerbList: View {
 
-@ObservedObject var globalModel = GlobalModel()
+    @EnvironmentObject var globalModel: GlobalModel
 @State private var animatingBear = false
     var body: some View {
         GeometryReader{ geo in

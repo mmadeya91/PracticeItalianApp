@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIKit
 
 
 extension URL {
@@ -62,13 +63,44 @@ struct shortStoryView: View {
         
         
         GeometryReader{ geo in
-            ZStack{
+            ZStack(alignment: .topLeading){
                 Image("verticalNature")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .zIndex(0)
+                
+                HStack(spacing: 18){
+                    Spacer()
+                    NavigationLink(destination: availableShortStories(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 25))
+                            .foregroundColor(.gray)
+                            
+                            
+                    })
                     
+                    GeometryReader{proxy in
+                        ZStack(alignment: .leading) {
+                            Capsule()
+                                .fill(.gray.opacity(0.25))
+                            
+                            Capsule()
+                                .fill(Color.green)
+                                .frame(width: proxy.size.width * CGFloat(progress))
+                        }
+                    }.frame(height: 13)
+                        .onChange(of: questionNumber){ newValue in
+                            progress = (CGFloat(newValue) / 4)
+                        }
+                    
+                    Image("italyFlag")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                    Spacer()
+                }
                     
                 Button(action: {
                     withAnimation(.easeIn){
@@ -81,29 +113,27 @@ struct shortStoryView: View {
                         .foregroundColor(.black)
                         .frame(width: 20, height: 20)
                 }).zIndex(2)
-                    .offset(x:132, y: showQuestionDropdown ? -265 : -230)
-                
+                    .offset(x:315, y: 80)
+
                 if showPopUpScreen{
                     popUpView(storyObj: self.storyObj, linkClickedString: self.$linkClickedString, showPopUpScreen: self.$showPopUpScreen).transition(.slide).animation(.easeIn).zIndex(2)
                         .padding(.bottom, 90)
-      
+
                 }
                 
                 VStack(spacing: 0){
                     
-                    NavBar().padding(.bottom, 40)
-                    
                     ScrollView(.vertical, showsIndicators: false) {
-                            Text("Cristofo Columbo")
-                                .font(Font.custom("Arial Hebrew", size: 25))
-                                .padding(.top, 30)
-                                .overlay(
-                                    Rectangle()
-                                        .fill(Color.black)
-                                        .frame(width: 210, height: 1)
-                                    , alignment: .bottom
-                                )
-
+                        Text("Cristofo Columbo")
+                            .font(Font.custom("Arial Hebrew", size: 25))
+                            .padding(.top, 30)
+                            .overlay(
+                                Rectangle()
+                                    .fill(Color.black)
+                                    .frame(width: 210, height: 1)
+                                , alignment: .bottom
+                            )
+                        
                         if !showEnglish {
                             Text(.init(storyObj.storyString))
                                 .modifier(textModifer())
@@ -117,72 +147,80 @@ struct shortStoryView: View {
                         }
                         
                         
-                    }.frame(width: 330, height: showQuestionDropdown ? storyHeight :520).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                    }.frame(width: geo.size.width - 40, height: showQuestionDropdown ? geo.size.height - 360 :geo.size.height - 170).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                         .stroke(Color("DarkNavy"), lineWidth: 6)).padding(.bottom, 25)
                     
-                    //QUESTION BAR
-                    VStack{
-                        HStack{
-                            HStack{
-                                Text("Questions")
-                                    .font(Font.custom("Arial Hebrew", size: 20))
-                                    .padding(.leading, 30)
-                                    .padding(.top, 6)
-                            }.frame(width: 315, height: 50, alignment: .leading)
-                                .background(Color("WashedWhite"))
-                                .cornerRadius(20)
-                                .overlay( /// apply a rounded border
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 4)
-                                )
-                            
-                            
-                            Button(action: {
-                                withAnimation(.spring()){
-                                    showQuestionDropdown.toggle()
-                                }
-                            }, label: {
-                                Image("downArrow4")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 55)
-                            }).offset(x:-35)
-                                .disabled(showShortStoryDragDrop)
-                        }.offset(x:20)
-                            .zIndex(1)
+                    
+                    HStack{
+                        Text("Questions")
+                            .font(Font.custom("Arial Hebrew", size: 20))
+                            .padding(.leading, 30)
+                            .padding(.top, 6)
                         
+                        
+                        Spacer()
+                        
+                        
+                        Button(action: {
+                            withAnimation(.spring()){
+                                showQuestionDropdown.toggle()
+                            }
+                        }, label: {
+                            Image("downArrow4")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 55)
+                        }).disabled(showShortStoryDragDrop)
+                        
+                        
+                    }.frame(width: geo.size.width - 40, height: 50, alignment: .leading)
+                        .background(Color("WashedWhite"))
+                        .cornerRadius(20)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .padding(.bottom, showQuestionDropdown ? 0 : 25)
+                    
+                }.padding(.top, 60)
+                    .padding(.leading, 20)
+                    .zIndex(1)
                         //QUESTIONS VIEW
                         if showQuestionDropdown && !showShortStoryDragDrop{
-                            
+
                             VStack(alignment: .leading){
-      
+
                                     Text(storyObj.questionList[questionNumber].question)
                                         .font(Font.custom("Arial Hebrew", size: 16))
                                         .bold()
                                         .padding([.leading, .trailing], 10 )
                                         .padding(.top, 5)
                                         .padding(.bottom, 10)
-                                    
-                                    
-                                    radioButtons(storyObj: storyObj, questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
-       
-                                
+
+
+                                radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+
+
                             }
                             .frame(width: 335, height: 210)
                             .background(Color.white.opacity(0.95))
                             .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-                            .offset(y:-13)
+                            .cornerRadius(20, corners: [.topLeft, .topRight])
+                            .padding(.top, 415)
+                            .padding(.leading, 21)
                             .zIndex(0)
-                                        
+                           
                             
+
+
+
                         }
-                    }
-                }.zIndex(1)
+                    
+                    NavigationLink(destination:  ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false),isActive: $showShortStoryDragDrop,label:{}
+                                                      ).isDetailLink(false)
+                    
             }
         }.navigationBarBackButtonHidden(true)
-            .fullScreenCover(isPresented: $showShortStoryDragDrop) {
-                ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false)
-            }
     }
     
     func handleURL(_ url: URL, name: String) -> OpenURLAction.Result {
@@ -191,40 +229,6 @@ struct shortStoryView: View {
         return .handled
     }
     
-    
-    @ViewBuilder
-    func NavBar() -> some View{
-        HStack(spacing: 18){
-            Spacer()
-            NavigationLink(destination: availableShortStories(), label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 25))
-                    .foregroundColor(.gray)
-                    
-                    
-            })
-            
-            GeometryReader{proxy in
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(.gray.opacity(0.25))
-                    
-                    Capsule()
-                        .fill(Color.green)
-                        .frame(width: proxy.size.width * CGFloat(progress))
-                }
-            }.frame(height: 13)
-                .onChange(of: questionNumber){ newValue in
-                    progress = (CGFloat(newValue) / 4)
-                }
-            
-            Image("italyFlag")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-            Spacer()
-        }
-    }
 }
 
 
@@ -300,22 +304,22 @@ struct popUpView: View{
 }
 
 
-struct radioButtons: View{
-    
-    var storyObj: shortStoryObject
-    
-    @Binding var questionNumber: Int
-    @Binding var showShortStoryDragDrop: Bool
-    @Binding var progress: CGFloat
-    
-    var body: some View{
-        VStack{
-            
-            radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
-            
-        }
-    }
-}
+//struct radioButtons: View{
+//
+//    var storyObj: shortStoryObject
+//
+//    @Binding var questionNumber: Int
+//    @Binding var showShortStoryDragDrop: Bool
+//    @Binding var progress: CGFloat
+//
+//    var body: some View{
+//        VStack{
+//
+//            radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+//
+//        }
+//    }
+//}
 
 struct radioButtonsMC: View {
     

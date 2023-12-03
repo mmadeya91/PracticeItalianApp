@@ -204,13 +204,9 @@ struct verbConjMultipleChoiceView: View{
                 }
                       
                 
+                NavigationLink(destination: ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
+                                                   ).isDetailLink(false)
                 
-                
-            }
-            .fullScreenCover(isPresented: $showFinishedActivityPage) {
-                NavigationView{
-                    ActivityCompletePage()
-                }
             }
             .onAppear{
                 withAnimation(.easeIn){

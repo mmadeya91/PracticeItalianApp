@@ -170,6 +170,10 @@ struct chooseVCActivity: View {
                         animatingBear = true
                     }
                 }
+                
+                
+                
+                
             }.fullScreenCover(isPresented: $showActivity) {
                 NavigationView{
                     switch chooseVCActivityVM.chosenActivity {

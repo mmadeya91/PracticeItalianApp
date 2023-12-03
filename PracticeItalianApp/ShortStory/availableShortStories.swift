@@ -16,7 +16,7 @@ extension View {
 struct availableShortStories: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @ObservedObject var globalModel = GlobalModel()
+    @EnvironmentObject var globalModel: GlobalModel
     @State var animatingBear = false
     @State var showInfoPopup = false
     @State var attemptToBuyPopUp = false
@@ -360,6 +360,9 @@ struct bookButton: View {
                                     .stroke(.black, lineWidth: 3))
                                 .shadow(radius: 10)
                         }).padding(.top, 5)
+                            .simultaneousGesture(TapGesture().onEnded{
+                                print("Hello world!")
+                            })
                         
                         Text(shortStoryName)
                             .font(Font.custom("Marker Felt", size: 20))
@@ -385,6 +388,8 @@ struct bookButton: View {
                             .shadow(radius: 10)
                         
                         
+                    }).simultaneousGesture(TapGesture().onEnded{
+                        print("Hello world!")
                     })
                     
                     

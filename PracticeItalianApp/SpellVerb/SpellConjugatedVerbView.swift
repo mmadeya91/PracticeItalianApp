@@ -27,6 +27,7 @@ struct SpellConjugatedVerbView: View {
     @State var saved = false
     @State var showAlreadyExists = false
     @State var currentVerbIta = "temp"
+    @State var showFinishedActivityPage = false
     
     @Environment(\.dismiss) var dismiss
     
@@ -73,13 +74,21 @@ struct SpellConjugatedVerbView: View {
                                     }
                                     
                                 }
+                                
+                                NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
+                                                                  ).isDetailLink(false)
                             }
                             .offset(y: -200)
                             .scrollDisabled(true)
                             .onChange(of: currentQuestionNumber) { newIndex in
-                                currentVerbIta = spellConjVerbVM.currentTenseSpellConjVerbData[newIndex].verbNameItalian
-                                withAnimation{
-                                    scroller.scrollTo(newIndex, anchor: .center)
+                                
+                                if newIndex > spellConjVerbVM.currentTenseSpellConjVerbData.count - 1 {
+                                    showFinishedActivityPage = true
+                                }else{
+                                    currentVerbIta = spellConjVerbVM.currentTenseSpellConjVerbData[newIndex].verbNameItalian
+                                    withAnimation{
+                                        scroller.scrollTo(newIndex, anchor: .center)
+                                    }
                                 }
                             }
                         }

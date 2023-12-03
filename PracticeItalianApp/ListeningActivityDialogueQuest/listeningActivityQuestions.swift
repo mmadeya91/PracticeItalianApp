@@ -18,7 +18,7 @@ struct listeningActivityQuestions: View {
     @State var currentQuestionNumber: Int = 0
     @State var hintGiven: Bool = false
     @State var hintButtonText = "Give me a Hint!"
-    @State var onNoQuestionDialogue = false
+    @State var isQuestionDialogue = false
     @State var wrongSelected = false
     @State var changeColorOnWrongSelect = false
     @State var showPutInOrder = false
@@ -29,12 +29,9 @@ struct listeningActivityQuestions: View {
     @State var wrongChosen = false
     @State var showUserCheck: Bool = false
     
-    
-    @ObservedObject var ListeningActivityQuestionsVM: ListeningActivityQuestionsViewModel
+    @ObservedObject var listeningActivityVM: ListeningActivityViewModel
     
     @State var placeHolderArray: [FillInDialogueQuestion] = [FillInDialogueQuestion]()
-    
-    let arrayOfAudioNames = ["pcCut1", "pcCut2", "pcCut3", "pcCut4", "pcCut5", "pcCut6", "pcCut6", "pcCut7", "pcCut8"]
     
     var body: some View {
         GeometryReader{geo in
@@ -88,14 +85,6 @@ struct listeningActivityQuestions: View {
                     }.frame(width: 340, height: 390)
                         .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                             .stroke(.black, lineWidth: 6)).padding(.top, 10)
-                        .onAppear{
-                            
-                            if !isPreview{
-                                listeningActivityManager.setCurrentHintLetterArray(fillInBlankDialogueObj: ListeningActivityQuestionsVM.dialogueQuestionView.fillInDialogueQuestionElement[0])
-                                audioManager.startPlayer(track: arrayOfAudioNames[0])
-                                placeHolderArray.append(ListeningActivityQuestionsVM.dialogueQuestionView.fillInDialogueQuestionElement[0])
-                            }
-                        }
                         .shadow(radius: 10)
                     
                     //BLANK SPACES FOR HINT LETTERS
@@ -104,24 +93,29 @@ struct listeningActivityQuestions: View {
                         HStack{
                             Button(action: {
                                 currentQuestionNumber += 1
-                                placeHolderArray.append(ListeningActivityQuestionsVM.dialogueQuestionView.fillInDialogueQuestionElement[currentQuestionNumber])
-                                if ListeningActivityQuestionsVM.dialogueQuestionView.fillInDialogueQuestionElement[currentQuestionNumber].isQuestion {
-                                    listeningActivityManager.setCurrentHintLetterArray(fillInBlankDialogueObj: ListeningActivityQuestionsVM.dialogueQuestionView.fillInDialogueQuestionElement[currentQuestionNumber])
+                                if currentQuestionNumber <= listeningActivityVM.audioAct.fillInDialogueQuestionElement.count - 1{
+                                    placeHolderArray.append(listeningActivityVM.audioAct.fillInDialogueQuestionElement[currentQuestionNumber])
                                     
-                                    onNoQuestionDialogue = false
-                                }else {
-                                    listeningActivityManager.resetCurrentHintLetterArray()
-                                    onNoQuestionDialogue = true
+                                    if listeningActivityVM.audioAct.fillInDialogueQuestionElement[currentQuestionNumber].isQuestion {
+                                        listeningActivityManager.setCurrentHintLetterArray(fillInBlankDialogueObj: listeningActivityVM.audioAct.fillInDialogueQuestionElement[currentQuestionNumber])
+                                        
+                                        isQuestionDialogue = true
+                                    }else {
+                                        listeningActivityManager.resetCurrentHintLetterArray()
+                                        isQuestionDialogue = false
+                                    }
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.30) {
+                                        scrollView.scrollTo(currentQuestionNumber)
+                                    }
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                        audioManager.startPlayer(track: listeningActivityVM.audioAct.audioCutFileNames[currentQuestionNumber])
+                                    }
                                 }
+        
                                 hintGiven = false
                                 hintButtonText = "Give me a Hint!"
                                 userInput = ""
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.30) {
-                                    scrollView.scrollTo(currentQuestionNumber)
-                                }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    audioManager.startPlayer(track: arrayOfAudioNames[currentQuestionNumber])
-                                }
                                 
                                 
                             }, label: {
@@ -132,8 +126,8 @@ struct listeningActivityQuestions: View {
                                     .frame(width: 30, height: 30)
                                 
                             })
-                            .opacity(onNoQuestionDialogue ? 1.0 : 0.0)
-                            .disabled(onNoQuestionDialogue ? false : true)
+                            .opacity(isQuestionDialogue ? 0.0 : 1.0)
+                            .disabled(isQuestionDialogue ? true : false)
                             
                             
                             Spacer()
@@ -141,10 +135,10 @@ struct listeningActivityQuestions: View {
                             HStack{
                                 
                                 ForEach($listeningActivityManager.currentHintLetterArray, id: \.self) { $answerArray in
-                                    Text(answerArray.letter!)
+                                    Text(answerArray.letter)
                                         .font(Font.custom("Chalkboard SE", size: 25))
                                         .foregroundColor(.black.opacity(answerArray.showLetter ? 1.0 : 0.0))
-                                        .underline(color: .black.opacity(onNoQuestionDialogue ? 0.0 : 1.0))
+                                        .underline(color: .black.opacity(isQuestionDialogue ? 1.0 : 0.0))
                                     
                                 }
                                 
@@ -154,7 +148,7 @@ struct listeningActivityQuestions: View {
                             
                             Button(action: {
                                 
-                                audioManager.startPlayer(track: arrayOfAudioNames[currentQuestionNumber])
+                                audioManager.startPlayer(track: listeningActivityVM.audioAct.audioCutFileNames[currentQuestionNumber])
                                 
                             }, label: {
                                 Image(systemName: "arrow.triangle.2.circlepath")
@@ -175,12 +169,27 @@ struct listeningActivityQuestions: View {
                             if !hintGiven {
                                 var array = [Int](0...listeningActivityManager.currentHintLetterArray.count-1)
                                 array.shuffle()
-                                listeningActivityManager.currentHintLetterArray[array.popLast()!].showLetter.toggle()
-                                listeningActivityManager.currentHintLetterArray[array.popLast()!].showLetter.toggle()
-                                listeningActivityManager.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                if listeningActivityManager.currentHintLetterArray.count == 2 {
+                                    listeningActivityManager.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                    hintButtonText = "Show Me!"
+                                    hintGiven = true
+                                }
+                                if listeningActivityManager.currentHintLetterArray.count == 3 {
+                                    listeningActivityManager.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                    listeningActivityManager.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                    
+                                    hintButtonText = "Show Me!"
+                                    hintGiven = true
+                                }
+                                if listeningActivityManager.currentHintLetterArray.count > 3 {
+                                    listeningActivityManager.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                    listeningActivityManager.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                    listeningActivityManager.currentHintLetterArray[array.popLast()!].showLetter.toggle()
+                                    
+                                    hintButtonText = "Show Me!"
+                                    hintGiven = true
+                                }
                                 
-                                hintButtonText = "Show Me!"
-                                hintGiven = true
                             }else{
                                 
                                 listeningActivityManager.showHint()
@@ -199,7 +208,7 @@ struct listeningActivityQuestions: View {
                                 RoundedRectangle(cornerRadius: 15)
                                     .stroke(.black, lineWidth: 3)
                             )
-                            .disabled(onNoQuestionDialogue)
+                            .disabled(isQuestionDialogue ? false : true)
                             .padding(.top, 20)
                             .padding(.bottom, 26)
                         
@@ -212,7 +221,7 @@ struct listeningActivityQuestions: View {
                                 .padding([.leading, .trailing], 15)
                                 .offset(x: wrongSelected ? -5 : 0)
                                 .onSubmit {
-                                    if userInput.lowercased() == ListeningActivityQuestionsVM.dialogueQuestionView.fillInDialogueQuestionElement[currentQuestionNumber].answer.lowercased()
+                                    if userInput.lowercased() == listeningActivityVM.audioAct.fillInDialogueQuestionElement[currentQuestionNumber].answer.lowercased()
                                     {
                                         SoundManager.instance.playSound(sound: .correct)
                                         
@@ -224,14 +233,14 @@ struct listeningActivityQuestions: View {
                                         
                                         placeHolderArray[currentQuestionNumber].correctChosen = true
                                         currentQuestionNumber += 1
-                                        placeHolderArray.append(ListeningActivityQuestionsVM.dialogueQuestionView.fillInDialogueQuestionElement[currentQuestionNumber])
-                                        if ListeningActivityQuestionsVM.dialogueQuestionView.fillInDialogueQuestionElement[currentQuestionNumber].isQuestion {
-                                            listeningActivityManager.setCurrentHintLetterArray(fillInBlankDialogueObj: ListeningActivityQuestionsVM.dialogueQuestionView.fillInDialogueQuestionElement[currentQuestionNumber])
+                                        placeHolderArray.append(listeningActivityVM.audioAct.fillInDialogueQuestionElement[currentQuestionNumber])
+                                        if listeningActivityVM.audioAct.fillInDialogueQuestionElement[currentQuestionNumber].isQuestion {
+                                            listeningActivityManager.setCurrentHintLetterArray(fillInBlankDialogueObj: listeningActivityVM.audioAct.fillInDialogueQuestionElement[currentQuestionNumber])
                                             
-                                            onNoQuestionDialogue = false
+                                            isQuestionDialogue = true
                                         }else {
                                             listeningActivityManager.resetCurrentHintLetterArray()
-                                            onNoQuestionDialogue = true
+                                            isQuestionDialogue = false
                                         }
                                         hintGiven = false
                                         hintButtonText = "Give me a Hint!"
@@ -240,7 +249,7 @@ struct listeningActivityQuestions: View {
                                             scrollView.scrollTo(currentQuestionNumber)
                                         }
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                            audioManager.startPlayer(track: arrayOfAudioNames[currentQuestionNumber])
+                                            audioManager.startPlayer(track: listeningActivityVM.audioAct.audioCutFileNames[currentQuestionNumber])
                                         }
                                         
                                         
@@ -284,7 +293,7 @@ struct listeningActivityQuestions: View {
                             .frame(width: 100, height: 40)
                             .offset(x: 25, y: -180)
                     }
-                          
+                    
                     if wrongChosen{
                         
                         let randomInt2 = Int.random(in: 1..<4)
@@ -296,14 +305,32 @@ struct listeningActivityQuestions: View {
                             .offset(x: 25, y: -180)
                     }
                 }
-            }.fullScreenCover(isPresented: $showPutInOrder) {
-                let LAPutDialogueInOrderVM = LAPutDialogueInOrderViewModel(dialoguePutInOrderVM: dialoguePutInOrderObj(stringArray: ListeningActivityElement.pastaCarbonara.putInOrderDialogueBoxes[0].fullSentences))
-                LAPutDialogueInOrder(ListeningActivityQuestionsVM: ListeningActivityQuestionsVM, LAPutDialogueInOrderVM: LAPutDialogueInOrderVM)
+                
+                let LAPutDialogueInOrderVM = LAPutDialogueInOrderViewModel(dialoguePutInOrderVM: dialoguePutInOrderObj(stringArray: listeningActivityVM.audioAct.putInOrderSentenceArray[0].fullSentences))
+                
+                NavigationLink(destination: LAPutDialogueInOrder(LAPutDialogueInOrderVM: LAPutDialogueInOrderVM),isActive: $showPutInOrder,label:{}
+                                                  ).isDetailLink(false)
+                
             }
+            .onChange(of: currentQuestionNumber) { questionNumber in
+                 
+                     if questionNumber > listeningActivityVM.audioAct.audioCutFileNames.count - 1{
+                         showPutInOrder = true
+                     }
+                }
             .onAppear{
                 withAnimation(.spring()){
                     animatingBear = true
                 }
+                
+                
+                listeningActivityManager.setCurrentHintLetterArray(fillInBlankDialogueObj: listeningActivityVM.audioAct.fillInDialogueQuestionElement[0])
+                placeHolderArray.append(listeningActivityVM.audioAct.fillInDialogueQuestionElement[0])
+                isQuestionDialogue = listeningActivityVM.audioAct.fillInDialogueQuestionElement[0].isQuestion
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    audioManager.startPlayer(track: listeningActivityVM.audioAct.audioCutFileNames[0], isPreview: isPreview)
+                }
+                
             }
             
         }
@@ -414,9 +441,10 @@ struct dialogueCaptionBoxNoQuestion: View {
 }
 
 struct SwiftUIView_Previews: PreviewProvider {
-    static let ListeningActivityQuestionsVM = ListeningActivityQuestionsViewModel(dialogueQuestionView: dialogueViewObject(fillInDialogueQuestionElement: ListeningActivityElement.pastaCarbonara.fillInDialogueQuestion))
+    static let listeningActivityVM = ListeningActivityViewModel(audioAct: audioActivty.cosaDesidera)
+
     static var previews: some View {
-        listeningActivityQuestions(isPreview: false, ListeningActivityQuestionsVM: ListeningActivityQuestionsVM)
+        listeningActivityQuestions(isPreview: false, listeningActivityVM: listeningActivityVM)
             .environmentObject(ListeningActivityManager())
             .environmentObject(AudioManager())
     }

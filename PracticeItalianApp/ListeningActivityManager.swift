@@ -12,7 +12,7 @@ final class ListeningActivityManager: ObservableObject {
     
     @Published private(set) var ListeningData: [ListeningActivityElement] = ListeningActivityElement.allListeningActivityElements
     
-    @Published var currentHintLetterArray: [AnswerArray] = [AnswerArray]()
+    @Published var currentHintLetterArray: [hintLetter] = [hintLetter]()
     
     func retrieveListeningActivityData(chosenAudioName: String) -> ListeningActivityElement {
         
@@ -28,11 +28,23 @@ final class ListeningActivityManager: ObservableObject {
     }
     
     func setCurrentHintLetterArray(fillInBlankDialogueObj: FillInDialogueQuestion) {
-        currentHintLetterArray = fillInBlankDialogueObj.answerArray
+        var tempArray = [hintLetter]()
+        for letterObject in fillInBlankDialogueObj.answerArray {
+            var tempAnswer = ""
+            if letterObject.answer != nil {
+                tempAnswer = letterObject.answer!
+            }
+            
+            let newHintLetter = hintLetter(letter: letterObject.letter!, showLetter: letterObject.showLetter, answer: tempAnswer)
+            tempArray.append(newHintLetter)
+        }
+        currentHintLetterArray = tempArray
+        
+        
     }
     
     func resetCurrentHintLetterArray() {
-        currentHintLetterArray = [AnswerArray]()
+        currentHintLetterArray = [hintLetter]()
     }
     
     func showHint(){
@@ -42,5 +54,13 @@ final class ListeningActivityManager: ObservableObject {
             currentHintLetterArray[i].showLetter = true
         }
     }
+    
 
+}
+
+struct hintLetter: Hashable{
+    let id = UUID()
+    let letter: String
+    var showLetter: Bool
+    let answer: String
 }

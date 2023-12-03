@@ -33,12 +33,12 @@ struct chooseActivity: View {
     
     var body: some View {
         GeometryReader{ geo in
-            ZStack{
+            ZStack(alignment: .topLeading){
                 Image("horizontalNature")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
                     .opacity(1.0)
                 
                 HStack{
@@ -59,92 +59,133 @@ struct chooseActivity: View {
                         .shadow(radius: 10)
                         .padding()
                     
-                }.zIndex(2).offset(y:-360)
+                }
                 
                 Image("bubbleChat2")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 40)
-                    .offset(x: -30, y: -315)
+                    .offset(x: 100, y: 25)
                     .opacity(showChatBubble ? 1.0 : 0.0)
                 
                 Image("sittingBear")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 200, height: 100)
-                    .offset(x: 70, y: animatingBear ? -250 : 0)
+                    .offset(x: 150, y: animatingBear ? 73 : 200)
                 
                 
                 
-                VStack{
+                VStack(spacing: 0){
                     Text("Exercises")
-                        .font(Font.custom("Marker Felt", size: 35))
+                        .font(Font.custom("Marker Felt", size: geo.size.width * 0.08))
                         .foregroundColor(.white)
-                        .padding(.bottom, 5)
-                        .frame(width: 357, height: 75)
+                        .padding(.top, 15)
+                        .frame(width: geo.size.width, height: geo.size.width * 0.20)
                         .background(Color("DarkNavy")).opacity(0.75)
                         .cornerRadius(13)
                         .border(width: 8, edges: [.bottom], color: .teal)
-                        .padding(.bottom, 15)
+                      
                     
                     HStack{
                         VStack{
                             NavigationLink(destination: availableShortStories(), label: {Image("reading-book")
-                                    .imageIconModifier()
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(10)
+                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
+                                    .background(.white)
+                                    .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(.black, lineWidth: 6))
                             })
                             Text("Reading")
                                 .bold()
-                                .font(Font.custom("Marker Felt", size: 20))
-                                .frame(width: 120, height: 60)
+                                .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
+                                .frame(width: geo.size.width * 0.25, height: geo.size.width * 0.15)
                             
-                        }.padding(.trailing, 20)
+                        }
+                        
                         VStack{
                             
                             
                             NavigationLink(destination: chooseAudio(), label: {
                                 Image("talking")
-                                    .imageIconModifier()
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(10)
+                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
+                                    .background(.white)
+                                    .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(.black, lineWidth: 6))
                             })
                             Text("Listening")
                                 .bold()
-                                .font(Font.custom("Marker Felt", size: 20))
-                                .frame(width: 120, height: 60)
+                                .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
+                                .frame(width: geo.size.width * 0.25, height: geo.size.width * 0.15)
                         }
                     }
-                    .padding([.leading, .trailing], 45)
-                    .padding(.top, 30)
-                    .padding(.bottom, 5)
-                    
+                      
+                  
           
-                    HStack{
+                    HStack(spacing: 0){
                         VStack{
                             NavigationLink(destination: chooseFlashCardSet(), label: {
                                 Image("flash-card")
-                                    .imageIconModifier()
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(10)
+                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
+                                    .background(.white)
+                                    .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(.black, lineWidth: 6))
+                                    .padding(.top, 55)
                             })
-                            Text("Flash Cards")
+                            Text("Flash \nCards")
                                 .bold()
-                                .font(Font.custom("Marker Felt", size: 20))
-                                .frame(width: 120, height: 60)
-                        }.padding(.trailing, 20)
+                                .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
+                                .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.22)
+                               
+                        }
+                        
+                       
                         VStack{
                             NavigationLink(destination: chooseVerbList(), label:{
                                 Image("spell-check")
-                                    .imageIconModifier()
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(10)
+                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
+                                    .background(.white)
+                                    .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(.black, lineWidth: 6))
+                                    .padding(.top, 55)
                             })
-                            Text("Verb" + "\nConjugation")
+                            Text("Verb Conjugation")
                                 .bold()
-                                .font(Font.custom("Marker Felt", size: 20))
-                                .frame(width: 120, height: 60)
                                 .multilineTextAlignment(.center)
+                                .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
+                                .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.22)
+                               
                         }
                     }
-                    .padding([.leading, .trailing], 45)
-                    .padding(.bottom, 50)
-                }.frame(width:345).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                    .stroke(.black, lineWidth: 5))
-                    .shadow(radius: 10)
-                    .padding(.top, 60)
+               
+                    
+                    Spacer()
+                }.frame(width:  geo.size.width * 0.95, height: geo.size.height * 0.725)
+                    //.shadow(radius: 10)
+                    .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                        .stroke(.black, lineWidth: 5))
+                    .padding([.leading, .trailing], geo.size.width * 0.025)
+                    .padding([.top, .bottom], geo.size.height * 0.15)
+                    //.offset(y: (geo.size.height / 2) - (geo.size.height / 2.8))
+
+                    
+                    
+                 
             }
             .onAppear{
                 withAnimation(.easeIn(duration: 1.5)){

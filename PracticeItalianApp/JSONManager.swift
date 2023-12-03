@@ -105,6 +105,7 @@ enum Gender: String, Codable {
 
 struct ListeningActivityElement: Codable {
     var audioName, audioTranscriptItalian, audioTranscriptEnglish: String
+    let audioCutArrays: [String]
     var comprehensionQuestions: [ComprehensionQuestion]
     var fillInDialogueQuestion: [FillInDialogueQuestion]
     var blankExplanation: [BlankExplanation]
@@ -113,6 +114,10 @@ struct ListeningActivityElement: Codable {
     static let allListeningActivityElements: [ListeningActivityElement] = Bundle.main.decode(file: "ListeningActivity.json")
     
     static let pastaCarbonara: ListeningActivityElement = allListeningActivityElements[0]
+    static let cosaDesidera: ListeningActivityElement = allListeningActivityElements[1]
+    static let uffizi: ListeningActivityElement = allListeningActivityElements[3]
+    static let bellagio: ListeningActivityElement = allListeningActivityElements[4]
+    static let rinascimento: ListeningActivityElement = allListeningActivityElements[5]
 }
 
 

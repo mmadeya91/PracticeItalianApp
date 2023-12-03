@@ -12,10 +12,9 @@ struct listeningActivity: View {
     @EnvironmentObject var audioManager: AudioManager
     @EnvironmentObject var listeningActivityManager: ListeningActivityManager
     @Environment(\.dismiss) var dismiss
-    var listeningActivityVM:ListeningActivityViewModel
+    @StateObject var listeningActivityVM: ListeningActivityViewModel
     var isPreview: Bool = false
     
-    @StateObject var listeningActivityQuestionsVM: ListeningActivityQuestionsViewModel
     
     @State private var value: Double = 0.0
     @State private var isEditing: Bool = false
@@ -41,15 +40,6 @@ struct listeningActivity: View {
                 .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             ZStack{
                 
-                if showUserCheck {
-                    userCheckNavigationPopUpListeningActivity(showUserCheck: $showUserCheck)
-                        .transition(.slide)
-                        .animation(.easeIn)
-                        .padding(.leading, 5)
-                        .padding(.top, 60)
-                        .zIndex(2)
-                }
-                
                 
                 VStack{
     
@@ -61,7 +51,7 @@ struct listeningActivity: View {
                                 .padding([.leading, .trailing], 15)
                             VStack{
         
-                                Image("pot")
+                                Image(listeningActivityVM.audioAct.image)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 90, height: 90)
@@ -72,7 +62,7 @@ struct listeningActivity: View {
                                         .stroke(.black, lineWidth: 3))
                                     .shadow(radius: 10)
                                 
-                                Text("Ricetta di Pasta Carbonara")
+                                Text(listeningActivityVM.audioAct.title)
                                     .font(Font.custom("Futura", size: 18))
                                     .frame(width: 130, height: 80)
                                     .multilineTextAlignment(.center)
@@ -114,6 +104,7 @@ struct listeningActivity: View {
                             
                             HStack{
                                 let color: Color = audioManager.isLooping ? .teal : .black
+                                let tortoiseColor: Color = audioManager.isSlowPlayback ? .teal : .black
                                
                                 PlaybackControlButton(systemName: "repeat", color: color) {
                                     audioManager.toggleLoop()
@@ -131,17 +122,9 @@ struct listeningActivity: View {
                                     player.currentTime += 10
                                 }
                                 Spacer()
-                                let slowColor: Color = audioManager.isSlowPlayback ? .teal : .black
                                 
-                                PlaybackControlButton(systemName: "tortoise.fill", color: slowColor){
-                                    if !audioManager.isSlowPlayback {
-                                        player.rate = 0.5
-                                        audioManager.togglePlayback()
-                                    }else {
-                                        player.rate = 1.0
-                                        audioManager.togglePlayback()
-                                    }
-                                  
+                                PlaybackControlButton(systemName: "tortoise.fill", color: tortoiseColor){
+                                    audioManager.slowSpeed()
                                 }.padding(.trailing, 20)
                                 
                             
@@ -223,17 +206,20 @@ struct listeningActivity: View {
                         .frame(width: 100, height: 40)
                         .offset(y: 425)
                 }
-            }.ignoresSafeArea()
-                .fullScreenCover(isPresented: $showDialogueQuestions) {
-                    listeningActivityQuestions(isPreview: false, ListeningActivityQuestionsVM: listeningActivityQuestionsVM)
-                }
+                
+                NavigationLink(destination:    listeningActivityQuestions(isPreview: false, listeningActivityVM: listeningActivityVM),isActive: $showDialogueQuestions,label:{}
+                                                  ).isDetailLink(false)
+                
+            }  .ignoresSafeArea()
                 .onAppear{
                     withAnimation(.spring()){
                         animatingBear = true
                     }
+                    
                     audioManager.startPlayer(track: listeningActivityVM.audioAct.track, isPreview: isPreview)
                     
-                }.onReceive(timer) { _ in
+                }
+                .onReceive(timer) { _ in
                     guard let player = audioManager.player, !isEditing else {return}
                     value = player.currentTime
                 }
@@ -243,6 +229,7 @@ struct listeningActivity: View {
                     }
                     correctChosen = true
                 }
+            
         }
         
     }
@@ -250,13 +237,10 @@ struct listeningActivity: View {
     @ViewBuilder
     func NavBar() -> some View{
         HStack(spacing: 18){
-            Button(action: {
-                showUserCheck.toggle()
-            }, label: {
+            NavigationLink(destination: chooseAudio(), label: {
                 Image(systemName: "xmark")
                     .font(.system(size: 25))
                     .foregroundColor(.gray)
-                
             })
             
             GeometryReader{proxy in
@@ -335,7 +319,7 @@ struct userCheckNavigationPopUpListeningActivity: View{
                 
                 HStack{
                     Spacer()
-                    NavigationLink(destination: availableShortStories(), label: {
+                    NavigationLink(destination: chooseAudio(), label: {
                         Text("Yes")
                             .font(Font.custom("Arial Hebrew", size: 15))
                             .foregroundColor(Color.blue)
@@ -366,10 +350,10 @@ struct userCheckNavigationPopUpListeningActivity: View{
 
 
 struct listeningActivity_Previews: PreviewProvider {
-    static let listeningActivityVM  = ListeningActivityViewModel(audioAct: audioActivty.data)
-    static let listeningActivityQuestionsVM = ListeningActivityQuestionsViewModel(dialogueQuestionView: dialogueViewObject(fillInDialogueQuestionElement: ListeningActivityElement.pastaCarbonara.fillInDialogueQuestion))
+    static let listeningActivityVM  = ListeningActivityViewModel(audioAct: audioActivty.pastaCarbonara)
+  
     static var previews: some View {
-        listeningActivity(listeningActivityVM: listeningActivityVM, isPreview: true, listeningActivityQuestionsVM: listeningActivityQuestionsVM)
+        listeningActivity(listeningActivityVM: listeningActivityVM, isPreview: true)
             .environmentObject(AudioManager())
             .environmentObject(ListeningActivityManager())
     }
