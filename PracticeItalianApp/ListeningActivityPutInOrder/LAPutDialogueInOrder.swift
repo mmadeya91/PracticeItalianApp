@@ -49,7 +49,7 @@ struct LAPutDialogueInOrder: View {
                 }
                 
                 
-                VStack{
+                VStack(spacing: 0){
                     HStack(spacing: 18){
                         Button(action: {
                             showUserCheck.toggle()
@@ -68,31 +68,28 @@ struct LAPutDialogueInOrder: View {
                             .frame(width: 40, height: 40)
                             .shadow(radius: 10)
                     }.padding([.leading, .trailing], 25)
-                        .padding(.top, 20)
-                    
+                      
+ 
                     
                     VStack(spacing: 0){
                         
-                        Text("Place the Dialogue In the Correct Order")
-                            .font(Font.custom("", size: 16))
-                            .foregroundColor(.white)
-                            .padding(.top, 13)
-                            .padding(.bottom, 15)
-                            .frame(width: 340, height: 45)
-                            .background(.teal)
-                            .padding(.top, 3)
-                            .border(width: 4, edges: [.bottom], color: .black)
-                        
-                        
                         ScrollView{
                             
-                            LazyVGrid(columns: columns, spacing: 20, content: {
+                            LazyVGrid(columns: columns, spacing: 18, content: {
                                 
+                                Text("Place the Dialogue In the Correct Order")
+                                    .font(Font.custom("", size: 16))
+                                    .foregroundColor(.black)
+                                    .underline()
                                 
                                 ForEach(LAPutDialogueInOrderVM.dialogueBoxes){ item in
                                     
-                                    dialogueBoxView(dialogueText: item.dialogueText)
-                                        .frame(width: 300)
+                                    Text(item.dialogueText)
+                                        .font(Font.custom("Chalkboard SE", size: geo.size.height * 0.017))
+                                        .padding(5)
+                                        .multilineTextAlignment(.leading)
+//                                    dialogueBoxView(dialogueText: item.dialogueText)
+                                        .frame(width: geo.size.width * 0.8)
                                         .background(item.positionWrong ? .red.opacity(0.7) : .teal.opacity(0.7))
                                         .cornerRadius(10)
                                         .overlay( /// apply a rounded border
@@ -112,15 +109,15 @@ struct LAPutDialogueInOrder: View {
                             
                         }.scrollDisabled(true).padding(.top, 20)
                         
-                    }.frame(width: 340, height: 610)
+                    }.frame(width: geo.size.width * 0.9, height: geo.size.height * 0.85)
                         .background(.white)
                         .cornerRadius(20)
                         .overlay( /// apply a rounded border
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(.black, lineWidth: 4)
                         )
-                        .padding(.top, 30)
-                        .padding([.leading, .trailing], 25)
+                        .padding([.leading, .trailing], geo.size.width * 0.05)
+                        .padding(.top, 20)
                         .offset(x: animateInvalidEntry ? -30 : 0)
                 }.zIndex(1)
                 
@@ -174,7 +171,10 @@ struct LAPutDialogueInOrder: View {
                             .background(.white)
                             .cornerRadius(10)
                             .shadow(radius: 10)
-                            .padding(.bottom, 10)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.black, lineWidth: 3)
+                            )
                     })
                     
                     Spacer()
@@ -197,27 +197,17 @@ struct LAPutDialogueInOrder: View {
                             .background(.white)
                             .cornerRadius(10)
                             .shadow(radius: 10)
-                            .padding(.bottom, 10)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.black, lineWidth: 3)
+                            )
                     })
                     Spacer()
-                }.offset(y:400)
+                }.offset(y:310)
+                    .zIndex(1)
                 
-                Image("sittingBear")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 200, height: 100)
-                    .offset(x: 50, y: animatingBear ? -235 : 750)
                 
-                if correctChosen{
-                    
-                    let randomInt = Int.random(in: 1..<4)
-                    
-                    Image("bubbleChatRight"+String(randomInt))
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 40)
-                        .offset(x: -45, y: -310)
-                }
+
                    
                 NavigationLink(destination: ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
                                                   ).isDetailLink(false)

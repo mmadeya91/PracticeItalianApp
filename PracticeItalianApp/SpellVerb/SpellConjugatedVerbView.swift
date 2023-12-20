@@ -55,7 +55,7 @@ struct SpellConjugatedVerbView: View {
                                         
                                         VStack(spacing: 0){
                                             questionView(vbItalian: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameItalian, vbEnglish: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameEnglish, pronoun: spellConjVerbVM.currentTenseSpellConjVerbData[i].pronoun).padding(.bottom, 25)
-                                                .padding(.top, 70)
+                                                .padding(.top, 40)
                                             
                                             HStack{
                                                 
@@ -102,7 +102,7 @@ struct SpellConjugatedVerbView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(.black, lineWidth: 4)
                         )
-                        .offset(y: -125)
+                        .offset(y: -135)
                         .zIndex(0)
                     
                     TextField("", text: $userAnswer)
@@ -110,7 +110,7 @@ struct SpellConjugatedVerbView: View {
                         .font(Font.custom("Marker Felt", size: 50))
                         .shadow(color: Color.black, radius: 12, x: 0, y:10)
                         .frame(width: 350)
-                        .padding(.bottom, 25)
+                        .padding(.bottom, 45)
                         .zIndex(1)
                     
                     VStack{
@@ -211,7 +211,7 @@ struct SpellConjugatedVerbView: View {
                                 
                                 
                             })
-                        }.offset(y: 100).zIndex(1)
+                        }.offset(y: 90).zIndex(1)
                         
                         Button(action: {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -243,7 +243,7 @@ struct SpellConjugatedVerbView: View {
                                 .padding(.trailing, 5)
                             
                             
-                        }).offset(y:120)
+                        }).offset(y:100)
                         
                         Text(currentVerbIta + " is already in MyList!")
                             .font(Font.custom("Arial Hebrew", size: 20))
@@ -260,8 +260,8 @@ struct SpellConjugatedVerbView: View {
                     Image("sittingBear")
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 200, height: 100)
-                        .offset(x: 110, y: animatingBear ? 350 : 750)
+                        .frame(width: geo.size.width * 0.6, height: geo.size.height * 0.2)
+                        .offset(x: 110, y: animatingBear ? 300 : 750)
                     
                     if saved {
                         
@@ -269,7 +269,7 @@ struct SpellConjugatedVerbView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 235)
+                            .offset(y: 245)
                         
                     }
                     
@@ -281,7 +281,7 @@ struct SpellConjugatedVerbView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 235)
+                            .offset(y: 200)
                     }
                     
                     if wrongChosen{
@@ -292,7 +292,7 @@ struct SpellConjugatedVerbView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 235)
+                            .offset(y: 200)
                     }
                     
                     

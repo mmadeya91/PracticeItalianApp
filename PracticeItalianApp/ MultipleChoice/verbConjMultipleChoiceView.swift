@@ -30,22 +30,51 @@ struct verbConjMultipleChoiceView: View{
         
         
         GeometryReader{geo in
-            Image("verticalNature")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            
-            
                 
-            ZStack{
-                VStack{
-                    NavBar()
+            ZStack(alignment: .topLeading){
+                Image("verticalNature")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .zIndex(0)
+                
+                HStack(spacing: 18){
+                    Spacer()
+                    NavigationLink(destination: chooseVerbList(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 25))
+                            .foregroundColor(.gray)
+                            
+                            
+                    })
                     
+                    GeometryReader{proxy in
+                        ZStack(alignment: .leading) {
+                            Capsule()
+                                .fill(.gray.opacity(0.25))
+                            
+                            Capsule()
+                                .fill(Color.green)
+                                .frame(width: proxy.size.width * CGFloat(progress))
+                        }
+                    }.frame(height: 13)
+                        .onChange(of: counter){ newValue in
+                            progress = (CGFloat(newValue) / 4)
+                        }
+                    
+                    Image("italyFlag")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                    Spacer()
+                }
+                VStack{
+    
                     Text(getTenseString(tenseIn: verbConjMultipleChoiceVM.currentTense))
                         .font(Font.custom("Chalkboard SE", size: 30))
                         .underline()
-                        .padding(.top, 20)
+                        .padding(.top, 70)
                     
                     ScrollViewReader {scroller in
                         ScrollView(.horizontal){
@@ -58,7 +87,8 @@ struct verbConjMultipleChoiceView: View{
                                         Text(verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameIt + " - " + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].pronoun + "\n(" + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameEng)
                                             .bold()
                                             .font(Font.custom("Arial Hebrew", size: 20))
-                                            .frame(width:260, height: 100)
+                                            .frame(width:geo.size.width * 0.7)
+                                            .padding()
                                             .background(Color.teal)
                                             .cornerRadius(10)
                                             .foregroundColor(Color.white)
@@ -68,7 +98,7 @@ struct verbConjMultipleChoiceView: View{
                                                     .stroke(.black, lineWidth: 4)
                                             )
                                         
-                                            .padding(.bottom, 50)
+                                            .padding(.bottom, 20)
                                             .shadow(radius: 10)
                             
                                         
@@ -156,12 +186,13 @@ struct verbConjMultipleChoiceView: View{
                 
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color("WashedWhite"))
-                    .frame(width: 365, height: 200)
+                    .frame(width: geo.size.width * 0.95, height: geo.size.height * 0.34)
                     .overlay( /// apply a rounded border
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(.black, lineWidth: 4)
                     )
-                    .offset(y: -75)
+                    .padding([.leading, .trailing], geo.size.width * 0.025)
+                    .offset(y: geo.size.height / 3)
                     .zIndex(0)
                 
                     
@@ -169,7 +200,7 @@ struct verbConjMultipleChoiceView: View{
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200, height: 100)
-                        .offset(x: 95, y: animatingBear ? 320 : 750)
+                        .offset(x: 195, y: animatingBear ? geo.size.height - 35: 750)
                     
                     if saved {
                         
@@ -189,7 +220,7 @@ struct verbConjMultipleChoiceView: View{
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 40)
-                        .offset(y: 240)
+                        .offset(x: 150, y: geo.size.height - 95)
                 }
                       
                 if wrongChosen{
@@ -200,7 +231,7 @@ struct verbConjMultipleChoiceView: View{
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 40)
-                        .offset(y: 240)
+                        .offset(x: 150, y: geo.size.height - 95)
                 }
                       
                 

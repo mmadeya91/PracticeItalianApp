@@ -35,39 +35,40 @@ struct ChooseVCActivityMyList: View {
     var body: some View {
         
         GeometryReader{ geo in
-            ZStack{
+            ZStack(alignment: .topLeading){
                 Image("horizontalNature")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
                     .opacity(1.0)
                 
-                Image("sittingBear")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 200, height: 100)
-                    .offset(x: 55, y: animatingBear ? -260 : 0)
-                
-                HStack(spacing: 18){
+                HStack(alignment: .top){
+                    
                     NavigationLink(destination: chooseVerbList(), label: {
                         Image(systemName: "xmark")
                             .font(.system(size: 25))
                             .foregroundColor(.black)
                         
                     }).padding(.leading, 25)
-                    
+                        .padding(.top, 20)
+
                     
                     Spacer()
+                    VStack(spacing: 0){
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .shadow(radius: 10)
+                            .padding()
+                        
+                      
+                        }
+                    }
                     
-                    Image("italyFlag")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .padding(.trailing, 30)
-                        .shadow(radius: 10)
-                }.offset(y:-350)
-                VStack(spacing: 0){
+                
+                VStack{
                     Text("Verb Conjugation").zIndex(1)
                         .font(Font.custom("Marker Felt", size: 30))
                         .foregroundColor(.white)
@@ -96,7 +97,7 @@ struct ChooseVCActivityMyList: View {
                                         .stroke(.black, lineWidth: 3))
                                     .shadow(radius: 10)
                                 
-                            }).disabled(isEmptyMyListVerbData())
+                            })
                             
                             Text("Multiple Choice")
                         }.frame(width: 140, height: 200)
@@ -122,22 +123,22 @@ struct ChooseVCActivityMyList: View {
                                         .stroke(.black, lineWidth: 3))
                                     .shadow(radius: 10)
                                 
-                            }).disabled(isEmptyMyListVerbData())
+                            })
                             
                             Text("Complete Conjugation Table")
                                 .multilineTextAlignment(.center)
                         }.frame(width: 140, height: 200)
-                            .offset(y:8)
+                            .padding(.top, 8)
+                            .offset(y:5)
                         Spacer()
-                    }
+                    }.offset(y:-15)
                     HStack{
                         Spacer()
                         VStack{
                             Button(action: {
                                 chooseVCActivityVM.chosenActivity = 2
                                 spellConjVerbVM.currentTense = getTenseInt(tenseString: selectedTense)
-                                spellConjVerbVM.createVerbObjects(myListIn: items)
-                                spellConjVerbVM.setMyListSpellVerbData()
+                                spellConjVerbVM.setSpellVerbData()
                                 spellConjVerbVM.setHintLetter(letterArray: spellConjVerbVM.currentTenseSpellConjVerbData[0].hintLetterArray)
                                 showActivity = true
                             }, label: {
@@ -151,16 +152,18 @@ struct ChooseVCActivityMyList: View {
                                     .overlay( RoundedRectangle(cornerRadius: 60)
                                         .stroke(.black, lineWidth: 3))
                                     .shadow(radius: 10)
-                            }).disabled(isEmptyMyListVerbData())
+                                
+                            })
                             
                             Text("Spell it Out")
-                        }.frame(width: 140, height: 200)
+                        }.frame(width: 100, height: 100).padding(.top, 20)
+                            .offset(y:-15)
                         Spacer()
                         VStack{
                             Button(action: {
                                 chooseVCActivityVM.chosenActivity = 3
                                 showActivity = true
-                               
+                                
                             }, label: {
                                 Image("myVerbList")
                                     .resizable()
@@ -178,28 +181,91 @@ struct ChooseVCActivityMyList: View {
                             Text("Edit My List")
                         }.frame(width: 140, height: 100)
                         Spacer()
-                    }.padding(.bottom, 20)
+                        
+                    }//.offset(y: -15)
                     
-                    if myListIsEmpty{
-                        Text("Your List is Empty")
-                    }
-
                     let tenses: [String] = ["Presente", "Passato Prossimo", "Futuro", "Imperfetto", "Presente Condizionale", "Imperativo"]
                     
                     Picker("Please choose a color", selection: $selectedTense) {
-                                 ForEach(tenses, id: \.self) {
-                                     Text($0)
-                                         .font(.title)
-            
-                                 }
+                        ForEach(tenses, id: \.self) {
+                            Text($0)
+                                .font(.title)
+                            
+                        }
                     }.pickerStyle(WheelPickerStyle())
-                        .offset(y:-30)
-                        .frame(height: 120)
+                        .padding(.bottom, 20)
+//                    HStack{
+//                        Spacer()
+//                        VStack{
+//                            Button(action: {
+//                                chooseVCActivityVM.chosenActivity = 2
+//                                spellConjVerbVM.currentTense = getTenseInt(tenseString: selectedTense)
+//                                spellConjVerbVM.createVerbObjects(myListIn: items)
+//                                spellConjVerbVM.setMyListSpellVerbData()
+//                                spellConjVerbVM.setHintLetter(letterArray: spellConjVerbVM.currentTenseSpellConjVerbData[0].hintLetterArray)
+//                                showActivity = true
+//                            }, label: {
+//                                Image("spellOut")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 65, height: 65)
+//                                    .padding()
+//                                    .background(.white)
+//                                    .cornerRadius(60)
+//                                    .overlay( RoundedRectangle(cornerRadius: 60)
+//                                        .stroke(.black, lineWidth: 3))
+//                                    .shadow(radius: 10)
+//                            }).disabled(isEmptyMyListVerbData())
+//                            
+//                            Text("Spell it Out")
+//                        }.frame(width: 140, height: 200)
+//                        Spacer()
+//                        VStack{
+//                            Button(action: {
+//                                chooseVCActivityVM.chosenActivity = 3
+//                                showActivity = true
+//                               
+//                            }, label: {
+//                                Image("myVerbList")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 65, height: 65)
+//                                    .padding()
+//                                    .background(.white)
+//                                    .cornerRadius(60)
+//                                    .overlay( RoundedRectangle(cornerRadius: 60)
+//                                        .stroke(.black, lineWidth: 3))
+//                                    .shadow(radius: 10)
+//                                
+//                            })
+//                            
+//                            Text("Edit My List")
+//                        }.frame(width: 140, height: 100)
+//                        Spacer()
+//                    }
+//                        .offset(y:-35)
+//                    
+//                    if myListIsEmpty{
+//                        Text("Your List is Empty")
+//                    }
+//
+//                    let tenses: [String] = ["Presente", "Passato Prossimo", "Futuro", "Imperfetto", "Presente Condizionale", "Imperativo"]
+//                    
+//                    Picker("Please choose a color", selection: $selectedTense) {
+//                        ForEach(tenses, id: \.self) {
+//                            Text($0)
+//                                .font(.title)
+//                            
+//                        }
+//                    }.pickerStyle(WheelPickerStyle())
+//                        .frame(height: 85)
+//                        .offset(y:-55)
         
-                }.frame(width:345, height: 600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                    .stroke(.black, lineWidth: 5))
-                    .shadow(radius: 10)
-                    .padding(.top, 40)
+                }.frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.85)
+                    .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                        .stroke(.black, lineWidth: 5))
+                    .padding([.leading, .trailing], geo.size.width * 0.05)
+                    .padding([.top, .bottom], geo.size.height * 0.12)
             }.onAppear{
                 withAnimation(.spring()){
                     animatingBear = true

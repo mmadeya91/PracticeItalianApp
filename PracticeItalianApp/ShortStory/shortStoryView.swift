@@ -117,70 +117,75 @@ struct shortStoryView: View {
 
                 if showPopUpScreen{
                     popUpView(storyObj: self.storyObj, linkClickedString: self.$linkClickedString, showPopUpScreen: self.$showPopUpScreen).transition(.slide).animation(.easeIn).zIndex(2)
-                        .padding(.bottom, 90)
+                        .offset(x: (geo.size.width / 9), y: (geo.size.height / 2) - 155)
 
                 }
                 
                 VStack(spacing: 0){
-                    
-                    ScrollView(.vertical, showsIndicators: false) {
-                        Text("Cristofo Columbo")
-                            .font(Font.custom("Arial Hebrew", size: 25))
-                            .padding(.top, 30)
-                            .overlay(
-                                Rectangle()
-                                    .fill(Color.black)
-                                    .frame(width: 210, height: 1)
-                                , alignment: .bottom
-                            )
-                        
-                        if !showEnglish {
-                            Text(.init(storyObj.storyString))
-                                .modifier(textModifer())
-                                .environment(\.openURL, OpenURLAction { url in
-                                    handleURL(url, name: url.valueOf("word")!)
-                                    
-                                })
-                        }else{
-                            Text(.init(storyObj.storyStringEnglish))
-                                .modifier(textModifer())
-                        }
-                        
-                        
-                    }.frame(width: geo.size.width - 40, height: showQuestionDropdown ? geo.size.height - 360 :geo.size.height - 170).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color("DarkNavy"), lineWidth: 6)).padding(.bottom, 25)
-                    
-                    
-                    HStack{
-                        Text("Questions")
-                            .font(Font.custom("Arial Hebrew", size: 20))
-                            .padding(.leading, 30)
-                            .padding(.top, 6)
-                        
-                        
-                        Spacer()
-                        
-                        
-                        Button(action: {
-                            withAnimation(.spring()){
-                                showQuestionDropdown.toggle()
+                        ScrollView(.vertical, showsIndicators: false) {
+                            Text("Cristofo Columbo")
+                                .font(Font.custom("Arial Hebrew", size: 25))
+                                .padding(.top, 30)
+                                .overlay(
+                                    Rectangle()
+                                        .fill(Color.black)
+                                        .frame(width: 210, height: 1)
+                                    , alignment: .bottom
+                                )
+                            
+                            if !showEnglish {
+                                Text(.init(storyObj.storyString))
+                                    .modifier(textModifer())
+                                    .environment(\.openURL, OpenURLAction { url in
+                                        handleURL(url, name: url.valueOf("word")!)
+                                        
+                                    })
+                            }else{
+                                Text(.init(storyObj.storyStringEnglish))
+                                    .modifier(textModifer())
                             }
-                        }, label: {
-                            Image("downArrow4")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 60, height: 55)
-                        }).disabled(showShortStoryDragDrop)
-                        
-                        
-                    }.frame(width: geo.size.width - 40, height: 50, alignment: .leading)
-                        .background(Color("WashedWhite"))
-                        .cornerRadius(20)
-                        .overlay( /// apply a rounded border
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(.black, lineWidth: 4)
-                        )
-                        .padding(.bottom, showQuestionDropdown ? 0 : 25)
+                            
+                            
+                            
+                        }.frame(width: geo.size.width - 40).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color("DarkNavy"), lineWidth: 6)).padding(.bottom, 25)
+                    
+                    GroupBox{
+                  
+                        DisclosureGroup("Questions") {
+      
+                            VStack(spacing: 0){
+                              
+                                Text(storyObj.questionList[questionNumber].question)
+                                    .font(Font.custom("Arial Hebrew", size: 16))
+                                    .padding()
+                                    .frame(width: geo.size.width - 37, height: 55)
+                                    .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 9)
+                                        .stroke(.black, lineWidth: 4))
+                          
+                                
+                                radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+                                    .padding(.top, 10)
+
+                                
+                                
+                            }
+                            .frame(width: geo.size.width - 60)
+                            .background(Color("WashedWhite")).cornerRadius(2)
+                            .overlay( RoundedRectangle(cornerRadius: 9)
+                                .stroke(Color("DarkNavy"), lineWidth: 4))
+                            .padding(.top, 10)
+                            
+                            
+                        }
+                        .tint(Color.black)
+                        .font(Font.custom("Arial Hebrew", size: 16))
+                        .frame(width: geo.size.width - 70)
+                    
+                    } .padding(.bottom, 15)
+                    
+                    
+                     
                     
                 }.padding(.top, 60)
                     .padding(.leading, 20)
@@ -303,23 +308,6 @@ struct popUpView: View{
     }
 }
 
-
-//struct radioButtons: View{
-//
-//    var storyObj: shortStoryObject
-//
-//    @Binding var questionNumber: Int
-//    @Binding var showShortStoryDragDrop: Bool
-//    @Binding var progress: CGFloat
-//
-//    var body: some View{
-//        VStack{
-//
-//            radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
-//
-//        }
-//    }
-//}
 
 struct radioButtonsMC: View {
     

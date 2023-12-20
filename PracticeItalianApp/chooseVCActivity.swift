@@ -28,38 +28,38 @@ struct chooseVCActivity: View {
     
     var body: some View {
             GeometryReader{ geo in
-                ZStack{
+                ZStack(alignment: .topLeading){
                     Image("horizontalNature")
                         .resizable()
                         .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
                         .opacity(1.0)
                     
-                    Image("sittingBear")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 100)
-                        .offset(x: 55, y: animatingBear ? -260 : 0)
-                    
-                    HStack(spacing: 18){
+                    HStack(alignment: .top){
+                        
                         NavigationLink(destination: chooseVerbList(), label: {
                             Image(systemName: "xmark")
                                 .font(.system(size: 25))
                                 .foregroundColor(.black)
                             
                         }).padding(.leading, 25)
-                        
+                            .padding(.top, 20)
+
                         
                         Spacer()
+                        VStack(spacing: 0){
+                            Image("italyFlag")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .shadow(radius: 10)
+                                .padding()
+                            
+                          
+                            }
+                        }
                         
-                        Image("italyFlag")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40, height: 40)
-                            .padding(.trailing, 30)
-                            .shadow(radius: 10)
-                    }.offset(y:-350)
                     
                     VStack{
                         Text("Verb Conjugation").zIndex(1)
@@ -122,7 +122,7 @@ struct chooseVCActivity: View {
                                 .padding(.top, 8)
                                 .offset(y:5)
                             Spacer()
-                        }
+                        }.offset(y:-15)
                         HStack{
                             VStack{
                                 Button(action: {
@@ -148,7 +148,7 @@ struct chooseVCActivity: View {
                                 Text("Spell it Out")
                             }.frame(width: 100, height: 100).padding(.top, 20)
                             
-                        }
+                        }.offset(y: -15)
                         
                         let tenses: [String] = ["Presente", "Passato Prossimo", "Futuro", "Imperfetto", "Presente Condizionale", "Imperativo"]
                         
@@ -161,10 +161,11 @@ struct chooseVCActivity: View {
                         }.pickerStyle(WheelPickerStyle())
                             .padding(.bottom, 20)
                         
-                    }.frame(width:345, height: 600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                        .stroke(.black, lineWidth: 5))
-                    .shadow(radius: 10)
-                    .padding(.top, 40)
+                    }.frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.85)
+                        .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                            .stroke(.black, lineWidth: 5))
+                        .padding([.leading, .trailing], geo.size.width * 0.05)
+                        .padding([.top, .bottom], geo.size.height * 0.12)
                 }.onAppear{
                     withAnimation(.spring()){
                         animatingBear = true

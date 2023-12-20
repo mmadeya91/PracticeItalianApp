@@ -38,60 +38,61 @@ struct chooseFlashCardSet: View {
     
     var body: some View {
         GeometryReader{ geo in
-            ZStack{
-                Image("verticalNature")
+            ZStack(alignment: .topLeading){
+                Image("horizontalNature")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
                     .opacity(1.0)
                 
-                HStack(spacing: 18){
-               
-                        NavigationLink(destination: chooseActivity(), label: {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 25))
-                                .foregroundColor(.black)
-                            
-                        }).padding(.leading, 25).padding(.top, 15)
- 
-                
+                HStack(alignment: .top){
+                    
+                    NavigationLink(destination: chooseActivity(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 25))
+                            .foregroundColor(.black)
+                        
+                    }).padding(.leading, 25)
+                        .padding(.top, 20)
+
                     
                     Spacer()
-                    VStack{
+                    VStack(spacing: 0){
                         Image("italyFlag")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40, height: 40)
                             .shadow(radius: 10)
+                            .padding()
+                        
                         HStack{
                             Image("coin2")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 40, height: 40)
-     
-                            
                             Text(String(globalModel.userCoins))
                                 .font(Font.custom("Arial Hebrew", size: 22))
-                        }.padding(.top,10).padding(.trailing, 45)
-                    }.padding(.top, 85)
-                }.zIndex(2).offset(y:-380)
+                        }.padding(.trailing, 50)
+                    }
+                    
+                }
                 
                 Image("sittingBear")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 200, height: 100)
-                    .offset(x: -45, y: animatingBear ? -260 : 0)
+                    .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
+                    .offset(x: 50, y: animatingBear ? 90 : 200)
                 
                 
                 
                 VStack{
                     
-                    flashCardSets(setAccData: flashCardSetAccData, showInfoPopup: $showInfoPopUp, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width: 345, height:600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                        .stroke(.black, lineWidth: 5))
-                        .shadow(radius: 10)
-                        .padding(.top, 90)
-                        .padding(.bottom, 35)
+                    flashCardSets(setAccData: flashCardSetAccData, showInfoPopup: $showInfoPopUp, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
+                        .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                            .stroke(.black, lineWidth: 5))
+                        .padding([.leading, .trailing], geo.size.width * 0.05)
+                        .padding([.top, .bottom], geo.size.height * 0.18)
                 }
                 
                 if showInfoPopUp{
@@ -108,6 +109,7 @@ struct chooseFlashCardSet: View {
                                 .stroke(.black, lineWidth: 3)
                         )
                         .transition(.slide).animation(.easeIn).zIndex(2)
+                        .offset(x: geo.size.width / 9, y: geo.size.height / 3)
                 }
                 
                 if attemptToBuyPopUp{
@@ -345,7 +347,10 @@ struct flashCardButton: View {
                                 .font(Font.custom("Arial Hebrew", size: 30))
                                 .bold()
                         }.offset(y:5)
+                        
                     )
+                    
+                    Text(String(format: "%.0f", flashCardSetAccObj.calculateSetAccuracy(setAccObj: setAccData[arrayIndex])) + "%").opacity(0)
                     
                 }
             }else{

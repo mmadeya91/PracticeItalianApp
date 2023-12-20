@@ -29,62 +29,61 @@ struct chooseAudio: View {
     
     var body: some View {
         GeometryReader{ geo in
-            ZStack{
+            ZStack(alignment: .topLeading){
                 Image("horizontalNature")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
                     .opacity(1.0)
-                    .padding(.bottom, 50)
                 
-                HStack(spacing: 18){
+                HStack(alignment: .top){
                     
                     NavigationLink(destination: chooseActivity(), label: {
                         Image(systemName: "xmark")
                             .font(.system(size: 25))
                             .foregroundColor(.black)
                         
-                    }).padding(.leading, 25).padding(.top, 15)
-                    
-                    
+                    }).padding(.leading, 25)
+                        .padding(.top, 20)
+
                     
                     Spacer()
-                    VStack{
+                    VStack(spacing: 0){
                         Image("italyFlag")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40, height: 40)
                             .shadow(radius: 10)
+                            .padding()
+                        
                         HStack{
                             Image("coin2")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 40, height: 40)
-                            
-                            
                             Text(String(globalModel.userCoins))
                                 .font(Font.custom("Arial Hebrew", size: 22))
-                        }.padding(.top,10).padding(.trailing, 45)
-                    }.padding(.top, 85)
-                }.zIndex(2).offset(y:-400)
+                        }.padding(.trailing, 50)
+                    }
+                    
+                }
+                
                 
                 Image("sittingBear")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 200, height: 100)
-                    .offset(x: -65, y: animatingBear ? -270 : 0)
-                
+                    .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
+                    .offset(x: 50, y: animatingBear ? 90 : 200)
                 
                 VStack{
                     
                     
-                    shortStoryContainer2(showInfoPopUp: $showInfoPopup, attemptToBuyPupUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width:345, height: 600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                        .stroke(.black, lineWidth: 4))
-                    .shadow(radius: 10)
-                    .padding(.top, 100)
-                    .padding(.bottom, 80)
-                    
+                    shortStoryContainer2(showInfoPopUp: $showInfoPopup, attemptToBuyPupUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
+                        .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                            .stroke(.black, lineWidth: 5))
+                        .padding([.leading, .trailing], geo.size.width * 0.05)
+                        .padding([.top, .bottom], geo.size.height * 0.18)
                 }
                 
                 if showInfoPopup{
@@ -101,7 +100,10 @@ struct chooseAudio: View {
                                 .stroke(.black, lineWidth: 3)
                         )
                         .transition(.slide).animation(.easeIn).zIndex(2)
+                        .offset(y: (geo.size.height / 2) - 100)
+                        .padding(.leading, 38)
                 }
+                    
                 
                 if attemptToBuyPopUp{
                     VStack{

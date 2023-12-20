@@ -35,15 +35,46 @@ struct listeningActivityQuestions: View {
     
     var body: some View {
         GeometryReader{geo in
-            Image("verticalNature")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            
-            
-            
-            ZStack{
+  
+            ZStack(alignment: .topLeading){
+                
+                Image("verticalNature")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .zIndex(0)
+                
+                HStack(spacing: 18){
+                    Spacer()
+                    NavigationLink(destination: availableShortStories(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 25))
+                            .foregroundColor(.gray)
+                            
+                            
+                    })
+                    
+                    GeometryReader{proxy in
+                        ZStack(alignment: .leading) {
+                            Capsule()
+                                .fill(.gray.opacity(0.25))
+                            
+                            Capsule()
+                                .fill(Color.green)
+                                .frame(width: proxy.size.width * CGFloat(progress))
+                        }
+                    }.frame(height: 13)
+                        .onChange(of: currentQuestionNumber){ newValue in
+                            progress = (CGFloat(newValue) / 4)
+                        }
+                    
+                    Image("italyFlag")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                    Spacer()
+                }
                 
                 if showUserCheck {
                     userCheckNavigationPopUpListeningActivity(showUserCheck: $showUserCheck)
@@ -56,12 +87,6 @@ struct listeningActivityQuestions: View {
                 
                 
                 ScrollViewReader {scrollView in
-                    ZStack(alignment: .topLeading){
-                        NavBar().padding([.leading, .trailing], 15)
-                            .padding(.bottom, 20)
-                            .padding(.top, 20)
-                        
-                    }
                     ScrollView(.vertical, showsIndicators: false) {
                         
                         ForEach(0..<placeHolderArray.count, id: \.self) {i in
@@ -69,7 +94,7 @@ struct listeningActivityQuestions: View {
                             if placeHolderArray[i].isQuestion {
                                 
                                 
-                                dialogueCaptionBoxWithQuestion(questionPart1: placeHolderArray[i].questionPart1, questionPart2: placeHolderArray[i].questionPart2, correctChosen: placeHolderArray[i].correctChosen, answer: placeHolderArray[i].answer, userInput: $userInput, currentQuestionNumber: $currentQuestionNumber).transition(.slide).animation(.easeIn(duration: 0.75)).padding([.leading, .trailing], 15).padding(.top, 15).padding(.bottom, 10)
+                                dialogueCaptionBoxWithQuestion(questionPart1: placeHolderArray[i].questionPart1, questionPart2: placeHolderArray[i].questionPart2, correctChosen: placeHolderArray[i].correctChosen, answer: placeHolderArray[i].answer, userInput: $userInput, currentQuestionNumber: $currentQuestionNumber).transition(.slide).animation(.easeIn(duration: 0.75)).padding([.leading, .trailing], 15).padding(.top, 15).padding(.bottom, 5)
                                 
                                 
                                 
@@ -77,15 +102,16 @@ struct listeningActivityQuestions: View {
                             }else {
                                 
                                 
-                                dialogueCaptionBoxNoQuestion(fullSentence: placeHolderArray[i].fullSentence, questionNumber: i, currentQuestionNumber: $currentQuestionNumber).transition(.slide).animation(.easeIn).padding([.leading, .trailing], 10).padding([.top, .bottom], 15)
+                                dialogueCaptionBoxNoQuestion(fullSentence: placeHolderArray[i].fullSentence, questionNumber: i, currentQuestionNumber: $currentQuestionNumber).transition(.slide).animation(.easeIn(duration: 0.75)).padding([.leading, .trailing], 15).padding(.top, 15).padding(.bottom, 5)
                                 
                                 
                             }
                         }
-                    }.frame(width: 340, height: 390)
+                    }.frame(width: geo.size.width * 0.9, height: geo.size.height * 0.45)
                         .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                             .stroke(.black, lineWidth: 6)).padding(.top, 10)
                         .shadow(radius: 10)
+                        .padding(.top, 55)
                     
                     //BLANK SPACES FOR HINT LETTERS
                     VStack(spacing: 0){
@@ -281,7 +307,7 @@ struct listeningActivityQuestions: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200, height: 100)
-                        .offset(x: 130, y: animatingBear ? -20 : 750)
+                        .offset(x: 130, y: animatingBear ? -28 : 750)
                     
                     if correctChosen{
                         
@@ -336,39 +362,6 @@ struct listeningActivityQuestions: View {
         }
     }
     
-    @ViewBuilder
-    func NavBar() -> some View{
-        HStack(spacing: 18){
-            Button(action: {
-                showUserCheck.toggle()
-            }, label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 25))
-                    .foregroundColor(.gray)
-                
-            })
-            
-            GeometryReader{proxy in
-                      ZStack(alignment: .leading) {
-                         Capsule()
-                             .fill(.gray.opacity(0.25))
-                          
-                          Capsule()
-                              .fill(Color.green)
-                              .frame(width: proxy.size.width * progress)
-                      }
-                  }
-            .frame(height: 10)
-            .onChange(of: currentQuestionNumber){ newValue in
-                progress = CGFloat(newValue) / CGFloat(5)
-            }
-            
-            Image("italyFlag")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-        }
-    }
 }
 
 
@@ -408,7 +401,7 @@ struct dialogueCaptionBoxWithQuestion: View {
                 Text(questionPart2)
                     .font(Font.custom("Chalkboard SE", size: 13))
             }
-        }.frame(width: 245)
+        }.frame()
             .padding([.top, .bottom], 10)
             .padding([.leading, .trailing], 20)
             .foregroundColor(.black)
@@ -429,7 +422,7 @@ struct dialogueCaptionBoxNoQuestion: View {
         
         Text(fullSentence)
             .font(Font.custom("Chalkboard SE", size: 15))
-            .frame(width: 230)
+            .frame()
             .padding([.top, .bottom], 10)
             .padding([.leading, .trailing], 20)
             .foregroundColor(.black)

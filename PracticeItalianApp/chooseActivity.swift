@@ -17,8 +17,8 @@ extension Image {
             .frame(width: 115, height: 120)
             .background(.white)
             .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(.black, lineWidth: 6))
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(.black, lineWidth: 6))
     }
 }
 
@@ -71,7 +71,7 @@ struct chooseActivity: View {
                 Image("sittingBear")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 200, height: 100)
+                    .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
                     .offset(x: 150, y: animatingBear ? 73 : 200)
                 
                 
@@ -80,112 +80,116 @@ struct chooseActivity: View {
                     Text("Exercises")
                         .font(Font.custom("Marker Felt", size: geo.size.width * 0.08))
                         .foregroundColor(.white)
-                        .padding(.top, 15)
                         .frame(width: geo.size.width, height: geo.size.width * 0.20)
                         .background(Color("DarkNavy")).opacity(0.75)
                         .cornerRadius(13)
                         .border(width: 8, edges: [.bottom], color: .teal)
-                      
                     
-                    HStack{
-                        VStack{
-                            NavigationLink(destination: availableShortStories(), label: {Image("reading-book")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(10)
-                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
-                                    .background(.white)
-                                    .overlay(
+                    VStack(spacing: 0){
+                        HStack{
+                            Spacer()
+                            VStack{
+                                NavigationLink(destination: availableShortStories(), label: {Image("reading-book")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(10)
+                                        .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
+                                        .background(.white)
+                                        .overlay(
                                             RoundedRectangle(cornerRadius: 16)
                                                 .stroke(.black, lineWidth: 6))
-                            })
-                            Text("Reading")
-                                .bold()
-                                .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
-                                .frame(width: geo.size.width * 0.25, height: geo.size.width * 0.15)
-                            
+                                })
+                                Text("Reading")
+                                    .bold()
+                                    .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
+                                    .frame(width: geo.size.width * 0.25, height: geo.size.width * 0.1)
+                                
+                            }
+                            Spacer()
+                            VStack{
+                                
+                                
+                                NavigationLink(destination: chooseAudio(), label: {
+                                    Image("talking")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(10)
+                                        .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
+                                        .background(.white)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(.black, lineWidth: 6))
+                                })
+                                Text("Listening")
+                                    .bold()
+                                    .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
+                                    .frame(width: geo.size.width * 0.25, height: geo.size.width * 0.1)
+                            }
+                            Spacer()
                         }
                         
-                        VStack{
-                            
-                            
-                            NavigationLink(destination: chooseAudio(), label: {
-                                Image("talking")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(10)
-                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
-                                    .background(.white)
-                                    .overlay(
-                                            RoundedRectangle(cornerRadius: 16)
-                                                .stroke(.black, lineWidth: 6))
-                            })
-                            Text("Listening")
-                                .bold()
-                                .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
-                                .frame(width: geo.size.width * 0.25, height: geo.size.width * 0.15)
-                        }
-                    }
-                      
-                  
-          
-                    HStack(spacing: 0){
-                        VStack{
-                            NavigationLink(destination: chooseFlashCardSet(), label: {
-                                Image("flash-card")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(10)
-                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
-                                    .background(.white)
-                                    .overlay(
-                                            RoundedRectangle(cornerRadius: 16)
-                                                .stroke(.black, lineWidth: 6))
-                                    .padding(.top, 55)
-                            })
-                            Text("Flash \nCards")
-                                .bold()
-                                .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
-                                .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.22)
-                               
-                        }
                         
-                       
-                        VStack{
-                            NavigationLink(destination: chooseVerbList(), label:{
-                                Image("spell-check")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(10)
-                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
-                                    .background(.white)
-                                    .overlay(
+                        
+                        HStack(spacing: 0){
+                            Spacer()
+                            VStack{
+                                NavigationLink(destination: chooseFlashCardSet(), label: {
+                                    Image("flash-card")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(10)
+                                        .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
+                                        .background(.white)
+                                        .overlay(
                                             RoundedRectangle(cornerRadius: 16)
                                                 .stroke(.black, lineWidth: 6))
-                                    .padding(.top, 55)
-                            })
-                            Text("Verb Conjugation")
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
-                                .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.22)
-                               
+                                        .padding(.top, 55)
+                                })
+                                Text("Flash \nCards")
+                                    .bold()
+                                    .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
+                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.15)
+                                
+                            }
+                            
+                            Spacer()
+                            VStack{
+                                NavigationLink(destination: chooseVerbList(), label:{
+                                    Image("spell-check")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(10)
+                                        .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.27)
+                                        .background(.white)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(.black, lineWidth: 6))
+                                        .padding(.top, 55)
+                                })
+                                Text("Verb Conjugation")
+                                    .bold()
+                                    .multilineTextAlignment(.center)
+                                    .font(Font.custom("Marker Felt", size: geo.size.width * 0.05))
+                                    .frame(width: geo.size.width * 0.27, height: geo.size.width * 0.15)
+                                
+                            }
+                            Spacer()
                         }
-                    }
-               
+                    }.padding(.top, geo.size.height * 0.05)
+                    
                     
                     Spacer()
-                }.frame(width:  geo.size.width * 0.95, height: geo.size.height * 0.725)
-                    //.shadow(radius: 10)
+                }.frame(width:  geo.size.width * 0.85, height: geo.size.height * 0.78)
+                //.shadow(radius: 10)
                     .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                         .stroke(.black, lineWidth: 5))
-                    .padding([.leading, .trailing], geo.size.width * 0.025)
+                    .padding([.leading, .trailing], geo.size.width * 0.075)
                     .padding([.top, .bottom], geo.size.height * 0.15)
-                    //.offset(y: (geo.size.height / 2) - (geo.size.height / 2.8))
-
-                    
-                    
-                 
+                //.offset(y: (geo.size.height / 2) - (geo.size.height / 2.8))
+                
+                
+                
+                
             }
             .onAppear{
                 withAnimation(.easeIn(duration: 1.5)){
@@ -209,7 +213,7 @@ struct chooseActivity_Previews: PreviewProvider {
         chooseActivity().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .environmentObject(AudioManager())
             .environmentObject(GlobalModel())
-   
-          
+        
+        
     }
 }

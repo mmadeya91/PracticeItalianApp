@@ -53,14 +53,14 @@ struct ListeningActivityView: View {
                                 .resizable()
                                 .scaledToFill()
                                 .padding(23)
-                                .frame(width: 150, height: 150)
+                                .frame(width: geo.size.width * 0.38, height: geo.size.height * 0.2)
                                 .background(Color("WashedWhite"))
                                 .overlay( /// apply a rounded border
                                     RoundedRectangle(cornerRadius: 70)
                                         .stroke(.black, lineWidth: 7)
                                 )
                                 .cornerRadius(70)
-                                .padding(.top, 200)
+                                .padding(.top, 260)
                                 .shadow(radius: 10)
                             
                             Text(listeningActivityVM.audioAct.title)

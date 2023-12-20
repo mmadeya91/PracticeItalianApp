@@ -285,7 +285,7 @@ struct correctLAComprehensionButton: View {
             
             HStack{
                 Text(choice)
-                    .font(Font.custom("Arial Hebrew", size: 16))
+                    .font(Font.custom("Arial Hebrew", size: 14))
                     .padding([.leading, .trailing], 10)
                 
                 Spacer()
@@ -356,7 +356,7 @@ struct incorrectLAComprehensionButton: View {
             
             HStack{
                 Text(choice)
-                    .font(Font.custom("Arial Hebrew", size: 16))
+                    .font(Font.custom("Arial Hebrew", size: 14))
                     .padding([.leading, .trailing], 5)
                 
                 Spacer()

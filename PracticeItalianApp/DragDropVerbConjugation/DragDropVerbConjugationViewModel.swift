@@ -47,24 +47,41 @@ final class DragDropVerbConjugationViewModel: ObservableObject {
             let wrongChoice2: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value}.randomElement()!)
             let wrongChoice3: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value && $0 != wrongChoice2.value}.randomElement()!)
             let wrongChoice4: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value && $0 != wrongChoice2.value && $0 != wrongChoice3.value}.randomElement()!)
-            let wrongChoice5: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value && $0 != wrongChoice2.value && $0 != wrongChoice3.value && $0 != wrongChoice4.value}.randomElement()!)
-            let wrongChoice6: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value && $0 != wrongChoice2.value && $0 != wrongChoice3.value && $0 != wrongChoice4.value && $0 != wrongChoice5.value}.randomElement()!)
             
-            choiceList = [wrongChoice1, wrongChoice2, wrongChoice3, wrongChoice4, wrongChoice5, wrongChoice6]
+            choiceList = [wrongChoice1, wrongChoice2, wrongChoice3, wrongChoice4]
             
             
             //create dropSpaceLeft Verb Items
             for i in 0...2 {
-                let verbConjCharacter = VerbConjCharacter(value: correctTenseList[i])
+                let verbConjCharacter = VerbConjCharacter(value: correctTenseList[i], pronoun: getPronoun(pronounIn: i))
                 
                 dropSpaceLeft.append(verbConjCharacter)
             }
             
             //create dropSpaceRight Verb Items
             for i in 3...5 {
-                let verbConjCharacter = VerbConjCharacter(value: correctTenseList[i])
+                let verbConjCharacter = VerbConjCharacter(value: correctTenseList[i], pronoun:  getPronoun(pronounIn: i))
                 
                 dropSpaceRight.append(verbConjCharacter)
+            }
+            
+            func getPronoun(pronounIn: Int)->String{
+                switch pronounIn {
+                case 0:
+                    return "Io"
+                case 1:
+                    return "Tu"
+                case 2:
+                    return "Lui/Lei/Lei"
+                case 3:
+                    return "Noi"
+                case 4:
+                    return "Voi"
+                case 5:
+                    return "Loro"
+                default:
+                    return "Default"
+                }
             }
             
             
@@ -124,24 +141,41 @@ final class DragDropVerbConjugationViewModel: ObservableObject {
             let wrongChoice2: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value}.randomElement()!)
             let wrongChoice3: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value && $0 != wrongChoice2.value}.randomElement()!)
             let wrongChoice4: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value && $0 != wrongChoice2.value && $0 != wrongChoice3.value}.randomElement()!)
-            let wrongChoice5: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value && $0 != wrongChoice2.value && $0 != wrongChoice3.value && $0 != wrongChoice4.value}.randomElement()!)
-            let wrongChoice6: VerbConjCharacter = VerbConjCharacter(value: allConjList.filter(){$0 != correctTenseList[0] && $0 != correctTenseList[1] && $0 != correctTenseList[2] && $0 != correctTenseList[3] && $0 != correctTenseList[4] && $0 != correctTenseList[5] && $0 != wrongChoice1.value && $0 != wrongChoice2.value && $0 != wrongChoice3.value && $0 != wrongChoice4.value && $0 != wrongChoice5.value}.randomElement()!)
             
-            choiceList = [wrongChoice1, wrongChoice2, wrongChoice3, wrongChoice4, wrongChoice5, wrongChoice6]
+            choiceList = [wrongChoice1, wrongChoice2, wrongChoice3, wrongChoice4]
             
             
             //create dropSpaceLeft Verb Items
             for i in 0...2 {
-                let verbConjCharacter = VerbConjCharacter(value: correctTenseList[i])
+                let verbConjCharacter = VerbConjCharacter(value: correctTenseList[i], pronoun: getPronoun(pronounIn: i))
                 
                 dropSpaceLeft.append(verbConjCharacter)
             }
             
             //create dropSpaceRight Verb Items
             for i in 3...5 {
-                let verbConjCharacter = VerbConjCharacter(value: correctTenseList[i])
+                let verbConjCharacter = VerbConjCharacter(value: correctTenseList[i], pronoun:  getPronoun(pronounIn: i))
                 
                 dropSpaceRight.append(verbConjCharacter)
+            }
+            
+            func getPronoun(pronounIn: Int)->String{
+                switch pronounIn {
+                case 0:
+                    return "Io"
+                case 1:
+                    return "Tu"
+                case 2:
+                    return "Lui/Lei/Lei"
+                case 3:
+                    return "Noi"
+                case 4:
+                    return "Voi"
+                case 5:
+                    return "Loro"
+                default:
+                    return "Default"
+                }
             }
             
             
@@ -197,6 +231,9 @@ struct VerbConjCharacter: Identifiable, Hashable, Equatable {
     var textSize: CGFloat = .zero
     var fontSize: CGFloat = 19
     var isShowing: Bool = false
+    var pronoun: String = "default"
 }
+
+
 
 

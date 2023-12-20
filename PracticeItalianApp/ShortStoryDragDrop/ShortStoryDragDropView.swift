@@ -14,6 +14,7 @@ struct ShortStoryDragDropView: View{
     @State var questionNumber = 0
     @State var showPlayer = false
     @State var showUserCheck = false
+    @State var progress: CGFloat = 0.0
     
     let shortStoryVM = ShortStoryViewModel(currentStoryIn: 0)
     
@@ -37,12 +38,25 @@ struct ShortStoryDragDropView: View{
                     })
                     
                     
-                    Spacer()
-                    Image("italyFlag")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .shadow(radius: 10)
+                        GeometryReader{proxy in
+                            ZStack(alignment: .leading) {
+                                Capsule()
+                                    .fill(.gray.opacity(0.25))
+                                
+                                Capsule()
+                                    .fill(Color.green)
+                                    .frame(width: proxy.size.width * CGFloat(progress))
+                            }
+                        }.frame(height: 13)
+                            .onChange(of: questionNumber){ newValue in
+                                progress = (CGFloat(newValue) / 4)
+                            }
+                        
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                        Spacer()
                 }.padding([.leading, .trailing], 15).zIndex(1)
                 
                 ScrollViewReader{scroller in
@@ -67,7 +81,7 @@ struct ShortStoryDragDropView: View{
                                             
                                             
                                             
-                                            shortStoryDragDropViewBuilder(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence,questionNumberCount: shortStoryDragDropVM.currentDragDropQuestions.count).frame(width: geo.size.width)
+                                            shortStoryDragDropViewBuilder(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, progress: $progress, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence,questionNumberCount: shortStoryDragDropVM.currentDragDropQuestions.count).frame(width: geo.size.width)
                                                 .frame(minHeight: geo.size.height)
                                         }
                                         
@@ -92,13 +106,14 @@ struct ShortStoryDragDropView: View{
                         
                         RoundedRectangle(cornerRadius: 20)
                             .fill(Color("WashedWhite"))
-                            .frame(width: 360, height: 370)
+                            .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.7)
                             .overlay( /// apply a rounded border
                                 RoundedRectangle(cornerRadius: 20)
                                     .stroke(.black, lineWidth: 4)
                             )
                             .zIndex(0)
-                            .offset(y:130)
+                            .offset(y: (geo.size.height / 9))
+                         
                         
                         
                         
@@ -114,8 +129,6 @@ struct ShortStoryDragDropView: View{
 
 struct shortStoryDragDropViewBuilder: View {
         
-    @State var progress: CGFloat = 0
-    
     //choices
     @State var charactersSet: [[dragDropShortStoryCharacter]]
     
@@ -133,36 +146,40 @@ struct shortStoryDragDropViewBuilder: View {
     
     @State var droppedCount: CGFloat = 0
     @Binding var questionNumber: Int
+    @Binding var progress: CGFloat
     
     var englishSentence: String
     var questionNumberCount: Int
     
     var body: some View {
-        VStack {
-            NavBar().padding(.bottom, 20)
-            
+        GeometryReader{geo in
             VStack {
-                Text("Form this sentence")
-                    .font(.title2.bold())
-                    .padding(.bottom, 60)
+                
+                VStack {
+                    Text("Form this sentence")
+                        .font(.title2.bold())
+                        .padding(.bottom, 15)
+                        .padding(.top, 45)
                     
-                Text(englishSentence)
-                    .bold()
-                    .font(Font.custom("Marker Felt", size: 20))
-                    .padding([.leading, .trailing], 3)
-                    .frame(width:300, height: 110)
-                    .background(Color.teal)
-                    .cornerRadius(10)
-                    .foregroundColor(Color("WashedWhite"))
-                    .multilineTextAlignment(.center)
-                    .overlay( /// apply a rounded border
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(.black, lineWidth: 4)
-                    )
+                    Text(englishSentence)
+                        .bold()
+                        .font(Font.custom("Marker Felt", size: geo.size.height * 0.033))
+                        .padding()
+                        .frame(width:geo.size.width * 0.95)
+                        .background(Color.teal)
+                        .cornerRadius(10)
+                        .foregroundColor(Color("WashedWhite"))
+                        .multilineTextAlignment(.center)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .padding([.leading, .trailing], geo.size.width * 0.025)
+                }
+                DropArea()
+                    .padding(.vertical, 30)
+                DragArea()
             }
-            DropArea()
-                .padding(.vertical, 30)
-            DragArea()
         }
         .padding()
         .onChange(of: questionNumber) { newIndex in
@@ -230,13 +247,13 @@ struct shortStoryDragDropViewBuilder: View {
     
     @ViewBuilder
     func DragArea()->some View {
-        VStack(spacing: 12){
+        VStack(spacing: 20){
             ForEach(shuffledRows, id: \.self){row in
-                HStack(spacing:10){
+                HStack(spacing:25){
                     ForEach(row){item in
                         Text(item.value)
                             .font(.system(size: item.fontSize))
-                            .padding(.vertical, 5)
+                            .padding(.vertical, 7)
                             .padding(.horizontal, item.padding)
                             .background{
                                 RoundedRectangle(cornerRadius: 6, style: .continuous)
@@ -255,25 +272,6 @@ struct shortStoryDragDropViewBuilder: View {
                 
             }
         }
-    }
-    
-    @ViewBuilder
-    func NavBar() -> some View{
-        HStack(spacing: 18){
-            Spacer()
-            GeometryReader{proxy in
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(.gray.opacity(0.25))
-                    
-                    Capsule()
-                        .fill(Color.green)
-                        .frame(width: proxy.size.width * CGFloat(progress))
-                }
-            }.frame(height: 13)
-            Spacer()
-        }
-        
     }
     
     func generateGrid()->[[dragDropShortStoryCharacter]]{

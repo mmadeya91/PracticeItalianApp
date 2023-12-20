@@ -13,50 +13,51 @@ struct chooseVerbList: View {
 @State private var animatingBear = false
     var body: some View {
         GeometryReader{ geo in
-            ZStack{
-                Image("verticalNature")
+            ZStack(alignment: .topLeading){
+                Image("horizontalNature")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
                     .opacity(1.0)
                 
-                HStack(spacing: 18){
-               
-                        NavigationLink(destination: chooseActivity(), label: {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 25))
-                                .foregroundColor(.black)
-                            
-                        }).padding(.leading, 25).padding(.top, 15)
- 
-                
+                HStack(alignment: .top){
+                    
+                    NavigationLink(destination: chooseActivity(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 25))
+                            .foregroundColor(.black)
+                        
+                    }).padding(.leading, 25)
+                        .padding(.top, 20)
+
                     
                     Spacer()
-                    VStack{
+                    VStack(spacing: 0){
                         Image("italyFlag")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40, height: 40)
                             .shadow(radius: 10)
+                            .padding()
+                        
                         HStack{
                             Image("coin2")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 40, height: 40)
-     
-                            
                             Text(String(globalModel.userCoins))
                                 .font(Font.custom("Arial Hebrew", size: 22))
-                        }.padding(.top,10).padding(.trailing, 45)
-                    }.padding(.top, 85)
-                }.zIndex(2).offset(y:-380)
+                        }.padding(.trailing, 50)
+                    }
+                    
+                }
                 
                 Image("sittingBear")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 200, height: 100)
-                    .offset(x: -45, y: animatingBear ? -260 : 0)
+                    .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
+                    .offset(x: 50, y: animatingBear ? 90 : 200)
                 
                 VStack{
                     
@@ -109,9 +110,11 @@ struct chooseVerbList: View {
                                 Spacer()
                             }.padding(.top, 25)
                         }
-                    }.frame(width:345, height: 600).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                        .stroke(.black, lineWidth: 4))
-                    .padding(.top, 40)
+                    } .frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
+                        .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                            .stroke(.black, lineWidth: 5))
+                        .padding([.leading, .trailing], geo.size.width * 0.05)
+                        .padding([.top, .bottom], geo.size.height * 0.18)
                 }
             }.onAppear{
                 withAnimation(.spring()){

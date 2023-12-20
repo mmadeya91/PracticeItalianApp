@@ -58,12 +58,13 @@ struct ShortStoryPlugInView: View{
                                         
                                         ShortStoryPlugInViewBuilder(plugInQuestion: shortStoryPlugInVM.currentPlugInQuestions[i], plugInChoices: shortStoryPlugInVM.currentPlugInQuestionsChoices[i],questionNumber: $questionNumber, selected: $selected, correctChosen: $correctChosen, showHint: $showHint).frame(width: geo.size.width)
                                             .frame(minHeight: geo.size.height)
+                                            
                                     }
                                     
                                 }
                             }
                             
-                        }
+                        }.offset(y: -85)
                         .scrollDisabled(true)
                         .onChange(of: questionNumber) { newIndex in
                             withAnimation{
@@ -79,17 +80,17 @@ struct ShortStoryPlugInView: View{
                         }
                         
                         
-                    }.zIndex(1)
+                    }.zIndex(2)
                     
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color("DarkNavy"))
-                        .frame(width: 360, height: 250)
+                        .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.4)
                         .overlay( /// apply a rounded border
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color("WashedWhite"), lineWidth: 4)
                         )
-                        .zIndex(0)
-                        .offset(y:130)
+                        .zIndex(1)
+
                     
                     
                     Text(showHint ? shortStoryPlugInVM.currentHints[questionNumber] : "Give me a Hint!")
@@ -102,13 +103,13 @@ struct ShortStoryPlugInView: View{
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(.black, lineWidth: 4)
                         )
-                        .offset(y:320)
                         .onTapGesture{
                             withAnimation(.easeIn(duration: 1)){
                                 showHint = true
                             }
                         }
-                        .zIndex(1)
+                        .offset(y: geo.size.height / 2.75)
+                        .zIndex(2)
                     
                     
                     
@@ -117,6 +118,7 @@ struct ShortStoryPlugInView: View{
                         .scaledToFill()
                         .frame(width: 200, height: 100)
                         .offset(x: 75, y: animateBear ? -175 : -100)
+                        .zIndex(0)
                     
                     
                     if correctChosen{
@@ -312,10 +314,11 @@ struct ShortStoryPlugInView: View{
                                         .padding(1)
                                         .padding(.top, 6)
                                 }
-                            }.frame(width: 300, height: 200)
+                            }.frame(width: geo.size.width * 0.8)
                                 .padding(.leading, 12)
+                                .padding([.top, .bottom], 25)
                             
-                        }.frame(width: 330, height: 200)
+                        }.frame(width: geo.size.width * 0.9)
                             .background(Color("WashedWhite")).cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)

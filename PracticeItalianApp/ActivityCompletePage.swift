@@ -56,33 +56,29 @@ struct ActivityCompletePage: View {
                         .shadow(radius: 10)
                         .padding()
                     
-                }.padding(.bottom, 700)
+                }.padding(.bottom, 600)
                     .zIndex(2)
                 VStack{
                     VStack{
                         Text("Nice Work!")
                             .font(Font.custom("Arial Hebrew", size: 35))
-                            .padding(.bottom, 20)
                         
-//                        Text("Results")
-//                            .font(Font.custom("Arial Hebrew", size: 25))
-//                        Text(String(correctCount) + "/" + String(questionCount))
-//                            .font(Font.custom("Arial Hebrew", size: 25))
-                    }.padding(.bottom, 70)
-                        .padding(.top, 66)
+
+                    }
                     VStack{
                         Image("sittingBear")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 200, height: 100)
                             .shadow(radius: 10)
-                            .offset(y: animatingBear ? 0 : -800)
+                            .offset(y: animatingBear ? ((geo.size.height / 2 ) - 275) : -800)
                         
                         Image("coin2")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 120, height: 120)
                             .shadow(radius: 10)
+                            .offset(y: 40)
                         
                         Text("+"+"\(self.counter1)")
                             .font(Font.custom("Arial Hebrew", size: 40))
@@ -93,7 +89,7 @@ struct ActivityCompletePage: View {
                                     
                                     self.runCounter(counter: self.$counter1, start: 0, end: 15, speed: 0.05)
                                 }
-                            }
+                            }.padding(.top, 45)
                     }
                     
                     Button {
@@ -116,7 +112,7 @@ struct ActivityCompletePage: View {
                                     .stroke(.black, lineWidth: 4)
                             )
                             .cornerRadius(20)
-                            .padding(.top, 40)
+                            .padding(.top, 10)
                             .shadow(radius: 10)
                     }
                     

@@ -36,35 +36,169 @@ struct flashCardActivity: View {
     @State var showFinishedActivityPage = false
     
     @State  var counter: Int = 0
+    
+    @State var leadingPad: CGFloat = 20
+    @State var trailingPad: CGFloat = 20
+    @State var selected = false
 
     
     var body: some View {
         GeometryReader{geo in
-            Image("verticalNature")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            
-            
-            ZStack{
+            ZStack(alignment: .topLeading){
+                Image("verticalNature")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    .zIndex(0)
+                
+                HStack(spacing: 18){
+                    Spacer()
+                    NavigationLink(destination: chooseFlashCardSet(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 25))
+                            .foregroundColor(.gray)
+                            
+                            
+                    })
+                    
+                    GeometryReader{proxy in
+                        ZStack(alignment: .leading) {
+                            Capsule()
+                                .fill(.gray.opacity(0.25))
+                            
+                            Capsule()
+                                .fill(Color.green)
+                                .frame(width: proxy.size.width * CGFloat(progress))
+                        }
+                    }.frame(height: 13)
+                        .onChange(of: counter){ newValue in
+                            progress = (CGFloat(newValue) / 4)
+                        }
+                    
+                    Image("italyFlag")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                    Spacer()
+                }
                 VStack{
                     
-                    NavBar().padding(.top, 35)
+                    let fCAM = FlashCardAccDataManager(cardName: flashCardObj.words[counter].wordItal)
                     
-                    scrollViewBuilder(flipped: self.$flipped, animate3d: self.$animate3d, flashCardObj: self.$flashCardObj, counter: self.$counter, showGif: self.$correctShowGif, saved: self.$saved, correctChosen: self.$correctChosen, setName: flashCardSetName).padding(.bottom, 160).padding(.top, 40)
-                        .padding([.leading, .trailing], 15)
+                    ScrollViewReader {scrollView in
+                        ScrollView(.horizontal){
+                            HStack{
+                                ForEach(0..<flashCardObj.words.count, id: \.self) {i in
+                                    cardView(flipped: $flipped, animate3d: $animate3d, counterTest: i , flashCardObj: $flashCardObj)
+                                        .frame(width: geo.size.width)
+                                        
+                                }
+                            }
+                        }.scrollDisabled(true)
+                        VStack(spacing: 0){
+                            HStack{
+                                Button(action: {
+                                    SoundManager.instance.playSound(sound: .wrong)
+                                    withAnimation{
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                            animate3d.toggle()
+                                            if counter < flashCardObj.words.count - 1 {
+                                                counter = counter + 1
+                                            }
+                                            withAnimation{
+                                                scrollView.scrollTo(counter, anchor: .center)
+                                            }
+                                        }
+                                        
+                                        if fCAM.isEmptyFlashCardAccData() {
+                                            fCAM.addNewCardAccEntityIncorrect(setName: flashCardSetName)
+                                        }else{
+                                            
+                                            fCAM.updateIncorrectInput(card: fCAM.getAccData(), setName: flashCardSetName)
+                                        }
+                                        
+                                        self.selected.toggle()
+
+                                    }
+                                }, label:
+                                        {Image("cancel")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 65, height: 65)
+                                        .offset(x: selected ? -5 : 0)
+                                        .animation(Animation.default.repeatCount(5).speed(6))
+                                    
+                                    
+                                    
+                                }).padding(.leading, 60)
+                                
+                                Spacer()
+                                
+                                saveToMyListButton(italLine1: flashCardObj.words[counter].wordItal,  engLine1: flashCardObj.words[counter].wordEng, engLine2: flashCardObj.words[counter].gender.rawValue, saved: $saved)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    
+                
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                        animate3d.toggle()
+                                        correctChosen = false
+                                        if counter < flashCardObj.words.count - 1 {
+                                            counter = counter + 1
+                                        }
+                                        withAnimation{
+                                            scrollView.scrollTo(counter, anchor: .center)
+                                        }
+                                    }
+                                        SoundManager.instance.playSound(sound: .correct)
+                                        correctChosen = true
+                                    
+                                    if fCAM.isEmptyFlashCardAccData() {
+                                        fCAM.addNewCardAccEntityCorrect(setName: flashCardSetName)
+                                    } else {
+                                        fCAM.updateCorrectInput(card: fCAM.getAccData(), setName: flashCardSetName)
+                                    }
+                                    
+                                    
+                                    correctShowGif.toggle()
+                                    
+                                }, label:
+                                        {Image("checked")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 65, height: 65)
+                                    
+                                    
+                                    
+                                    
+                                }).padding(.trailing, 60)
+                            }
+                            
+                
+                        }.opacity(flipped ? 1 : 0).animation(.easeIn(duration: 0.3), value: flipped)
+                            .offset(y: -50)
+                    }
+                    
+//                    scrollViewBuilder(flipped: self.$flipped, animate3d: self.$animate3d, flashCardObj: self.$flashCardObj, counter: self.$counter, showGif: self.$correctShowGif, saved: self.$saved, correctChosen: self.$correctChosen, setName: flashCardSetName)
+//                        //.frame(width: geo.size.width * 0.9)
+//                        //.padding([.leading, .trailing], geo.size.width * 0.05)
                     
                     
                     
-                }.frame(width: geo.size.width)
-                .frame(minHeight: geo.size.height)
+                }
+                .frame(width: geo.size.width)
+               .frame(minHeight: geo.size.height)
+               //.padding([.leading, .trailing], geo.size.width * 0.1)
                 
                 Image("sittingBear")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 200, height: 100)
-                    .offset(x: 95, y: animatingBear ? 380 : 750)
+                    .frame(width: geo.size.width * 0.6, height: 100)
+                    .offset(x: 195, y: animatingBear ? (geo.size.height - 25 ): 750)
                 
                 if saved {
                     
@@ -72,7 +206,7 @@ struct flashCardActivity: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 40)
-                        .offset(y: 250)
+                        .offset(x: 195, y: geo.size.height - 25 )
                         
                 }
             
@@ -84,7 +218,7 @@ struct flashCardActivity: View {
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 40)
-                    .offset(y: 310)
+                    .offset(x: 155, y: geo.size.height - 90 )
             }
                 
                 NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
@@ -107,39 +241,6 @@ struct flashCardActivity: View {
             .navigationBarBackButtonHidden(true)
         }
     
-    }
-    
-    @ViewBuilder
-    func NavBar() -> some View{
-        HStack(spacing: 18){
-            Spacer()
-            NavigationLink(destination: chooseFlashCardSet(), label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 25))
-                    .foregroundColor(.black)
-                
-            })
-            
-            GeometryReader{proxy in
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(.gray.opacity(0.25))
-                    
-                    Capsule()
-                        .fill(Color.green)
-                        .frame(width: proxy.size.width * CGFloat(progress))
-                }
-            }.frame(height: 13)
-                .onChange(of: counter){ newValue in
-                    progress = CGFloat(newValue) / CGFloat(flashCardObj.words.count)
-                }
-            
-            Image("italyFlag")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-            Spacer()
-        }.padding(.trailing, 5)
     }
     
     func storeSetAccuracyData(){
@@ -276,7 +377,7 @@ struct cardView: View {
     
     
     var body: some View{
-        ZStack() {
+        ZStack{
             flashCardItal(counterTest: counterTest, fcO: $flashCardObj).opacity(flipped ? 0.0 : 1.0)
             flashCardEng(counterTest: counterTest, fcO: $flashCardObj).opacity(flipped ? 1.0 : 0.0)
         }
@@ -340,14 +441,14 @@ struct flashCardItal: View {
             
             
             
-        } .frame(width: 325, height: 250)
+        } .frame(width: 315, height: 250)
             .background(Color("WashedWhite"))
             .overlay( /// apply a rounded border
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(.black, lineWidth: 7)
             )
             .cornerRadius(20)
-            .shadow(radius: 10)
+            //.shadow(radius: 10)
             .padding([.top, .bottom], 75)
         
         
@@ -375,15 +476,15 @@ struct flashCardEng: View {
                 .foregroundColor(Color.black)
                 .padding([.leading, .trailing], 10)
             
-        }.frame(width: 325, height: 250)
+        }.frame(width: 315, height: 250)
             .background(Color("WashedWhite"))
             .overlay( /// apply a rounded border
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(.black, lineWidth: 7)
             )
             .cornerRadius(20)
-            .shadow(radius: 10)
-            .padding()
+            //.shadow(radius: 10)
+            //.padding()
     }
 }
 
