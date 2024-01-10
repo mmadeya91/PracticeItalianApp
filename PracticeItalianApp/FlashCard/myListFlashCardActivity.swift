@@ -16,6 +16,7 @@ extension View {
 struct myListFlashCardActivity: View {
     
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var isEmpty: Bool {myListCards.isEmpty}
     
@@ -41,68 +42,72 @@ struct myListFlashCardActivity: View {
     
     var body: some View {
         GeometryReader{geo in
-            Image("verticalNature")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            
-            
-            ZStack{
-                VStack{
-                    
-                    NavBar().padding(.top, 35)
-                    
-                    scrollViewBuilderMyList(flipped: self.$flipped, animate3d: self.$animate3d, counter: self.$counter, showGif: self.$correctShowGif, saved: self.$saved, correctChosen: self.$correctChosen, myListCards: myListCards).padding(.bottom, 160).padding(.top, 40)
-                    
-                    
-                }.frame(width: geo.size.width)
-                    .frame(minHeight: geo.size.height)
-                
-                Image("sittingBear")
+            if horizontalSizeClass == .compact {
+                Image("verticalNature")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 200, height: 100)
-                    .offset(x: 95, y: animatingBear ? 380 : 750)
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 
-                if saved {
+                
+                ZStack{
+                    VStack{
+                        
+                        NavBar().padding(.top, 35).zIndex(2)
+                        
+                        scrollViewBuilderMyList(flipped: self.$flipped, animate3d: self.$animate3d, counter: self.$counter, showGif: self.$correctShowGif, saved: self.$saved, correctChosen: self.$correctChosen, myListCards: myListCards).padding(.bottom, 160).padding(.top, 40)
+                        
+                        
+                    }.frame(width: geo.size.width)
+                        .frame(minHeight: geo.size.height)
                     
-                    Image("bubbleChatSaved")
+                    Image("sittingBear")
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 100, height: 40)
-                        .offset(y: 250)
+                        .frame(width: 200, height: 100)
+                        .offset(x: 95, y: animatingBear ? 380 : 750)
+                    
+                    if saved {
                         
+                        Image("bubbleChatSaved")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(y: 250)
+                        
+                    }
+                    
+                    if correctChosen{
+                        
+                        let randomInt = Int.random(in: 1..<4)
+                        
+                        Image("bubbleChatRight"+String(randomInt))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(y: 310)
+                    }
+                    NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
+                    ).isDetailLink(false)
+                    
                 }
-            
-            if correctChosen{
-                
-                let randomInt = Int.random(in: 1..<4)
-                
-                Image("bubbleChatRight"+String(randomInt))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 100, height: 40)
-                    .offset(y: 310)
-            }
-                NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
-                                                  ).isDetailLink(false)
-                
-            }
-            .onAppear{
-                withAnimation(.spring()){
-                    animatingBear = true
-                }
-            }
-            .onChange(of: counter) { questionNumber in
-                 
-                if questionNumber > myListCards.count - 1{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        showFinishedActivityPage = true
+                .onAppear{
+                    withAnimation(.spring()){
+                        animatingBear = true
                     }
                 }
+                .onChange(of: counter) { questionNumber in
+                    
+                    if questionNumber > myListCards.count - 1{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            showFinishedActivityPage = true
+                        }
+                    }
+                }
+                .navigationBarBackButtonHidden(true)
+            }else{
+                myListFlashCardActivityIPAD()
             }
-            .navigationBarBackButtonHidden(true)
         }
     
     }

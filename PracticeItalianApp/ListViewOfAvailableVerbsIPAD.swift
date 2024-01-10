@@ -1,28 +1,16 @@
 //
-//  ListViewOfAvailableVerbs.swift
+//  ListViewOfAvailableVerbsIPAD.swift
 //  PracticeItalianApp
 //
-//  Created by Matt Madeya on 7/3/23.
+//  Created by Matt Madeya on 1/10/24.
 //
 
 import SwiftUI
 import Algorithms
 
-final class ListViewOfAvailableVerbsVM: ObservableObject{
-    @Published var fetchedUserAddedVerbs: [UserVerbList]
-    
-    init(arrayIn: [UserVerbList]){
-        fetchedUserAddedVerbs = arrayIn
-    }
-    
-    func setFetchedData(arrayIn: [UserVerbList]){
-        fetchedUserAddedVerbs = arrayIn
-    }
-}
 
-
-struct ListViewOfAvailableVerbs: View {
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+struct ListViewOfAvailableVerbsIPAD: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
     
     @State var isEmpty: Bool = false
@@ -56,116 +44,120 @@ struct ListViewOfAvailableVerbs: View {
     
     var body: some View {
         GeometryReader {geo in
-            if horizontalSizeClass == .compact {
-                ZStack(alignment: .topLeading){
-                    Image("verticalNature")
-                        .resizable()
-                        .scaledToFill()
-                    //.padding(.bottom, 150)
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                    
-                    VStack{
-                        HStack(spacing: 18){
-                            Spacer()
-                            Button(action: {
-                                dismiss()
-                            }, label: {
-                                Image(systemName: "xmark")
-                                    .font(.title)
-                                    .foregroundColor(.gray)
-                                    .padding(.trailing, 200)
-                                
-                                
-                            })
-                            Spacer()
-                            Image("italyFlag")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
-                                .shadow(radius: 10)
-                            Spacer()
+            
+            ZStack(alignment: .topLeading){
+                Image("verticalNature")
+                    .resizable()
+                    .scaledToFill()
+                //.padding(.bottom, 150)
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                
+                VStack{
+                    HStack(spacing: 18){
+                     
+                        Button(action: {
+                            dismiss()
+                        }, label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 45))
+                                .foregroundColor(.gray)
+                                .padding(.trailing, 200)
                             
-                        }
+                            
+                        }).padding(.leading, 20)
+                        Spacer()
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 55, height: 55)
+                            .shadow(radius: 10)
+                            .padding(.trailing, 20)
+                      
                         
                     }
+    
+                }
+                
+                
+                VStack(alignment: .leading){
+                    Text("MyList")
+                        .font(Font.custom("Chalkboard SE", size: 45))
+                        .padding(.top, 60)
+                        .offset(x: geo.size.width / 2.5 + 10)
                     
-                    
-                    VStack(alignment: .leading){
-                        Text("MyList")
-                            .font(Font.custom("Chalkboard SE", size: 35))
-                            .padding(.top, 60)
-                            .offset(x: geo.size.width / 2.5)
-                        
-                        NavigationView{
-                            VStack{
-                                List{
-                                    let compactedArray: [UserVerbList] = listViewOfAvailableVerbsVM.fetchedUserAddedVerbs
-                                    ForEach(0..<compactedArray.count, id: \.self) {i in
-                                        VStack{
-                                            
-                                            let vbItal = compactedArray[i].verbNameItalian ?? "defaultItal"
-                                            
-                                            let vbEngl = compactedArray[i].verbNameEnglish ?? "defaultEng"
-                                            
-                                            HStack{
-                                                Text(vbItal + " - " + vbEngl)
-                                            }
+                    NavigationView{
+                        VStack{
+                            List{
+                                let compactedArray: [UserVerbList] = listViewOfAvailableVerbsVM.fetchedUserAddedVerbs
+                                ForEach(0..<compactedArray.count, id: \.self) {i in
+                                    VStack{
+                                        
+                                        let vbItal = compactedArray[i].verbNameItalian ?? "defaultItal"
+                                        
+                                        let vbEngl = compactedArray[i].verbNameEnglish ?? "defaultEng"
+                                        
+                                        HStack{
+                                            Text(vbItal + " - " + vbEngl)
+                                                .font(.system(size: 30))
+                                                .padding(10)
                                         }
                                     }
-                                    .onDelete(perform: removeRows)
-                                    .id(refreshingID)
-                                    
                                 }
-                                .overlay(Group {
-                                    if isEmptyMyListVerbData() {
-                                        Text("Oops, loos like there's no data...")
-                                    }
+                                .onDelete(perform: removeRows)
+                                .id(refreshingID)
+                                
+                            }.padding([.leading, .trailing], 40)
+                            .frame(width: geo.size.width, height: geo.size.height * 0.6)
+                            .overlay(Group {
+                                if isEmptyMyListVerbData() {
+                                    Text("Oops, loos like there's no data...")
+                                }
+                            })
+                            // .navigationBarTitle("MyList")
+                            .navigationBarItems(leading: HStack{
+                                Button(action: {
+                                    self.isEditing.toggle()
+                                }, label: {
+                                    Text(isEditing ? "Done" : "Edit")
+                                        .font(Font.custom("Arial Hebrew", size: 30))
+                                        .frame(width: 80, height: 40)
+                                        .padding(.top, 20)
                                 })
-                                // .navigationBarTitle("MyList")
-                                .navigationBarItems(leading: HStack{
-                                    Button(action: {
-                                        self.isEditing.toggle()
-                                    }, label: {
-                                        Text(isEditing ? "Done" : "Edit")
-                                            .font(Font.custom("Arial Hebrew", size: 22))
-                                            .frame(width: 80, height: 40)
-                                            .padding(.top, 20)
-                                    })
-                                }, trailing: Button(action: onAdd) { Image(systemName: "plus").resizable().scaledToFill().padding(.trailing, 45).frame(width: 25, height: 25)})
-                                .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
-                                .padding(.top, 10)
-                                
-                            }
-                        }.frame(width: geo.size.width, height: geo.size.height * 0.6)
-                        
-                        HStack{
+                            }, trailing: Button(action: onAdd) { Image(systemName: "plus").resizable().scaledToFill().padding(.trailing, 35).frame(width: 28, height: 28).offset(y:5)})
+                            .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
+                            .padding(.top, 10)
+                         
                             
-                            Button(action: {
-                                showCreateVerb.toggle()
-                            }, label: {
-                                Text("Create Verb")
-                                    .font(Font.custom("Arial Hebrew", size: 17))
-                                    .padding(.top, 5)
-                                    .foregroundColor(.black)
-                                    .frame(width: 150, height: 40)
-                                    .background(Color("WashedWhite"))
-                                    .cornerRadius(10)
-                                    .overlay( RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.black, lineWidth: 2))
-                                    .shadow(radius: 10)
-                                    .padding(.top, 15)
-                                
-                            })//.padding(.top, 15)
-                            .padding(.leading, 10)
-                            
-                        }.frame(width: 390, height: 50)
+                        }
+                    }.frame(width: geo.size.width * 0.9, height: geo.size.height * 0.6) .cornerRadius(20)
+                        .navigationViewStyle(.stack)
+                        .padding([.leading, .trailing], geo.size.width * 0.05)
+                      
+                    
+                    HStack{
                         
-                    }
+                        Button(action: {
+                            showCreateVerb.toggle()
+                        }, label: {
+                            Text("Create Verb")
+                                .font(Font.custom("Arial Hebrew", size: 35))
+                                .padding(.top, 5)
+                                .foregroundColor(.black)
+                                .frame(width: 250, height: 60)
+                                .background(Color("WashedWhite"))
+                                .cornerRadius(20)
+                                .overlay( RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.black, lineWidth: 2))
+                                .shadow(radius: 10)
+                                .padding(.top, 15)
+                            
+                        }).offset(x:200, y: 30)
+                        
+                    }.frame(width: 390, height: 50)
                     
                 }
-            }else{
-                ListViewOfAvailableVerbsIPAD()
+                
             }
             
         
@@ -175,10 +167,10 @@ struct ListViewOfAvailableVerbs: View {
             viewContext.reset()
             loadData()
             self.refreshingID = UUID()}) {
-            availableVerbsSheet()
+            availableVerbsSheetIPAD()
         }
         .fullScreenCover(isPresented: $showCreateVerb) {
-            CreateVerbTemplate()
+            CreateVerbTemplateIPAD()
         }
         .onAppear{
             if isEmptyMyListVerbData() {
@@ -238,7 +230,7 @@ struct ListViewOfAvailableVerbs: View {
     
 }
 
-struct availableVerbsSheet: View {
+struct availableVerbsSheetIPAD: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
     
@@ -265,8 +257,9 @@ struct availableVerbsSheet: View {
                         Image(systemName: "xmark")
                             .font(.largeTitle)
                             .tint(Color.black)
+                            .offset(x: -315, y: 10)
                         
-                    }).padding(.trailing, 300).padding(.bottom, 15)
+                    }).padding(.bottom, 25)
                     Text("Choose from the available Italian verbs to add to your unique practice list!")
                         .font(Font.custom("Chalkboard SE", size: 20))
                         .multilineTextAlignment(.center)
@@ -277,12 +270,14 @@ struct availableVerbsSheet: View {
                         .shadow(radius: 10)
                         .overlay( RoundedRectangle(cornerRadius: 10)
                             .stroke(.black, lineWidth: 2))
-                }.frame(width:400, height: 200)
+                        .offset(y: -20)
+                }.frame(width:800, height: 200)
                     .background(Color("pastelBlue"))
                 List{
                     ForEach(0..<listViewVerbs.count, id: \.self) {i in
                         HStack{
                             Text(listViewVerbs[i].verbNameItalian + " - " + listViewVerbs[i].verbNameEnglish)
+                                .font(.system(size: 25))
                             Spacer()
                             Toggle("", isOn: self.$listViewVerbs[i].isToggled)
                         }
@@ -305,18 +300,18 @@ struct availableVerbsSheet: View {
                         }
                     }, label: {
                         Text("Save")
-                            .font(Font.custom("Arial Hebrew", size: 17))
+                            .font(Font.custom("Arial Hebrew", size: 25))
                             .padding(.top, 5)
                             .foregroundColor(.black)
-                            .frame(width: 150, height: 40)
+                            .frame(width: 140, height: 45)
                             .background(Color("WashedWhite"))
                             .cornerRadius(10)
                             .overlay( RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 2))
+                                .stroke(.black, lineWidth: 3))
                             .shadow(radius: 10)
                             .padding(.top, 15)
                         
-                    }).offset(y: -15)
+                    }).offset(x: 260, y: -820)
                         .padding(.leading, 10)
                     
                 }.frame(width: 390, height: 50)
@@ -379,8 +374,9 @@ struct availableVerbsSheet: View {
     
 }
 
-struct ListViewOfAvailableVerbs_Previews: PreviewProvider {
+struct ListViewOfAvailableVerbsIPAD_Previews: PreviewProvider {
     static var previews: some View {
-        ListViewOfAvailableVerbs().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ListViewOfAvailableVerbsIPAD().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+

@@ -10,116 +10,122 @@ import SwiftUI
 struct chooseVerbList: View {
 
     @EnvironmentObject var globalModel: GlobalModel
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
 @State private var animatingBear = false
     var body: some View {
         GeometryReader{ geo in
-            ZStack(alignment: .topLeading){
-                Image("horizontalNature")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-                    .opacity(1.0)
-                
-                HStack(alignment: .top){
+            if horizontalSizeClass == .compact {
+                ZStack(alignment: .topLeading){
+                    Image("horizontalNature")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
+                        .opacity(1.0)
                     
-                    NavigationLink(destination: chooseActivity(), label: {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 25))
-                            .foregroundColor(.black)
+                    HStack(alignment: .top){
                         
-                    }).padding(.leading, 25)
-                        .padding(.top, 20)
-
-                    
-                    Spacer()
-                    VStack(spacing: 0){
-                        Image("italyFlag")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40, height: 40)
-                            .shadow(radius: 10)
-                            .padding()
+                        NavigationLink(destination: chooseActivity(), label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 25))
+                                .foregroundColor(.black)
+                            
+                        }).padding(.leading, 25)
+                            .padding(.top, 20)
                         
-                        HStack{
-                            Image("coin2")
+                        
+                        Spacer()
+                        VStack(spacing: 0){
+                            Image("italyFlag")
                                 .resizable()
-                                .scaledToFill()
+                                .scaledToFit()
                                 .frame(width: 40, height: 40)
-                            Text(String(globalModel.userCoins))
-                                .font(Font.custom("Arial Hebrew", size: 22))
-                        }.padding(.trailing, 50)
+                                .shadow(radius: 10)
+                                .padding()
+                            
+                            HStack{
+                                Image("coin2")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 40, height: 40)
+                                Text(String(globalModel.userCoins))
+                                    .font(Font.custom("Arial Hebrew", size: 22))
+                            }.padding(.trailing, 50)
+                        }
+                        
                     }
                     
-                }
-                
-                Image("sittingBear")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
-                    .offset(x: 50, y: animatingBear ? 90 : 200)
-                
-                VStack{
+                    Image("sittingBear")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
+                        .offset(x: 50, y: animatingBear ? 90 : 200)
                     
-                    ScrollView{
-                        VStack{
-                            Text("Verb Sets").zIndex(1)
-                                .font(Font.custom("Marker Felt", size: 30))
-                                .foregroundColor(.white)
-                                .frame(width: 350, height: 60)
-                                .background(Color("DarkNavy")).opacity(0.75)
-                                .border(width: 8, edges: [.bottom], color: .teal)
-                            HStack{
-                                Spacer()
-                                VStack{
-                                    NavigationLink(destination: chooseVCActivity(), label: {Image("reading-book")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 65, height: 65)
-                                            .padding()
-                                            .background(.white)
-                                            .cornerRadius(60)
-                                            .overlay( RoundedRectangle(cornerRadius: 60)
-                                                .stroke(.black, lineWidth: 3))
-                                            .shadow(radius: 10)
-                                    })
-                                    Text("20 Most Used Italian Verbs")
-                                        .bold()
-                                        .font(Font.custom("Arial Hebrew", size: 18))
-                                        .frame(width: 120, height: 50)
-                                        .multilineTextAlignment(.center)
-                                }
-                                Spacer()
-                                VStack{
-                                    NavigationLink(destination: ChooseVCActivityMyList(), label: {Image("reading-book")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 65, height: 65)
-                                            .padding()
-                                            .background(.white)
-                                            .cornerRadius(60)
-                                            .overlay( RoundedRectangle(cornerRadius: 60)
-                                                .stroke(.black, lineWidth: 3))
-                                            .shadow(radius: 10)
-                                    })
-                                    Text("My List")
-                                        .bold()
-                                        .font(Font.custom("Arial Hebrew", size: 20))
-                                        .frame(width: 120, height: 50)
-                                }
-                                Spacer()
-                            }.padding(.top, 25)
-                        }
-                    } .frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
-                        .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                            .stroke(.black, lineWidth: 5))
-                        .padding([.leading, .trailing], geo.size.width * 0.05)
-                        .padding([.top, .bottom], geo.size.height * 0.18)
+                    VStack{
+                        
+                        ScrollView{
+                            VStack{
+                                Text("Verb Sets").zIndex(1)
+                                    .font(Font.custom("Marker Felt", size: 30))
+                                    .foregroundColor(.white)
+                                    .frame(width: 450, height: 60)
+                                    .background(Color("DarkNavy")).opacity(0.75)
+                                    .border(width: 8, edges: [.bottom], color: .teal)
+                                HStack{
+                                    Spacer()
+                                    VStack{
+                                        NavigationLink(destination: chooseVCActivity(), label: {Image("reading-book")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 65, height: 65)
+                                                .padding()
+                                                .background(.white)
+                                                .cornerRadius(60)
+                                                .overlay( RoundedRectangle(cornerRadius: 60)
+                                                    .stroke(.black, lineWidth: 3))
+                                                .shadow(radius: 10)
+                                        })
+                                        Text("20 Most Used Italian Verbs")
+                                            .bold()
+                                            .font(Font.custom("Arial Hebrew", size: 18))
+                                            .frame(width: 120, height: 50)
+                                            .multilineTextAlignment(.center)
+                                    }
+                                    Spacer()
+                                    VStack{
+                                        NavigationLink(destination: ChooseVCActivityMyList(), label: {Image("reading-book")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 65, height: 65)
+                                                .padding()
+                                                .background(.white)
+                                                .cornerRadius(60)
+                                                .overlay( RoundedRectangle(cornerRadius: 60)
+                                                    .stroke(.black, lineWidth: 3))
+                                                .shadow(radius: 10)
+                                        })
+                                        Text("My List")
+                                            .bold()
+                                            .font(Font.custom("Arial Hebrew", size: 20))
+                                            .frame(width: 120, height: 50)
+                                    }
+                                    Spacer()
+                                }.padding(.top, 25)
+                            }
+                        } .frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
+                            .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                                .stroke(.black, lineWidth: 5))
+                            .padding([.leading, .trailing], geo.size.width * 0.05)
+                            .padding([.top, .bottom], geo.size.height * 0.18)
+                    }
+                }.onAppear{
+                    withAnimation(.spring()){
+                        animatingBear = true
+                    }
                 }
-            }.onAppear{
-                withAnimation(.spring()){
-                    animatingBear = true
-                }
+            }else{
+                chooseVerbListIPAD()
             }
         }.navigationBarBackButtonHidden(true)
     }

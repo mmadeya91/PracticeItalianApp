@@ -51,6 +51,7 @@ struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @EnvironmentObject var globalModel: GlobalModel
     
     @State var animate: Bool = false
@@ -71,67 +72,74 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(key: "dataSetName", ascending: true)]
     ) var fetchedUserUnlockedData: FetchedResults<UserUnlockedDataSets>
     
+ 
     var body: some View {
-        NavigationView{
-            GeometryReader{ geo in
-                ZStack(alignment: .topLeading){
-                    Image("vectorRome")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                        .opacity(1.0)
-                    VStack{
-                        
-                        homePageText()
-                            .padding(.bottom, 100)
-                            .padding(.top, 175)
-                            .padding(.leading, 14)
-                        
-         
-                        Button {
-                           DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-                               
-                                goNext = true
-                           }
-                            showBearAni.toggle()
-                            SoundManager.instance.playSound(sound: .introMusic)
-                            navButtonText = "Andiamo!"
+        if horizontalSizeClass == .compact{
+            NavigationView{
+                GeometryReader{ geo in
+                    ZStack(alignment: .topLeading){
+                        Image("vectorRome")
+                            .resizable()
+                            .scaledToFill()
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                            .opacity(1.0)
+                        VStack{
                             
-                        } label: {
-                            Text(navButtonText)
-                                .font(Font.custom("Marker Felt", size: 24))
-                                .foregroundColor(Color.black)
-                                .frame(width: 300, height: 50)
-                                .background(Color.teal.opacity(0.5))
-                                .cornerRadius(20)
+                            homePageText()
+                                .padding(.bottom, 100)
+                                .padding(.top, 175)
+                                .padding(.leading, 14)
+                            
+                            
+                            Button {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                                    
+                                    goNext = true
+                                }
+                                showBearAni.toggle()
+                                SoundManager.instance.playSound(sound: .introMusic)
+                                navButtonText = "Andiamo!"
+                                
+                            } label: {
+                                Text(navButtonText)
+                                    .font(Font.custom("Marker Felt", size: 24))
+                                    .foregroundColor(Color.black)
+                                    .frame(width: 300, height: 50)
+                                    .background(Color.teal.opacity(0.5))
+                                    .cornerRadius(20)
+                            }
+                            
+                            NavigationLink(destination: chooseActivity(),isActive: $goNext,label:{}
+                            ).isDetailLink(false)
+                            
+                        }.offset(y:-170)
+                        VStack{
+                            Text(String(globalModel.userCoins))
                         }
                         
-                        NavigationLink(destination: chooseActivity(),isActive: $goNext,label:{}
-                                    ).isDetailLink(false)
+                        
+                        if showBearAni {
+                            GifImage("italAppGif")
+                                .offset(x: CGFloat(-var_x*700+240), y: 400)
+                                .animation(.linear(duration: 11 ))
+                                .onAppear { self.var_x *= -1}
                             
-                    }.offset(y:-170)
-                    VStack{
-                        Text(String(globalModel.userCoins))
+                        }
+                        
+                        
+                    }.onAppear{
+                        addUserCoinsifNew()
+                        addUserUnlockedDataifNew()
+                        //togglePageReload.toggle()
                     }
-                    
-                    
-                    if showBearAni {
-                        GifImage("italAppGif")
-                            .offset(x: CGFloat(-var_x*700+240), y: 400)
-                            .animation(.linear(duration: 11 ))
-                            .onAppear { self.var_x *= -1}
-                            
-                    }
- 
-   
-                }.onAppear{
-                    addUserCoinsifNew()
-                    addUserUnlockedDataifNew()
-                   //togglePageReload.toggle()
                 }
-            }
-        }.navigationViewStyle(.stack)
+            }.navigationViewStyle(.stack)
+                .preferredColorScheme(.light)
+        }
+        else{
+            ContentViewIPAD()
+        }
             
         
     }
@@ -282,3 +290,5 @@ struct ContentView: View {
         }
     }
 }
+
+

@@ -15,6 +15,7 @@ extension View {
 
 struct availableShortStories: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @EnvironmentObject var globalModel: GlobalModel
     @State var animatingBear = false
@@ -36,121 +37,126 @@ struct availableShortStories: View {
     
     var body: some View {
         GeometryReader{ geo in
-            ZStack(alignment: .topLeading){
-                Image("horizontalNature")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-                    .opacity(1.0)
-                
-                HStack(alignment: .top){
+            if horizontalSizeClass == .compact {
+                ZStack(alignment: .topLeading){
+                    Image("horizontalNature")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
+                        .opacity(1.0)
                     
-                    NavigationLink(destination: chooseActivity(), label: {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 25))
-                            .foregroundColor(.black)
+                    HStack(alignment: .top){
                         
-                    }).padding(.leading, 25)
-                        .padding(.top, 20)
-
-                    
-                    Spacer()
-                    VStack(spacing: 0){
-                        Image("italyFlag")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40, height: 40)
-                            .shadow(radius: 10)
-                            .padding()
+                        NavigationLink(destination: chooseActivity(), label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 25))
+                                .foregroundColor(.black)
+                            
+                        }).padding(.leading, 25)
+                            .padding(.top, 20)
                         
-                        HStack{
-                            Image("coin2")
+                        
+                        Spacer()
+                        VStack(spacing: 0){
+                            Image("italyFlag")
                                 .resizable()
-                                .scaledToFill()
+                                .scaledToFit()
                                 .frame(width: 40, height: 40)
-                            Text(String(globalModel.userCoins))
-                                .font(Font.custom("Arial Hebrew", size: 22))
-                        }.padding(.trailing, 50)
-                    }
-                    
-                }
-                
-                
-                Image("sittingBear")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
-                    .offset(x: 50, y: animatingBear ? 90 : 200)
-                
-                VStack{
-                    
-                    shortStoryContainer(showInfoPopup: $showInfoPopup, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
-                        .frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
-                        .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                            .stroke(.black, lineWidth: 5))
-                        .padding([.leading, .trailing], geo.size.width * 0.05)
-                        .padding([.top, .bottom], geo.size.height * 0.18)
-                }
-                
-                if showInfoPopup{
-                    VStack{
-                        Text("Do your best to read and understand the following short stories on various topics. \n \nWhile you read, pay attention to key vocabulary words as you will be quizzed after on your comprehension!")
-                            .multilineTextAlignment(.center)
-                            .padding()
-                    }.frame(width: 300, height: 285)
-                        .background(Color("WashedWhite"))
-                        .cornerRadius(20)
-                        .shadow(radius: 20)
-                        .overlay( /// apply a rounded border
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(.black, lineWidth: 3)
-                        )
-                        .transition(.slide).animation(.easeIn).zIndex(2)
-                        .offset(x: geo.size.width / 9, y: geo.size.height / 3)
-                }
-                
-                if attemptToBuyPopUp{
-                    VStack{
-                        VStack{
-                            Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' flash card set?")
-                                .multilineTextAlignment(.center)
+                                .shadow(radius: 10)
                                 .padding()
                             
-                            if notEnoughCoins{
-                                Text("Sorry! You don't have enough coins!")
+                            HStack{
+                                Image("coin2")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 40, height: 40)
+                                Text(String(globalModel.userCoins))
+                                    .font(Font.custom("Arial Hebrew", size: 22))
+                            }.padding(.trailing, 50)
+                        }
+                        
+                    }
+                    
+                    
+                    Image("sittingBear")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
+                        .offset(x: 50, y: animatingBear ? 90 : 200)
+                    
+                    VStack{
+                        
+                        shortStoryContainer(showInfoPopup: $showInfoPopup, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                            .frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
+                            .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                                .stroke(.black, lineWidth: 5))
+                            .padding([.leading, .trailing], geo.size.width * 0.05)
+                            .padding([.top, .bottom], geo.size.height * 0.18)
+                    }
+                    
+                    if showInfoPopup{
+                        VStack{
+                            Text("Do your best to read and understand the following short stories on various topics. \n \nWhile you read, pay attention to key vocabulary words as you will be quizzed after on your comprehension!")
+                                .multilineTextAlignment(.center)
+                                .padding()
+                        }.frame(width: 300, height: 285)
+                            .background(Color("WashedWhite"))
+                            .cornerRadius(20)
+                            .shadow(radius: 20)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.black, lineWidth: 3)
+                            )
+                            .transition(.slide).animation(.easeIn).zIndex(2)
+                            .offset(x: geo.size.width / 9, y: geo.size.height / 3)
+                    }
+                    
+                    if attemptToBuyPopUp{
+                        VStack{
+                            VStack{
+                                Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' flash card set?")
                                     .multilineTextAlignment(.center)
                                     .padding()
+                                
+                                if notEnoughCoins{
+                                    Text("Sorry! You don't have enough coins!")
+                                        .multilineTextAlignment(.center)
+                                        .padding()
+                                }
+                                
+                                HStack{
+                                    Button(action: {
+                                        checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
+                                    }, label: {Text("Yes")})
+                                    Button(action: {
+                                        attemptToBuyPopUp = false
+                                    }, label: {Text("No")})
+                                }
+                                
                             }
-                            
-                            HStack{
-                                Button(action: {
-                                    checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
-                                }, label: {Text("Yes")})
-                                Button(action: {
-                                    attemptToBuyPopUp = false
-                                }, label: {Text("No")})
-                            }
-                            
-                        }
-                    }.frame(width: 300, height: 285)
-                        .background(Color("WashedWhite"))
-                        .cornerRadius(20)
-                        .shadow(radius: 20)
-                        .overlay( /// apply a rounded border
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(.black, lineWidth: 3)
-                        )
-                        .transition(.slide).animation(.easeIn).zIndex(2)
+                        }.frame(width: 300, height: 285)
+                            .background(Color("WashedWhite"))
+                            .cornerRadius(20)
+                            .shadow(radius: 20)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.black, lineWidth: 3)
+                            )
+                            .transition(.slide).animation(.easeIn).zIndex(2)
+                        
+                    }
                     
+                }.onAppear{
+                    withAnimation(.spring()){
+                        animatingBear = true
+                    }
                 }
-                
-            }.onAppear{
-                withAnimation(.spring()){
-                    animatingBear = true
-                }
+            }else{
+                availableShortStoriesIPAD()
             }
         }.navigationBarBackButtonHidden(true)
+        
     }
     
     func unlockData(chosenDataSet: String){
@@ -224,7 +230,7 @@ struct shortStoryContainer: View {
                         
                     })
                     .padding(.leading, 5)
-                } .frame(width: 350, height: 60)
+                } .frame(width: 450, height: 60)
                     .background(Color("DarkNavy")).opacity(0.75)
                     .border(width: 8, edges: [.bottom], color: .teal)
                 

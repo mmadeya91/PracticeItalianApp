@@ -1,16 +1,15 @@
 //
-//  SpellConjugatedVerbView.swift
+//  SpellConjugatedVerbViewIPAD.swift
 //  PracticeItalianApp
 //
-//  Created by Matt Madeya on 6/27/23.
+//  Created by Matt Madeya on 1/9/24.
 //
 
 import SwiftUI
 import CoreData
 
-struct SpellConjugatedVerbView: View {
+struct SpellConjugatedVerbViewIPAD: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject var spellConjVerbVM: SpellConjVerbViewModel
     
     @State var progress: CGFloat = 0
@@ -35,8 +34,7 @@ struct SpellConjugatedVerbView: View {
     
     var body: some View {
      
-        GeometryReader{ geo in
-            if horizontalSizeClass == .compact {
+            GeometryReader{ geo in
                 Image("verticalNature")
                     .resizable()
                     .scaledToFill()
@@ -47,8 +45,9 @@ struct SpellConjugatedVerbView: View {
                         NavBar().padding([.leading, .trailing], 20).zIndex(2)
                         
                         Text(getTenseString(tenseIn: spellConjVerbVM.currentTense))
-                            .font(Font.custom("Chalkboard SE", size: 25))
+                            .font(Font.custom("Chalkboard SE", size: 45))
                             .underline()
+                            .offset(y: 100)
                         
                         ScrollViewReader{scroller in
                             ScrollView(.horizontal) {
@@ -56,18 +55,18 @@ struct SpellConjugatedVerbView: View {
                                     ForEach(0..<spellConjVerbVM.currentTenseSpellConjVerbData.count, id: \.self) {i in
                                         
                                         VStack(spacing: 0){
-                                            questionView(vbItalian: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameItalian, vbEnglish: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameEnglish, pronoun: spellConjVerbVM.currentTenseSpellConjVerbData[i].pronoun).padding(.bottom, 25)
-                                                .padding(.top, 40)
+                                            questionViewIPAD(vbItalian: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameItalian, vbEnglish: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameEnglish, pronoun: spellConjVerbVM.currentTenseSpellConjVerbData[i].pronoun).offset(y: -25)
+                                                
                                             
                                             HStack{
                                                 
                                                 ForEach($spellConjVerbVM.currentHintLetterArray, id: \.self) { $answerArray in
                                                     Text(answerArray.letter)
-                                                        .font(Font.custom("Chalkboard SE", size: 25))
+                                                        .font(Font.custom("Chalkboard SE", size: 35))
                                                         .foregroundColor(.black.opacity(answerArray.showLetter ? 1.0 : 0.0))
                                                         .underline(color: .black)
                                                     
-                                                }.padding(.bottom, 90)
+                                                }.padding(.bottom, 110)
                                                 
                                             }
                                             
@@ -78,7 +77,7 @@ struct SpellConjugatedVerbView: View {
                                 }
                                 
                                 NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
-                                ).isDetailLink(false)
+                                                                  ).isDetailLink(false)
                             }
                             .offset(y: -200)
                             .scrollDisabled(true)
@@ -99,7 +98,7 @@ struct SpellConjugatedVerbView: View {
                     
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color("WashedWhite"))
-                        .frame(width: 340, height: 130)
+                        .frame(width: 540, height: 130)
                         .overlay( /// apply a rounded border
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(.black, lineWidth: 4)
@@ -111,8 +110,9 @@ struct SpellConjugatedVerbView: View {
                         .background(Color.white.cornerRadius(10))
                         .font(Font.custom("Marker Felt", size: 50))
                         .shadow(color: Color.black, radius: 12, x: 0, y:10)
-                        .frame(width: 350)
+                        .frame(width: 450)
                         .padding(.bottom, 45)
+                        .padding(.top, 50)
                         .zIndex(1)
                     
                     VStack{
@@ -155,8 +155,8 @@ struct SpellConjugatedVerbView: View {
                             }, label: {
                                 Text("Check")
                                 
-                            }).font(Font.custom("Marker Felt", size:  18))
-                                .frame(width:160, height: 40)
+                            }).font(Font.custom("Marker Felt", size:  25))
+                                .frame(width:260, height: 50)
                                 .background(Color.teal)
                                 .foregroundColor(Color.white)
                                 .cornerRadius(20)
@@ -165,8 +165,8 @@ struct SpellConjugatedVerbView: View {
                                         .stroke(.black, lineWidth: 4)
                                 )
                                 .shadow(radius: 10)
-                                .padding(.trailing, 5)
-                                .padding(.top, 15)
+                                .padding(.trailing, 25)
+                                .padding(.top, 65)
                             
                             
                             Button(action: {
@@ -200,8 +200,9 @@ struct SpellConjugatedVerbView: View {
                             }, label: {
                                 
                                 Text(hintButtonText)
-                                    .font(Font.custom("Chalkboard SE", size: 18))
-                                    .frame(width:160, height: 40)
+                                    .font(Font.custom("Marker Felt", size: 25))
+                                    .padding(.top, 3)
+                                    .frame(width:260, height: 50)
                                     .background(Color.teal)
                                     .foregroundColor(Color.white)
                                     .cornerRadius(20)
@@ -209,7 +210,7 @@ struct SpellConjugatedVerbView: View {
                                         RoundedRectangle(cornerRadius: 20)
                                             .stroke(.black, lineWidth: 4)
                                     )
-                                    .padding(.top, 15)
+                                    .padding(.top, 65)
                                 
                                 
                             })
@@ -230,15 +231,15 @@ struct SpellConjugatedVerbView: View {
                             
                         }, label: {
                             Text("Add " + currentVerbIta + " to MyList")
-                                .font(Font.custom("Marker Felt", size:  18))
+                                .font(Font.custom("Marker Felt", size:  25))
                                 .padding(.top, 3)
-                                .padding([.leading, .trailing], 20)
-                                .frame(height: 45)
+                                .padding([.leading, .trailing], 30)
+                                .frame(height: 55)
                                 .background(Color.teal)
                                 .foregroundColor(Color.white)
                                 .overlay( /// apply a rounded border
                                     RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 4)
+                                        .stroke(.black, lineWidth: 8)
                                 )
                                 .cornerRadius(20)
                                 .shadow(radius: 10)
@@ -257,21 +258,21 @@ struct SpellConjugatedVerbView: View {
                             .cornerRadius(15)
                             .opacity(showAlreadyExists ? 1 : 0)
                             .offset(y:140)
-                    }.zIndex(1)
+                    }.zIndex(1).padding(.top, 55)
                     
                     Image("sittingBear")
                         .resizable()
                         .scaledToFill()
-                        .frame(width: geo.size.width * 0.6, height: geo.size.height * 0.2)
-                        .offset(x: 110, y: animatingBear ? 300 : 750)
+                        .frame(width: geo.size.width * 0.55, height: geo.size.height * 0.2)
+                        .offset(x: 180, y: animatingBear ? 550 : 750)
                     
                     if saved {
                         
                         Image("bubbleChatSaved")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 100, height: 40)
-                            .offset(y: 245)
+                            .frame(width: 170, height: 40)
+                            .offset(x: -30, y: 350)
                         
                     }
                     
@@ -282,8 +283,8 @@ struct SpellConjugatedVerbView: View {
                         Image("bubbleChatRight"+String(randomInt))
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 100, height: 40)
-                            .offset(y: 200)
+                            .frame(width: 170, height: 40)
+                            .offset(x: -30, y: 350)
                     }
                     
                     if wrongChosen{
@@ -293,8 +294,8 @@ struct SpellConjugatedVerbView: View {
                         Image("bubbleChatWrong"+String(randomInt2))
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 100, height: 40)
-                            .offset(y: 200)
+                            .frame(width: 170, height: 40)
+                            .offset(x: -30, y: 350)
                     }
                     
                     
@@ -311,12 +312,8 @@ struct SpellConjugatedVerbView: View {
                         currentVerbIta = spellConjVerbVM.currentTenseSpellConjVerbData[0].verbNameItalian
                     }
                 }
-            }else{
-                SpellConjugatedVerbViewIPAD(spellConjVerbVM: spellConjVerbVM, isPreview: false)
-            }
-        }.navigationBarBackButtonHidden(true)
-        
-        
+            }.navigationBarBackButtonHidden(true)
+       
         
     }
     
@@ -360,7 +357,7 @@ struct SpellConjugatedVerbView: View {
         HStack(spacing: 18){
             NavigationLink(destination: chooseVerbList(), label: {
                 Image(systemName: "xmark")
-                    .font(.system(size: 25))
+                    .font(.system(size: 45))
                     .foregroundColor(.gray)
             })
             
@@ -378,7 +375,7 @@ struct SpellConjugatedVerbView: View {
             Image("italyFlag")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 40, height: 40)
+                .frame(width: 55, height: 55)
                 .shadow(radius: 10)
         }
     }
@@ -406,7 +403,7 @@ struct SpellConjugatedVerbView: View {
 
 
 
-struct questionView: View {
+struct questionViewIPAD: View {
     var vbItalian: String
     var vbEnglish: String
     var pronoun: String
@@ -414,9 +411,9 @@ struct questionView: View {
         
         Text(vbItalian + " - " + pronoun + "\n(" + vbEnglish + ")")
             .bold()
-            .font(Font.custom("Marker Felt", size: 23))
+            .font(Font.custom("Marker Felt", size: 35))
             .padding([.leading, .trailing], 1)
-            .frame(width:275, height: 110)
+            .frame(width:475, height: 110)
             .background(Color.teal)
             .cornerRadius(10)
             .foregroundColor(Color.white)
@@ -429,9 +426,10 @@ struct questionView: View {
 }
 
 
-struct SpellConjugatedVerbView_Previews: PreviewProvider {
+struct SpellConjugatedVerbViewIPAD_Previews: PreviewProvider {
     static var _spellConjVerbVM = SpellConjVerbViewModel()
     static var previews: some View {
-        SpellConjugatedVerbView(spellConjVerbVM: _spellConjVerbVM, isPreview: true)
+        SpellConjugatedVerbViewIPAD(spellConjVerbVM: _spellConjVerbVM, isPreview: true)
     }
 }
+

@@ -1,15 +1,14 @@
 //
-//  chooseAudio.swift
+//  chooseAudioIPAD.swift
 //  PracticeItalianApp
 //
-//  Created by Matt Madeya on 6/7/23.
+//  Created by Matt Madeya on 1/3/24.
 //
 
 import SwiftUI
 
-struct chooseAudio: View {
+struct chooseAudioIPAD: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var audioManager: AudioManager
     @EnvironmentObject var globalModel: GlobalModel
     @State var animatingBear = false
@@ -30,126 +29,127 @@ struct chooseAudio: View {
     
     var body: some View {
         GeometryReader{ geo in
-            if horizontalSizeClass == .compact {
-                ZStack(alignment: .topLeading){
-                    Image("horizontalNature")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-                        .opacity(1.0)
+            ZStack(alignment: .topLeading){
+                Image("horizontalNature")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
+                    .opacity(1.0)
+                
+                HStack(alignment: .top){
                     
-                    HStack(alignment: .top){
+                    NavigationLink(destination: chooseActivity(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 45))
+                            .foregroundColor(.black)
                         
-                        NavigationLink(destination: chooseActivity(), label: {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 25))
-                                .foregroundColor(.black)
-                            
-                        }).padding(.leading, 25)
-                            .padding(.top, 20)
+                    }).padding(.leading, 25)
+                        .padding(.top, 20)
+
+                    
+                    Spacer()
+                    VStack(spacing: 0){
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 60, height: 50)
+                            .shadow(radius: 10)
+                            .padding()
                         
-                        
-                        Spacer()
-                        VStack(spacing: 0){
-                            Image("italyFlag")
+                        HStack{
+                            Image("coin2")
                                 .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
-                                .shadow(radius: 10)
-                                .padding()
-                            
-                            HStack{
-                                Image("coin2")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 40, height: 40)
-                                Text(String(globalModel.userCoins))
-                                    .font(Font.custom("Arial Hebrew", size: 22))
-                            }.padding(.trailing, 50)
-                        }
-                        
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                            Text(String(globalModel.userCoins))
+                                .font(Font.custom("Arial Hebrew", size: 22))
+                        }.padding(.trailing, 50)
                     }
                     
+                }.zIndex(2)
+                
+                
+                Image("sittingBear")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geo.size.width * 0.35, height: geo.size.width * 0.20)
+                    .offset(x: 380, y: animatingBear ? 90 : 200)
+                
+                VStack{
                     
-                    Image("sittingBear")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
-                        .offset(x: 50, y: animatingBear ? 90 : 200)
                     
+                    shortStoryContainer2IPAD(showInfoPopUp: $showInfoPopup, attemptToBuyPupUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName) .frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
+                        .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                            .stroke(.black, lineWidth: 5))
+                        .padding([.leading, .trailing], geo.size.width * 0.05)
+                        .padding([.top, .bottom], geo.size.height * 0.18)
+                }
+                
+                if showInfoPopup{
                     VStack{
-                        
-                        
-                        shortStoryContainer2(showInfoPopUp: $showInfoPopup, attemptToBuyPupUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
-                            .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                                .stroke(.black, lineWidth: 5))
-                            .padding([.leading, .trailing], geo.size.width * 0.05)
-                            .padding([.top, .bottom], geo.size.height * 0.18)
-                    }
+                        Text("Listen to the following dialogues performed by a native Italian speaker. \n \nDo your best to comprehend the audio and answer the questions to the best of your ability!")
+                            .multilineTextAlignment(.center)
+                            .padding()
+                    }.frame(width: 300, height: 285)
+                        .background(Color("WashedWhite"))
+                        .cornerRadius(20)
+                        .shadow(radius: 20)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 3)
+                        )
+                        .transition(.slide).animation(.easeIn).zIndex(2)
+                        .offset(y: (geo.size.height / 2) - 100)
+                        .padding(.leading, 38)
+                }
                     
-                    if showInfoPopup{
+                
+                if attemptToBuyPopUp{
+                    VStack{
                         VStack{
-                            Text("Listen to the following dialogues performed by a native Italian speaker. \n \nDo your best to comprehend the audio and answer the questions to the best of your ability!")
+                            Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' flash card set?")
                                 .multilineTextAlignment(.center)
                                 .padding()
-                        }.frame(width: 300, height: 285)
-                            .background(Color("WashedWhite"))
-                            .cornerRadius(20)
-                            .shadow(radius: 20)
-                            .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.black, lineWidth: 3)
-                            )
-                            .transition(.slide).animation(.easeIn).zIndex(2)
-                            .offset(y: (geo.size.height / 2) - 100)
-                            .padding(.leading, 38)
-                    }
-                    
-                    
-                    if attemptToBuyPopUp{
-                        VStack{
-                            VStack{
-                                Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' flash card set?")
+                                .font(Font.custom("Futura", size: 20))
+                            
+                            if notEnoughCoins{
+                                Text("Sorry! You don't have enough coins!")
                                     .multilineTextAlignment(.center)
                                     .padding()
-                                
-                                if notEnoughCoins{
-                                    Text("Sorry! You don't have enough coins!")
-                                        .multilineTextAlignment(.center)
-                                        .padding()
-                                }
-                                
-                                HStack{
-                                    Button(action: {
-                                        checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
-                                    }, label: {Text("Yes")})
-                                    Button(action: {
-                                        attemptToBuyPopUp = false
-                                    }, label: {Text("No")})
-                                }
-                                
                             }
-                        }.frame(width: 300, height: 285)
-                            .background(Color("WashedWhite"))
-                            .cornerRadius(20)
-                            .shadow(radius: 20)
-                            .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.black, lineWidth: 3)
-                            )
-                            .transition(.slide).animation(.easeIn).zIndex(2)
-                        
-                    }
+                            
+                            HStack{
+                                Spacer()
+                                Button(action: {
+                                    checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
+                                }, label: {Text("Yes")  .font(Font.custom("Futura", size: 30))})
+                                Spacer()
+                                Button(action: {
+                                    attemptToBuyPopUp = false
+                                }, label: {Text("No")  .font(Font.custom("Futura", size: 30))})
+                                Spacer()
+                            }
+                            
+                        }
+                    }.frame(width: 500, height: 385)
+                        .background(Color("WashedWhite"))
+                        .cornerRadius(20)
+                        .shadow(radius: 20)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 3)
+                        )
+                        .transition(.slide).animation(.easeIn).zIndex(2)
+                        .offset(x: geo.size.width / 5, y: geo.size.height / 3)
                     
-                }.onAppear{
-                    withAnimation(.easeIn(duration: 1.5)){
-                        animatingBear = true
-                    }
-                }.navigationBarBackButtonHidden(true)
-            }else{
-                chooseAudioIPAD()
-            }
+                }
+                
+            }.onAppear{
+                withAnimation(.easeIn(duration: 1.5)){
+                    animatingBear = true
+                }
+            }.navigationBarBackButtonHidden(true)
         }
     }
     
@@ -199,7 +199,7 @@ struct chooseAudio: View {
     }
 }
 
-struct shortStoryContainer2: View {
+struct shortStoryContainer2IPAD: View {
     @Binding var showInfoPopUp: Bool
     @Binding var attemptToBuyPupUp: Bool
     @Binding var attemptedBuyName: String
@@ -209,7 +209,7 @@ struct shortStoryContainer2: View {
                 
                 HStack{
                     Text("Audio Stories").zIndex(1)
-                        .font(Font.custom("Marker Felt", size: 30))
+                        .font(Font.custom("Marker Felt", size: 50))
                         .foregroundColor(.white)
                     
                     Button(action: {
@@ -225,12 +225,12 @@ struct shortStoryContainer2: View {
                         
                     })
                     .padding(.leading, 5)
-                } .frame(width: 450, height: 60)
+                }.frame(width: 740, height: 100)
                     .background(Color("DarkNavy")).opacity(0.75)
                     .border(width: 8, edges: [.bottom], color: .teal)
                 
                 
-                audioHStack(attemptToBuyPopUp: $attemptToBuyPupUp, attemptedBuyName: $attemptedBuyName)
+                audioHStackIPAD(attemptToBuyPopUp: $attemptToBuyPupUp, attemptedBuyName: $attemptedBuyName)
                 
             }
             
@@ -238,7 +238,7 @@ struct shortStoryContainer2: View {
     }
 }
 
-struct audioHStack: View {
+struct audioHStackIPAD: View {
     @Binding var attemptToBuyPopUp: Bool
     @Binding var attemptedBuyName: String
     var body: some View{
@@ -248,38 +248,41 @@ struct audioHStack: View {
         ScrollView{
             VStack{
                 Text("Beginner")
-                    .font(Font.custom("Marker Felt", size: 30))
-                    .frame(width: 120, height: 30)
+                    .font(Font.custom("Marker Felt", size: 40))
+                    .frame(width: 225)
+                    .border(width: 3, edges: [.bottom], color: .black)
                     .padding(.top, 10)
-                    .border(width: 3, edges: [.bottom], color: .teal)
+                    .padding(.bottom, 25)
                 HStack{
-                    audioChoiceButton(shortStoryName: bookTitles[0], audioImage: "pot", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                    audioChoiceButtonIPAD(shortStoryName: bookTitles[0], audioImage: "pot", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                     Spacer()
-                    audioChoiceButton(shortStoryName:bookTitles[1], audioImage: "dinner", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
-                }.padding([.leading, .trailing], 35)
-                    .padding(.top, 30)
-                    .padding(.bottom, 20)
+                    audioChoiceButtonIPAD(shortStoryName:bookTitles[1], audioImage: "dinner", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                }.padding([.leading, .trailing], 125)
+                    .padding(.bottom, 10)
+                    .padding(.top, 40)
                 
                 Text("Intermediate")
-                    .font(Font.custom("Marker Felt", size: 30))
-                    .frame(width: 175, height: 30)
-                    .border(width: 3, edges: [.bottom], color: .teal)
+                    .font(Font.custom("Marker Felt", size: 40))
+                    .frame(width: 275)
+                    .border(width: 3, edges: [.bottom], color: .black)
+                    .padding(.top, 10)
+                    .padding(.bottom, 25)
                 
                 HStack{
-                    audioChoiceButton(shortStoryName: bookTitles[2], audioImage: "directions", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                    audioChoiceButtonIPAD(shortStoryName: bookTitles[2], audioImage: "directions", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                     Spacer()
-                    audioChoiceButton(shortStoryName: bookTitles[3], audioImage: "clothesStore", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
-                }.padding([.leading, .trailing], 28)
-                    .padding(.top, 20)
+                    audioChoiceButtonIPAD(shortStoryName: bookTitles[3], audioImage: "clothesStore", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                }.padding([.leading, .trailing], 110)
                 
                 Text("Hard")
-                    .font(Font.custom("Marker Felt", size: 30))
-                    .frame(width: 75, height: 30)
-                    .padding(.top, 20)
-                    .border(width: 3, edges: [.bottom], color: .teal)
+                    .font(Font.custom("Marker Felt", size: 40))
+                    .frame(width: 175)
+                    .border(width: 3, edges: [.bottom], color: .black)
+                    .padding(.top, 10)
+                    .padding(.bottom, 25)
                 
                 HStack{
-                    audioChoiceButton(shortStoryName:bookTitles[4], audioImage: "renaissance", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                    audioChoiceButtonIPAD(shortStoryName:bookTitles[4], audioImage: "renaissance", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                 }.padding([.leading, .trailing], 28)
                     .padding(.bottom, 10)
                     .padding(.top, 20)
@@ -290,7 +293,7 @@ struct audioHStack: View {
     
 }
 
-struct audioChoiceButton: View {
+struct audioChoiceButtonIPAD: View {
     @EnvironmentObject var globalModel: GlobalModel
     
     @StateObject var listeningActivityViewModel = ListeningActivityViewModel(audioAct: audioActivty.pastaCarbonara)
@@ -316,10 +319,10 @@ struct audioChoiceButton: View {
                             Image(audioImage)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 65, height: 65)
+                                .frame(width: 120, height: 120)
                                 .padding()
                                 .background(.white)
-                                .cornerRadius(60)
+                                .cornerRadius(80)
                                 .overlay( RoundedRectangle(cornerRadius: 60)
                                     .stroke(.black, lineWidth: 3))
                                 .shadow(radius: 10)
@@ -329,7 +332,7 @@ struct audioChoiceButton: View {
                                 Image("coin2")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 45, height: 45)
+                                    .frame(width: 75, height: 75)
                                 Text("25")
                                     .font(Font.custom("Arial Hebrew", size: 30))
                                     .bold()
@@ -337,8 +340,8 @@ struct audioChoiceButton: View {
                         )
                         
                         Text(shortStoryName)
-                            .font(Font.custom("Marker Felt", size: 20))
-                            .frame(width: 120, height: 85)
+                            .font(Font.custom("Futura", size: 20))
+                            .frame(width: 130, height: 80)
                             .multilineTextAlignment(.center)
                            
                         
@@ -351,7 +354,7 @@ struct audioChoiceButton: View {
                             Image(audioImage)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 65, height: 65)
+                                .frame(width: 120, height: 120)
                                 .padding()
                                 .background(.white)
                                 .cornerRadius(60)
@@ -364,8 +367,8 @@ struct audioChoiceButton: View {
                             })
                         
                         Text(shortStoryName)
-                            .font(Font.custom("Marker Felt", size: 20))
-                            .frame(width: 100, height: 85)
+                            .font(Font.custom("Futura", size: 20))
+                            .frame(width: 130, height: 80)
                             .multilineTextAlignment(.center)
 
                         
@@ -377,7 +380,7 @@ struct audioChoiceButton: View {
                         Image(audioImage)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 75, height: 75)
+                            .frame(width: 120, height: 120)
                         
                             .padding()
                             .background(.white)
@@ -394,7 +397,7 @@ struct audioChoiceButton: View {
                     
                     
                     Text(shortStoryName)
-                        .font(Font.custom("Futura", size: 18))
+                        .font(Font.custom("Futura", size: 20))
                         .frame(width: 130, height: 80)
                         .multilineTextAlignment(.center)
                 }
@@ -416,11 +419,12 @@ struct audioChoiceButton: View {
 }
 
 
-struct chooseAudio_Previews: PreviewProvider {
+struct chooseAudioIPAD_Previews: PreviewProvider {
     static var previews: some View {
-        chooseAudio()
+        chooseAudioIPAD()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .environmentObject(AudioManager())
             .environmentObject(GlobalModel())
     }
 }
+

@@ -1,16 +1,15 @@
 //
-//  DragDropVerbConjugationView.swift
+//  DragDropVerbConjugationViewIPAD.swift
 //  PracticeItalianApp
 //
-//  Created by Matt Madeya on 6/30/23.
+//  Created by Matt Madeya on 1/10/24.
 //
 
 import SwiftUI
 
-struct DragDropVerbConjugationView: View {
+struct DragDropVerbConjugationViewIPAD: View {
     @StateObject var dragDropVerbConjugationVM: DragDropVerbConjugationViewModel
     @Environment(\.dismiss) var dismiss
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     var isPreview: Bool
     @State var questionNumber = 0
     @State var wrongChosen = false
@@ -24,170 +23,166 @@ struct DragDropVerbConjugationView: View {
     
     var body: some View{
         GeometryReader {geo in
-            if horizontalSizeClass == .compact {
-                ZStack(alignment: .topLeading){
-                    Image("verticalNature")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            ZStack(alignment: .topLeading){
+                Image("verticalNature")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                
+                HStack(spacing: 18){
+                    NavigationLink(destination: chooseVerbList(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 45))
+                            .foregroundColor(.gray)
+                    })
                     
-                    HStack(spacing: 18){
-                        NavigationLink(destination: chooseVerbList(), label: {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 25))
-                                .foregroundColor(.gray)
-                        })
+                    Spacer()
+                    
+                    Text(String(questionNumber) + "/" + String( dragDropVerbConjugationVM.currentTenseDragDropData.count))
+                        .font(.title3)
+                        .foregroundColor(.black)
+                    
+                    
+                    Image("italyFlag")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 55, height: 55)
+                    
+                }.padding([.leading, .trailing], 25)
+//                HStack{
+//                    Button(action: {
+//                        withAnimation(.linear){
+//                            showUserCheck.toggle()
+//                        }
+//                    }, label: {
+//                        Image(systemName: "xmark")
+//                            .font(.system(size: 25))
+//                            .foregroundColor(.gray)
+//
+//                    })
+//
+//
+//                        GeometryReader{proxy in
+//                            ZStack(alignment: .leading) {
+//                                Capsule()
+//                                    .fill(.gray.opacity(0.25))
+//
+//                                Capsule()
+//                                    .fill(Color.green)
+//                                    .frame(width: proxy.size.width * CGFloat(progress))
+//                            }
+//                        }.frame(height: 13)
+//                            .onChange(of: questionNumber){ newValue in
+//                                progress = (CGFloat(newValue) / 4)
+//                            }
+//
+//                        Image("italyFlag")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 40, height: 40)
+//                        Spacer()
+//                }.padding([.leading, .trailing], 15).zIndex(1)
+            ScrollViewReader{scroller in
+                
+                ZStack{
+                    if showUserCheck {
+                        userCheckNavigationPopUpConjViewIPAD(showUserCheck: $showUserCheck)
+                            .transition(.slide)
+                            .animation(.easeIn)
+                            .padding(.leading, 60)
+                            .padding(.top, 60)
+                            .zIndex(2)
+                    }
+                    VStack{
                         
-                        Spacer()
+                        Text(getTenseString(tenseIn: dragDropVerbConjugationVM.currentTense))
+                            .font(Font.custom("Chalkboard SE", size: 45))
+                            .underline()
                         
-                        Text(String(questionNumber) + "/" + String( dragDropVerbConjugationVM.currentTenseDragDropData.count))
-                            .font(.title3)
-                            .foregroundColor(.black)
-                        
-                        
-                        Image("italyFlag")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40, height: 40)
-                        
-                    }.padding([.leading, .trailing], 25)
-                    //                HStack{
-                    //                    Button(action: {
-                    //                        withAnimation(.linear){
-                    //                            showUserCheck.toggle()
-                    //                        }
-                    //                    }, label: {
-                    //                        Image(systemName: "xmark")
-                    //                            .font(.system(size: 25))
-                    //                            .foregroundColor(.gray)
-                    //
-                    //                    })
-                    //
-                    //
-                    //                        GeometryReader{proxy in
-                    //                            ZStack(alignment: .leading) {
-                    //                                Capsule()
-                    //                                    .fill(.gray.opacity(0.25))
-                    //
-                    //                                Capsule()
-                    //                                    .fill(Color.green)
-                    //                                    .frame(width: proxy.size.width * CGFloat(progress))
-                    //                            }
-                    //                        }.frame(height: 13)
-                    //                            .onChange(of: questionNumber){ newValue in
-                    //                                progress = (CGFloat(newValue) / 4)
-                    //                            }
-                    //
-                    //                        Image("italyFlag")
-                    //                            .resizable()
-                    //                            .scaledToFit()
-                    //                            .frame(width: 40, height: 40)
-                    //                        Spacer()
-                    //                }.padding([.leading, .trailing], 15).zIndex(1)
-                    ScrollViewReader{scroller in
-                        
-                        ZStack{
-                            if showUserCheck {
-                                userCheckNavigationPopUpConjView(showUserCheck: $showUserCheck)
-                                    .transition(.slide)
-                                    .animation(.easeIn)
-                                    .padding(.leading, 60)
-                                    .padding(.top, 60)
-                                    .zIndex(2)
-                            }
-                            VStack{
-                                
-                                Text(getTenseString(tenseIn: dragDropVerbConjugationVM.currentTense))
-                                    .font(Font.custom("Chalkboard SE", size: 25))
-                                    .underline()
-                                
-                                ScrollView(.horizontal){
-                                    
-                                    HStack{
-                                        ForEach(0..<dragDropVerbConjugationVM.currentTenseDragDropData.count, id: \.self) { i in
-                                            VStack{
-                                                dragDropViewBuilder(tense: dragDropVerbConjugationVM.currentTense, currentVerb: dragDropVerbConjugationVM.currentTenseDragDropData[i].currentVerb, characters: dragDropVerbConjugationVM.currentTenseDragDropData[i].choices , leftDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListLeft, rightDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListRight, questionNumber: $questionNumber, correctChosen: $correctChosen, wrongChosen: $wrongChosen).frame(width: geo.size.width)
-                                                    .frame(minHeight: geo.size.height)
-                                            }
-                                            //.offset(y:-90)
-                                            
-                                        }
-                                    }
-                                    
-                                }
-                                .scrollDisabled(true)
-                                .onChange(of: questionNumber) { newIndex in
-                                    
-                                    if newIndex > dragDropVerbConjugationVM.currentTenseDragDropData.count - 1 {
-                                        showFinishedActivityPage = true
-                                    }else{
-                                        
-                                        withAnimation{
-                                            scroller.scrollTo(newIndex, anchor: .center)
-                                        }
-                                    }
-                                    
-                                    
-                                }
-                                
-                                
-                            }.zIndex(1)
+                        ScrollView(.horizontal){
                             
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color("WashedWhite"))
-                                .frame(width: geo.size.width * 0.95, height: geo.size.height * 0.7)
-                                .overlay( /// apply a rounded border
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 4)
-                                )
+                            HStack{
+                                ForEach(0..<dragDropVerbConjugationVM.currentTenseDragDropData.count, id: \.self) { i in
+                                    VStack{
+                                        dragDropViewBuilderIPAD(tense: dragDropVerbConjugationVM.currentTense, currentVerb: dragDropVerbConjugationVM.currentTenseDragDropData[i].currentVerb, characters: dragDropVerbConjugationVM.currentTenseDragDropData[i].choices , leftDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListLeft, rightDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListRight, questionNumber: $questionNumber, correctChosen: $correctChosen, wrongChosen: $wrongChosen).frame(width: geo.size.width)
+                                            .frame(minHeight: geo.size.height)
+                                    }
+                                    //.offset(y:-90)
+                                    
+                                }
+                            }
+                            
                         }
+                        .scrollDisabled(true)
+                        .onChange(of: questionNumber) { newIndex in
+                            
+                            if newIndex > dragDropVerbConjugationVM.currentTenseDragDropData.count - 1 {
+                                showFinishedActivityPage = true
+                            }else{
+                                
+                                withAnimation{
+                                    scroller.scrollTo(newIndex, anchor: .center)
+                                }
+                            }
+                            
+                            
+                        }
+                        
+                        
+                    }.zIndex(1)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("WashedWhite"))
+                        .frame(width: geo.size.width * 0.87, height: geo.size.height * 0.5)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        ).offset(y: -130)
+                }
                         .offset(y: 50)
                         .zIndex(0)
-                        
-                        //                    Image("sittingBear")
-                        //                        .resizable()
-                        //                        .scaledToFill()
-                        //                        .frame(width: 200, height: 100)
-                        //                        .offset(x: 130, y: animatingBear ? 350 : 750)
-                        //
-                        //                    if correctChosen{
-                        //
-                        //                        let randomInt = Int.random(in: 1..<4)
-                        //
-                        //                        Image("bubbleChatRight"+String(randomInt))
-                        //                            .resizable()
-                        //                            .scaledToFill()
-                        //                            .frame(width: 100, height: 40)
-                        //                            .offset(y: 280)
-                        //                    }
-                        //
-                        //                    if wrongChosen{
-                        //
-                        //                        let randomInt2 = Int.random(in: 1..<4)
-                        //
-                        //                        Image("bubbleChatWrong"+String(randomInt2))
-                        //                            .resizable()
-                        //                            .scaledToFill()
-                        //                            .frame(width: 100, height: 40)
-                        //                            .offset(y: 280)
-                        //                    }
-                        
-                        NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
-                        ).isDetailLink(false)
-                        
-                    }.onAppear{
-                        withAnimation(.spring()){
-                            animatingBear = true
-                        }
-                        if isPreview {
-                            dragDropVerbConjugationVM.currentTense = 0
-                            dragDropVerbConjugationVM.setNonMyListDragDropData()
-                        }
+                    
+//                    Image("sittingBear")
+//                        .resizable()
+//                        .scaledToFill()
+//                        .frame(width: 200, height: 100)
+//                        .offset(x: 130, y: animatingBear ? 350 : 750)
+//
+//                    if correctChosen{
+//
+//                        let randomInt = Int.random(in: 1..<4)
+//
+//                        Image("bubbleChatRight"+String(randomInt))
+//                            .resizable()
+//                            .scaledToFill()
+//                            .frame(width: 100, height: 40)
+//                            .offset(y: 280)
+//                    }
+//
+//                    if wrongChosen{
+//
+//                        let randomInt2 = Int.random(in: 1..<4)
+//
+//                        Image("bubbleChatWrong"+String(randomInt2))
+//                            .resizable()
+//                            .scaledToFill()
+//                            .frame(width: 100, height: 40)
+//                            .offset(y: 280)
+//                    }
+                    
+                    NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
+                                                      ).isDetailLink(false)
+                    
+                }.onAppear{
+                    withAnimation(.spring()){
+                        animatingBear = true
+                    }
+                    if isPreview {
+                        dragDropVerbConjugationVM.currentTense = 0
+                        dragDropVerbConjugationVM.setNonMyListDragDropData()
                     }
                 }
-            }else{
-                DragDropVerbConjugationViewIPAD(dragDropVerbConjugationVM: dragDropVerbConjugationVM, isPreview: false)
             }
         }
     }
@@ -212,7 +207,7 @@ struct DragDropVerbConjugationView: View {
     
 }
 
-struct userCheckNavigationPopUpConjView: View{
+struct userCheckNavigationPopUpConjViewIPAD: View{
     @Binding var showUserCheck: Bool
     
     var body: some View{
@@ -271,7 +266,7 @@ struct userCheckNavigationPopUpConjView: View{
 
 
 
-struct dragDropViewBuilder: View{
+struct dragDropViewBuilderIPAD: View{
     
     var tense: Int
     var currentVerb: Verb
@@ -306,11 +301,11 @@ struct dragDropViewBuilder: View{
                     
                     VStack(spacing: 0){
                         Text("Complete the Table")
-                            .font(.title2.bold())
+                            .font(.system(size:30))
                             .offset(y:-15)
                         
                         Text(currentVerb.verbName + "\n" + currentVerb.verbEngl)
-                            .font(.title2.bold()).multilineTextAlignment(.center)
+                            .font(.system(size:25)).multilineTextAlignment(.center).bold()
                             .frame(width: geo.size.width * 0.65)
                             .padding()
                             .background(.teal)
@@ -323,18 +318,18 @@ struct dragDropViewBuilder: View{
                         
                         VStack{
                             HStack{
-                                //Spacer()
-                                LeftDropArea().padding(.leading, 50)
                                 Spacer()
-                                RightDropArea().padding(.trailing, 70)
-                                //Spacer()
+                                LeftDropArea()//.padding(.leading, 50)
+                                Spacer()
+                                RightDropArea()//.padding(.trailing, 70)
+                                Spacer()
                                 
-                            }
+                            }.offset(y:50)
                         }
                         .padding(.top, 10)
                     }.padding(.bottom, 15)
                     //.padding(.top, 5)
-                    DragArea()
+                    DragArea().offset(y: 100).frame(width: geo.size.width - 50)
                 }
                 .padding()
                 .onAppear{
@@ -342,9 +337,9 @@ struct dragDropViewBuilder: View{
                         //First Creating shuffled On
                         //then normal one
                         characters = characters.shuffled()
-                        rows = generateGrid()
-                        shuffledRows = generateGrid()
-                        rows = generateGrid()
+                        rows = generateGridIPAD()
+                        shuffledRows = generateGridIPAD()
+                        rows = generateGridIPAD()
                     }
                 }
                 .offset(x: animateWrongText ? -30 : 0)
@@ -357,7 +352,7 @@ struct dragDropViewBuilder: View{
         VStack(spacing:10){
             ForEach($leftDropCharacters){$item in
                 Text(item.isShowing ? item.value : item.pronoun)
-                    .font(.system(size: item.fontSize))
+                    .font(.system(size: 25))
                     .opacity(item.isShowing ? 1 : 0.5)
                     .background{
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
@@ -416,7 +411,7 @@ struct dragDropViewBuilder: View{
         VStack(spacing:10){
             ForEach($rightDropCharacters){$item in
                 Text(item.isShowing ? item.value : item.pronoun)
-                    .font(.system(size: item.fontSize))
+                    .font(.system(size: 25))
                     .opacity(item.isShowing ? 1 : 0.5)
                     .background{
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
@@ -446,7 +441,7 @@ struct dragDropViewBuilder: View{
                 HStack(spacing: 20){
                     ForEach(row){item in
                         Text(item.value)
-                            .font(.system(size: item.fontSize))
+                            .font(.system(size: 25))//item.fontSize))
                             .padding(.vertical, 5)
                             .padding(.horizontal, item.padding)
                             .background{
@@ -471,12 +466,12 @@ struct dragDropViewBuilder: View{
     }
     
     
-    func generateGrid()->[[VerbConjCharacter]]{
+    func generateGridIPAD()->[[VerbConjCharacter]]{
         
         for item in characters.enumerated() {
             let textSize = textSize(character: item.element)
             
-            characters[item.offset].textSize = textSize
+            characters[item.offset].textSize = textSize + 25
             
         }
         
@@ -515,7 +510,7 @@ struct dragDropViewBuilder: View{
         
         let size = (character.value as NSString).size(withAttributes: attributes)
         
-        return size.width + (character.padding * 2) + 15
+        return size.width + (character.padding * 2) + 35
     }
     
     func updateShuffledArray(character: VerbConjCharacter){
@@ -531,10 +526,10 @@ struct dragDropViewBuilder: View{
 }
 
 
-struct DragDropVerbConjugationView_Previews: PreviewProvider {
+struct DragDropVerbConjugationViewIPAD_Previews: PreviewProvider {
     static var dragDropVM: DragDropVerbConjugationViewModel = DragDropVerbConjugationViewModel()
     
     static var previews: some View {
-        DragDropVerbConjugationView(dragDropVerbConjugationVM:  dragDropVM, isPreview: true)
+        DragDropVerbConjugationViewIPAD(dragDropVerbConjugationVM:  dragDropVM, isPreview: true)
     }
 }

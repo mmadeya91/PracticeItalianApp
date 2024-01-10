@@ -35,6 +35,7 @@ struct RoundedCorner: Shape {
 
 struct shortStoryView: View {
     @EnvironmentObject var audioManager: AudioManager
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @State var chosenStoryNameIn: String
     @State var progress: CGFloat = 0
@@ -63,65 +64,66 @@ struct shortStoryView: View {
         
         
         GeometryReader{ geo in
-            ZStack(alignment: .topLeading){
-                Image("verticalNature")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                    .zIndex(0)
-                
-                HStack(spacing: 18){
-                    Spacer()
-                    NavigationLink(destination: availableShortStories(), label: {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 25))
-                            .foregroundColor(.gray)
-                            
-                            
-                    })
-                    
-                    GeometryReader{proxy in
-                        ZStack(alignment: .leading) {
-                            Capsule()
-                                .fill(.gray.opacity(0.25))
-                            
-                            Capsule()
-                                .fill(Color.green)
-                                .frame(width: proxy.size.width * CGFloat(progress))
-                        }
-                    }.frame(height: 13)
-                        .onChange(of: questionNumber){ newValue in
-                            progress = (CGFloat(newValue) / 4)
-                        }
-                    
-                    Image("italyFlag")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                    Spacer()
-                }
-                    
-                Button(action: {
-                    withAnimation(.easeIn){
-                        showEnglish.toggle()
-                    }
-                }, label: {
-                    Image(systemName: showEnglish ? "eye.slash" : "eye")
+            if horizontalSizeClass == .compact {
+                ZStack(alignment: .topLeading){
+                    Image("verticalNature")
                         .resizable()
                         .scaledToFill()
-                        .foregroundColor(.black)
-                        .frame(width: 20, height: 20)
-                }).zIndex(2)
-                    .offset(x:315, y: 80)
-
-                if showPopUpScreen{
-                    popUpView(storyObj: self.storyObj, linkClickedString: self.$linkClickedString, showPopUpScreen: self.$showPopUpScreen).transition(.slide).animation(.easeIn).zIndex(2)
-                        .offset(x: (geo.size.width / 9), y: (geo.size.height / 2) - 155)
-
-                }
-                
-                VStack(spacing: 0){
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                        .zIndex(0)
+                    
+                    HStack(spacing: 18){
+                        Spacer()
+                        NavigationLink(destination: availableShortStories(), label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 25))
+                                .foregroundColor(.gray)
+                            
+                            
+                        })
+                        
+                        GeometryReader{proxy in
+                            ZStack(alignment: .leading) {
+                                Capsule()
+                                    .fill(.gray.opacity(0.25))
+                                
+                                Capsule()
+                                    .fill(Color.green)
+                                    .frame(width: proxy.size.width * CGFloat(progress))
+                            }
+                        }.frame(height: 13)
+                            .onChange(of: questionNumber){ newValue in
+                                progress = (CGFloat(newValue) / 4)
+                            }
+                        
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                        Spacer()
+                    }
+                    
+                    Button(action: {
+                        withAnimation(.easeIn){
+                            showEnglish.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: showEnglish ? "eye.slash" : "eye")
+                            .resizable()
+                            .scaledToFill()
+                            .foregroundColor(.black)
+                            .frame(width: 20, height: 20)
+                    }).zIndex(2)
+                        .offset(x:330, y: 80)
+                    
+                    if showPopUpScreen{
+                        popUpView(storyObj: self.storyObj, linkClickedString: self.$linkClickedString, showPopUpScreen: self.$showPopUpScreen).transition(.slide).animation(.easeIn).zIndex(2)
+                            .offset(x: (geo.size.width / 9), y: (geo.size.height / 2) - 155)
+                        
+                    }
+                    
+                    VStack(spacing: 0){
                         ScrollView(.vertical, showsIndicators: false) {
                             Text("Cristofo Columbo")
                                 .font(Font.custom("Arial Hebrew", size: 25))
@@ -149,81 +151,84 @@ struct shortStoryView: View {
                             
                         }.frame(width: geo.size.width - 40).background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                             .stroke(Color("DarkNavy"), lineWidth: 6)).padding(.bottom, 25)
-                    
-                    GroupBox{
-                  
-                        DisclosureGroup("Questions") {
-      
-                            VStack(spacing: 0){
-                              
-                                Text(storyObj.questionList[questionNumber].question)
-                                    .font(Font.custom("Arial Hebrew", size: 16))
-                                    .padding()
-                                    .frame(width: geo.size.width - 37, height: 55)
-                                    .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 9)
-                                        .stroke(.black, lineWidth: 4))
-                          
-                                
-                                radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
-                                    .padding(.top, 10)
-
-                                
-                                
-                            }
-                            .frame(width: geo.size.width - 60)
-                            .background(Color("WashedWhite")).cornerRadius(2)
-                            .overlay( RoundedRectangle(cornerRadius: 9)
-                                .stroke(Color("DarkNavy"), lineWidth: 4))
-                            .padding(.top, 10)
+                        
+                        GroupBox{
                             
-                            
-                        }
-                        .tint(Color.black)
-                        .font(Font.custom("Arial Hebrew", size: 16))
-                        .frame(width: geo.size.width - 70)
-                    
-                    } .padding(.bottom, 15)
-                    
-                    
-                     
-                    
-                }.padding(.top, 60)
-                    .padding(.leading, 20)
-                    .zIndex(1)
-                        //QUESTIONS VIEW
-                        if showQuestionDropdown && !showShortStoryDragDrop{
-
-                            VStack(alignment: .leading){
-
+                            DisclosureGroup("Questions") {
+                                
+                                VStack(spacing: 0){
+                                    
                                     Text(storyObj.questionList[questionNumber].question)
                                         .font(Font.custom("Arial Hebrew", size: 16))
-                                        .bold()
-                                        .padding([.leading, .trailing], 10 )
-                                        .padding(.top, 5)
-                                        .padding(.bottom, 10)
-
-
-                                radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
-
-
+                                        .padding()
+                                        .frame(width: geo.size.width - 37, height: 55)
+                                        .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 9)
+                                            .stroke(.black, lineWidth: 4))
+                                    
+                                    
+                                    radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+                                        .padding(.top, 10)
+                                    
+                                    
+                                    
+                                }
+                                .frame(width: geo.size.width - 60)
+                                .background(Color("WashedWhite")).cornerRadius(2)
+                                .overlay( RoundedRectangle(cornerRadius: 9)
+                                    .stroke(Color("DarkNavy"), lineWidth: 4))
+                                .padding(.top, 10)
+                                
+                                
                             }
-                            .frame(width: 335, height: 210)
-                            .background(Color.white.opacity(0.95))
-                            .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-                            .cornerRadius(20, corners: [.topLeft, .topRight])
-                            .padding(.top, 415)
-                            .padding(.leading, 21)
-                            .zIndex(0)
-                           
+                            .tint(Color.black)
+                            .font(Font.custom("Arial Hebrew", size: 16))
+                            .frame(width: geo.size.width - 70)
                             
-
-
-
+                        } .padding(.bottom, 15)
+                        
+                        
+                        
+                        
+                    }.padding(.top, 60)
+                        .padding(.leading, 20)
+                        .zIndex(1)
+                    //QUESTIONS VIEW
+                    if showQuestionDropdown && !showShortStoryDragDrop{
+                        
+                        VStack(alignment: .leading){
+                            
+                            Text(storyObj.questionList[questionNumber].question)
+                                .font(Font.custom("Arial Hebrew", size: 16))
+                                .bold()
+                                .padding([.leading, .trailing], 10 )
+                                .padding(.top, 5)
+                                .padding(.bottom, 10)
+                            
+                            
+                            radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+                            
+                            
                         }
+                        .frame(width: 335, height: 210)
+                        .background(Color.white.opacity(0.95))
+                        .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+                        .cornerRadius(20, corners: [.topLeft, .topRight])
+                        .padding(.top, 415)
+                        .padding(.leading, 21)
+                        .zIndex(0)
+                        
+                        
+                        
+                        
+                        
+                    }
                     
                     NavigationLink(destination:  ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false),isActive: $showShortStoryDragDrop,label:{}
-                                                      ).isDetailLink(false)
+                    ).isDetailLink(false)
                     
+                }
+            }else{
+                shortStoryViewIPAD(chosenStoryNameIn: "Cristofo Columbo")
             }
         }.navigationBarBackButtonHidden(true)
     }

@@ -1,15 +1,14 @@
 //
-//  chooseFlashCardSet.swift
+//  chooseFlashCardSetIPAD.swift
 //  PracticeItalianApp
 //
-//  Created by Matt Madeya on 5/13/23.
+//  Created by Matt Madeya on 1/10/24.
 //
 
 import SwiftUI
 
-struct chooseFlashCardSet: View {
+struct chooseFlashCardSetIPAD: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var globalModel: GlobalModel
     @State private var animatingBear = false
     @State private var showInfoPopUp = false
@@ -39,128 +38,131 @@ struct chooseFlashCardSet: View {
     
     var body: some View {
         GeometryReader{ geo in
-            if horizontalSizeClass == .compact {
-                ZStack(alignment: .topLeading){
-                    Image("horizontalNature")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-                        .opacity(1.0)
+            ZStack(alignment: .topLeading){
+                Image("horizontalNature")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
+                    .opacity(1.0)
+                
+                HStack(alignment: .top){
                     
-                    HStack(alignment: .top){
+                    NavigationLink(destination: chooseActivity(), label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 45))
+                            .foregroundColor(.black)
                         
-                        NavigationLink(destination: chooseActivity(), label: {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 25))
-                                .foregroundColor(.black)
-                            
-                        }).padding(.leading, 25)
-                            .padding(.top, 20)
+                    }).padding(.leading, 25)
+                        .padding(.top, 20)
+
+                    
+                    Spacer()
+                    VStack(spacing: 0){
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 60, height: 50)
+                            .shadow(radius: 10)
+                            .padding()
                         
-                        
-                        Spacer()
-                        VStack(spacing: 0){
-                            Image("italyFlag")
+                        HStack{
+                            Image("coin2")
                                 .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
-                                .shadow(radius: 10)
-                                .padding()
-                            
-                            HStack{
-                                Image("coin2")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 40, height: 40)
-                                Text(String(globalModel.userCoins))
-                                    .font(Font.custom("Arial Hebrew", size: 22))
-                            }.padding(.trailing, 50)
-                        }
-                        
-                    }
-                    
-                    Image("sittingBear")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
-                        .offset(x: 50, y: animatingBear ? 90 : 200)
-                    
-                    
-                    
-                    VStack{
-                        
-                        flashCardSets(setAccData: flashCardSetAccData, showInfoPopup: $showInfoPopUp, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
-                            .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
-                                .stroke(.black, lineWidth: 5))
-                            .padding([.leading, .trailing], geo.size.width * 0.05)
-                            .padding([.top, .bottom], geo.size.height * 0.18)
-                    }
-                    
-                    if showInfoPopUp{
-                        VStack{
-                            Text("Use the provided flash card sets to increase your vocabulary! Or, make your own using the 'Make Your Own' feature. \n \nEach flash card set displays your accuracy under the corresponding image to let you know which words you need to work most on during your practice.")
-                                .multilineTextAlignment(.center)
-                                .padding()
-                        }.frame(width: 300, height: 285)
-                            .background(Color("WashedWhite"))
-                            .cornerRadius(20)
-                            .shadow(radius: 20)
-                            .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.black, lineWidth: 3)
-                            )
-                            .transition(.slide).animation(.easeIn).zIndex(2)
-                            .offset(x: geo.size.width / 9, y: geo.size.height / 3)
-                    }
-                    
-                    if attemptToBuyPopUp{
-                        VStack{
-                            VStack{
-                                Text("Do you want to spend 25 of your coins to unlock the 'Food' flash card set?")
-                                    .multilineTextAlignment(.center)
-                                    .padding()
-                                
-                                if notEnoughCoins{
-                                    Text("Sorry! You don't have enough coins!")
-                                        .multilineTextAlignment(.center)
-                                        .padding()
-                                }
-                                
-                                HStack{
-                                    Button(action: {
-                                        checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
-                                    }, label: {Text("Yes")})
-                                    Button(action: {
-                                        attemptToBuyPopUp = false
-                                    }, label: {Text("No")})
-                                }
-                                
-                            }
-                        }.frame(width: 300, height: 285)
-                            .background(Color("WashedWhite"))
-                            .cornerRadius(20)
-                            .shadow(radius: 20)
-                            .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.black, lineWidth: 3)
-                            )
-                            .transition(.slide).animation(.easeIn).zIndex(2)
-                        
-                    }
-                    
-                    
-                }.onAppear{
-                    withAnimation(.spring()){
-                        animatingBear = true
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                            Text(String(globalModel.userCoins))
+                                .font(Font.custom("Arial Hebrew", size: 30))
+                        }.padding(.trailing, 50)
                     }
                     
                 }
-            }else{
-                chooseFlashCardSetIPAD()
+                
+                
+                Image("sittingBear")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geo.size.width * 0.35, height: geo.size.width * 0.20)
+                    .offset(x: 380, y: animatingBear ? 90 : 200)
+                
+                
+                
+                VStack{
+                    
+                    flashCardSetsIPAD(setAccData: flashCardSetAccData, showInfoPopup: $showInfoPopUp, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
+                        .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                            .stroke(.black, lineWidth: 5))
+                        .padding([.leading, .trailing], geo.size.width * 0.05)
+                        .padding([.top, .bottom], geo.size.height * 0.18)
+                }
+                
+                if showInfoPopUp{
+                    VStack{
+                        Text("Use the provided flash card sets to increase your vocabulary! Or, make your own using the 'Make Your Own' feature. \n \nEach flash card set displays your accuracy under the corresponding image to let you know which words you need to work most on during your practice.")
+                            .multilineTextAlignment(.center)
+                            .font(Font.custom("Marker Felt", size: 30))
+                            .padding(35)
+                    }.frame(width: 500, height: 485)
+                        .background(Color("WashedWhite"))
+                        .cornerRadius(20)
+                        .shadow(radius: 20)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 3)
+                        )
+                        .transition(.slide).animation(.easeIn).zIndex(2)
+                        .offset(x: geo.size.width / 5, y: geo.size.height / 3)
+                }
+                
+                if attemptToBuyPopUp{
+                    VStack{
+                        VStack{
+                            Text("Do you want to spend 25 of your coins to unlock the 'Food' flash card set?")
+                                .multilineTextAlignment(.center)
+                                .padding()
+                            
+                            if notEnoughCoins{
+                                Text("Sorry! You don't have enough coins!")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                            }
+                            
+                            HStack{
+                                Button(action: {
+                                    checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
+                                }, label: {Text("Yes")})
+                                Button(action: {
+                                    attemptToBuyPopUp = false
+                                }, label: {Text("Yes")  .font(Font.custom("Futura", size: 30))})
+                                Spacer()
+                                Button(action: {
+                                    attemptToBuyPopUp = false
+                                }, label: {Text("No")  .font(Font.custom("Futura", size: 30))})
+                                Spacer()
+                            }
+                            
+                        }
+                    }.frame(width: 500, height: 385)
+                        .background(Color("WashedWhite"))
+                        .cornerRadius(20)
+                        .shadow(radius: 20)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 3)
+                        )
+                        .transition(.slide).animation(.easeIn).zIndex(2)
+                        .offset(x: geo.size.width / 5, y: geo.size.height / 3)
+                    
+                }
+                
+                
+            }.onAppear{
+                withAnimation(.spring()){
+                    animatingBear = true
+                }
+              
             }
-            }.navigationBarBackButtonHidden(true)
-     
+        }.navigationBarBackButtonHidden(true)
     }
     
     func unlockData(chosenDataSet: String){
@@ -209,7 +211,7 @@ struct chooseFlashCardSet: View {
     }
 }
 
-struct flashCardSets: View {
+struct flashCardSetsIPAD: View {
     var setAccData: FetchedResults<FlashCardSetAccuracy>
     @Binding var showInfoPopup: Bool
     @Binding var attemptToBuyPopUp: Bool
@@ -222,8 +224,8 @@ struct flashCardSets: View {
                 
                 HStack{
                     Text("Flash Cards").zIndex(1)
-                        .font(Font.custom("Marker Felt", size: 30))
-                        .padding(.leading, 30)
+                        .font(Font.custom("Marker Felt", size: 50))
+                        .foregroundColor(.white)
                     
                     Button(action: {
                         withAnimation(.linear){
@@ -238,11 +240,11 @@ struct flashCardSets: View {
                         
                     })
                     .padding(.leading, 5)
-                }.frame(width: 450, height: 70)
-                    .background(.teal).opacity(0.75)
-                    .border(width: 6, edges: [.bottom], color: .black)
+                } .frame(width: 740, height: 100)
+                    .background(Color("DarkNavy")).opacity(0.75)
+                    .border(width: 8, edges: [.bottom], color: .teal)
                 
-                flashCardHStack(setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                flashCardHStackIPAD(setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                 
                 
                 
@@ -252,7 +254,7 @@ struct flashCardSets: View {
     }
 }
 
-struct flashCardHStack: View {
+struct flashCardHStackIPAD: View {
     var setAccData: FetchedResults<FlashCardSetAccuracy>
     @Binding var attemptToBuyPopUp: Bool
     @Binding var attemptedBuyName: String
@@ -264,43 +266,44 @@ struct flashCardHStack: View {
         
         ScrollView{
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[0], flashCardSetIcon: flashCardIcons[0], arrayIndex: 0, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                flashCardButtonIPAD(flashCardSetName: flashCardSetTitles[0], flashCardSetIcon: flashCardIcons[0], arrayIndex: 0, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                 Spacer()
-                flashCardButton(flashCardSetName: flashCardSetTitles[1], flashCardSetIcon: flashCardIcons[1], arrayIndex: 1, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
-            }.padding([.leading, .trailing], 45)
+                flashCardButtonIPAD(flashCardSetName: flashCardSetTitles[1], flashCardSetIcon: flashCardIcons[1], arrayIndex: 1, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+            }.padding([.leading, .trailing], 125)
+                .padding(.bottom, 10)
     
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[2], flashCardSetIcon: flashCardIcons[2], arrayIndex: 2, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                flashCardButtonIPAD(flashCardSetName: flashCardSetTitles[2], flashCardSetIcon: flashCardIcons[2], arrayIndex: 2, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                 Spacer()
-                flashCardButton(flashCardSetName: flashCardSetTitles[3], flashCardSetIcon: flashCardIcons[3], arrayIndex: 3, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
-            }.padding([.leading, .trailing], 45)
+                flashCardButtonIPAD(flashCardSetName: flashCardSetTitles[3], flashCardSetIcon: flashCardIcons[3], arrayIndex: 3, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+            }.padding([.leading, .trailing], 125)
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[4], flashCardSetIcon: flashCardIcons[4], arrayIndex: 4, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                flashCardButtonIPAD(flashCardSetName: flashCardSetTitles[4], flashCardSetIcon: flashCardIcons[4], arrayIndex: 4, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                 Spacer()
-                flashCardButton(flashCardSetName: flashCardSetTitles[5], flashCardSetIcon: flashCardIcons[5], arrayIndex: 5, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
-            }.padding([.leading, .trailing], 45)
+                flashCardButtonIPAD(flashCardSetName: flashCardSetTitles[5], flashCardSetIcon: flashCardIcons[5], arrayIndex: 5, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+            }.padding([.leading, .trailing], 125)
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[6], flashCardSetIcon: flashCardIcons[6], arrayIndex: 6, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                flashCardButtonIPAD(flashCardSetName: flashCardSetTitles[6], flashCardSetIcon: flashCardIcons[6], arrayIndex: 6, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                 Spacer()
-                flashCardButton(flashCardSetName: flashCardSetTitles[7], flashCardSetIcon: flashCardIcons[7], arrayIndex: 7, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
-            }.padding([.leading, .trailing], 45)
+                flashCardButtonIPAD(flashCardSetName: flashCardSetTitles[7], flashCardSetIcon: flashCardIcons[7], arrayIndex: 7, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+            }.padding([.leading, .trailing], 125)
             HStack{
-                flashCardButton(flashCardSetName: flashCardSetTitles[8], flashCardSetIcon: flashCardIcons[8], arrayIndex: 8, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
+                flashCardButtonIPAD(flashCardSetName: flashCardSetTitles[8], flashCardSetIcon: flashCardIcons[8], arrayIndex: 8, setAccData: setAccData, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                 Spacer()
-                toMyListButton(flashCardSetName: flashCardSetTitles[9], flashCardSetIcon: flashCardIcons[9], setAccData: setAccData)
-            }.padding([.leading, .trailing], 45)
+                toMyListButtonIPAD(flashCardSetName: flashCardSetTitles[9], flashCardSetIcon: flashCardIcons[9], setAccData: setAccData)
+            }.padding([.leading, .trailing], 125)
             HStack{
-                toMakeYourOwnButton(flashCardSetName: flashCardSetTitles[10], flashCardSetIcon: flashCardIcons[10], setAccData: setAccData)
+                toMakeYourOwnButtonIPAD(flashCardSetName: flashCardSetTitles[10], flashCardSetIcon: flashCardIcons[10], setAccData: setAccData)
                 Spacer()
                 
-            }.padding([.leading, .trailing], 45)
+            }.padding([.leading, .trailing], 125)
         }
         
     }
     
 }
 
-struct flashCardButton: View {
+struct flashCardButtonIPAD: View {
     @EnvironmentObject var globalModel: GlobalModel
     
     var flashCardSetName: String
@@ -323,7 +326,7 @@ struct flashCardButton: View {
                 VStack{
                     
                     Text(flashCardSetName)
-                        .font(Font.custom("Marker Felt", size: 20))
+                        .font(Font.custom("Marker Felt", size: 25))
                         .frame(width: 100, height: 85)
                         .multilineTextAlignment(.center)
                         .offset(y:15)
@@ -335,11 +338,11 @@ struct flashCardButton: View {
                         Image(flashCardSetIcon)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 65, height: 65)
+                            .frame(width: 120, height: 120)
                             .padding()
                             .background(.white)
-                            .cornerRadius(60)
-                            .overlay( RoundedRectangle(cornerRadius: 60)
+                            .cornerRadius(180)
+                            .overlay( RoundedRectangle(cornerRadius: 160)
                                 .stroke(.black, lineWidth: 3))
                             .shadow(radius: 10)
                             .opacity(0.40)
@@ -348,7 +351,7 @@ struct flashCardButton: View {
                             Image("coin2")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 45, height: 45)
+                                .frame(width: 75, height: 75)
                             Text("25")
                                 .font(Font.custom("Arial Hebrew", size: 30))
                                 .bold()
@@ -363,7 +366,7 @@ struct flashCardButton: View {
                 VStack{
                     
                     Text(flashCardSetName)
-                        .font(Font.custom("Marker Felt", size: 20))
+                        .font(Font.custom("Marker Felt", size: 25))
                         .frame(width: 100, height: 85)
                         .multilineTextAlignment(.center)
                         .offset(y:15)
@@ -373,11 +376,11 @@ struct flashCardButton: View {
                         Image(flashCardSetIcon)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 65, height: 65)
+                            .frame(width: 120, height: 120)
                             .padding()
                             .background(.white)
-                            .cornerRadius(60)
-                            .overlay( RoundedRectangle(cornerRadius: 60)
+                            .cornerRadius(160)
+                            .overlay( RoundedRectangle(cornerRadius: 160)
                                 .stroke(.black, lineWidth: 3))
                             .shadow(radius: 10)
                     })
@@ -389,7 +392,7 @@ struct flashCardButton: View {
             VStack{
                 
                 Text(flashCardSetName)
-                    .font(Font.custom("Marker Felt", size: 20))
+                    .font(Font.custom("Marker Felt", size: 25))
                     .frame(width: 100, height: 85)
                     .multilineTextAlignment(.center)
                     .offset(y:15)
@@ -399,11 +402,12 @@ struct flashCardButton: View {
                     Image(flashCardSetIcon)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 65, height: 65)
+                        .frame(width: 120, height: 120)
+                    
                         .padding()
                         .background(.white)
-                        .cornerRadius(60)
-                        .overlay( RoundedRectangle(cornerRadius: 60)
+                        .cornerRadius(160)
+                        .overlay( RoundedRectangle(cornerRadius: 160)
                             .stroke(.black, lineWidth: 3))
                         .shadow(radius: 10)
                 })
@@ -427,7 +431,7 @@ struct flashCardButton: View {
     
 }
 
-struct toMakeYourOwnButton: View {
+struct toMakeYourOwnButtonIPAD: View {
     
     
     var flashCardSetName: String
@@ -440,7 +444,7 @@ struct toMakeYourOwnButton: View {
         VStack{
             
             Text(flashCardSetName)
-                .font(Font.custom("Marker Felt", size: 20))
+                .font(Font.custom("Marker Felt", size: 25))
                 .frame(width: 100, height: 85)
                 .multilineTextAlignment(.center)
                 .offset(y:15)
@@ -450,11 +454,12 @@ struct toMakeYourOwnButton: View {
                 Image(flashCardSetIcon)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 65, height: 65)
+                    .frame(width: 120, height: 120)
+                
                     .padding()
                     .background(.white)
-                    .cornerRadius(60)
-                    .overlay( RoundedRectangle(cornerRadius: 60)
+                    .cornerRadius(160)
+                    .overlay( RoundedRectangle(cornerRadius: 160)
                         .stroke(.black, lineWidth: 3))
                     .shadow(radius: 10)
             })
@@ -466,7 +471,7 @@ struct toMakeYourOwnButton: View {
     
 }
 
-struct toMyListButton: View {
+struct toMyListButtonIPAD: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -481,7 +486,7 @@ struct toMyListButton: View {
         VStack{
             
             Text(flashCardSetName)
-                .font(Font.custom("Marker Felt", size: 20))
+                .font(Font.custom("Marker Felt", size: 25))
                 .frame(width: 100, height: 85)
                 .multilineTextAlignment(.center)
                 .offset(y:15)
@@ -491,11 +496,12 @@ struct toMyListButton: View {
                 Image(flashCardSetIcon)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 65, height: 65)
+                    .frame(width: 120, height: 120)
+                
                     .padding()
                     .background(.white)
-                    .cornerRadius(60)
-                    .overlay( RoundedRectangle(cornerRadius: 60)
+                    .cornerRadius(160)
+                    .overlay( RoundedRectangle(cornerRadius: 160)
                         .stroke(.black, lineWidth: 3))
                     .shadow(radius: 10)
             })
@@ -510,9 +516,9 @@ struct toMyListButton: View {
 }
 
 
-struct chooseFlashCardSet_Previews: PreviewProvider {
+struct chooseFlashCardSetIPAD_Previews: PreviewProvider {
     static var previews: some View {
-        chooseFlashCardSet().environment(\.managedObjectContext,
+        chooseFlashCardSetIPAD().environment(\.managedObjectContext,
                                           PersistenceController.preview.container.viewContext)
         .environmentObject(GlobalModel())
     }

@@ -10,8 +10,9 @@ import CoreData
 
 struct verbConjMultipleChoiceView: View{
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject var globalModel = GlobalModel()
-    @StateObject var verbConjMultipleChoiceVM: VerbConjMultipleChoiceViewModel
+    @ObservedObject var verbConjMultipleChoiceVM: VerbConjMultipleChoiceViewModel
     
     @State private var pressed = false
     @State private var progress: CGFloat = 0.0
@@ -30,171 +31,171 @@ struct verbConjMultipleChoiceView: View{
         
         
         GeometryReader{geo in
-                
-            ZStack(alignment: .topLeading){
-                Image("verticalNature")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                    .zIndex(0)
-                
-                HStack(spacing: 18){
-                    Spacer()
-                    NavigationLink(destination: chooseVerbList(), label: {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 25))
-                            .foregroundColor(.gray)
-                            
-                            
-                    })
-                    
-                    GeometryReader{proxy in
-                        ZStack(alignment: .leading) {
-                            Capsule()
-                                .fill(.gray.opacity(0.25))
-                            
-                            Capsule()
-                                .fill(Color.green)
-                                .frame(width: proxy.size.width * CGFloat(progress))
-                        }
-                    }.frame(height: 13)
-                        .onChange(of: counter){ newValue in
-                            progress = (CGFloat(newValue) / 4)
-                        }
-                    
-                    Image("italyFlag")
+            if horizontalSizeClass == .compact {
+                ZStack(alignment: .topLeading){
+                    Image("verticalNature")
                         .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                    Spacer()
-                }
-                VStack{
-    
-                    Text(getTenseString(tenseIn: verbConjMultipleChoiceVM.currentTense))
-                        .font(Font.custom("Chalkboard SE", size: 30))
-                        .underline()
-                        .padding(.top, 70)
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                        .zIndex(0)
                     
-                    ScrollViewReader {scroller in
-                        ScrollView(.horizontal){
-                            HStack{
-                                ForEach(0..<verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count, id: \.self) { i in
-                                    
-                                    VStack{
-                                    
-                                        
-                                        Text(verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameIt + " - " + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].pronoun + "\n(" + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameEng)
-                                            .bold()
-                                            .font(Font.custom("Arial Hebrew", size: 20))
-                                            .frame(width:geo.size.width * 0.7)
-                                            .padding()
-                                            .background(Color.teal)
-                                            .cornerRadius(10)
-                                            .foregroundColor(Color.white)
-                                            .multilineTextAlignment(.center)
-                                            .overlay( /// apply a rounded border
-                                                RoundedRectangle(cornerRadius: 20)
-                                                    .stroke(.black, lineWidth: 4)
-                                            )
-                                        
-                                            .padding(.bottom, 20)
-                                            .shadow(radius: 10)
+                    HStack(spacing: 18){
+                        Spacer()
+                        NavigationLink(destination: chooseVerbList(), label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 25))
+                                .foregroundColor(.gray)
                             
+                            
+                        })
+                        
+                        GeometryReader{proxy in
+                            ZStack(alignment: .leading) {
+                                Capsule()
+                                    .fill(.gray.opacity(0.25))
+                                
+                                Capsule()
+                                    .fill(Color.green)
+                                    .frame(width: proxy.size.width * CGFloat(progress))
+                            }
+                        }.frame(height: 13)
+                            .onChange(of: counter){ newValue in
+                                progress = (CGFloat(newValue) / 4)
+                            }
+                        
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                        Spacer()
+                    }
+                    VStack{
+                        
+                        Text(getTenseString(tenseIn: verbConjMultipleChoiceVM.currentTense))
+                            .font(Font.custom("Chalkboard SE", size: 30))
+                            .underline()
+                            .padding(.top, 70)
+                        
+                        ScrollViewReader {scroller in
+                            ScrollView(.horizontal){
+                                HStack{
+                                    ForEach(0..<verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count, id: \.self) { i in
                                         
+                                        VStack{
+                                            
+                                            
+                                            Text(verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameIt + " - " + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].pronoun + "\n(" + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameEng)
+                                                .bold()
+                                                .font(Font.custom("Arial Hebrew", size: 20))
+                                                .frame(width:geo.size.width * 0.7)
+                                                .padding()
+                                                .background(Color.teal)
+                                                .cornerRadius(10)
+                                                .foregroundColor(Color.white)
+                                                .multilineTextAlignment(.center)
+                                                .overlay( /// apply a rounded border
+                                                    RoundedRectangle(cornerRadius: 20)
+                                                        .stroke(.black, lineWidth: 4)
+                                                )
+                                            
+                                                .padding(.bottom, 20)
+                                                .shadow(radius: 10)
+                                            
+                                            
+                                            
+                                            choicesView(choicesIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].choiceList, correctAnswerIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].correctAnswer, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen).offset(x:3)
+                                        }
+                                        .frame(width: geo.size.width)
+                                        .frame(minHeight: geo.size.height)
                                         
-                                        choicesView(choicesIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].choiceList, correctAnswerIn: verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].correctAnswer, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen).offset(x:3)
                                     }
-                                    .frame(width: geo.size.width)
-                                    .frame(minHeight: geo.size.height)
-                                
+                                    
+                                }.offset(y: -180)
+                            }
+                            .scrollDisabled(true)
+                            .frame(width: geo.size.width)
+                            .frame(minHeight: geo.size.height)
+                            .onChange(of: counter) { newIndex in
+                                if newIndex == verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                        showFinishedActivityPage = true
+                                    }
+                                    progress = CGFloat(verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count)
+                                }else{
+                                    currentVerbIta = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[newIndex].verbNameIt
+                                    withAnimation{
+                                        scroller.scrollTo(newIndex, anchor: .center)
+                                    }
                                 }
                                 
-                            }.offset(y: -180)
-                        }
-                        .scrollDisabled(true)
-                        .frame(width: geo.size.width)
-                        .frame(minHeight: geo.size.height)
-                        .onChange(of: counter) { newIndex in
-                            if newIndex == verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                    showFinishedActivityPage = true
-                                }
-                                progress = CGFloat(verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count)
-                            }else{
-                                currentVerbIta = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[newIndex].verbNameIt
-                                withAnimation{
-                                    scroller.scrollTo(newIndex, anchor: .center)
-                                }
+                                
                             }
                             
- 
+                            
+                            
                         }
-                       
+                        
+                        
+                        Button(action: {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                showAlreadyExists = false
+                            }
+                            if addVerbItem(verbToSave: counter){
+                                showAlreadyExists = true
+                            }else{
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    saved = false
+                                }
+                                saved = true
+                            }
+                            
+                        }, label: {
+                            Text("Add " + currentVerbIta + " to MyList")
+                                .font(Font.custom("Arial Hebrew", size: 17))
+                                .padding(.top, 3)
+                                .padding([.leading, .trailing], 20)
+                                .foregroundColor(Color.black)
+                                .frame(height: 45)
+                                .background(Color.orange)
+                                .cornerRadius(20)
+                                .overlay( /// apply a rounded border
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(.black, lineWidth: 4)
+                                )
+                                .shadow(radius: 10)
+                            
+                            
+                        }).offset(y:-350)
+                        
+                        Text(currentVerbIta + " is already in MyList!")
+                            .font(Font.custom("Arial Hebrew", size: 20))
+                            .padding(.top, 3)
+                            .padding([.top, .bottom], 5)
+                            .padding([.leading, .trailing], 15)
+                            .background(Color("WashedWhite"))
+                            .foregroundColor(.black)
+                            .cornerRadius(15)
+                            .opacity(showAlreadyExists ? 1 : 0)
+                            .offset(y:-330)
+                        
                         
                         
                     }
+                    .zIndex(1)
                     
                     
-                    Button(action: {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            showAlreadyExists = false
-                        }
-                        if addVerbItem(verbToSave: counter){
-                            showAlreadyExists = true
-                        }else{
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                saved = false
-                            }
-                            saved = true
-                        }
-                        
-                    }, label: {
-                        Text("Add " + currentVerbIta + " to MyList")
-                            .font(Font.custom("Arial Hebrew", size: 17))
-                            .padding(.top, 3)
-                            .padding([.leading, .trailing], 20)
-                            .foregroundColor(Color.black)
-                            .frame(height: 45)
-                            .background(Color.orange)
-                            .cornerRadius(20)
-                            .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.black, lineWidth: 4)
-                            )
-                            .shadow(radius: 10)
-                        
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("WashedWhite"))
+                        .frame(width: geo.size.width * 0.95, height: geo.size.height * 0.34)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .padding([.leading, .trailing], geo.size.width * 0.025)
+                        .offset(y: geo.size.height / 3)
+                        .zIndex(0)
                     
-                    }).offset(y:-350)
-                    
-                    Text(currentVerbIta + " is already in MyList!")
-                        .font(Font.custom("Arial Hebrew", size: 20))
-                        .padding(.top, 3)
-                        .padding([.top, .bottom], 5)
-                        .padding([.leading, .trailing], 15)
-                        .background(Color("WashedWhite"))
-                        .foregroundColor(.black)
-                        .cornerRadius(15)
-                        .opacity(showAlreadyExists ? 1 : 0)
-                        .offset(y:-330)
-                    
-                   
-      
-                }
-                .zIndex(1)
-                
-                
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color("WashedWhite"))
-                    .frame(width: geo.size.width * 0.95, height: geo.size.height * 0.34)
-                    .overlay( /// apply a rounded border
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(.black, lineWidth: 4)
-                    )
-                    .padding([.leading, .trailing], geo.size.width * 0.025)
-                    .offset(y: geo.size.height / 3)
-                    .zIndex(0)
-                
                     
                     Image("sittingBear")
                         .resizable()
@@ -209,48 +210,52 @@ struct verbConjMultipleChoiceView: View{
                             .scaledToFill()
                             .frame(width: 100, height: 40)
                             .offset(y: 240)
-                            
+                        
                     }
-                
-                if correctChosen{
                     
-                    let randomInt = Int.random(in: 1..<4)
+                    if correctChosen{
+                        
+                        let randomInt = Int.random(in: 1..<4)
+                        
+                        Image("bubbleChatRight"+String(randomInt))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(x: 150, y: geo.size.height - 95)
+                    }
                     
-                    Image("bubbleChatRight"+String(randomInt))
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 40)
-                        .offset(x: 150, y: geo.size.height - 95)
+                    if wrongChosen{
+                        
+                        let randomInt2 = Int.random(in: 1..<4)
+                        
+                        Image("bubbleChatWrong"+String(randomInt2))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(x: 150, y: geo.size.height - 95)
+                    }
+                    
+                    
+                    NavigationLink(destination: ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
+                    ).isDetailLink(false)
+                    
                 }
-                      
-                if wrongChosen{
-                    
-                    let randomInt2 = Int.random(in: 1..<4)
-                    
-                    Image("bubbleChatWrong"+String(randomInt2))
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 40)
-                        .offset(x: 150, y: geo.size.height - 95)
+                .onAppear{
+                    withAnimation(.easeIn){
+                        animatingBear = true
+                    }
+                    if isPreview{
+                        verbConjMultipleChoiceVM.setMultipleChoiceData()
+                        currentVerbIta = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[0].verbNameIt
+                    }else{
+                        currentVerbIta = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[0].verbNameIt
+                    }
                 }
-                      
-                
-                NavigationLink(destination: ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
-                                                   ).isDetailLink(false)
-                
+                .navigationBarBackButtonHidden(true)
+            }else{
+
+                verbConjMultipleChoiceViewIPAD(verbConjMultipleChoiceVM: verbConjMultipleChoiceVM, isPreview: false)
             }
-            .onAppear{
-                withAnimation(.easeIn){
-                    animatingBear = true
-                }
-                if isPreview{
-                    verbConjMultipleChoiceVM.setMultipleChoiceData()
-                    currentVerbIta = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[0].verbNameIt
-                }else{
-                    currentVerbIta = verbConjMultipleChoiceVM.currentTenseMCConjVerbData[0].verbNameIt
-                }
-            }
-            .navigationBarBackButtonHidden(true)
         }
     }
     

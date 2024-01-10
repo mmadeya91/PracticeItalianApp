@@ -1,15 +1,14 @@
 //
-//  ShortStoryDragDropView.swift
+//  ShortStoryDragDropViewIPAD.swift
 //  PracticeItalianApp
 //
-//  Created by Matt Madeya on 6/29/23.
+//  Created by Matt Madeya on 1/2/24.
 //
 
 import SwiftUI
 
-struct ShortStoryDragDropView: View{
+struct ShortStoryDragDropViewIPAD: View{
     @StateObject var shortStoryDragDropVM: ShortStoryDragDropViewModel
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.dismiss) var dismiss
     var isPreview: Bool
     @State var questionNumber = 0
@@ -21,25 +20,24 @@ struct ShortStoryDragDropView: View{
     
     var body: some View{
             GeometryReader {geo in
-                if horizontalSizeClass == .compact {
-                    Image("verticalNature")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                    HStack{
-                        Button(action: {
-                            withAnimation(.linear){
-                                showUserCheck.toggle()
-                            }
-                        }, label: {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 25))
-                                .foregroundColor(.gray)
-                            
-                        })
+                Image("verticalNature")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                HStack{
+                    Button(action: {
+                        withAnimation(.linear){
+                            showUserCheck.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 45))
+                            .foregroundColor(.gray)
                         
-                        
+                    })
+                    
+                    
                         GeometryReader{proxy in
                             ZStack(alignment: .leading) {
                                 Capsule()
@@ -57,82 +55,79 @@ struct ShortStoryDragDropView: View{
                         Image("italyFlag")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 40, height: 40)
+                            .frame(width: 55, height: 55)
                         Spacer()
-                    }.padding([.leading, .trailing], 15).zIndex(1)
+                }.padding([.leading, .trailing], 15).zIndex(1)
+                
+                ScrollViewReader{scroller in
                     
-                    ScrollViewReader{scroller in
-                        
-                        ZStack{
-                            if showUserCheck {
-                                userCheckNavigationPopUp(showUserCheck: $showUserCheck)
-                                    .transition(.slide)
-                                    .animation(.easeIn)
-                                    .padding(.leading, 60)
-                                    .padding(.top, 60)
-                                    .zIndex(2)
-                            }
-                            VStack{
+                    ZStack{
+                        if showUserCheck {
+                            userCheckNavigationPopUpIPAD(showUserCheck: $showUserCheck)
+                                .transition(.slide)
+                                .animation(.easeIn)
+                                //.padding(.leading, 20)
+                                .padding(.top, 60)
+                                .zIndex(2)
+                        }
+                        VStack{
+                            
+                            ScrollView(.horizontal){
                                 
-                                ScrollView(.horizontal){
-                                    
-                                    HStack{
-                                        ForEach(0..<shortStoryDragDropVM.currentDragDropQuestions.count, id: \.self) { i in
-                                            VStack{
-                                                
-                                                
-                                                
-                                                
-                                                shortStoryDragDropViewBuilder(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, progress: $progress, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence,questionNumberCount: shortStoryDragDropVM.currentDragDropQuestions.count).frame(width: geo.size.width)
-                                                    .frame(minHeight: geo.size.height)
-                                            }
+                                HStack{
+                                    ForEach(0..<shortStoryDragDropVM.currentDragDropQuestions.count, id: \.self) { i in
+                                        VStack{
                                             
+                                            
+                                            
+                                            
+                                            shortStoryDragDropViewBuilderIPAD(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, progress: $progress, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence,questionNumberCount: shortStoryDragDropVM.currentDragDropQuestions.count).frame(width: geo.size.width)
+                                                .frame(minHeight: geo.size.height)
                                         }
-                                    }
-                                    
-                                }
-                                .scrollDisabled(true)
-                                .onChange(of: questionNumber) { newIndex in
-                                    withAnimation{
-                                        scroller.scrollTo(newIndex, anchor: .center)
-                                    }
-                                    
-                                    if questionNumber == shortStoryDragDropVM.currentDragDropQuestions.count {
-                                        showPlayer = true
+                                        
                                     }
                                 }
                                 
-                                NavigationLink(destination: ShortStoryPlugInView(shortStoryPlugInVM: shortStoryVM),isActive: $showPlayer,label:{}
-                                ).isDetailLink(false)
-                            }.zIndex(1)
+                            }
+                            .scrollDisabled(true)
+                            .onChange(of: questionNumber) { newIndex in
+                                withAnimation{
+                                    scroller.scrollTo(newIndex, anchor: .center)
+                                }
+                                
+                                if questionNumber == shortStoryDragDropVM.currentDragDropQuestions.count {
+                                    showPlayer = true
+                                }
+                            }
                             
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color("WashedWhite"))
-                                .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.7)
-                                .overlay( /// apply a rounded border
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 4)
-                                )
-                                .zIndex(0)
-                                .offset(y: (geo.size.height / 9))
-                            
-                            
-                            
-                            
-                        }
-                        .onAppear{
-                            shortStoryDragDropVM.setData()
-                            shortStoryDragDropVM.setChoiceArrayDataSet()
-                        }
+                            NavigationLink(destination: ShortStoryPlugInView(shortStoryPlugInVM: shortStoryVM),isActive: $showPlayer,label:{}
+                                                              ).isDetailLink(false)
+                        }.zIndex(1)
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color("WashedWhite"))
+                            .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.5)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.black, lineWidth: 4)
+                            )
+                            .zIndex(0)
+                            .offset(y: (geo.size.height / 70))
+                         
+                        
+                        
+                        
                     }
-                }else{
-                    ShortStoryDragDropViewIPAD(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false)
+                    .onAppear{
+                        shortStoryDragDropVM.setData()
+                        shortStoryDragDropVM.setChoiceArrayDataSet()
+                    }
                 }
             }
     }
 }
 
-struct shortStoryDragDropViewBuilder: View {
+struct shortStoryDragDropViewBuilderIPAD: View {
         
     //choices
     @State var charactersSet: [[dragDropShortStoryCharacter]]
@@ -164,13 +159,13 @@ struct shortStoryDragDropViewBuilder: View {
                     Text("Form this sentence")
                         .font(.title2.bold())
                         .padding(.bottom, 15)
-                        .padding(.top, 45)
+                        .padding(.top, 125)
                     
                     Text(englishSentence)
                         .bold()
-                        .font(Font.custom("Marker Felt", size: geo.size.height * 0.033))
+                        .font(Font.custom("Marker Felt", size: geo.size.height * 0.028))
                         .padding()
-                        .frame(width:geo.size.width * 0.95)
+                        .frame(width:geo.size.width * 0.85)
                         .background(Color.teal)
                         .cornerRadius(10)
                         .foregroundColor(Color("WashedWhite"))
@@ -179,7 +174,8 @@ struct shortStoryDragDropViewBuilder: View {
                             RoundedRectangle(cornerRadius: 15)
                                 .stroke(.black, lineWidth: 4)
                         )
-                        .padding([.leading, .trailing], geo.size.width * 0.025)
+                        .padding([.leading, .trailing], geo.size.width * 0.075)
+                        .padding(.top, 20)
                 }
                 DropArea()
                     .padding(.vertical, 30)
@@ -272,6 +268,7 @@ struct shortStoryDragDropViewBuilder: View {
                                 RoundedRectangle(cornerRadius: 6, style: .continuous)
                                     .fill(item.isShowing ? .gray.opacity(0.25) : .clear)
                             }
+                            
                     }
                 }
                 
@@ -347,7 +344,7 @@ struct shortStoryDragDropViewBuilder: View {
     }
 }
 
-struct userCheckNavigationPopUp: View{
+struct userCheckNavigationPopUpIPAD: View{
     @Binding var showUserCheck: Bool
     
     var body: some View{
@@ -359,7 +356,7 @@ struct userCheckNavigationPopUp: View{
                 
                 Text("Are you Sure you want to Leave the Page?")
                     .bold()
-                    .font(Font.custom("Arial Hebrew", size: 17))
+                    .font(Font.custom("Arial Hebrew", size: 20))
                     .foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding(.top, 20)
@@ -367,7 +364,7 @@ struct userCheckNavigationPopUp: View{
                     .padding([.leading, .trailing], 5)
                 
                 Text("You will be returned to the 'select story page' and progress on this exercise will be lost")
-                    .font(Font.custom("Arial Hebrew", size: 15))
+                    .font(Font.custom("Arial Hebrew", size: 17))
                     .foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 10)
@@ -377,13 +374,13 @@ struct userCheckNavigationPopUp: View{
                         Spacer()
                         NavigationLink(destination: availableShortStories(), label: {
                             Text("Yes")
-                                .font(Font.custom("Arial Hebrew", size: 15))
+                                .font(Font.custom("Arial Hebrew", size: 17))
                                 .foregroundColor(Color.blue)
                         })
                         Spacer()
                         Button(action: {showUserCheck.toggle()}, label: {
                             Text("No")
-                                .font(Font.custom("Arial Hebrew", size: 15))
+                                .font(Font.custom("Arial Hebrew", size: 17))
                                 .foregroundColor(Color.blue)
                         })
                         Spacer()
@@ -392,7 +389,7 @@ struct userCheckNavigationPopUp: View{
             }
                 
     
-        }.frame(width: 265, height: 200)
+        }.frame(width: 365, height: 250)
             .background(Color.white)
             .cornerRadius(20)
             .shadow(radius: 20)
@@ -404,10 +401,10 @@ struct userCheckNavigationPopUp: View{
     }
 }
 
-struct ShortStoryDragDropView_Previews: PreviewProvider {
+struct ShortStoryDragDropViewIPAD_Previews: PreviewProvider {
     static var shortStoryDragDropVM: ShortStoryDragDropViewModel = ShortStoryDragDropViewModel(chosenStory: 0)
     static var previews: some View {
-        ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: true)
+        ShortStoryDragDropViewIPAD(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: true)
     }
 }
 

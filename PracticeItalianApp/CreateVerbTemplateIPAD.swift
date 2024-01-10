@@ -1,13 +1,13 @@
 //
-//  CreateVerbTemplate.swift
+//  CreateVerbTemplateIPAD.swift
 //  PracticeItalianApp
 //
-//  Created by Matt Madeya on 7/3/23.
+//  Created by Matt Madeya on 1/10/24.
 //
 
 import SwiftUI
 
-struct CreateVerbTemplate: View {
+struct CreateVerbTemplateIPAD: View {
     
     @State var verbNameItalian: String = ""
     @State var verbNameEnglish: String = ""
@@ -30,173 +30,168 @@ struct CreateVerbTemplate: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
         GeometryReader {geo in
-            if horizontalSizeClass == .compact {
-                Image("verticalNature")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                ZStack{
+            Image("verticalNature")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            ZStack(alignment: .topLeading){
+                
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    Image(systemName: "xmark")
+                        .font(.largeTitle)
+                        .tint(Color.black)
                     
-                    Button(action: {
-                        dismiss()
-                    }, label: {
-                        Image(systemName: "xmark")
-                            .font(.largeTitle)
-                            .tint(Color.black)
-                        
-                    }).padding(.bottom, 700).padding(.trailing, 300)
+                }).padding(.leading, 15)
+                
+                VStack{
+                    HStack{
+                        Text("Verb in Italian: ").padding(.trailing, 20).font(.system(size: 25))
+                        TextField("", text: $verbNameItalian)
+                            .font(.system(size: 35))
+                            .frame(width: 250)
+                            .background(.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 10)
+                    }.padding(.bottom, 15)
+                    HStack{
+                        Text("Verb in English: ").padding(.trailing, 11).font(.system(size: 25))
+                        TextField("", text: $verbNameEnglish)
+                            .font(.system(size: 35))
+                            .frame(width: 250)
+                            .background(.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 10)
+                    }.padding(.bottom, 60)
                     
                     VStack{
                         HStack{
-                            Text("Verb in Italian: ").padding(.trailing, 20)
-                            TextField("", text: $verbNameItalian)
-                                .font(.title)
-                                .frame(width: 200)
-                                .background(.white)
-                                .cornerRadius(10)
-                                .shadow(radius: 10)
-                        }.padding(.bottom, 15)
-                        HStack{
-                            Text("Verb in English: ").padding(.trailing, 11)
-                            TextField("", text: $verbNameEnglish)
-                                .font(.title)
-                                .frame(width: 200)
-                                .background(.white)
-                                .cornerRadius(10)
-                                .shadow(radius: 10)
-                        }.padding(.bottom, 60)
-                        
-                        VStack{
-                            HStack{
-                                VStack(spacing: 12){
-                                    Button(action: {
-                                        tenseForSheet = 0
-                                        showingSheet.toggle()
-                                        
-                                    },
-                                           label: {
-                                        Text("Presente")
-                                            .modifier(buttonModifier())
-                                        
-                                    })
-                                    
-                                    Button(action: {
-                                        tenseForSheet = 1
-                                        showingSheet.toggle()
-                                    }, label: {
-                                        Text("Passato Prossimo")
-                                            .modifier(buttonModifier())
-                                        
-                                    })
-                                    
-                                    Button(action: {
-                                        tenseForSheet = 2
-                                        showingSheet.toggle()
-                                    }, label: {
-                                        Text("Imperfetto")
-                                            .modifier(buttonModifier())
-                                        
-                                    })
-                                    
-                                }
-                                Spacer()
-                                VStack(spacing: 12){
-                                    Button(action: {
-                                        tenseForSheet = 3
-                                        showingSheet.toggle()
-                                    }, label: {
-                                        Text("Futuro")
-                                            .modifier(buttonModifier())
-                                        
-                                    })
-                                    Button(action: {
-                                        tenseForSheet = 4
-                                        showingSheet.toggle()
-                                    }, label: {
-                                        Text("Condizionale")
-                                            .modifier(buttonModifier())
-                                        
-                                    })
-                                    Button(action: {
-                                        tenseForSheet = 5
-                                        showingSheet.toggle()
-                                    }, label: {
-                                        Text("Imperativo")
-                                            .modifier(buttonModifier())
-                                        
-                                    })
-                                    
-                                }
-                            }
-                            
-                            HStack{
-                                Spacer()
+                            VStack(spacing: 12){
                                 Button(action: {
+                                    tenseForSheet = 0
+                                    showingSheet.toggle()
                                     
-                                    
-                                    if !finalSaveCheck() {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                            showMessage = false
-                                        }
-                                        saveSuccess = false
-                                        showMessage = true
-                                        SoundManager.instance.playSound(sound: .wrong)
-                                        animateView()
-                                    }else{
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                            showMessage = false
-                                            dismiss()
-                                        }
-                                        saveSuccess = true
-                                        showMessage = true
-                                        
-                                        addVerbItem(nI: verbNameItalian, nE: verbNameEnglish, pres: presente, pass: passatoProssimo, fut: futuro, imp: imperfetto, imperat: imperativo, cond: condizionale)
-                                        
-                                        
-                                    }
-                                    
-                                }, label: {
-                                    Text("Save")
-                                        .font(Font.custom("Arial Hebrew", size: 20)).padding(.top, 4)
-                                        .foregroundColor(.black)
-                                        .frame(width: 100, height: 35)
-                                        .background(.white)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 10)
+                                },
+                                       label: {
+                                    Text("Presente")
+                                        .modifier(buttonModifierIPAD())
                                     
                                 })
-                                Spacer()
                                 
+                                Button(action: {
+                                    tenseForSheet = 1
+                                    showingSheet.toggle()
+                                }, label: {
+                                    Text("Passato Prossimo")
+                                        .modifier(buttonModifierIPAD())
+                                    
+                                })
                                 
-                            }.padding(.top, 50)
-                            
-                            if saveSuccess {
-                                Text("Saved to Available Verb List!")
-                                    .font(.title)
-                                    .padding(.top, 50)
-                                    .opacity(showMessage ? 1.0 : 0.0)
-                            }else{
-                                Text("Please fully fill out the verb information including the conjugation tables for each tense")
-                                    .font(.title)
-                                    .multilineTextAlignment(.center)
-                                    .padding(.top, 50)
-                                    .opacity(showMessage ? 1.0 : 0.0)
+                                Button(action: {
+                                    tenseForSheet = 2
+                                    showingSheet.toggle()
+                                }, label: {
+                                    Text("Imperfetto")
+                                        .modifier(buttonModifierIPAD())
+                                    
+                                })
+                                
+                            }.padding(.trailing, 55)
+                       
+                            VStack(spacing: 12){
+                                Button(action: {
+                                    tenseForSheet = 3
+                                    showingSheet.toggle()
+                                }, label: {
+                                    Text("Futuro")
+                                        .modifier(buttonModifierIPAD())
+                                    
+                                })
+                                Button(action: {
+                                    tenseForSheet = 4
+                                    showingSheet.toggle()
+                                }, label: {
+                                    Text("Condizionale")
+                                        .modifier(buttonModifierIPAD())
+                                    
+                                })
+                                Button(action: {
+                                    tenseForSheet = 5
+                                    showingSheet.toggle()
+                                }, label: {
+                                    Text("Imperativo")
+                                        .modifier(buttonModifierIPAD())
+                                    
+                                })
+                                
                             }
+                        }
+                        
+                        HStack{
+                            Spacer()
+                            Button(action: {
+                                
+                                
+                                if !finalSaveCheck() {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                        showMessage = false
+                                    }
+                                    saveSuccess = false
+                                    showMessage = true
+                                    SoundManager.instance.playSound(sound: .wrong)
+                                    animateView()
+                                }else{
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                        showMessage = false
+                                        dismiss()
+                                    }
+                                    saveSuccess = true
+                                    showMessage = true
+                                    
+                                    addVerbItem(nI: verbNameItalian, nE: verbNameEnglish, pres: presente, pass: passatoProssimo, fut: futuro, imp: imperfetto, imperat: imperativo, cond: condizionale)
+                                    
+                                    
+                                }
+                                
+                            }, label: {
+                                Text("Save")
+                                    .font(Font.custom("Arial Hebrew", size: 25)).padding(.top, 4)
+                                    .foregroundColor(.black)
+                                    .frame(width: 150, height: 45)
+                                    .background(.white)
+                                    .cornerRadius(10)
+                                    .shadow(radius: 10)
+                                
+                            })
+                            Spacer()
                             
-                        }.padding([.leading, .trailing], 15)
-                    }
-                    .sheet(isPresented: $showingSheet) {
-                        SheetViewVerbTemplate(tense: tenseForSheet, verbNameItalian: $verbNameItalian, verbNameEnglish: $verbNameEnglish, presente: $presente, passatoProssimo: $passatoProssimo, imperfetto: $imperfetto, futuro: $futuro, condizionale: $condizionale, imperativo: $imperativo)
-                    }
-                }.offset(x: animateInvalidEntry ? -30 : 0)
-            }else{
-                CreateVerbTemplateIPAD()
-            }
+                            
+                        }.padding(.top, 50)
+                        
+                        if saveSuccess {
+                            Text("Saved to Available Verb List!")
+                                .font(.title)
+                                .padding(.top, 50)
+                                .opacity(showMessage ? 1.0 : 0.0)
+                        }else{
+                            Text("Please fully fill out the verb information including the conjugation tables for each tense")
+                                .font(.title)
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 50)
+                                .opacity(showMessage ? 1.0 : 0.0)
+                        }
+                        
+                    }.padding([.leading, .trailing], 15)
+                }.padding(.top, 200)
+                .sheet(isPresented: $showingSheet) {
+                    SheetViewVerbTemplateIPAD(tense: tenseForSheet, verbNameItalian: $verbNameItalian, verbNameEnglish: $verbNameEnglish, presente: $presente, passatoProssimo: $passatoProssimo, imperfetto: $imperfetto, futuro: $futuro, condizionale: $condizionale, imperativo: $imperativo)
+                }
+            }.offset(x: animateInvalidEntry ? -30 : 0)
             
         }
     }
@@ -247,7 +242,7 @@ struct CreateVerbTemplate: View {
 
 }
 
-struct SheetViewVerbTemplate: View {
+struct SheetViewVerbTemplateIPAD: View {
     @Environment(\.dismiss) var dismiss
     
     var tense: Int
@@ -296,32 +291,34 @@ struct SheetViewVerbTemplate: View {
                 
                 Text(getTenseString(tenseInt: tense))
                     .font(.title)
-                    .frame(width: 400, height: 50)
+                    .frame(width: 450, height: 50)
                     .foregroundColor(.black)
-                    .background(.white.opacity(0.75))
+                 
                     .padding(.top, 100)
+                    .offset(x: 120)
                 
                 
                 
                 Text(verbNameItalian + "\n" + verbNameEnglish)
                     .font(.title)
-                    .frame(width: 200, height: 70)
+                    .frame(width: 350, height: 110)
                     .background(.white)
                     .cornerRadius(10)
                     .shadow(radius: 10)
                     .overlay( RoundedRectangle(cornerRadius: 10)
                     .stroke(.black, lineWidth: 2))
                     .padding(.top, 40)
+                    .offset(x: 120)
                 
                 VStack{
                     VStack{
                         HStack{
-                            VStack{
+                            VStack(spacing: 20){
                                 HStack{
                                     TextField(checkIfConjBoxEmpty(indexIn: 0) ? "Io" : "", text: $io)
-                                        .font(.title)
+                                        .font(.system(size: 35))
                                         .padding(.leading, 10)
-                                        .frame(width: 170)
+                                        .frame(width: 200)
                                         .background(.white)
                                         .cornerRadius(10)
                                         .shadow(radius: 10)
@@ -331,9 +328,9 @@ struct SheetViewVerbTemplate: View {
                                 
                                 HStack{
                                     TextField(checkIfConjBoxEmpty(indexIn: 1) ? "Tu" : "", text: $tu)
-                                        .font(.title)
+                                        .font(.system(size: 35))
                                         .padding(.leading, 10)
-                                        .frame(width: 170)
+                                        .frame(width: 200)
                                         .background(.white)
                                         .cornerRadius(10)
                                         .shadow(radius: 10)
@@ -343,9 +340,9 @@ struct SheetViewVerbTemplate: View {
                                 
                                 HStack{
                                     TextField(checkIfConjBoxEmpty(indexIn: 2) ? "Lui/Lei/Lei" : "", text: $lui)
-                                        .font(.title)
+                                        .font(.system(size: 35))
                                         .padding(.leading, 10)
-                                        .frame(width: 170)
+                                        .frame(width: 200)
                                         .background(.white)
                                         .cornerRadius(10)
                                         .shadow(radius: 10)
@@ -353,14 +350,14 @@ struct SheetViewVerbTemplate: View {
                                         .stroke(.black, lineWidth: 2))
                                 }.padding(.leading,15)
                                 
-                            }
-                            Spacer()
-                            VStack{
+                            }.padding(.trailing, 35)
+                        
+                            VStack(spacing: 20){
                                 HStack{
                                     TextField(checkIfConjBoxEmpty(indexIn: 3) ? "Loro" : "", text: $loro)
-                                        .font(.title)
+                                        .font(.system(size: 35))
                                         .padding(.leading, 10)
-                                        .frame(width: 170)
+                                        .frame(width: 200)
                                         .background(.white)
                                         .cornerRadius(10)
                                         .shadow(radius: 10)
@@ -370,9 +367,9 @@ struct SheetViewVerbTemplate: View {
                                 
                                 HStack{
                                     TextField(checkIfConjBoxEmpty(indexIn: 4) ? "Noi" : "", text: $noi)
-                                        .font(.title)
+                                        .font(.system(size: 35))
                                         .padding(.leading, 10)
-                                        .frame(width: 170)
+                                        .frame(width: 200)
                                         .background(.white)
                                         .cornerRadius(10)
                                         .shadow(radius: 10)
@@ -382,9 +379,9 @@ struct SheetViewVerbTemplate: View {
                                 
                                 HStack{
                                     TextField(checkIfConjBoxEmpty(indexIn: 5) ? "Voi" : "", text: $voi)
-                                        .font(.title)
+                                        .font(.system(size: 35))
                                         .padding(.leading, 10)
-                                        .frame(width: 170)
+                                        .frame(width: 200)
                                         .background(.white)
                                         .cornerRadius(10)
                                         .shadow(radius: 10)
@@ -395,6 +392,7 @@ struct SheetViewVerbTemplate: View {
                             }
                         }
                     }.padding(.top, 40).padding([.leading, .trailing], 5)
+                        .offset(x: 120)
                     
                 }
             }
@@ -595,22 +593,23 @@ struct SheetViewVerbTemplate: View {
 }
     
 
-struct buttonModifier: ViewModifier {
+struct buttonModifierIPAD: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("Arial Hebrew", size: 18)).padding(.top, 4)
+            .font(.custom("Arial Hebrew", size: 23)).padding(.top, 4)
             .foregroundColor(.white)
-            .frame(width: 170, height: 40)
+            .frame(width: 250, height: 50)
             .background(.teal)
             .cornerRadius(20)
             .overlay( RoundedRectangle(cornerRadius: 20)
                 .stroke(.black, lineWidth: 2))
             .shadow(radius: 10)
+            .padding([.top, .bottom], 5)
     }
 }
 
-struct CreateVerbTemplate_Previews: PreviewProvider {
+struct CreateVerbTemplateIPAD_Previews: PreviewProvider {
     static var previews: some View {
-        CreateVerbTemplate()
+        CreateVerbTemplateIPAD()
     }
 }
