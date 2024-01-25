@@ -22,6 +22,25 @@ class shortStoryData {
         
         var chosenStoryObject: storyObject = shortStoryList[0]
         
+        switch chosenStoryName {
+            case "La Mia Introduzione":
+                chosenStoryObject = shortStoryList[0]
+            case "Il Mio Migliore Amico":
+                chosenStoryObject = shortStoryList[1]
+            case "La Mia Famiglia":
+                chosenStoryObject = shortStoryList[1]
+            case "Le Mie Vacanze in Sicilia":
+                chosenStoryObject = shortStoryList[2]
+            case "La Mia Routine":
+                chosenStoryObject = shortStoryList[3]
+            case "Ragù Di Maiale Brasato":
+                chosenStoryObject = shortStoryList[4]
+            case "Il Mio Fine Settimana":
+                chosenStoryObject = shortStoryList[5]
+            default:
+                chosenStoryObject = shortStoryList[0]
+            }
+        
         shortStoryList.forEach { storyObject in
             if storyObject.storyName == chosenStoryName {
                 chosenStoryObject = storyObject

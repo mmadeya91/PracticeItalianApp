@@ -402,7 +402,7 @@ struct userCheckNavigationPopUpIPAD: View{
 }
 
 struct ShortStoryDragDropViewIPAD_Previews: PreviewProvider {
-    static var shortStoryDragDropVM: ShortStoryDragDropViewModel = ShortStoryDragDropViewModel(chosenStory: 0)
+    static var shortStoryDragDropVM: ShortStoryDragDropViewModel = ShortStoryDragDropViewModel(chosenStoryName: "La Mia Introduzione")
     static var previews: some View {
         ShortStoryDragDropViewIPAD(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: true)
     }

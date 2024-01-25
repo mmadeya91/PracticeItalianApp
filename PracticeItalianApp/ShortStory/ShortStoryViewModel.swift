@@ -22,7 +22,14 @@ final class ShortStoryViewModel: ObservableObject {
             currentStory = "Cristofo Columbo"
         }
     }
-    
+//
+//    static let introduzione: storyObject = allStoryObjects[0]
+//    static let amico: storyObject = allStoryObjects[1]
+//    static let famiglia: storyObject = allStoryObjects[2]
+//    static let vacanza: storyObject = allStoryObjects[3]
+//    static let routine: storyObject = allStoryObjects[4]
+//    static let ragu: storyObject = allStoryObjects[5]
+//    static let weekend: storyObject = allStoryObjects[6]
 
     
     func setShortStoryData(storyName: String) {
@@ -34,6 +41,25 @@ final class ShortStoryViewModel: ObservableObject {
         let shortStoryList: [storyObject] = storyObject.allStoryObjects
         
         var chosenStoryObject: storyObject = shortStoryList[0]
+        
+        switch storyName {
+            case "La Mia Introduzione":
+                chosenStoryObject = shortStoryList[0]
+            case "Il Mio Migliore Amico":
+                chosenStoryObject = shortStoryList[1]
+            case "La Mia Famiglia":
+                chosenStoryObject = shortStoryList[1]
+            case "Le Mie Vacanze in Sicilia":
+                chosenStoryObject = shortStoryList[2]
+            case "La Mia Routine":
+                chosenStoryObject = shortStoryList[3]
+            case "Ragù Di Maiale Brasato":
+                chosenStoryObject = shortStoryList[4]
+            case "Il Mio Fine Settimana":
+                chosenStoryObject = shortStoryList[5]
+            default:
+                chosenStoryObject = shortStoryList[0]
+            }
         
         let storyString = chosenStoryObject.story
 

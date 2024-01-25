@@ -405,7 +405,7 @@ struct userCheckNavigationPopUp: View{
 }
 
 struct ShortStoryDragDropView_Previews: PreviewProvider {
-    static var shortStoryDragDropVM: ShortStoryDragDropViewModel = ShortStoryDragDropViewModel(chosenStory: 0)
+    static var shortStoryDragDropVM: ShortStoryDragDropViewModel = ShortStoryDragDropViewModel(chosenStoryName: "La Mia Introduzione")
     static var previews: some View {
         ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: true)
     }

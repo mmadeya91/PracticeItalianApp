@@ -29,8 +29,14 @@ struct storyObject: Codable {
     let fillInBlankQuestions: [FillInBlankQuestion]
     var dragAndDropQuestions: [DragAndDropQuestion]
     
-    static let allStoryObjects: [storyObject] = Bundle.main.decode(file: "shortStoryAppData.json")
-    static let columbo: storyObject = allStoryObjects[0]
+    static let allStoryObjects: [storyObject] = Bundle.main.decode(file: "shortStoriesData.json")
+    static let introduzione: storyObject = allStoryObjects[0]
+    static let amico: storyObject = allStoryObjects[1]
+    static let famiglia: storyObject = allStoryObjects[2]
+    static let vacanza: storyObject = allStoryObjects[3]
+    static let routine: storyObject = allStoryObjects[4]
+    static let ragu: storyObject = allStoryObjects[5]
+    static let weekend: storyObject = allStoryObjects[6]
 }
 
 // MARK: - DragAndDropQuestion

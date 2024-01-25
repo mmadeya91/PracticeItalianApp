@@ -1,0 +1,2962 @@
+[
+    
+    {
+
+
+
+        "storyName": "La Mia Introduzione",
+        
+        "story": " Il mio nome [è](myappurl://action?word=è) Matteo, [ho](myappurl://action?word=ho) 32 anni, [abito](myappurl://action?word=abito) a Firenze in Toscana, una delle città più conosciute e turistiche in Italia. Io lavoro come informatico e sono [abbastanza](myappurl://action?word=abbastanza) bravo ad usare i computer. La mia famiglia è grande e ho anche un cane bianco e nero molto dolce che [si chiama](myappurl://action?word=si chiama) Nerone. Nel mio tempo libero [faccio](myappurl://action?word=faccio) sport, guardo serie tv e tantissimi film, il mio film preferito è Ratatouille perchè amo cucinare, ogni settimana [sperimento](myappurl://action?word=sperimento) una [ricetta](myappurl://action?word=ricetta) nuova tipica italiana. Nel fine settimana, [di solito](myappurl://action?word=di solito), esco a cena in diversi ristoranti della zona, uno dei ristoranti dove vado più [spesso](myappurl://action?word=spesso) è “Della terra”, qui fanno delle pizze e dei piatti di pasta molto buoni. [Vicino](myappurl://action?word=Vicino) a questo ristorante c’è un [paesino](myappurl://action?word=paesino) con una strada dove [ci sono](myappurl://action?word=ci sono) dei negozi dove di solito faccio le spese. La mia più grande passione è studiare le lingue, [studio](myappurl://action?word=studio) l’inglese, per me che sono italiano è molto difficile ma con la pratica posso migliorare in futuro, anche perchè è una lingua parlata da tantissime persone. [Spero](myappurl://action?word=Spero) di andare a Londra l’anno prossimo per vedere il “Big Ben” il famoso [orologio](myappurl://action?word=orologio) inglese e realizzare così il mio [sogno](myappurl://action?word=sogno). ",
+
+        
+
+        "storyEnglish": "   My name is Matthew, I am 32 years old, I live in Florence in Tuscany, one of the most known and touristic cities in Italy. I work in IT and I am pretty good at using computers. My family is big and I also have a very sweet black and white dog called Blacky. In my free time I play sports, I watch tv and a lot of movies, my favorite movie is Ratatouille because I love to cook, every week I experiment with a new typical Italian cuisine. On the weekend, usually, I go out for dinner to different restaurants in the area, one of my favorite restaurants where I go most often is ‘Della Terra’, here they make pizza and some really good tasting pasta dishes. Near this restaurant there is a small town with a street where there are some stores where I usually do my shopping. My greatest passion is studying languages, I study English, for me being Italian it is very difficult, but with practice I can improve in the future, also because it is a language spoken by many people. I hope to go to London next year to see \"Big Ben\" , the famous English clock and make my dream come true.",
+
+        
+
+        "wordLinks": [{
+
+                "wordNameIt": "è",
+
+                "infinitive": "Essere",
+
+                "wordNameEng": "To be",
+
+                "explanation": "è - Lui/Lei/Lei Presente (it is)"
+
+            },
+
+            {
+
+                "wordNameIt": "ho",
+
+                "infinitive": "Avere",
+
+                "wordNameEng": "To have",
+
+                "explanation": "ho - Io Presente (I have)"
+
+            },
+
+            {
+
+                "wordNameIt": "abito",
+
+                "infinitive": "Abitare",
+
+                "wordNameEng": "To live",
+
+                "explanation": "abito - Io Presente (I live)"
+
+            },
+
+            {
+
+                "wordNameIt": "abbastanza",
+
+                "infinitive": "Abbastanza",
+
+                "wordNameEng": "enough (adverb fem)",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "si chiama",
+
+                "infinitive": "Chiamarsi",
+
+                "wordNameEng": "To call oneself",
+
+                "explanation": "si chiama - Lei Presente (she calls herself)"
+
+            },
+
+            {
+
+                "wordNameIt": "faccio",
+
+                "infinitive": "Fare",
+
+                "wordNameEng": "To do/To make",
+
+                "explanation": "faccio - Io Presente (I do)"
+
+            },
+
+            {
+
+                "wordNameIt": "sperimento",
+
+                "infinitive": "Sperimentare",
+
+                "wordNameEng": "To experiment",
+
+                "explanation": "sperimento - Io Presente (I experiment)"
+
+            },
+            
+            {
+
+                "wordNameIt": "ricetta",
+
+                "infinitive": "Ricetta",
+
+                "wordNameEng": "Recipe (noun fem.)",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "di solito",
+
+                "infinitive": "Di Solito",
+
+                "wordNameEng": "Usually (adverb)",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "spesso",
+
+                "infinitive": "Spesso",
+
+                "wordNameEng": "Often (adverb)",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "Vicino",
+
+                "infinitive": "Vicino",
+
+                "wordNameEng": "Near/Close to",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "paesino",
+
+                "infinitive": "Paesino",
+
+                "wordNameEng": "Small Town (noun masc.)",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "ci sono",
+
+                "infinitive": "Ci sono",
+
+                "wordNameEng": "There are",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "studio",
+
+                "infinitive": "Studiare",
+
+                "wordNameEng": "To study",
+
+                "explanation": "studio - Io Presente (I study)"
+
+            },
+            
+            {
+
+                "wordNameIt": "Spero",
+
+                "infinitive": "Sperare",
+
+                "wordNameEng": "To hope",
+
+                "explanation": "spero - Io Presente (I hope)"
+
+            },
+            
+            {
+
+                "wordNameIt": "orologio",
+
+                "infinitive": "Orologio",
+
+                "wordNameEng": "Clock (noun masc.)",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "sogno",
+
+                "infinitive": "Sogno",
+
+                "wordNameEng": "Dream (noun masc.)",
+
+                "explanation": ""
+
+            }
+
+            
+
+        ],
+
+
+
+        "questionsObjs": [
+
+            {
+
+                "question": "Quanti anni ha Matteo?",
+
+                "choices":["24", "32", "38", "22"],
+
+                "answer": "32",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Che lavoro fa Matteo?",
+
+                "choices":["Informatico", "Cuoco", "Insegnante"],
+
+                "answer": "Informatico",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Di che colore è il cane di Matteo?",
+
+                "choices":["Bianco e nero", "Rosso e verde", "Bianco e grigio"],
+
+                "answer": "Bianco e nero",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Che cosa piace a Matteo fare nel suo tempo libero?",
+
+                "choices":["Fare sport, guardare la tv, e cucinare", "Fare sport e apprendimento", "Suonare musica e cucinare"],
+
+                "answer": "Fare sport, guardare la tv, e cucinare",
+
+                "mC": true
+
+            },
+            
+            {
+
+                "question": "Quali sono le passioni di Matteo?",
+
+                "choices":["Il Cibo", "Le Lingue", "Viaggiare", "I Cani"],
+
+                "answer": "Le Lingue",
+
+                "mC": true
+
+            },
+            
+            {
+
+                "question": "Che lingua studia Matteo?",
+
+                "choices":["Italiano", "Inglese", "Cinese", "Francese"],
+
+                "answer": "Inglese",
+
+                "mC": true
+
+            },
+            
+            {
+
+                "question": "Cosa vuole fare in futuro?",
+
+                "choices":["Visitare il Big Ben", "Imparare il Cinese", "Diventare un cuoco", "Visitare l’ Italia"],
+
+                "answer": "Visitare il Big Ben",
+
+                "mC": true
+
+            }
+
+            
+
+        ],
+
+        
+
+        "fillInBlankQuestions": [
+
+                {
+
+                     "englishLine1": "To be - Presente (Lui)",
+
+                     "question": "Il mio nome è Matteo",
+
+                     "missingWord": "è",
+
+                     "plugInChoices": [
+
+                         {"choice": "è", "isCorrect": true},
+
+                         {"choice": "chiamo", "isCorrect": false},
+
+                         {"choice": "abito", "isCorrect": false},
+
+                         {"choice": "faccio", "isCorrect": false},
+
+                         {"choice": "spero", "isCorrect": false},
+
+                         {"choice": "studio", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To have - Presente (Io)",
+
+                     "question": "...ho 32 anni",
+
+                     "missingWord": "ho",
+
+                     "plugInChoices": [
+
+                         {"choice": "ho", "isCorrect": true},
+
+                         {"choice": "è", "isCorrect": false},
+
+                         {"choice": "faccio", "isCorrect": false},
+
+                         {"choice": "hai", "isCorrect": false},
+
+                         {"choice": "spero", "isCorrect": false},
+
+                         {"choice": "diventa", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To experiment - Presente (Io)",
+
+                     "question": "...ogni settimana sperimento una nuova ricetta tipica italiana.",
+
+                     "missingWord": "sperimento",
+
+                     "plugInChoices": [
+
+                         {"choice": "sperimento", "isCorrect": true},
+
+                         {"choice": "abito", "isCorrect": false},
+
+                         {"choice": "faccio", "isCorrect": false},
+
+                         {"choice": "nasco", "isCorrect": false},
+
+                         {"choice": "sogno", "isCorrect": false},
+
+                         {"choice": "spedizione", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To study - Presente (Io)",
+
+                     "question": "La mia più grande passione è studiare le lingue, studio l’inglese…... ",
+
+                     "missingWord": "studio",
+
+                     "plugInChoices": [
+
+                         {"choice": "studio", "isCorrect": true},
+
+                         {"choice": "abito", "isCorrect": false},
+
+                         {"choice": "tutti", "isCorrect": false},
+
+                         {"choice": "nasco", "isCorrect": false},
+
+                         {"choice": "sogno", "isCorrect": false},
+
+                         {"choice": "scopre", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To hope - Presente (Io)",
+
+                     "question": "Spero di andare a Londra l’anno prossimo per vedere il “Big Ben” il famoso orologio inglese e realizzare così il mio sogno.",
+
+                     "missingWord": "Spero",
+
+                     "plugInChoices": [
+
+                         {"choice": "spero", "isCorrect": true},
+
+                         {"choice": "abito", "isCorrect": false},
+
+                         {"choice": "nasce", "isCorrect": false},
+
+                         {"choice": "scopre", "isCorrect": false},
+
+                         {"choice": "nasco", "isCorrect": false},
+
+                         {"choice": "faccio", "isCorrect": false}
+
+                     ]
+
+                 }
+
+        ],
+
+        
+
+        "dragAndDropQuestions": [
+
+            {
+
+            "englishSentence": "I work in IT and I am pretty good at using computers.",
+
+            "choices": ["Io lavoro", "come informatico", "e sono", "abbastanza bravo", "ad usare i computer"]
+
+            },
+
+            {
+
+            "englishSentence": "My name is Matthew, I am 32 years old, I live in Florence in Tuscany.",
+
+            "choices": ["Il mio nome", "è Matteo,", "ho 32 anni,", "abito", "a", "Firenze in Toscana,"]
+
+            },
+
+            {
+
+            "englishSentence": "My family is big and I also have a very sweet white and black dog named Blacky.",
+
+            "choices": ["La mia famiglia", "è grande", "e ho anche", "un cane", "bianco e nero", "molto dolce", "che si chiama", "Nerone"]
+
+            },
+            
+            {
+
+            "englishSentence": "In my free time I play sports, watch tv and a lot of movies...",
+
+            "choices": ["Nel", "mio tempo", "libero", "faccio", "sport,", "guardo", "serie tv", "e tantissimi", "film"]
+
+            },
+            
+            {
+
+            "englishSentence": "I hope to go to London next year to see Big Ben, the famous clock...",
+
+            "choices": ["Spero", "di andare", "a", "Londra", "l'anno", "prossimo", "per vedere", "il", "Big Ben", "il famoso", "orologio"]
+
+            }
+
+        ]
+
+    },
+    
+    {
+
+
+
+        "storyName": "Il Mio Migliore Amico",
+        
+        "story": " Il migliore amico si chiama Luca [l’ho incontrato](myappurl://action?word=l'ho incontrato) alla scuola elementare, lui ha la stessa mia [età](myappurl://action?word=età) e abbiamo molte altre cose in comune. [Viviamo](myappurl://action?word=Viviamo) in un piccolo paesino in provincia di Napoli. Luca [ama](myappurl://action?word=ama) giocare a [calcio](myappurl://action?word=calcio), infatti, quando [saremo](myappurl://action?word=saremo) più grandi vogliamo diventare calciatori. Luca è intelligente, lui legge sempre un libro, .adesso, [sta leggendo](myappurl://action?word=sta leggendo) un libro sul famoso calciatore Diego Maradona, il nostro calciatore preferito. Il suo cibo preferito è la pizza margherita, qualcosa per cui la nostra città è famosa. [Domani](myappurl://action?word=Domani) è il 30 di Ottobre ed è il compleanno di Luca. Gli ho comprato un nuovo libro e spero che [gli piacerà](myappurl://action?word=gli piacerà), spero di rimanere amico con lui  per tutta la vita perché [gli voglio molto bene](myappurl://action?word=gli voglio molto bene)...",
+
+        
+
+        "storyEnglish": "   My best friend is called Luca, I met him in elementary school, he is the same age as me and we have a lot of other things in common. We live in the same small town in the province of Naples. Luca loves to play soccer, in fact, when we become older, we want to become soccer players. Luca is intelligent, he is always reading a book, now, he is reading a book on the famous soccer player Diego Maradona, our favorite soccer player. His favorite food is margherita pizza, something for which our city is famous for. Tomorrow is the 30th of October and it Luca's birthday. I bought him a new book and I hope that he will like it, I hope to remain friends with him for my whole life because I like him very much.",
+
+        
+
+        "wordLinks": [{
+
+                "wordNameIt": "l’ho incontrato",
+
+                "infinitive": "Incontrare",
+
+                "wordNameEng": "To meet/To encounter",
+
+                "explanation": "l’ho incontrato - Io Passato Prossimo (I met him)"
+
+            },
+
+            {
+
+                "wordNameIt": "età",
+
+                "infinitive": "Età",
+
+                "wordNameEng": "Age (noun fem.)",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "Viviamo",
+
+                "infinitive": "Vivere",
+
+                "wordNameEng": "To live",
+
+                "explanation": "Viviamo - Noi Presente (We live)"
+
+            },
+
+            {
+
+                "wordNameIt": "ama",
+
+                "infinitive": "Amare",
+
+                "wordNameEng": "To love",
+
+                "explanation": "ama - Lui Presente (He loves)"
+
+            },
+
+            {
+
+                "wordNameIt": "calcio",
+
+                "infinitive": "Calcio",
+
+                "wordNameEng": "Soccer (noun masc.)",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "saremo",
+
+                "infinitive": "Essere",
+
+                "wordNameEng": "To be",
+
+                "explanation": "saremo - Noi Futuro (We will be)"
+
+            },
+
+            {
+
+                "wordNameIt": "sta leggendo",
+
+                "infinitive": "Leggere",
+
+                "wordNameEng": "To read",
+
+                "explanation": "sta leggendo - Lui Il Gerundio Presente (He is reading)"
+
+            },
+            
+            {
+
+                "wordNameIt": "Domani",
+
+                "infinitive": "Domani",
+
+                "wordNameEng": "Tomorrow",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "gli piacerà",
+
+                "infinitive": "Piacere",
+
+                "wordNameEng": "To please/To like",
+
+                "explanation": "gli piacerà - Lui Futuro (It will please him)"
+
+            },
+            
+            {
+
+                "wordNameIt": "gli voglio molto bene",
+
+                "infinitive": "gli voglio molto bene",
+
+                "wordNameEng": "I Really  love him  (Italian phrase)",
+
+                "explanation": "Phrase to express love/like for people other than your spouse/partner"
+
+            }
+            
+
+        ],
+
+
+
+        "questionsObjs": [
+
+            {
+
+                "question": "Dove ha incontrato Luca?",
+
+                "choices":["Scuola Elementare", "Università", "Scuola Superiore", "Lavoro"],
+
+                "answer": "Scuola Elementare",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Festeggiano il compleanno lo stesso giorno.?",
+
+                "choices":["True", "False"],
+
+                "answer": "True",
+
+                "mC": false
+
+            },
+
+            {
+
+                "question": "Quando saranno più grandi, vogliono diventare cosa?",
+
+                "choices":["Calciatori", "Cuochi", "Artisti", "Insegnanti"],
+
+                "answer": "Calciatori",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "quali sono le due cose che ama Luca?",
+
+                "choices":["Il Calcio e Leggere", "Gli Scacchi e la Scuola", "Il Calcio e Dipingere", "Il Nuoto e Leggere"],
+
+                "answer": "Il Calcio e Leggere",
+
+                "mC": true
+
+            },
+            
+            {
+
+                "question": "Cosa ha comprato  per il compleanno di Luca?",
+
+                "choices":["Un Libro", "Una Palla da calcio", "Una Camicia", "Un Videogioco"],
+
+                "answer": "Un Libro",
+
+                "mC": true
+
+            }
+        ],
+
+        
+
+        "fillInBlankQuestions": [
+
+                {
+
+                     "englishLine1": "To encounter/meet - Passato Prossimo (Io)",
+
+                     "question": "Il migliore amico si chiama Luca l’ho incontrato alla scuola elementare.",
+
+                     "missingWord": "l'ho incontrato",
+
+                     "plugInChoices": [
+
+                         {"choice": "l'ho incontrato", "isCorrect": true},
+
+                         {"choice": "si chiama", "isCorrect": false},
+
+                         {"choice": "abbiamo", "isCorrect": false},
+
+                         {"choice": "faccio", "isCorrect": false},
+
+                         {"choice": "preferito", "isCorrect": false},
+
+                         {"choice": "rimanere", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "Favorite",
+
+                     "question": "Il suo cibo preferito è la pizza margherita, qualcosa per cui la nostra città è famosa.",
+
+                     "missingWord": "preferito",
+
+                     "plugInChoices": [
+
+                         {"choice": "preferito", "isCorrect": true},
+
+                         {"choice": "compleanno", "isCorrect": false},
+
+                         {"choice": "amico", "isCorrect": false},
+
+                         {"choice": "ama", "isCorrect": false},
+
+                         {"choice": "comune", "isCorrect": false},
+
+                         {"choice": "viviamo", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To buy - Passato Prossimo (Io)",
+
+                     "question": "Gli ho comprato un nuovo libro e spero che gli piacerà.",
+
+                     "missingWord": "ho comprato",
+
+                     "plugInChoices": [
+
+                         {"choice": "ho comprato", "isCorrect": true},
+
+                         {"choice": "viviamo", "isCorrect": false},
+
+                         {"choice": "l'ho incontrato", "isCorrect": false},
+
+                         {"choice": "ho abitato", "isCorrect": false},
+
+                         {"choice": "ho giocato", "isCorrect": false},
+
+                         {"choice": "migliore", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "Something",
+
+                     "question": "Il suo cibo preferito è la pizza margherita, qualcosa per cui la nostra città è famosa",
+
+                     "missingWord": "qualcosa",
+
+                     "plugInChoices": [
+
+                         {"choice": "qualcosa", "isCorrect": true},
+
+                         {"choice": "libro", "isCorrect": false},
+
+                         {"choice": "infatti", "isCorrect": false},
+
+                         {"choice": "grandi", "isCorrect": false},
+
+                         {"choice": "legge", "isCorrect": false},
+
+                         {"choice": "calcio", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To become",
+
+                     "question": "Luca ama giocare a calcio, infatti, quando saremo più grandi vogliamo diventare calciatori.",
+
+                     "missingWord": "diventare",
+
+                     "plugInChoices": [
+
+                         {"choice": "diventare", "isCorrect": true},
+
+                         {"choice": "vogliamo", "isCorrect": false},
+
+                         {"choice": "nostro", "isCorrect": false},
+
+                         {"choice": "abbiamo", "isCorrect": false},
+
+                         {"choice": "nuovo", "isCorrect": false},
+
+                         {"choice": "faccio", "isCorrect": false}
+
+                     ]
+
+                 }
+
+        ],
+
+        
+
+        "dragAndDropQuestions": [
+
+            {
+
+            "englishSentence": "I hope we remain friends for my whole life because I like him a lot.",
+
+            "choices": ["Spero", "di rimanere", "amico", "con", "lui", "per tutta", "la vita", "perché", "gli", "voglio", "molto bene"]
+
+            },
+
+            {
+
+            "englishSentence": "We live in a small town in the province of Naples.",
+
+            "choices": ["Viviamo", "in", "un piccolo", "paesino", "in", "provincia", "di", "Napoli"]
+
+            },
+
+            {
+
+            "englishSentence": "When grow up we want to become soccer players.",
+
+            "choices": ["Quando", "saremo", "più", "grandi", "vogliamo", "diventare", "calciatori"]
+
+            },
+            
+            {
+
+            "englishSentence": "Luca is intelligent, he is always reading a book, now, he is reading a book about the famous soccer player Diego Maradona.",
+
+            "choices": ["Luca è", "intelligente,", "lui legge", "sempre", "un", "libro", "adesso", "sta", "leggendo", "un libro", "sul", "famoso", "calciatore", "Diego Maradona"]
+
+            },
+            
+            {
+
+            "englishSentence": "Tomorrow is the 30th of October and it is Luca's birthday.",
+
+            "choices": ["Domani", "è", "il 30", "di", "Ottobre", "ed è", "il", "compleanno", "di", "Luca."]
+
+            }
+
+        ]
+
+    },
+    
+    {
+
+
+
+        "storyName": "La Mia Famiglia",
+        
+        "story": " [Vi presento](myappurl://action?word=Vi presento) la mia grande [pazza](myappurl://action?word=pazza) famiglia. Mia mamma si chiama Maria, mio padre si chiama  Antonio, mia sorella  si chiama Anna, e il nostro cane si chiama Luna. Mio padre lavora come [cuoco](myappurl://action?word=cuoco) nel ristorante di famiglia. Lui [ha imparato](myappurl://action?word=ha imparato) da suo padre e [adesso](myappurl://action?word=adesso), mio padre [mi sta insegnando](myappurl://action?word=mi sta insegnando). Mia mamma lavora con mia nonna a fare la pasta fresca ogni mattina [mentre](myappurl://action?word=mentre) mia sorella accomoda e aiuta i clienti. Come [ho detto](myappurl://action?word=ho detto), questo è un ristorante a conduzione familiare, quindi, i miei due zii e le mie tre zie lavorano anche loro in cucina.  Mia zia Rita cerca sempre di farmi mangiare tanto , e mio zio Carlo,  ama [raccontarmi](myappurl://action?word=raccontarmi) storie su mio padre di quando lui era un bambino.  Mio nonno è nato in Sicilia ma, sfortunatamente, [è morto](myappurl://action?word=è morto) quando ero piccolo. Usiamo tutt’oggi  le sue ricette, in particolare,  la sua ricetta dei cannoli, che secondo me è la migliore nel mondo. A volte i miei cugini ci danno una mano nel ristorante ma loro sono ancora troppo piccoli. Spesso [litighiamo](myappurl://action?word=litighiamo) e c’è molta confusione in cucina, ma nonostante tutto [non scambierei](myappurl://action?word=non scambierei) mai la mia famiglia per nulla al mondo.",
+
+
+        
+
+        "storyEnglish": "  I present to you all my big crazy family. My mother Maria, my father Antonio, my sister Anna, and our dog Luna. My father works as a cook in the family restaurant. He learned from his father and now my father is teaching me. My mother works with my grandmother making fresh pasta every morning while my sister greets and helps the customers. Like I said, this is a family run restaurant, so, my two uncles and my three aunts also work in the kitchen. My Aunt Rita is always looking to try and feed me, and my Uncle Carlo, he loves to tell me stories about my father when he was a kid. My grandfather was born in Sicily but, unfortunetly, he dies when I was little. We still use all of his recipes today, in particular, his recipe for cannoli, that according to me, is the best in the world. At times my cousins give a hand in the restaurant but they are still too little. Often we argue and there is a lot of confusion in the kitchen, but, I would never change my family for anything in the world.",
+
+        
+
+        "wordLinks": [{
+
+                "wordNameIt": "Vi presento",
+
+                "infinitive": "Presentare",
+
+                "wordNameEng": "To present",
+
+                "explanation": "Vi presento - Io Presente (I present to you all)"
+
+            },
+
+            {
+
+                "wordNameIt": "pazza",
+
+                "infinitive": "Pazza",
+
+                "wordNameEng": "Crazy  (f.) (adjective)",
+
+                "explanation": ""
+
+            },
+
+
+            {
+
+                "wordNameIt": "cuoco",
+
+                "infinitive": "Cuoco",
+
+                "wordNameEng": "Cook (noun)",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "ha imparato",
+
+                "infinitive": "Imparare",
+
+                "wordNameEng": "To learn",
+
+                "explanation": "ha imparato - Lui / Passato Prossimo (He learnt )"
+
+            },
+
+            {
+
+                "wordNameIt": "adesso",
+
+                "infinitive": "Adesso",
+
+                "wordNameEng": "now",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "mi sta insegnando",
+
+                "infinitive": "Stare + Insegnare",
+
+                "wordNameEng": "To teach",
+
+                "explanation": "mi sta insegnando - Lui / Il Gerundio Presente (He is teaching me)"
+
+            },
+            
+            {
+
+                "wordNameIt": "mentre",
+
+                "infinitive": "Mentre",
+
+                "wordNameEng": "While",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "ho detto",
+
+                "infinitive": "Dire",
+
+                "wordNameEng": "To say",
+
+                "explanation": "ho detto - Io / Passato Prossimo (I said)"
+
+            },
+            
+            {
+
+                "wordNameIt": "raccontarmi",
+
+                "infinitive": "Raccontare + pronoun",
+
+                "wordNameEng": "To recount",
+
+                "explanation": "raccontarmi - infinitive + pronoun (recounts to me)"
+
+            },
+            
+            {
+
+                "wordNameIt": "è morto",
+
+                "infinitive": "Mortire",
+
+                "wordNameEng": "To die",
+
+                "explanation": "è morto - Lui / Passato Prossimo (He died)"
+
+            },
+            
+            {
+
+                "wordNameIt": "litighiamo",
+
+                "infinitive": "Litigare",
+
+                "wordNameEng": "To argue",
+
+                "explanation": "litighiamo - Noi / Presente (we argue)"
+
+            },
+            
+            {
+
+                "wordNameIt": "non scambierei",
+
+                "infinitive": "Scambiare",
+
+                "wordNameEng": "To exchange",
+
+                "explanation": "scambierei - Io / Condizionale (I would not exchange)"
+
+            }
+            
+
+        ],
+
+
+
+        "questionsObjs": [
+
+            {
+
+                "question": "Sua sorella si chiama Maria",
+
+                "choices":["True", "False"],
+
+                "answer": "False",
+
+                "mC": false
+
+            },
+
+            {
+
+                "question": "Suo padre ha imparato cucinare da chi?",
+
+                "choices":["Suo padre", "Sua madre", "Suo zio","Sua zia"],
+
+                "answer": "Suo padre",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Cosa sua sorella fa nel ristorante?",
+
+                "choices":["Fa la pasta fresca", "Fa i cannoli", "Fa accomodare  e aiutai clienti", "Pulisce i piatti"],
+
+                "answer": "Fa accomodare  e aiutai clienti",
+
+                "mC": true
+
+            },
+            
+            {
+
+                "question": "Usano le ricette di suo nonno ancora oggi.",
+
+                "choices":["True", "False"],
+
+                "answer": "True",
+
+                "mC": false
+
+            }
+        ],
+
+        
+
+        "fillInBlankQuestions": [
+
+                {
+
+                     "englishLine1": "To learn - Passato Prossimo (Lui)",
+
+                     "question": "Lui ha imparato da suo padre...",
+
+                     "missingWord": "ha imparato",
+
+                     "plugInChoices": [
+
+                         {"choice": "ha imparato", "isCorrect": true},
+
+                         {"choice": "si chiama", "isCorrect": false},
+
+                         {"choice": "ha lavorato", "isCorrect": false},
+
+                         {"choice": "usiamo", "isCorrect": false},
+
+                         {"choice": "ho imparato", "isCorrect": false},
+
+                         {"choice": "mentre", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To help - Presente (Lei)",
+
+                     "question": "Mentre mia sorella fa accomodare e aiuta i clienti.",
+
+                     "missingWord": "aiuta",
+
+                     "plugInChoices": [
+
+                         {"choice": "aiuta", "isCorrect": true},
+
+                         {"choice": "lavora", "isCorrect": false},
+
+                         {"choice": "ricette", "isCorrect": false},
+
+                         {"choice": "fresca", "isCorrect": false},
+
+                         {"choice": "ha imparato", "isCorrect": false},
+
+                         {"choice": "viviamo", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To be born - Passato Prossimo (Lui)",
+
+                     "question": "Mio nonno è nato in Sicilia.",
+
+                     "missingWord": "è nato",
+
+                     "plugInChoices": [
+
+                         {"choice": "è nato", "isCorrect": true},
+
+                         {"choice": "ha imparato", "isCorrect": false},
+
+                         {"choice": "sono nato", "isCorrect": false},
+
+                         {"choice": "è nata", "isCorrect": false},
+
+                         {"choice": "aiuta", "isCorrect": false},
+
+                         {"choice": "sono cuoco", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To be - Imperfetto (Io)",
+
+                     "question": "Sfortunatamente, è morto quando ero piccolo",
+
+                     "missingWord": "ero",
+
+                     "plugInChoices": [
+
+                         {"choice": "ero", "isCorrect": true},
+
+                         {"choice": "era", "isCorrect": false},
+
+                         {"choice": "sono", "isCorrect": false},
+
+                         {"choice": "è", "isCorrect": false},
+
+                         {"choice": "ho", "isCorrect": false},
+
+                         {"choice": "siamo", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "Cousins",
+
+                     "question": "A volte i miei cugini ci danno una mano nel ristorante ma loro sono ancora troppo piccoli. ",
+
+                     "missingWord": "cugini",
+
+                     "plugInChoices": [
+
+                         {"choice": "cugini", "isCorrect": true},
+
+                         {"choice": "zii", "isCorrect": false},
+
+                         {"choice": "zia", "isCorrect": false},
+
+                         {"choice": "padre", "isCorrect": false},
+
+                         {"choice": "sorella", "isCorrect": false},
+
+                         {"choice": "cane", "isCorrect": false}
+
+                     ]
+
+                 }
+
+        ],
+
+        
+
+        "dragAndDropQuestions": [
+
+            {
+
+            "englishSentence": "I present to you all my big crazy family.",
+
+            "choices": ["Vi", "presento", "la", "mia", "grande", "pazza", "famiglia"]
+
+            },
+
+            {
+
+            "englishSentence": "and our dog is named Luna.",
+
+            "choices": ["e", "il", "nostro", "cane", "si", "chiama", "Luna"]
+
+            },
+
+            {
+
+            "englishSentence": "He learned from his father and now, he is teaching me.",
+
+            "choices": ["Lui", "ha", "imparato", "da", "suo", "padre", "e adesso,", "mio", "padre", "mi", "sta", "insegnando"]
+
+            },
+            
+            {
+
+            "englishSentence": "Like I said, this is a family run restaurant.",
+
+            "choices": ["Come", "ho", "detto", "questo", "è", "un", "ristorante", "e", "conduzione", "familiare"]
+
+            },
+            
+            {
+
+            "englishSentence": "Often we argue and there is a lot of confusion in the kitchen.",
+
+            "choices": ["Spesso", "litighiamo", "e", "c’è", "molta", "confusione", "in", "cucina"]
+
+            }
+
+        ]
+
+    },
+    
+    {
+
+        "storyName": "Le Mie Vacanze in Sicilia",
+        "story": "Questa settimana [vado](myappurl://action?word=vado) in Sicilia in vacanza, in una città che si chiama Taormina. Prima [devo](myappurl://action?word=devo) arrivare all'aeroporto di Catania e [affittare](myappurl://action?word=affittare) una macchina e andare [verso](myappurl://action?word=verso) nord dove c'è [l'albergo](myappurl://action?word=l'albergo) che [si trova](myappurl://action?word=si trova) proprio nel centro storico della citta’. Ci sono molte cose che voglio vedere per esempio: Il Teatro Grecro, La Villa Comunale e le bellissime [spiagge](myappurl://action?word=spiagge), come Isola Bella, una delle spiagge più famose nei [dintorni](myappurl://action?word=dintorni). [Non vedo l’ora](myappurl://action?word=Non vedo l’ora) di provare tutti i piatti tipici Siciliani, gli arancini, i cannoli, il pistacchio Siciliano, le cassate e tanto altro ancora. La vacanza [sarà](myappurl://action?word=sarà) [divertente](myappurl://action?word=divertente) perché i miei amici [saranno](myappurl://action?word=saranno) con me, sono sicuro che [non dimenticherò](myappurl://action?word=non dimenticherò) questo viaggio.",
+        "storyEnglish": "  This week I go to Sicily for vacation, to a city called Taormina. First, I must arrive at the airport in Catania and rent a car and go north where there is a hotel that is located right in the center of the city. There are many things I want to see, for example: The Greek Theatre, La Villa Comunale, and the most beautiful beaches, like Isola Bella, one of the most famous beaces in the surroundings. I can't wait to try all the typical Sicilian foods, arancini, cannoli, the Sicilian pistacchio, cassate, and many others still. The vacation will be fun because my friends will be with me, I am sure that I will not forget this trip. ",
+
+        
+
+        "wordLinks": [{
+
+                "wordNameIt": "vado",
+
+                "infinitive": "Andare",
+
+                "wordNameEng": "To go",
+
+                "explanation": "vado - Io Presente (I go)"
+
+            },
+
+            {
+
+                "wordNameIt": "devo",
+
+                "infinitive": "dovere",
+
+                "wordNameEng": "To have to/must",
+
+                "explanation": "devo - Io Presente (I must)"
+
+            },
+
+
+            {
+
+                "wordNameIt": "affittare",
+
+                "infinitive": "Affittare",
+
+                "wordNameEng": "To rent",
+
+                "explanation": "affittare - infinitive"
+
+            },
+
+            {
+
+                "wordNameIt": "verso",
+
+                "infinitive": "Verso",
+
+                "wordNameEng": "Towards",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "l'albergo",
+
+                "infinitive": "Albergo",
+
+                "wordNameEng": "The hotel",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "si trova",
+
+                "infinitive": "Trovare",
+
+                "wordNameEng": "To find/locate",
+
+                "explanation": "si trova - Lui / Presente (it is located)"
+
+            },
+            
+            {
+
+                "wordNameIt": "spiagge",
+
+                "infinitive": "Spiagge",
+
+                "wordNameEng": "Beaches",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "dintorni",
+
+                "infinitive": "Dintorni",
+
+                "wordNameEng": "Surroundings",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "Non vedo l’ora",
+
+                "infinitive": "",
+
+                "wordNameEng": "I cannot wait",
+
+                "explanation": "Italian phrase for 'I can't wait' directly translates to 'I don't see the hour'"
+
+            },
+            
+            {
+
+                "wordNameIt": "sarà",
+
+                "infinitive": "Essere",
+
+                "wordNameEng": "To be",
+
+                "explanation": "sarà - Lui / Futuro (It will be)"
+
+            },
+            
+            {
+
+                "wordNameIt": "divertente",
+
+                "infinitive": "Divertente",
+
+                "wordNameEng": "Fun",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "saranno",
+
+                "infinitive": "Essere",
+
+                "wordNameEng": "To be",
+
+                "explanation": "saranno - Loro / Futuro (They will be)"
+
+            },
+            
+            {
+
+                "wordNameIt": "non dimenticherò",
+
+                "infinitive": "Dimenticare",
+
+                "wordNameEng": "To forget",
+
+                "explanation": "non dimenticherò - Io / Futuro (I will not forget)"
+
+            }
+            
+
+        ],
+
+
+
+        "questionsObjs": [
+
+            {
+
+                "question": "Dov’è  l’ aeroporto dove lui arriverà?",
+
+                "choices":["Taormina", "Catania", "Palermo", "Roma"],
+
+                "answer": "Catania",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Il suo albergo si trova nella periferia di Taormina.",
+
+                "choices":["True", "False"],
+
+                "answer": "False",
+
+                "mC": false
+
+            },
+
+            {
+
+                "question": "Cosa vuole vedere aTaormina?",
+
+                "choices":["le Spiagge", "i Vigneti", "i Musei", "i Famosi Ristoranti"],
+
+                "answer": "le Spiagge",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "quali sono i piatti tipici Siciliani?",
+
+                "choices":["Arancini e Cannoli", "Carne e Cacio e Peppe", "Pasta alla Carbonara e Gnocchi al Pesto"],
+
+                "answer": "Arancini e Cannoli",
+
+                "mC": true
+
+            },
+            
+            {
+
+                "question": "Lui va da solo inSicilia.",
+
+                "choices":["True", "False"],
+
+                "answer": "False",
+
+                "mC": false
+
+            }
+        ],
+
+        
+
+        "fillInBlankQuestions": [
+
+                {
+
+                     "englishLine1": "To rent - Infinitive",
+
+                     "question": "Affittare una macchina e andare verso nord.",
+
+                     "missingWord": "Affittare",
+
+                     "plugInChoices": [
+
+                         {"choice": "Affittare", "isCorrect": true},
+
+                         {"choice": "Arrivare", "isCorrect": false},
+
+                         {"choice": "Saranno", "isCorrect": false},
+
+                         {"choice": "Andare", "isCorrect": false},
+
+                         {"choice": "Vedere", "isCorrect": false},
+
+                         {"choice": "Dimenticare", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To find - Presente (Lui)",
+
+                     "question": "L'albergo che si trova proprio nel centro storico della citta’.",
+
+                     "missingWord": "trova",
+
+                     "plugInChoices": [
+
+                         {"choice": "trova", "isCorrect": true},
+
+                         {"choice": "lavora", "isCorrect": false},
+
+                         {"choice": "devo", "isCorrect": false},
+
+                         {"choice": "vedo", "isCorrect": false},
+
+                         {"choice": "trovare", "isCorrect": false},
+
+                         {"choice": "ha dimenticato", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "I cannot wait - Frase Italiano",
+
+                     "question": "Non vedo l’ora di provare tutti i piatti tipici Siciliani",
+
+                     "missingWord": "Non vedo l'ora",
+
+                     "plugInChoices": [
+
+                         {"choice": "Non vedo l'ora", "isCorrect": true},
+
+                         {"choice": " A condizione che", "isCorrect": false},
+
+                         {"choice": "Purchè", "isCorrect": false},
+
+                         {"choice": "Non vedo", "isCorrect": false},
+
+                         {"choice": "è necessario che", "isCorrect": false},
+
+                         {"choice": "ho voluto", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To be - Futuro (loro)",
+
+                     "question": "La vacanza sarà divertente perché i miei amici saranno con me",
+
+                     "missingWord": "saranno",
+
+                     "plugInChoices": [
+
+                         {"choice": "saranno", "isCorrect": true},
+
+                         {"choice": "sono", "isCorrect": false},
+
+                         {"choice": "erano", "isCorrect": false},
+
+                         {"choice": "sono stati", "isCorrect": false},
+
+                         {"choice": "hanno", "isCorrect": false},
+
+                         {"choice": "vanno", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To be - Futuro (Io)",
+
+                     "question": "Sono sicuro che non dimenticherò questo viaggio.",
+
+                     "missingWord": "dimenticherò",
+
+                     "plugInChoices": [
+
+                         {"choice": "dimenticherò", "isCorrect": true},
+
+                         {"choice": "saranno", "isCorrect": false},
+
+                         {"choice": "trova", "isCorrect": false},
+
+                         {"choice": "dimenticare", "isCorrect": false},
+
+                         {"choice": "vedere", "isCorrect": false},
+
+                         {"choice": "ho comprato", "isCorrect": false}
+
+                     ]
+
+                 }
+
+        ],
+
+        
+
+        "dragAndDropQuestions": [
+
+            {
+
+            "englishSentence": "This weekend I go to Sicily for vacation.",
+
+            "choices": ["Questa", "settimana", "vado", "in", "Sicilia", "in", "vacanza"]
+
+            },
+
+            {
+
+            "englishSentence": "First I must arrive at the airport in Catania.",
+
+            "choices": ["Prima", "devo", "arrivare", "all'aeroporto", "di", "Catania"]
+
+            },
+
+            {
+
+            "englishSentence": "I must rent a car and go north where there is the hotel.",
+
+            "choices": ["Devo", "affittare", "una", "macchina", "e", "andare", "verso", "nord", "dove", "c'è", "l'albergo"]
+
+            },
+            
+            {
+
+            "englishSentence": "The vacation will be fun because my friends will be with me.",
+
+            "choices": ["La", "vacanza", "sarà", "divertente", "perché", "i", "miei", "amici", "saranno", "con", "me"]
+
+            },
+            
+            {
+
+            "englishSentence": "I am sure I will not forget this trip.",
+
+            "choices": ["Sono", "sicuro", "che", "non", "dimenticherò", "questo", "viaggio"]
+
+            }
+
+        ]
+
+    },
+    
+    {
+
+
+
+        "storyName": "la Mia Routine",
+        
+        "story": " Ogni giorno [mi alzo](myappurl://action?word=mi alzo) alle sette e mezza, la prima cosa che faccio è [lavarmi](myappurl://action?word=lavarmi) la faccia e i denti. A volte mi faccio la barba quando è troppo lunga, [soprattutto](myappurl://action?word=soprattutto) prima di andare a lavoro. Dopo aver finito la mia routine davanti allo [specchio](myappurl://action?word=specchio), mi faccio una [doccia](myappurl://action?word=doccia) e poi [mi vesto](myappurl://action?word=mi vesto). Lavoro in ufficio e per questo devo vestirmi in modo formale, [mi metto](myappurl://action?word=mi metto) un paio di pantaloni eleganti e una [camicia](myappurl://action?word=camicia) bianca con una [cravatta](myappurl://action?word=cravatta). Dopo [essermi](myappurl://action?word=essermi) preparato, faccio [colazione](myappurl://action?word=colazione) con qualcosa di veloce, di solito vado al bar e prendo un cappuccino con un [cornetto](myappurl://action?word=cornetto) alla nutella. Io lavoro dalle nove alle cinque, finito il lavoro, torno a casa e [mi rilasso](myappurl://action?word=mi rilasso). Leggo un buon libro, guardo una serie tv e infine [mi addormento](myappurl://action?word=mi addormento) verso le undici ascoltando musica classica.",
+        
+
+        "storyEnglish": "  Every day I wake up at 7:30, the first thing that I do is watch my face and teeth. At time, I shave my beard when it is too long, mostly before I go to work. After I have finished my routine in front of the mirror I take a shower and then I get dressed. I work in an office and for this, I must dress in a formal way, I put on a pair of dress pants and a white shirt with a tie. After I prepared myself, I do breakfast with something fast, usually I go to the cafe and I get a cappuccino with a nutella croissant. I work from 9 to 5, when I finish work, I return home and relax. I read a good book, watch a tv series, and in the end I fall asleep around 11 listening to classical music. ",
+
+        
+
+        "wordLinks": [{
+
+                "wordNameIt": "mi alzo",
+
+                "infinitive": "Alzarsi",
+
+                "wordNameEng": "To get up",
+
+                "explanation": "mi alzo - Io / Presente Riflessivo (I get up)"
+
+            },
+
+            {
+
+                "wordNameIt": "lavarmi",
+
+                "infinitive": "Lavarsi",
+
+                "wordNameEng": "To wash oneself",
+
+                "explanation": "lavarmi - Io / Infinitive + pronoun (I wash myself)"
+
+            },
+
+
+            {
+
+                "wordNameIt": "soprattutto",
+
+                "infinitive": "Soprattutto",
+
+                "wordNameEng": "above all",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "specchio",
+
+                "infinitive": "Specchio",
+
+                "wordNameEng": "The mirror",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "doccia",
+
+                "infinitive": "Doccia",
+
+                "wordNameEng": "shower (noun)",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "mi vesto",
+
+                "infinitive": "Vestirsi",
+
+                "wordNameEng": "To dress oneself",
+
+                "explanation": "mi vesto - Io / Presente Riflessivo (I dress myself)"
+
+            },
+            
+            {
+
+                "wordNameIt": "mi metto",
+
+                "infinitive": "Mettersi",
+
+                "wordNameEng": "To put on",
+
+                "explanation": "mi metto - Io / Presente Riflessivo (I put on)"
+
+            },
+            
+            {
+
+                "wordNameIt": "camicia",
+
+                "infinitive": "Camicia",
+
+                "wordNameEng": "Shirt",
+
+                "explanation": "More for button down type shirts, not t-shirts"
+
+            },
+            
+            {
+
+                "wordNameIt": "cravatta",
+
+                "infinitive": "Cravatta",
+
+                "wordNameEng": "Tie",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "essermi preparato",
+
+                "infinitive": "Essere + Preparare",
+
+                "wordNameEng": "To get ready",
+
+                "explanation": "Italian phrase for 'getting ready' / to be prepared"
+
+            },
+            
+            {
+
+                "wordNameIt": "colazione",
+
+                "infinitive": "Colazione",
+
+                "wordNameEng": "Breakfast",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "cornetto",
+
+                "infinitive": "Cornetto",
+
+                "wordNameEng": "Croissant",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "mi rilasso",
+
+                "infinitive": "Rilassarsi",
+
+                "wordNameEng": "To relax oneself",
+
+                "explanation": "mi rilasso - Io / Presente Riflessivo (I relax)"
+
+            },
+            
+            {
+
+                "wordNameIt": "mi addormento",
+
+                "infinitive": "Addormentarsi",
+
+                "wordNameEng": "To fall asleep",
+
+                "explanation": "mi addormento - Io / Presente Riflessivo (I fall asleep)"
+
+            }
+            
+
+        ],
+
+
+
+        "questionsObjs": [
+
+            {
+
+                "question": "A che ora si alza?",
+
+                "choices":["7:30", "8:00", "9:00", "6:30"],
+
+                "answer": "7:30",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "qual è la prima cosa che fa lamattina?",
+
+                "choices":["Lavarsi i denti", "Farsi una doccia", "Vestirsi", "Fare colazione"],
+
+                "answer": "Lavarsi i denti",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Lui non va mai al bar per fare colazione.",
+
+                "choices":["True", "False"],
+
+                "answer": "False",
+
+                "mC": false
+
+            },
+
+            {
+
+                "question": "A che ora finisce di lavorare ?",
+
+                "choices":["5:00", "5:30", "6:00", "6:30"],
+
+                "answer": "5:00",
+
+                "mC": true
+
+            },
+            
+            {
+
+                "question": "Cosa gli piace fare  prima di addormentarsi",
+
+                "choices":["Leggere i libri e guardare la tv", "Giocare ai videogiochi e ascoltare musica", "Giocare a scacchi e suonare la chitarra"],
+
+                "answer": "Leggere i libri e guardare la tv",
+
+                "mC": true
+
+            }
+        ],
+
+        
+
+        "fillInBlankQuestions": [
+
+                {
+
+                     "englishLine1": "To wake up - Io Presente Riflessivo",
+
+                     "question": "Ogni giorno mi alzo alle sette e mezza della mattina.",
+
+                     "missingWord": "mi alzo",
+
+                     "plugInChoices": [
+
+                         {"choice": "mi alzo", "isCorrect": true},
+
+                         {"choice": "si alzo", "isCorrect": false},
+
+                         {"choice": "mi alza", "isCorrect": false},
+
+                         {"choice": "mi addormento", "isCorrect": false},
+
+                         {"choice": "ti addormenti", "isCorrect": false},
+
+                         {"choice": "si addormenta", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To wash oneself - Infinitivo",
+
+                     "question": "La prima cosa che faccio è lavarmi la  faccia",
+
+                     "missingWord": "lavarsi",
+
+                     "plugInChoices": [
+
+                         {"choice": "lavarsi", "isCorrect": true},
+
+                         {"choice": "farsi", "isCorrect": false},
+
+                         {"choice": "addormentarsi", "isCorrect": false},
+
+                         {"choice": "rilassarsi", "isCorrect": false},
+
+                         {"choice": "faccia", "isCorrect": false},
+
+                         {"choice": "alzarsi", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To dress oneself - Io / Presente",
+
+                     "question": "Adesso è arrivato il tempo di vestirmi.",
+
+                     "missingWord": "mi vesto",
+
+                     "plugInChoices": [
+
+                         {"choice": "mi vesto", "isCorrect": true},
+
+                         {"choice": " si veste", "isCorrect": false},
+
+                         {"choice": "mi alzo", "isCorrect": false},
+
+                         {"choice": "ti alzi", "isCorrect": false},
+
+                         {"choice": "mi lavo", "isCorrect": false},
+
+                         {"choice": "lavarmi", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To relax - Io / Presente Riflessivo",
+
+                     "question": "Finito il lavoro, torno a casa e mi rilasso. ",
+
+                     "missingWord": "mi rilasso",
+
+                     "plugInChoices": [
+
+                         {"choice": "mi rilasso", "isCorrect": true},
+
+                         {"choice": "mi rilassa", "isCorrect": false},
+
+                         {"choice": "mi alzo", "isCorrect": false},
+
+                         {"choice": "sono alzo", "isCorrect": false},
+
+                         {"choice": "sono rilasso", "isCorrect": false},
+
+                         {"choice": "mi addormento", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To fall asleep - Io / Presente Riflessivo",
+
+                     "question": "Leggo un buon libro, guardo una serie tv e infine mi addormento verso le undici.",
+
+                     "missingWord": "mi addormento",
+
+                     "plugInChoices": [
+
+                         {"choice": "mi addormento", "isCorrect": true},
+
+                         {"choice": "mi alzo", "isCorrect": false},
+
+                         {"choice": "ti addormenti", "isCorrect": false},
+
+                         {"choice": "si addormenta", "isCorrect": false},
+
+                         {"choice": "mi lavo", "isCorrect": false},
+
+                         {"choice": "si alza", "isCorrect": false}
+
+                     ]
+
+                 }
+
+        ],
+
+        
+
+        "dragAndDropQuestions": [
+
+            {
+
+            "englishSentence": "Sometimes I do my beard when it is too long.",
+
+            "choices": ["A volte", "mi", "faccio", "la", "barba", "quando", "è", "troppo", "lunga"]
+
+            },
+
+            {
+
+            "englishSentence": "I put on a pair of dress pants, a white dress shirt with a tie.",
+
+            "choices": ["Mi", "metto", "un", "paio", "di", "pantaloni", "eleganti", "e", "una", "camicia", "bianca", "con", "una", "cravatta"]
+
+            },
+
+            {
+
+            "englishSentence": "After I get ready I have something quick for breakfast.",
+
+            "choices": ["Dopo", "essermi", "preparato,", "faccio", "colazione", "con", "qualcosa", "di", "veloce"]
+
+            },
+            
+            {
+
+            "englishSentence": "Usually I go to the bar and have a cappuccino with a nutella croissant.",
+
+            "choices": ["Di", "solito", "vado", "al", "bar", "e", "prendo", "un", "cappuccino", "con", "un", "cornetto", "alla", "nutella"]
+
+            },
+            
+            {
+
+            "englishSentence": "I fall asleep around 11 listening to classical music.",
+
+            "choices": ["Mi", "addormento", "verso", "le", "undici", "ascoltando", "musica", "classica"]
+
+            }
+
+        ]
+
+    },
+    {
+
+        "storyName": "Ragù Di Maiale Brasato",
+        "story":"[Accendi](myappurl://action?word=Accendi) il forno a 350° e accendi il tuo [piano cottura](myappurl://action?word=piano cottura) a temperatura media . Sul piano cottura, metti una [pentola](myappurl://action?word=pentola) con un po 'di olio. Mentre la pentola [si scalda](myappurl://action?word=si scalda) , [taglia](myappurl://action?word=taglia) una spalla di maiale da due chili in quattro pezzi. [Aggiusta](myappurl://action?word=Aggiusta) il [maiale](myappurl://action?word=maiale) di sale e pepe poi metti nella pentola e cuoci per tre o quattro minuti e toglilo dalla pentola. [Trita](myappurl://action?word=Trita) la  cipolla, le carote,l’ aglio, e il [sedano](myappurl://action?word=sedano) e fai [appassire](myappurl://action?word=appassire) per tre o quattro minuti nella pentola.  Aggiungi le erbe e continua a fare appassire per altri quattro minuti. Aggiungi il concentrato impasto di pomodoro e [unisci](myappurl://action?word=unisci) tutto. [Sfuma](myappurl://action?word=Sfuma) il ragù con il vino rosso,abbassa la temperatura a fuoco a medio  e cuoci lentamente fino a quando il vino sta quasi per seccarsi . Aggiungi una passata di pomodoro a mescola. Metti il maiale nella pentola, [coprire](myappurl://action?word=coprire) con un coperchio e metti nel forno per due ore. Servi con pappardelle o tagliatelle con un cucchiaio di ricotta fresca.",
+        "storyEnglish": "  Turn on the oven to 350° and turn on your stove to medium heat. On your stove, put a pot with a little bit of oil. While the pot is getting hot, cut a 2 kilogram pork shoulder into 4 pieces. Season with salt and pepper and then put it in the pot and cook for 3 or 4 minutes then remove it. Chop the onion, carrots, garlic, and celery and cook gently for 3 or 4 minutes in the pot. Add the herbs and continue to gently cook for another 4 minutes. Add the tomato paste and combine everything. Simmer the ragù with red wine, lower the temperature of the fire to medium and slowly cook until the wine is almost gone. Add the passata and mix. Put the pork in the pot, cover with a lid and put it in the oven for 2 hours. Serve with pappardelle or tagliatelle with a spoonful of fresh ricotta.",
+
+        
+
+        "wordLinks": [{
+
+                "wordNameIt": "Accendi",
+
+                "infinitive": "Accendere",
+
+                "wordNameEng": "To turn on",
+
+                "explanation": "Accendi - Tu / Imperativo (You turn on)"
+
+            },
+
+            {
+
+                "wordNameIt": "piano cottura",
+
+                "infinitive": "Piano Cottura",
+
+                "wordNameEng": "stove",
+
+                "explanation": ""
+
+            },
+
+
+            {
+
+                "wordNameIt": "pentola",
+
+                "infinitive": "Pentola",
+
+                "wordNameEng": "Pot",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "si scalda",
+
+                "infinitive": "Scaldarsi",
+
+                "wordNameEng": "To heat up",
+
+                "explanation": "si scalda - Lui / Presente Riflessivo (it warms up)"
+
+            },
+
+            {
+
+                "wordNameIt": "taglia",
+
+                "infinitive": "Tagliare",
+
+                "wordNameEng": "To cut",
+
+                "explanation": "taglia - Tu / Imperativo (You cut)"
+
+            },
+
+            {
+
+                "wordNameIt": "Aggiusta",
+
+                "infinitive": "Aggiustare",
+
+                "wordNameEng": "To adjust",
+
+                "explanation": "Aggiusta - Tu / Imperativo (You adjust)"
+
+            },
+            
+            {
+
+                "wordNameIt": "maiale",
+
+                "infinitive": "Maiale",
+
+                "wordNameEng": "Pork",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "Trita",
+
+                "infinitive": "Tritare",
+
+                "wordNameEng": "To chop",
+
+                "explanation": "Trita - Tu / Imperativo (You chop)"
+
+            },
+            
+            {
+
+                "wordNameIt": "sedano",
+
+                "infinitive": "Sedano",
+
+                "wordNameEng": "Celery",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "appassire",
+
+                "infinitive": "Appassire",
+
+                "wordNameEng": "To wither",
+
+                "explanation": "appassire - Infinitivo (To wither)"
+
+            },
+            
+            {
+
+                "wordNameIt": "unisci",
+
+                "infinitive": "Unire",
+
+                "wordNameEng": "To unite",
+
+                "explanation": "unisci - Tu / Imperativo (You unite)"
+
+            },
+            
+            {
+
+                "wordNameIt": "Sfuma",
+
+                "infinitive": "Sfumare",
+
+                "wordNameEng": "To vanish",
+
+                "explanation": "Sfuma - Tu / Imperative (In this case it means to cook down/cook away or simmer)"
+
+            },
+            
+            {
+
+                "wordNameIt": "coprire",
+
+                "infinitive": "Coprire",
+
+                "wordNameEng": "To cover",
+
+                "explanation": "coprire - Infinitivo (To cover)"
+
+            }
+            
+
+        ],
+
+
+
+        "questionsObjs": [
+
+            {
+
+                "question": "A quale temperatura accendi il piano cottura??",
+
+                "choices":["Alta", "Bassa", "Media", "Media alta"],
+
+                "answer": "Media",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "In quanti pezzi devi tagliare il maiale?",
+
+                "choices":["Due", "Tre", "Quattro", "Cinque"],
+
+                "answer": "Quattro",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Prima, cuoci il maiale per cinque minuti nella pentola.",
+
+                "choices":["True", "False"],
+
+                "answer": "False",
+
+                "mC": false
+
+            },
+
+            {
+
+                "question": "Aggiungi il concentrato impasto di pomodoro a il maiale.",
+
+                "choices":["True", "False"],
+
+                "answer": "False",
+
+                "mC": false
+
+            },
+            
+            {
+
+                "question": "Prima metti il maiale nel forno, non dimenticare di fare cosa?",
+
+                "choices":["Abbassare il forno", "Aggiungere più vino", "Coprire la pentola"],
+
+                "answer": "Coprire la pentola",
+
+                "mC": true
+
+            }
+        ],
+
+        
+
+        "fillInBlankQuestions": [
+
+                {
+
+                     "englishLine1": "Pot",
+
+                     "question": "Sul piano cottura, metti una pentola con un po 'di olio.",
+
+                     "missingWord": "pentola",
+
+                     "plugInChoices": [
+
+                         {"choice": "pentola", "isCorrect": true},
+
+                         {"choice": "sedano", "isCorrect": false},
+
+                         {"choice": "pomodoro", "isCorrect": false},
+
+                         {"choice": "sale", "isCorrect": false},
+
+                         {"choice": "pepe", "isCorrect": false},
+
+                         {"choice": "forno", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To adjust - Tu / Imperativo",
+
+                     "question": "Aggiusta il maiale di sale e pepe poi metti nella pentola.",
+
+                     "missingWord": "Aggiusta",
+
+                     "plugInChoices": [
+
+                         {"choice": "Aggiusta", "isCorrect": true},
+
+                         {"choice": "Metti", "isCorrect": false},
+
+                         {"choice": "Aggiungi", "isCorrect": false},
+
+                         {"choice": "Accendi", "isCorrect": false},
+
+                         {"choice": "Servi", "isCorrect": false},
+
+                         {"choice": "Cuoci", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To chop - Tu / Imperativo",
+
+                     "question": "Trita la  cipolla, le carote,l’ aglio, e il sedano.",
+
+                     "missingWord": "Trita",
+
+                     "plugInChoices": [
+
+                         {"choice": "Trita", "isCorrect": true},
+
+                         {"choice": "Metti", "isCorrect": false},
+
+                         {"choice": "Aggiungi", "isCorrect": false},
+
+                         {"choice": "Accendi", "isCorrect": false},
+
+                         {"choice": "Servi", "isCorrect": false},
+
+                         {"choice": "Cuoci", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To add - Tu / Imperativo",
+
+                     "question": "Aggiungi le erbe e continua a fare appassire per altri quattro minuti.",
+
+                     "missingWord": "Aggiungi",
+
+                     "plugInChoices": [
+
+                         {"choice": "Trita", "isCorrect": false},
+
+                         {"choice": "Metti", "isCorrect": false},
+
+                         {"choice": "Aggiungi", "isCorrect": true},
+
+                         {"choice": "Accendi", "isCorrect": false},
+
+                         {"choice": "Servi", "isCorrect": false},
+
+                         {"choice": "Cuoci", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To lower - Tu / Imperativo",
+
+                     "question": "Abbassa la temperatura a fuoco a medio.",
+
+                     "missingWord": "Abbassa",
+
+                     "plugInChoices": [
+
+                         {"choice": "Abbassa", "isCorrect": true},
+
+                         {"choice": "Metti", "isCorrect": false},
+
+                         {"choice": "Aggiungi", "isCorrect": false},
+
+                         {"choice": "Accendi", "isCorrect": false},
+
+                         {"choice": "Servi", "isCorrect": false},
+
+                         {"choice": "Cuoci", "isCorrect": false}
+
+                     ]
+
+                 }
+
+        ],
+
+        
+
+        "dragAndDropQuestions": [
+
+            {
+
+            "englishSentence": "While the pot heals up, cut the pork shoulder.",
+
+            "choices": ["Mentre", "la", "pentola", "si", "scalda", "taglia", "una", "spalla", "di maiale"]
+
+            },
+
+            {
+
+            "englishSentence": "Chop the onion, the carrots, the garlic, and the celery.",
+
+            "choices": ["Trita", "la", "cipolla,", "le", "carote,", "l'aglio,", "e", "il", "sedano"]
+
+            },
+
+            {
+
+            "englishSentence": "Simmer the ragù with the red wine and lower the temperature.",
+
+            "choices": ["Sfuma", "il ", "ragù", "con", "il", "vino", "rosso", "e", "abbassa", "la", "temperatura"]
+
+            },
+            
+            {
+
+            "englishSentence": "Cover with a lid and put it in the oven.",
+
+            "choices": ["Coprire", "con", "un", "coperchio", "e", "metti", "nel", "forno"]
+
+            },
+            
+            {
+
+            "englishSentence": "Serve with a spoonful of fresh riccota.",
+
+            "choices": ["Servi", "con", "un", "cucchiaio", "di", "ricotta", "fresca"]
+
+            }
+
+        ]
+
+    },
+    
+    {
+
+
+
+        "storyName": "Il Mio Fine Settimana",
+        "story":"L’ultimo fine settimana, [sono andato](myappurl://action?word=sono andato) in città a fare un giro in centro a Napoli e anche perchè [dovevo](myappurl://action?word=dovevo) vedere il concerto del mio [cantante](myappurl://action?word=cantante) preferito Gigi D’Alessio. Il concerto [è stato](myappurl://action?word=è stato) fantastico e divertentissimo. [C’erano](myappurl://action?word=C’erano) tanti ragazzi che [gridavano](myappurl://action?word=gridavano) e cantavano, [abbiamo ballato](myappurl://action?word=abbiamo ballato) tutti per ore [senza fermarci](myappurl://action?word=senza fermarci) mai. Dopo il concerto, avevo fame e così con un mio amico siamo andati al mio ristorante preferito Sorbillo, che si trova sul [lungomare](myappurl://action?word=lungomare) di Napoli. Più tardi, con la pancia piena e molte energie, siamo andati a ballare. Dopo due ore di ballo [eravamo stanchissimi](myappurl://action?word=eravamo stanchissimi). [Abbiamo preso](myappurl://action?word=Abbiamo preso) un taxi e ognuno è ritornato a casa propria. Prima di andare a dormire, [ho fatto](myappurl://action?word=ho fatto) uno spuntino di mezzanotte. Devo dire che è stato un fine settimana speciale. ",
+        "storyEnglish": "  Last weekend, I went to the city to do a small trip in the center of Naples and also because I had to see the concert of my favorite singer, Gigi D'Alessio. The concert was fantastic and really fun. There were many boys that were screaming and singing, we all danced for hours without ever stopping. After the concert, I was hungry and so with a friend, we went to my favorite restaurant 'Sorbillo', that is located along the coast of Naples. A little later, with a full belly and alot of energy, we went to dance. After two hours of dancing we were very tired. We took a taxi and each one of us returned to our homes. Before going to sleep, I made a midnight snack. I must say that it was a special weekend.",
+
+        
+
+        "wordLinks": [{
+
+                "wordNameIt": "sono andato",
+
+                "infinitive": "Andare",
+
+                "wordNameEng": "To go",
+
+                "explanation": "sono andato - Io / Passato Prossimo (I went)"
+
+            },
+
+            {
+
+                "wordNameIt": "dovevo",
+
+                "infinitive": "Dovere",
+
+                "wordNameEng": "To have to/must",
+
+                "explanation": "dovevo - Io / Imperfetto (I had to)"
+
+            },
+
+
+            {
+
+                "wordNameIt": "cantante",
+
+                "infinitive": "Cantante",
+
+                "wordNameEng": "Singer",
+
+                "explanation": ""
+
+            },
+
+            {
+
+                "wordNameIt": "è stato",
+
+                "infinitive": "Stare",
+
+                "wordNameEng": "To be",
+
+                "explanation": "è stato - Lui / Passato Prossimo (It was)"
+
+            },
+
+            {
+
+                "wordNameIt": "C’erano",
+
+                "infinitive": "Esserci",
+
+                "wordNameEng": "Be there",
+
+                "explanation": "C’erano - Loro / Imperativo (There were)"
+
+            },
+
+            {
+
+                "wordNameIt": "gridavano",
+
+                "infinitive": "Gridare",
+
+                "wordNameEng": "To shout/yell",
+
+                "explanation": "gridavano - Loro / IMPERFETTO(They were shouting)"
+
+            },
+            
+            {
+
+                "wordNameIt": "abbiamo ballato",
+
+                "infinitive": "Ballare",
+
+                "wordNameEng": "To dance",
+
+                "explanation": "abbiamo ballato - Noi / Passato Prossimo (We danced)"
+
+            },
+            
+            {
+
+                "wordNameIt": "senza fermarci",
+
+                "infinitive": "",
+
+                "wordNameEng": "Stopping",
+
+                "explanation": "fermarsi - (Without stopping/without us stopping)"
+
+            },
+            
+            {
+
+                "wordNameIt": "lungomare",
+
+                "infinitive": "Lungomare",
+
+                "wordNameEng": "Along the sea",
+
+                "explanation": ""
+
+            },
+            
+            {
+
+                "wordNameIt": "eravamo stanchissimi",
+
+                "infinitive": "Essere + Superlativo Stanco",
+
+                "wordNameEng": "To be + tired",
+
+                "explanation": "eravamo stanchissimo - Noi / Imperfetto (We had been really tired)"
+
+            },
+            
+            {
+
+                "wordNameIt": "Abbiamo preso",
+
+                "infinitive": "Prendere",
+
+                "wordNameEng": "To take",
+
+                "explanation": "Abbiamo preso - Noi / Passato Prossimo (We took)"
+
+            },
+            
+            {
+
+                "wordNameIt": "ho fatto",
+
+                "infinitive": "Fare",
+
+                "wordNameEng": "To do",
+
+                "explanation": "ho fatto - Io / Passato Prossimo (I did)"
+
+            }
+
+        ],
+
+
+
+        "questionsObjs": [
+
+            {
+
+                "question": "Dov’ è andato l’ultimo fine settimana?",
+
+                "choices":["In città", "A Casa del suo amico", "In campagna", "Al mare"],
+
+                "answer": "In città",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Lui è andato al concerto.",
+
+                "choices":["True", "False"],
+
+                "answer": "True",
+
+                "mC": false
+
+            },
+
+            {
+
+                "question": "Qual'è stata la cosa che ha fatto dopo il concerto.",
+
+                "choices":["Sono andati in discoteca", "Sono andati in un ristorante", "Sono andati in spiaggia"],
+
+                "answer": "Sono andati in un ristorante",
+
+                "mC": true
+
+            },
+
+            {
+
+                "question": "Hanno ballato per solo un'ora.",
+
+                "choices":["True", "False"],
+
+                "answer": "False",
+
+                "mC": false
+
+            },
+            
+            {
+
+                "question": "Prima di andare a dormire, cosa ha fatto?",
+
+                "choices":["Ha fatto uno spuntino", "Ha guardato LA tv", "Ha letto un libro", "Ha fatto una doccia"],
+
+                "answer": "Ha fatto uno spuntino",
+
+                "mC": true
+
+            }
+        ],
+
+        
+
+        "fillInBlankQuestions": [
+
+                {
+
+                     "englishLine1": "I went - Io / Passato Prossimo",
+
+                     "question": "Ultima fine settimana, sono andato in citta per un piccola gita.",
+
+                     "missingWord": "sono andato",
+
+                     "plugInChoices": [
+
+                         {"choice": "sono andato", "isCorrect": true},
+
+                         {"choice": "è andato", "isCorrect": false},
+
+                         {"choice": "hano ballato", "isCorrect": false},
+
+                         {"choice": "sono andati", "isCorrect": false},
+
+                         {"choice": "ho mangaito", "isCorrect": false},
+
+                         {"choice": "ho fatto", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To be - Lui / Passato Prossimo",
+
+                     "question": " Il concerto è stato molto divertente. ",
+
+                     "missingWord": "è stato",
+
+                     "plugInChoices": [
+
+                         {"choice": "è stato", "isCorrect": true},
+
+                         {"choice": "sono stato", "isCorrect": false},
+
+                         {"choice": "hanno fatto", "isCorrect": false},
+
+                         {"choice": "ero", "isCorrect": false},
+
+                         {"choice": "eravamo", "isCorrect": false},
+
+                         {"choice": "ho ballato", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "There were",
+
+                     "question": "C’erano tanti ragazzi che gridavano e cantavano",
+
+                     "missingWord": "C’erano",
+
+                     "plugInChoices": [
+
+                         {"choice": "C’erano", "isCorrect": true},
+
+                         {"choice": "Ci sono", "isCorrect": false},
+
+                         {"choice": "C'è", "isCorrect": false},
+
+                         {"choice": "C'era", "isCorrect": false},
+
+                         {"choice": "Eravamo", "isCorrect": false},
+
+                         {"choice": "Era", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To be - Noi / Imperfetto",
+
+                     "question": " Dopo due ore di ballo eravamo stanchissimi.",
+
+                     "missingWord": "eravamo",
+
+                     "plugInChoices": [
+
+                         {"choice": "eravamo", "isCorrect": false},
+
+                         {"choice": "era", "isCorrect": false},
+
+                         {"choice": "eranno", "isCorrect": true},
+
+                         {"choice": "sono stato", "isCorrect": false},
+
+                         {"choice": "è stato", "isCorrect": false},
+
+                         {"choice": "sono stati", "isCorrect": false}
+
+                     ]
+
+                 },
+
+                 {
+
+                     "englishLine1": "To take - Noi / Passato Prossimo",
+
+                     "question": "Abbiamo preso un taxi e ognuno è ritornato a casa propria.",
+
+                     "missingWord": "Abbiamo preso",
+
+                     "plugInChoices": [
+
+                         {"choice": "Abbiamo preso", "isCorrect": false},
+
+                         {"choice": "Abbiamo prenduto", "isCorrect": false},
+
+                         {"choice": "Ho preso", "isCorrect": true},
+
+                         {"choice": "Sono andato", "isCorrect": false},
+
+                         {"choice": "Ho mangiato", "isCorrect": false},
+
+                         {"choice": "Hanno ballato", "isCorrect": false}
+
+                     ]
+
+                 }
+
+        ],
+
+        
+
+        "dragAndDropQuestions": [
+
+            {
+
+            "englishSentence": "The concert was fantastic and really fun",
+
+            "choices": ["Il", "concerto", "è", "stato", "fantastico", "e", "divertentissimo"]
+
+            },
+
+            {
+
+            "englishSentence": "We all danced for hours without ever stopping.",
+
+            "choices": ["Abbiamo", "ballato", "tutti", "per", "ore", "senza", "fermarci", "mai"]
+
+            },
+
+            {
+
+            "englishSentence": "After the concert, I was hungry so I went to my favorite restaurant.",
+
+            "choices": ["Dopo", "il concerto", "avevo", "fame e", "cosi", "sono", "andato", "al mio", "ristorante", "preferito."]
+
+            },
+            
+            {
+
+            "englishSentence": "Before going to bed, I made a midnight snack.",
+
+            "choices": ["Prima", "di andare", "a", "dormire,", "ho", "fatto", "uno spuntino", "di", "mezzanotte."]
+
+            },
+            
+            {
+
+            "englishSentence": "I must say that it was a special weekend.",
+
+            "choices": ["Devo", "dire", "che", "è", "stato", "un", "fino", "settimana", "speciale."]
+
+            }
+
+        ]
+
+    }
+
+]
+
+

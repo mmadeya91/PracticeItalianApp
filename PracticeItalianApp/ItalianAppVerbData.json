@@ -1,53 +1,366 @@
 [
-	{
-		"verb": {
-			"verbName": "Essere",
-			"verbEngl": "To be"
-		},
-        "presenteConjList": ["Sono", "Sei", "E", "Siamo", "Siete", "Sono"],
-        "passatoProssimoConjList": ["Sono stato", "Sei stato", "e stato", "e stata", "Siamo stati", "Siamo state", "Siete stati", "Siete state", "Sono stati", "Sono state"],
-        "futuroConjList": ["Saro", "Sarai", "Sara", "Saremo", "Sarete", "Saranno"],
-        "imperfettoConjList": ["Ero", "Eri", "Era", "Eravamo", "Eravate", "Erano"],
-        "presenteCondizionaleConjList": ["Sarei", "Saresti", "Sarebbe", "Saremmo", "Sareste", "Sarebbero"],
-        "imperativoConjList": ["Sii", "Sia", "Siamo", "Siate", "Siano"]
-	},
-	{
-		"verb": {
-			"verbName": "Avere",
-			"verbEngl": "To have"
-		},
-		
-		"presenteConjList": ["Ho", "Hai", "Ha", "Abbiamo", "Avete", "Hanno"],
-		"passatoProssimoConjList": ["Ho avuto", "Hai avuto", "Ha avuto", "Abbiamo avuto", "Avete avuto", "Hanno avuto"],
-		"futuroConjList": ["Avro", "Avrai", "Avra", "Avremo", "Avrete", "Avranno"],
-		"imperfettoConjList": ["Avevo", "Avevi", "Aveva", "Avevamo", "Avevate", "Avevano"],
-		"presenteCondizionaleConjList": ["Avrei", "Avresti", "Avrebbe", "Avremmo", "Avreste", "Avrebbero"],
-		"imperativoConjList": ["Abbi", "Abbia", "Abbiamo", "Abbiate", "Abbiano"]	
-	},
-	{
-		"verb": {
-			"verbName": "Fare",
-			"verbEngl": "To do, to make"
-		},
 
-		"presenteConjList": ["Faccio", "Fai", "Fa", "Facciamo", "Fate", "Fanno"],
-		"passatoProssimoConjList": ["Ho fato", "Hai fato", "Ha fato", "Abbiamo fato", "Aveta fato", "Hanno fato"],
-		"futuroConjList": ["Faro", "Farai", "Fara", "Faremo", "Farete", "Faranno"],
-		"imperfettoConjList": ["Facevo", "Facevi", "Faceva", "Facevamo", "Facevate", "Facevano"],
-		"presenteCondizionaleConjList": ["Farei", "Faresti", "Farebbe", "Faremmo", "Fareste", "Farebbero"],
-		"imperativoConjList": ["Fa'/Fai", "Faccia", "Facciamo", "Fate", "Facciano"]	
-	},
-	{
-		"verb": {
-			"verbName": "Dire",
-			"verbEngl": "To say"
-		},
-		
-		"presenteConjList": ["Dico", "Dici", "Dice", "Diciamo", "Dite", "Dicono"],
-		"passatoProssimoConjList": ["Ho detto", "Hai detto", "Ha detto", "Abbiamo detto", "Avete detto", "Hanno detto"],
-		"futuroConjList": ["Diro", "Dirai", "Dira", "Diremo", "Direte", "Diranno"],
-		"imperfettoConjList": ["Dicevo", "Dicevi", "Diceva", "Dicevamo", "Dicevate", "Dicevano"],
-		"presenteCondizionaleConjList": ["Direi", "Diresti", "Direbbe", "Diremmo", "Direste", "Direbbero"],
-		"imperativoConjList": ["Di'", "Dica", "Diciamo", "Dite", "Dicano"]	
-	}
+    {
+
+        "verb": {
+
+            "verbName": "Essere",
+
+            "verbEngl": "To be"
+
+        },
+
+        "presenteConjList": ["Sono", "Sei", "E", "Siamo", "Siete", "Sono"],
+
+        "passatoProssimoConjList": ["Sono stato", "Sei stato", "e stato", "e stata", "Siamo stati", "Siamo state", "Siete stati", "Siete state", "Sono stati", "Sono state"],
+
+        "futuroConjList": ["Saro", "Sarai", "Sara", "Saremo", "Sarete", "Saranno"],
+
+        "imperfettoConjList": ["Ero", "Eri", "Era", "Eravamo", "Eravate", "Erano"],
+
+        "presenteCondizionaleConjList": ["Sarei", "Saresti", "Sarebbe", "Saremmo", "Sareste", "Sarebbero"],
+
+        "imperativoConjList": ["Sii", "Sia", "Siamo", "Siate", "Siano"]
+
+    },
+
+    {
+
+        "verb": {
+
+            "verbName": "Avere",
+
+            "verbEngl": "To have"
+
+        },
+
+        
+
+        "presenteConjList": ["Ho", "Hai", "Ha", "Abbiamo", "Avete", "Hanno"],
+
+        "passatoProssimoConjList": ["Ho avuto", "Hai avuto", "Ha avuto", "Abbiamo avuto", "Avete avuto", "Hanno avuto"],
+
+        "futuroConjList": ["Avro", "Avrai", "Avra", "Avremo", "Avrete", "Avranno"],
+
+        "imperfettoConjList": ["Avevo", "Avevi", "Aveva", "Avevamo", "Avevate", "Avevano"],
+
+        "presenteCondizionaleConjList": ["Avrei", "Avresti", "Avrebbe", "Avremmo", "Avreste", "Avrebbero"],
+
+        "imperativoConjList": ["Abbi", "Abbia", "Abbiamo", "Abbiate", "Abbiano"]
+
+    },
+
+    {
+
+        "verb": {
+
+            "verbName": "Fare",
+
+            "verbEngl": "To do, to make"
+
+        },
+
+
+
+        "presenteConjList": ["Faccio", "Fai", "Fa", "Facciamo", "Fate", "Fanno"],
+
+        "passatoProssimoConjList": ["Ho fato", "Hai fato", "Ha fato", "Abbiamo fato", "Aveta fato", "Hanno fato"],
+
+        "futuroConjList": ["Faro", "Farai", "Fara", "Faremo", "Farete", "Faranno"],
+
+        "imperfettoConjList": ["Facevo", "Facevi", "Faceva", "Facevamo", "Facevate", "Facevano"],
+
+        "presenteCondizionaleConjList": ["Farei", "Faresti", "Farebbe", "Faremmo", "Fareste", "Farebbero"],
+
+        "imperativoConjList": ["Fa'/Fai", "Faccia", "Facciamo", "Fate", "Facciano"]
+
+    },
+
+    {
+
+        "verb": {
+
+            "verbName": "Dire",
+
+            "verbEngl": "To say"
+
+        },
+
+        
+
+        "presenteConjList": ["Dico", "Dici", "Dice", "Diciamo", "Dite", "Dicono"],
+
+        "passatoProssimoConjList": ["Ho detto", "Hai detto", "Ha detto", "Abbiamo detto", "Avete detto", "Hanno detto"],
+
+        "futuroConjList": ["Diro", "Dirai", "Dira", "Diremo", "Direte", "Diranno"],
+
+        "imperfettoConjList": ["Dicevo", "Dicevi", "Diceva", "Dicevamo", "Dicevate", "Dicevano"],
+
+        "presenteCondizionaleConjList": ["Direi", "Diresti", "Direbbe", "Diremmo", "Direste", "Direbbero"],
+
+        "imperativoConjList": ["Di'", "Dica", "Diciamo", "Dite", "Dicano"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Indossare",
+
+            "verbEngl": "To wear"
+
+        },
+
+        
+
+        "presenteConjList": ["Indosso", "Indossi", "Indossa",  "Indossiamo", "Indossate", "Indossano"],
+
+        "passatoProssimoConjList": ["Ho indossato", "Hai indossato", "Ha indossato", "Abbiamo indossato", "Avete indossato", "Hanno indossato"],
+
+        "futuroConjList": ["Indosserò", "Indosserai", "Indosserà",  "Indosseremo", "Indosserete", "Indosseranno"],
+
+        "imperfettoConjList": ["Indossavo", "Indossavi", "Indossava",  "Indossavamo", "Indossavate", "Indossavano"],
+
+        "presenteCondizionaleConjList": ["Indosserei", "Indosseresti", "Indosserebbe", "Indosseremmo", "Indossereste", "Indosserebbero"],
+
+        "imperativoConjList": ["Indossa'", "Indossi", "Indossiamo", "Indossate", "Indossino"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Svestire",
+
+            "verbEngl": "To undress"
+
+        },
+
+        
+
+        "presenteConjList": ["Svesto", "Svesti", "Sveste",  "Svestiamo", "Svestite", "Svestono"],
+
+        "passatoProssimoConjList": ["Ho svestito", "Hai svestito", "Ha svestito", "Abbiamo svestito", "Avete svestito", "Hanno svestito"],
+
+        "futuroConjList": ["Svestirò",  "Svestirai", "Svestirà",  "Svesteremo", "Svestirete", "Svesteranno"],
+
+        "imperfettoConjList": ["Svestivo", "Svestivi", "Svestiva", "Svestivamo", "Svestivate", "Svestivano"],
+
+        "presenteCondizionaleConjList": ["Svestirei", "Svestiresti", "Svestirebbe", "Svestiremmo", "Svestireste", "Svestirebbero"],
+
+        "imperativoConjList": ["Svesti", "Svesta", "Svestiamo", "Svestite", "Svestano"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Scegliere",
+
+            "verbEngl": "To choose"
+
+        },
+
+        
+
+        "presenteConjList": ["Scelgo", "Scegli", "Sceglie", "Scegliamo", "Scegliete", "Scelgono"],
+
+        "passatoProssimoConjList": ["Ho scelto", "Hai scelto", "Ha scelto", "Abbiamo scelto", "Avete scelto", "Hanno scelto"],
+
+        "futuroConjList": ["Sceglierò", "Sceglierai", "Sceglierà", "Sceglieremo", "Sceglierete", "Sceglieranno"],
+
+        "imperfettoConjList": ["Sceglievo", "Sceglievi", "Sceglieva", "Sceglievamo", "Sceglievate", "Sceglievano"],
+
+        "presenteCondizionaleConjList": ["Sceglierei", "Sceglieresti", "Sceglierebbe", "Sceglieremmo", "Scegliereste", "Sceglierebbero"],
+
+        "imperativoConjList": ["Scegli", "Scelga", "Scegliamo", "Scegliete", "Scelgano"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Abbinare",
+
+            "verbEngl": "To match"
+
+        },
+
+        
+
+        "presenteConjList": ["Abbino", "Abbini", "Abbina", "Abbiniamo", "Abbinate", "Abbinano"],
+
+        "passatoProssimoConjList": ["Ho abbinato", "Hai abbinato", "Ha abbinato", "Abbiamo abbinato", "Avete abbinato", "Hanno abbinato"],
+
+        "futuroConjList": ["Abbinerò", "Abbinerai", "Abbinierà", "Abbineremo", "Abbinerete", "Abbineranno"],
+
+        "imperfettoConjList": ["Abbinavo", "Abbinavi", "Abbinava", "Abbinavamo", "Abbinavate", "Abbinavano"],
+
+        "presenteCondizionaleConjList": ["Abbinerei", "Abbineresti", "Abbinerebbe", "Abbineremmo", "Abbinereste", "Abbinerebbero"],
+
+        "imperativoConjList": ["Abbina", "Abbini", "Abbiniamo", "Abbinate", "Abbinino"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Comprare",
+
+            "verbEngl": "To buy"
+
+        },
+
+        
+
+        "presenteConjList": ["Compro", "Compri", "Compra", "Compriamo", "Comprate", "Comprano"],
+
+        "passatoProssimoConjList": ["Ho comprato", "Hai comprato", "Ha comprato", "Abbiamo comprato", "Avete comprato", "Hanno comprato"],
+
+        "futuroConjList": ["Comprerò", "Comprerai", "Comprerà", "Compreremo", "Comprerete", "Compreranno"],
+
+        "imperfettoConjList": ["Compravo", "Compravi", "Comprava", "Compravamo", "Compravate", "Compravano"],
+
+        "presenteCondizionaleConjList": ["Comprerei", "Compreresti", "Comprerebbe", "Compreremmo", "Comprereste", "Comprerebbero"],
+
+        "imperativoConjList": ["Compra", "Compri", "Compriamo", "Comprate", "Comprino"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Provare",
+
+            "verbEngl": "To try"
+
+        },
+
+        
+
+        "presenteConjList": ["Provo", "Provi", "Prova", "Proviamo", "Provate", "Provano"],
+
+        "passatoProssimoConjList": ["Ho provato", "Hai provato", "Ha provato", "Abbiamo provato", "Avete provato", "Hanno provato"],
+
+        "futuroConjList": ["Proverò", "Proverai", "Proverà", "Proveremo", "Proverete", "Proveranno"],
+
+        "imperfettoConjList": ["Provavo", "Provavi", "Provava", "Provavamo", "Provavate", "Provavano"],
+
+        "presenteCondizionaleConjList": ["Proverei", "Proveresti", "Proverebbe", "Proveremmo", "Provereste", "Proverebbero"],
+
+        "imperativoConjList": ["Prova", "Provi", "Proviamo", "Provate", "Provino"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Cambiare",
+
+            "verbEngl": "To change"
+
+        },
+
+        
+
+        "presenteConjList": ["Cambio", "Cambi", "Cambia", "Cambiamo", "Cambiate", "Cambiano"],
+
+        "passatoProssimoConjList": ["Ho cambiato", "Hai cambiato", "Ha cambiato", "Abbiamo cambiato", "Avete cambiato", "Hanno cambiato"],
+
+        "futuroConjList": ["Cambierò", "Cambierai", "Cambierà", "Cambieremo", "Cambierete", "Cambieranno"],
+
+        "imperfettoConjList": ["Cambiavo", "Cambiavi", "Cambiava", "Cambiavamo", "Cambiavate", "Cambiavano"],
+
+        "presenteCondizionaleConjList": ["Cambierei", "Cambieresti", "Cambierebbe", "Cambieremmo", "Cambieste", "Cambierebbero"],
+
+        "imperativoConjList": ["Cambia", "Cambi", "Cambiamo", "Cambiate", "Cambino"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Lavare",
+
+            "verbEngl": "To wash"
+
+        },
+
+        
+
+        "presenteConjList": ["Lavo", "Lavi", "Lava", "Laviamo", "Lavate", "Lavano"],
+
+        "passatoProssimoConjList": ["Ho lavato", "Hai lavato", "Ha lavato", "Abbiamo lavato", "Avete lavato", "Hanno lavato"],
+
+        "futuroConjList": ["Laverò", "Laverai", "Laverà", "Laveremo", "Laverete", "Laveranno"],
+
+        "imperfettoConjList": ["Lavavo", "Lavavi", "Lavava", "Lavavamo", "Lavavate", "Lavavano"],
+
+        "presenteCondizionaleConjList": ["Laverei", "Laveresti", "Laverebbe", "Laveremmo",  "Lavereste", "Laverebbero"],
+
+        "imperativoConjList": ["Lava", "Lavi", "Laviamo", "Lavate", "Lavano"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Stirare",
+
+            "verbEngl": "To iron/press"
+
+        },
+
+        
+
+        "presenteConjList": ["Stiro", "Stiri", "Stira", "Stiriamo", "Stirate", "Stirano"],
+
+        "passatoProssimoConjList": ["Ho stirato", "Hai stirato", "Ha stirato", "Abbiamo stirato", "Avete stirato", "Hanno stirato"],
+
+        "futuroConjList": ["Stirerò", "Stirerai", "Stirerà", "Stireremo", "Stirerete", "Stireranno"],
+
+        "imperfettoConjList": ["Stiravo", "Stiravi", "Stirava", "Stiravamo", "Stiravate", "Stiravano"],
+
+        "presenteCondizionaleConjList": ["Stirerie", "Stireresti", "Stirerebbe", "Stireremmo", "Stirereste", "Stirerebbero"],
+
+        "imperativoConjList": ["Stira", "Stiri", "Stiriamo", "Stirate", "Stirino"]
+
+    },
+    
+    {
+
+        "verb": {
+
+            "verbName": "Appendere",
+
+            "verbEngl": "To hang up"
+
+        },
+
+        
+
+        "presenteConjList": ["Appendo", "Appendi", "Appende", "Appendiamo", "Appendete", "Appendono"],
+
+        "passatoProssimoConjList": ["Ho appeso", "Hai appeso", "Ha appeso", "Abbiamo appeso", "Avete appeso", "Hanno appeso"],
+
+        "futuroConjList": ["Appenderò", "Appenderai", "Appenderà", "Appenderemo", "Appenderete", "Appenderanno"],
+
+        "imperfettoConjList": ["Appendevo", "Appendevi", "Appendeva", "Appendevamo", "Appendevate", "Appendavano"],
+
+        "presenteCondizionaleConjList": ["Appenderei", "Appenderesti", "Appenderebbe", "Appenderemmo", "Appendereste", "Appenderebbero"],
+
+        "imperativoConjList": ["Appendi", "Appenda", "Appendiamo", "Appendete", "Appendano"]
+
+    }
+
 ]
+

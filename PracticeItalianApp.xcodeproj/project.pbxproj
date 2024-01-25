@@ -31,7 +31,6 @@
 		7C14723F2AA7B6150052169C /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 7C14723E2AA7B6150052169C /* WrappingHStack */; };
 		7C31868E2A24059600E94F60 /* FlashCardAccDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */; };
 		7C31869D2A28E05C00E94F60 /* ItalianAppVerbData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C31869C2A28E05C00E94F60 /* ItalianAppVerbData.json */; };
-		7C31869F2A28E06400E94F60 /* shortStoryAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C31869E2A28E06400E94F60 /* shortStoryAppData.json */; };
 		7C3186A12A28E06A00E94F60 /* flashCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C3186A02A28E06900E94F60 /* flashCardData.json */; };
 		7C3186A32A28E34400E94F60 /* RightWrongButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3186A22A28E34400E94F60 /* RightWrongButtons.swift */; };
 		7C3DC9D02AE23277003CAB1E /* rinascimento.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7C3DC9CB2AE23276003CAB1E /* rinascimento.mp3 */; };
@@ -72,6 +71,7 @@
 		7C7A1D942B4888DF00BAB86E /* chooseVCActivityIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A1D932B4888DF00BAB86E /* chooseVCActivityIPAD.swift */; };
 		7C7A1D962B488BEB00BAB86E /* ChooseVCActivityMyListIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A1D952B488BEB00BAB86E /* ChooseVCActivityMyListIPAD.swift */; };
 		7C7A1D982B4C83BC00BAB86E /* verbConjMultipleChoiceViewIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A1D972B4C83BC00BAB86E /* verbConjMultipleChoiceViewIPAD.swift */; };
+		7C7D116A2B6055C2007BC3D2 /* shortStoriesData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C7D11692B6055C2007BC3D2 /* shortStoriesData.json */; };
 		7C82004F2B4E590C0046188D /* SpellConjugatedVerbViewIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82004E2B4E590C0046188D /* SpellConjugatedVerbViewIPAD.swift */; };
 		7C8EA7DC2A56086900A286D8 /* chooseVerbList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EA7DB2A56086900A286D8 /* chooseVerbList.swift */; };
 		7C8EA7DE2A574EBC00A286D8 /* ChooseVCActivityMyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EA7DD2A574EBC00A286D8 /* ChooseVCActivityMyList.swift */; };
@@ -189,7 +189,6 @@
 		7C0DDE552A66F5E50098F27D /* ShortStoryDragDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortStoryDragDropDelegate.swift; sourceTree = "<group>"; };
 		7C31868D2A24059600E94F60 /* FlashCardAccDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardAccDataManager.swift; sourceTree = "<group>"; };
 		7C31869C2A28E05C00E94F60 /* ItalianAppVerbData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ItalianAppVerbData.json; sourceTree = "<group>"; };
-		7C31869E2A28E06400E94F60 /* shortStoryAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shortStoryAppData.json; sourceTree = "<group>"; };
 		7C3186A02A28E06900E94F60 /* flashCardData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = flashCardData.json; sourceTree = "<group>"; };
 		7C3186A22A28E34400E94F60 /* RightWrongButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightWrongButtons.swift; sourceTree = "<group>"; };
 		7C3DC9CB2AE23276003CAB1E /* rinascimento.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rinascimento.mp3; sourceTree = "<group>"; };
@@ -229,6 +228,7 @@
 		7C7A1D932B4888DF00BAB86E /* chooseVCActivityIPAD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseVCActivityIPAD.swift; sourceTree = "<group>"; };
 		7C7A1D952B488BEB00BAB86E /* ChooseVCActivityMyListIPAD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVCActivityMyListIPAD.swift; sourceTree = "<group>"; };
 		7C7A1D972B4C83BC00BAB86E /* verbConjMultipleChoiceViewIPAD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verbConjMultipleChoiceViewIPAD.swift; sourceTree = "<group>"; };
+		7C7D11692B6055C2007BC3D2 /* shortStoriesData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shortStoriesData.json; sourceTree = "<group>"; };
 		7C82004E2B4E590C0046188D /* SpellConjugatedVerbViewIPAD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellConjugatedVerbViewIPAD.swift; sourceTree = "<group>"; };
 		7C8EA7DB2A56086900A286D8 /* chooseVerbList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseVerbList.swift; sourceTree = "<group>"; };
 		7C8EA7DD2A574EBC00A286D8 /* ChooseVCActivityMyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVCActivityMyList.swift; sourceTree = "<group>"; };
@@ -394,8 +394,8 @@
 				7CB8F28E2A0F62470017A740 /* chooseActivity.swift */,
 				28E88FFC29F9D5F000D07103 /* JSONManager.swift */,
 				7C31869C2A28E05C00E94F60 /* ItalianAppVerbData.json */,
+				7C7D11692B6055C2007BC3D2 /* shortStoriesData.json */,
 				7CF0674F2A3BB54500D0CF53 /* ListeningActivity.json */,
-				7C31869E2A28E06400E94F60 /* shortStoryAppData.json */,
 				7C3186A02A28E06900E94F60 /* flashCardData.json */,
 				7C0334D32A53217500119990 /* ListViewOfAvailableVerbs.swift */,
 				7CE57C712B4F1E720003C783 /* ListViewOfAvailableVerbsIPAD.swift */,
@@ -754,7 +754,6 @@
 				7C3DC9E12AE2F538003CAB1E /* pasta6.mp3 in Resources */,
 				7C3DC9E42AE2F538003CAB1E /* pasta8.mp3 in Resources */,
 				7C3DC9DE2AE2F538003CAB1E /* pasta4.mp3 in Resources */,
-				7C31869F2A28E06400E94F60 /* shortStoryAppData.json in Resources */,
 				7CCF16262AE087F10072E7A9 /* cosaDesidera7.mp3 in Resources */,
 				7CCF16102AE087DF0072E7A9 /* uffizi6.mp3 in Resources */,
 				7CCF16122AE087DF0072E7A9 /* uffizi11.mp3 in Resources */,
@@ -786,6 +785,7 @@
 				7C3DC9D32AE23277003CAB1E /* stileBellagio.mp3 in Resources */,
 				7CCF15E02AE087AD0072E7A9 /* rena1.mp3 in Resources */,
 				7CCF16222AE087F10072E7A9 /* cosaDesidera8.mp3 in Resources */,
+				7C7D116A2B6055C2007BC3D2 /* shortStoriesData.json in Resources */,
 				7CCF160A2AE087DF0072E7A9 /* uffizi3.mp3 in Resources */,
 				7CCF16092AE087DF0072E7A9 /* uffizi9.mp3 in Resources */,
 				7CCF16112AE087DF0072E7A9 /* uffizi5.mp3 in Resources */,

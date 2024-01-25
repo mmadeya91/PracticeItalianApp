@@ -109,7 +109,7 @@ struct availableShortStories: View {
                                     .stroke(.black, lineWidth: 3)
                             )
                             .transition(.slide).animation(.easeIn).zIndex(2)
-                            .offset(x: geo.size.width / 9, y: geo.size.height / 3)
+                            .offset(x: geo.size.width / 7, y: geo.size.height / 3)
                     }
                     
                     if attemptToBuyPopUp{
@@ -247,7 +247,7 @@ struct bookHStack: View {
     @Binding var attemptedBuyName: String
     var body: some View{
         
-        let bookTitles: [String] = ["Cristofo Columbo", "test1", "test2", "test3", "test4", "test5"]
+        let bookTitles: [String] = ["La Mia Introduzione", "Il Mio Migliore Amico", "La Mia Famiglia", "Le Mie Vacanze in Sicilia", "La Mia Routine", "Ragù Di Maiale Brasato", "Il Mio Fine Settimana"]
         
         ScrollView{
             VStack{
@@ -267,8 +267,6 @@ struct bookHStack: View {
                         .padding(.bottom, 10)
                     HStack{
                         bookButton(shortStoryName: bookTitles[2], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
-                        Spacer()
-                        bookButton(shortStoryName: bookTitles[3], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                     }.padding([.leading, .trailing], 55)
                 }
                 VStack{
@@ -279,9 +277,9 @@ struct bookHStack: View {
                         .padding(.bottom, 25)
                     
                     HStack{
-                        bookButton(shortStoryName: bookTitles[2], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
-                        Spacer()
                         bookButton(shortStoryName: bookTitles[3], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
+                        Spacer()
+                        bookButton(shortStoryName: bookTitles[4], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                     }.padding([.leading, .trailing], 55)
                 }
                 VStack{
@@ -292,9 +290,9 @@ struct bookHStack: View {
                         .padding(.bottom, 25)
                     
                     HStack{
-                        bookButton(shortStoryName:bookTitles[4], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
+                        bookButton(shortStoryName:bookTitles[5], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                         Spacer()
-                        bookButton(shortStoryName: bookTitles[5], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
+                        bookButton(shortStoryName: bookTitles[6], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
                     }.padding([.leading, .trailing], 55)
                 }
             }
@@ -308,7 +306,7 @@ struct bookButton: View {
     
     @EnvironmentObject var globalModel: GlobalModel
     
-    let lockedStories: [String] = ["test2", "test3", "test4", "test5"]
+    let lockedStories: [String] = ["La Mia Famiglia", "Le Mie Vacanze in Sicilia", "La Mia Routine", "Ragù Di Maiale Brasato", "Il Mio Fine Settimana"]
     
     var shortStoryName: String
     @Binding var attemptToBuyPopUp: Bool
@@ -349,8 +347,8 @@ struct bookButton: View {
                         )
                         
                         Text(shortStoryName)
-                            .font(Font.custom("Marker Felt", size: 20))
-                            .frame(width: 120, height: 85)
+                            .font(Font.custom("Futura", size: 18))
+                            .frame(width: 130, height: 80)
                             .multilineTextAlignment(.center)
                            
                         
@@ -376,8 +374,8 @@ struct bookButton: View {
                             })
                         
                         Text(shortStoryName)
-                            .font(Font.custom("Marker Felt", size: 20))
-                            .frame(width: 100, height: 85)
+                            .font(Font.custom("Futura", size: 18))
+                            .frame(width: 130, height: 80)
                             .multilineTextAlignment(.center)
 
                         

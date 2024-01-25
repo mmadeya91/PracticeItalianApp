@@ -12,13 +12,25 @@ final class ShortStoryDragDropViewModel: ObservableObject{
     @Published private(set) var currentDragDropChoicesList: [[dragDropShortStoryCharacter]] = [[dragDropShortStoryCharacter]]()
     @Published private(set) var currentStoryData: storyObject
     
-    init(chosenStory: Int){
-        switch chosenStory {
-        case 0:
-            currentStoryData = storyObject.columbo
-        default:
-            currentStoryData = storyObject.columbo
-        }
+    init(chosenStoryName: String){
+        switch chosenStoryName {
+            case "La Mia Introduzione":
+                currentStoryData = storyObject.introduzione
+            case "Il Mio Migliore Amico":
+                currentStoryData = storyObject.amico
+            case "La Mia Famiglia":
+                currentStoryData = storyObject.famiglia
+            case "Le Mie Vacanze in Sicilia":
+                currentStoryData = storyObject.vacanza
+            case "La Mia Routine":
+                currentStoryData = storyObject.routine
+            case "Ragù Di Maiale Brasato":
+                currentStoryData = storyObject.ragu
+            case "Il Mio Fine Settimana":
+                currentStoryData = storyObject.weekend
+            default:
+                currentStoryData = storyObject.introduzione
+            }
     }
     
     func setData(){

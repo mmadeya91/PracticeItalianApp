@@ -26,7 +26,7 @@ struct shortStoryViewIPAD: View {
     
     @State var showEnglish = false
     
-    @StateObject var shortStoryDragDropVM = ShortStoryDragDropViewModel(chosenStory: 0)
+    @StateObject var shortStoryDragDropVM = ShortStoryDragDropViewModel(chosenStoryName: "La Mia Introduzione")
     
     var storyData: shortStoryData { shortStoryData(chosenStoryName: chosenStoryNameIn)}
     
@@ -470,7 +470,7 @@ struct textModiferIPAD : ViewModifier {
 
 struct shortStoryViewIPAD_Previews: PreviewProvider {
     static var previews: some View {
-        shortStoryViewIPAD(chosenStoryNameIn: "Cristofo Columbo")
+        shortStoryViewIPAD(chosenStoryNameIn: "La Mia Introduzione")
             .environmentObject(AudioManager())
     }
 }

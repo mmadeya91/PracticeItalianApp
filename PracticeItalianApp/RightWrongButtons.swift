@@ -114,6 +114,7 @@ struct correctMCButton: View {
 struct correctShortStoryButton: View {
     
     var choice: String
+    var totalQuestions: Int
     
     @State var colorOpacity = 0.0
     @State var chosenOpacity = 0.0
@@ -122,6 +123,7 @@ struct correctShortStoryButton: View {
     @Binding var correctChosen: Bool
     @Binding var showShortStoryDragDrop: Bool
     @Binding var progress: CGFloat
+   
     
     var body: some View{
         
@@ -131,7 +133,7 @@ struct correctShortStoryButton: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 
                 
-                if questionNumber != 3 {
+                if questionNumber != totalQuestions  {
                     questionNumber = questionNumber + 1
                     correctChosen.toggle()
                 }else{
@@ -164,7 +166,7 @@ struct correctShortStoryButton: View {
                 
             }.padding([.leading, .trailing], 10)
         })
-        .frame(width:330, height: 40)
+        .frame(width:310, height: 40)
         .background(Color.green.opacity(colorOpacity))
         .foregroundColor(Color.black)
         .cornerRadius(5)
@@ -227,11 +229,11 @@ struct incorrectShortStoryButton: View {
                 
             }.padding([.leading, .trailing], 10)
         })
-        .frame(width:330, height: 40)
+        .frame(width:310, height: 40)
         .background(Color.red.opacity(colorOpacity))
         .foregroundColor(Color.black)
         .cornerRadius(5)
-        .offset(x: selected ? -5 : 0)
+        .offset(x: selected ? -3 : 0)
         .padding([.leading, .trailing], 10)
         .onChange(of: correctChosen) { newValue in
             if newValue == true {
@@ -295,7 +297,7 @@ struct correctLAComprehensionButton: View {
                 
             }.padding([.leading, .trailing], 10)
         })
-        .frame(width:330, height: 40)
+        .frame(width:310, height: 40)
         .background(Color.green.opacity(colorOpacity))
         .foregroundColor(Color.black)
         .cornerRadius(5)
@@ -366,11 +368,11 @@ struct incorrectLAComprehensionButton: View {
                 
             }.padding([.leading, .trailing], 10)
         })
-        .frame(width:330, height: 40)
+        .frame(width:310, height: 40)
         .background(Color.red.opacity(colorOpacity))
         .foregroundColor(Color.black)
         .cornerRadius(5)
-        .offset(x: selected ? -5 : 0)
+        .offset(x: selected ? -3 : 0)
         .padding([.leading, .trailing], 10)
         .padding([.top, .bottom], 3)
         .onChange(of: correctChosen) { newValue in

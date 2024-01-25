@@ -52,11 +52,12 @@ struct shortStoryView: View {
     
     @State var showEnglish = false
     
-    @StateObject var shortStoryDragDropVM = ShortStoryDragDropViewModel(chosenStory: 0)
+    @StateObject var shortStoryDragDropVM = ShortStoryDragDropViewModel(chosenStoryName: "La Mia Introduzione")
     
     var storyData: shortStoryData { shortStoryData(chosenStoryName: chosenStoryNameIn)}
     
     var storyObj: shortStoryObject {storyData.collectShortStoryData(storyName: storyData.chosenStoryName)}
+    
     
     
     var body: some View {
@@ -125,7 +126,7 @@ struct shortStoryView: View {
                     
                     VStack(spacing: 0){
                         ScrollView(.vertical, showsIndicators: false) {
-                            Text("Cristofo Columbo")
+                            Text(chosenStoryNameIn)
                                 .font(Font.custom("Arial Hebrew", size: 25))
                                 .padding(.top, 30)
                                 .overlay(
@@ -159,15 +160,17 @@ struct shortStoryView: View {
                                 VStack(spacing: 0){
                                     
                                     Text(storyObj.questionList[questionNumber].question)
-                                        .font(Font.custom("Arial Hebrew", size: 16))
-                                        .padding()
-                                        .frame(width: geo.size.width - 37, height: 55)
+                                        .font(Font.custom("Arial Hebrew", size: 15))
+                                        .multilineTextAlignment(.center)
+                                        .padding(15)
+                                        .frame(width: geo.size.width - 37)
                                         .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 9)
                                             .stroke(.black, lineWidth: 4))
                                     
                                     
-                                    radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+                                    radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), totalQuestionCount: storyObj.questionList.count, questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
                                         .padding(.top, 10)
+                                        .padding(.bottom, 16)
                                     
                                     
                                     
@@ -177,6 +180,7 @@ struct shortStoryView: View {
                                 .overlay( RoundedRectangle(cornerRadius: 9)
                                     .stroke(Color("DarkNavy"), lineWidth: 4))
                                 .padding(.top, 10)
+                          
                                 
                                 
                             }
@@ -193,42 +197,43 @@ struct shortStoryView: View {
                         .padding(.leading, 20)
                         .zIndex(1)
                     //QUESTIONS VIEW
-                    if showQuestionDropdown && !showShortStoryDragDrop{
-                        
-                        VStack(alignment: .leading){
-                            
-                            Text(storyObj.questionList[questionNumber].question)
-                                .font(Font.custom("Arial Hebrew", size: 16))
-                                .bold()
-                                .padding([.leading, .trailing], 10 )
-                                .padding(.top, 5)
-                                .padding(.bottom, 10)
-                            
-                            
-                            radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
-                            
-                            
-                        }
-                        .frame(width: 335, height: 210)
-                        .background(Color.white.opacity(0.95))
-                        .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-                        .cornerRadius(20, corners: [.topLeft, .topRight])
-                        .padding(.top, 415)
-                        .padding(.leading, 21)
-                        .zIndex(0)
-                        
-                        
-                        
-                        
-                        
-                    }
+//                    if showQuestionDropdown && !showShortStoryDragDrop{
+//
+//                        VStack(alignment: .leading){
+//
+//                            Text(storyObj.questionList[questionNumber].question)
+//                                .font(Font.custom("Arial Hebrew", size: 16))
+//                                .bold()
+//                                .padding([.leading, .trailing], 10 )
+//                                .padding(.top, 5)
+//                                .padding(.bottom, 10)
+//
+//
+//                            radioButtonsMC(correctAnswer: storyObj.questionList[questionNumber].answer, choicesIn: storyObj.questionList[questionNumber].choices.shuffled(), questionNumber: $questionNumber, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+//
+//
+//
+//                        }
+//                        .frame(width: 335, height: 210)
+//                        .background(Color.white.opacity(0.95))
+//                        .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+//                        .cornerRadius(20, corners: [.topLeft, .topRight])
+//                        .padding(.top, 415)
+//                        .padding(.leading, 21)
+//                        .zIndex(0)
+//
+//
+//
+//
+//
+//                    }
                     
                     NavigationLink(destination:  ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false),isActive: $showShortStoryDragDrop,label:{}
                     ).isDetailLink(false)
                     
                 }
             }else{
-                shortStoryViewIPAD(chosenStoryNameIn: "Cristofo Columbo")
+                shortStoryViewIPAD(chosenStoryNameIn: chosenStoryNameIn)
             }
         }.navigationBarBackButtonHidden(true)
     }
@@ -318,6 +323,7 @@ struct radioButtonsMC: View {
     
     var correctAnswer: String
     var choicesIn: [String]
+    var totalQuestionCount: Int
     
     @State var correctChosen: Bool = false
     @Binding var questionNumber: Int
@@ -328,9 +334,11 @@ struct radioButtonsMC: View {
         VStack {
             ForEach(0..<choicesIn.count, id: \.self) { i in
                 if choicesIn[i].elementsEqual(correctAnswer) {
-                    correctShortStoryButton(choice: choicesIn[i], questionNumber: $questionNumber, correctChosen: $correctChosen, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+                    correctShortStoryButton(choice: choicesIn[i], totalQuestions: totalQuestionCount, questionNumber: $questionNumber, correctChosen: $correctChosen, showShortStoryDragDrop: $showShortStoryDragDrop, progress: $progress)
+                        //.padding(.bottom, 5)
                 } else {
                     incorrectShortStoryButton(choice: choicesIn[i], correctChosen: $correctChosen)
+                        //.padding(.bottom, 5)
                 }
             }
         }
@@ -354,7 +362,7 @@ struct textModifer : ViewModifier {
 
 struct shortStoryView_Previews: PreviewProvider {
     static var previews: some View {
-        shortStoryView(chosenStoryNameIn: "Cristofo Columbo")
+        shortStoryView(chosenStoryNameIn: "La Mia Introduzione")
             .environmentObject(AudioManager())
     }
 }
