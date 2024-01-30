@@ -211,6 +211,7 @@ struct shortStoryContainer2: View {
                     Text("Audio Stories").zIndex(1)
                         .font(Font.custom("Marker Felt", size: 30))
                         .foregroundColor(.white)
+                        .padding(.leading, 35)
                     
                     Button(action: {
                         withAnimation(.linear){

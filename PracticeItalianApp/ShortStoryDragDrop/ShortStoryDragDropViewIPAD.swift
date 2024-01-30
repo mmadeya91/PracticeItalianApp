@@ -123,7 +123,7 @@ struct ShortStoryDragDropViewIPAD: View{
                         shortStoryDragDropVM.setChoiceArrayDataSet()
                     }
                 }
-            }
+            }.navigationBarBackButtonHidden(true)
     }
 }
 
@@ -194,10 +194,12 @@ struct shortStoryDragDropViewBuilderIPAD: View {
             if rows.isEmpty{
                 //First Creating shuffled On
                 //then normal one
+                //characters = characters.shuffled()
+                rows = generateGrid()
                 characters = characters.shuffled()
-                rows = generateGrid()
                 shuffledRows = generateGrid()
-                rows = generateGrid()
+                //rows = generateGrid()
+             
             }
     
         }
@@ -210,10 +212,11 @@ struct shortStoryDragDropViewBuilderIPAD: View {
             if rows.isEmpty{
                 //First Creating shuffled On
                 //then normal one
+                //characters = characters.shuffled()
+                rows = generateGrid()
                 characters = characters.shuffled()
-                rows = generateGrid()
                 shuffledRows = generateGrid()
-                rows = generateGrid()
+                //rows = generateGrid()
             }
         }
         .offset(x: animateWrongText ? -30 : 0)

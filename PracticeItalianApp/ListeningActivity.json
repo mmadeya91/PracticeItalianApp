@@ -10,31 +10,56 @@
         "audioCutArrays": ["pasta1", "pasta2", "pasta3", "pasta4", "pasta5", "pasta6", "pasta6", "pasta7", "pasta8"],
 
 		"comprehensionQuestions": [
-			{
-				"question": "What is the first thing you do?",
-				"answer": "boil the water for the pasta",
-				"choices": ["boil the water for the pasta", "cut the guanciale into little pieces", "grate the cheese", "mix your eggs"]
-			},
-			{
-				"question": "How many grams of guaniciale do we need?",
-				"answer": "200",
-				"choices": ["200", "100", "2", "120"]
-			},
-			{
-				"question": "How many egg yolks do we need?",
-				"answer": "4",
-				"choices": ["4", "2", "3", "6"]
-			},
-			{
-				"question": "Cook the guanciale on high heat",
-				"answer": "False",
-				"choices": ["True", "False"]
-			},
-			{
-				"question": "Keep the pan on the stove while adding the precorino cream",
-				"answer": "False",
-				"choices": ["True", "False"]
-			}
+            {
+
+            "question": "Qual è la prima cosa da fare?",
+
+            "answer": "Bollire l'acqua per la pasta",
+
+            "choices": ["Bollire l'acqua per la pasta", "Tagliare il guanciale in piccoli pezzi", "Grattugiare il formaggio", "Mescolare le uova"]
+
+            },
+
+            {
+
+            "question": "Quanti grammi di guanciale devi usare?",
+
+            "answer": "200",
+
+            "choices": ["200", "100", "2", "120"]
+
+            },
+
+            {
+
+            "question": "Quanti tuorli d'uovo devi usare? ",
+
+            "answer": "4",
+
+            "choices": ["4", "2", "3", "6"]
+
+            },
+
+            {
+
+            "question": "Cucina il guanciale a temperatura alta.",
+
+            "answer": "False",
+
+            "choices": ["True", "False"]
+
+            },
+
+            {
+
+            "question": "La pentola rimane sul piano cottura mentre aggiungila crema al pecorino.",
+
+            "answer": "False",
+
+            "choices": ["True", "False"]
+
+            }
+
 		],
 
 		"fillInDialogueQuestion": [
@@ -238,30 +263,55 @@
 
         "comprehensionQuestions": [
             {
-                "question": "Is a table available for the customer?",
-                "answer": "True",
-                "choices": ["True", "False"]
-            },
-            {
-                "question": "Is the table inside or outside?",
-                "answer": "Outside",
-                "choices": ["Inside", "Outside"]
-            },
-            {
-                "question": "What where two typical dishes available to the customer?",
-                "answer": "Eggplant Parmesan, Gnocchi al Pesto",
-                "choices": ["Eggplant Parmesan, Gnocchi al Pesto", "Eggplant Parmesan, Lasagna", "Chicken Parmesan, Gnocchi al Pesto", "Spaghetti alle Bolognese, Ravioli"]
-            },
-            {
-                "question": "Is there a special today?",
-                "answer": "True",
-                "choices": ["True", "False"]
-            },
-            {
-                "question": "Did the customer only want a glass of red wine?",
-                "answer": "False",
-                "choices": ["True", "False"]
-            }
+
+                       "question": "C’è un tavolo libero per il cliente?",
+
+                       "answer": "True",
+
+                       "choices": ["True", "False"]
+
+                   },
+
+                   {
+
+                       "question": "Il tavolo è fuori o dentro?",
+
+                       "answer": "Dentro",
+
+                       "choices": ["Fuori", "Dentro"]
+
+                   },
+
+                   {
+
+                       "question": "Quale sono i due piatti tipici che il cliente può ordinare?",
+
+                       "answer": "Parmigiana di melanzane , Gnocchi al Pesto",
+
+                       "choices": ["Parmigiana di melanzane, Gnocchi al Pesto","Lasagna, Pasta alla Carbonara", "Gnocchi al Pesto", "Spaghetti alle Bolognese, Ravioli"]
+
+                   },
+
+                   {
+
+                       "question": "C’è un speciale piatto oggi?",
+
+                       "answer": "True",
+
+                       "choices": ["True", "False"]
+
+                   },
+
+                   {
+
+                       "question": "Il cliente solo ha voluto un bicchiere di vino.",
+
+                       "answer": "False",
+
+                       "choices": ["True", "False"]
+
+                   }
+
         ],
 
         "fillInDialogueQuestion": [
@@ -577,30 +627,54 @@
 
         "comprehensionQuestions": [
             {
-                "question": "Is the stranger about 30 minutes from the Galleria degli Uffizi?",
-                "answer": "False",
-                "choices": ["True", "False"]
-            },
-            {
-                "question": "What is the name of the street he first needs to walk down?",
-                "answer": "Via dei Benci",
-                "choices": ["Via dei Benci", "Via dei Saponai", "Via Vinegia", "Via del Leoni"]
-            },
-            {
-                "question": "What street does Mateo need to turn left on?",
-                "answer": "Via del Leoni",
-                "choices": ["Via dei Benci", "Via dei Saponai", "Via Vinegia", "Via del Leoni"]
-            },
-            {
-                "question": "Mateo should follow the street south until he passes Braceria Auditore",
-                "answer": "True",
-                "choices": ["True", "False"]
-            },
-            {
-                "question": "Where is the restaurant located in reference to the Uffizi?",
-                "answer": "Next to",
-                "choices": ["Next to", "Behind", "In front of"]
-            }
+
+                     "question": "La Galleria degli uffizi dista solo 30 min dallo sconosciuto?",
+                     "answer": "False",
+
+                     "choices": ["True", "False"]
+
+                 },
+
+                 {
+
+                     "question": "Quale strada lui deve percorrere prima?",
+
+                     "answer": "Via dei Benci",
+
+                     "choices": ["Via dei Benci", "Via dei Saponai", "Via Vinegia", "Via del Leoni"]
+
+                 },
+
+                 {
+
+                     "question": "in strada lui deve girare a sinistra?",
+
+                     "answer": "Via del Leoni",
+
+                     "choices": ["Via dei Benci", "Via dei Saponai", "Via Vinegia", "Via del Leoni"]
+
+                 },
+
+                 {
+
+                     "question": "Lui deve seguire la strada verso sud fino a passare per il ristorante Braceria Auditore.",
+
+                     "answer": "True",
+
+                     "choices": ["True", "False"]
+
+                 },
+
+                 {
+
+                     "question": "Il ristorante __________  Galleria degli Uffizi.",
+
+                     "answer": "Accanto alla",
+
+                     "choices": ["Accanto a", "Dietro alla", "Di fronte alla"]
+
+                 }
+
         ],
 
         "fillInDialogueQuestion": [
@@ -893,31 +967,56 @@
         "audioCutArrays": ["bellagio1", "bellagio2", "bellagio3", "bellagio4", "bellagio5", "bellagio6", "bellagio7", "bellagio8", "bellagio9", "bellagio10", "bellagio11"],
 
         "comprehensionQuestions": [
-            {
-                "question": "Does Stili di Bellagio only have women's clothing?",
-                "answer": "False",
-                "choices": ["True", "False"]
-            },
-            {
-                "question": "The dresses with flowers are made of what material?",
-                "answer": "silk",
-                "choices": ["silk", "cotton", "leather", "wool"]
-            },
-            {
-                "question": "What type of shoes do they have for going out or for the office",
-                "answer": "via del Leoni",
-                "choices": ["leather", "boots", "tennis shoes", "sandals"]
-            },
-            {
-                "question": "Does the shop only have one dressing room?",
-                "answer": "False",
-                "choices": ["True", "False"]
-            },
-            {
-                "question": "What are the stores hours?",
-                "answer": "9am to 5pm",
-                "choices": ["8am to 4pm", "9am to 6pm", "6am to 5pm", "10am to 9pm"]
-            }
+                    {
+
+                          "question": "Stili di Bellagio ha vestiti solo per ragazze?",
+
+                          "answer": "False",
+
+                          "choices": ["True", "False"]
+
+                      },
+
+                      {
+
+                          "question": "I Vestiti con i  fiori di che  materiale sono?",
+
+                          "answer": "Seta",
+
+                          "choices": ["Seta", "Cotone", "Pelle", "Lana"]
+
+                      },
+
+                      {
+
+                          "question": "Che tipo di scarpe vende il negozio?",
+
+                          "answer": "Scarpe di pelle",
+
+                          "choices": ["Scarpe di pelle", "Stivali", "Scarpe da tennis", "Sandali"]
+
+                      },
+
+                      {
+
+                          "question": "Il negozio ha solo uno camerino.",
+
+                          "answer": "False",
+
+                          "choices": ["True", "False"]
+
+                      },
+
+                      {
+
+                          "question": "Quali sono gli orari di apertura e di chiusura di Stile di Bellagio?",
+
+                          "answer": "Dalle 9 alle 5",
+
+                          "choices": ["Dalle 8 alle 4", "Dalle 9 alle 6", "Dalle 6 alle 5", "Dalle 10 alle 9"]
+
+                      }
+
         ],
 
         "fillInDialogueQuestion": [
@@ -1204,30 +1303,56 @@
 
         "comprehensionQuestions": [
             {
-                "question": "Where did the renaissance start?",
-                "answer": "Tuscany",
-                "choices": ["Tuscany", "Florence", "Venice", "Milan"]
-            },
-            {
-                "question": "Which one these cultural topics was not mentioned in the dialogue",
-                "answer": "economics",
-                "choices": ["economics", "music", "painting", "literature"]
-            },
-            {
-                "question": "What was the name of the cultural movenemnt made famouse during the renaissance?",
-                "answer": "Humanism",
-                "choices": ["Altruism", "Humanism", "Realism", "Surrealism"]
-            },
-            {
-                "question": "One of the reasons the renaissance began in Italy was began there were many rich people willing to spend money on the arts",
-                "answer": "True",
-                "choices": ["True", "False"]
-            },
-            {
-                "question": "Which is not a famous artist mentioned in the dialogue",
-                "answer": "Medici",
-                "choices": ["Michelangelo", "Leonardo da Vinci", "Piero della Francesa", "Raphael"]
-            }
+
+                           "question": "Dove è iniziato Il Rinascimento?",
+
+                           "answer": "Toscana",
+
+                           "choices": ["Toscana", "Firenze", "Venezia", "Milano"]
+
+                       },
+
+                       {
+
+                           "question": "Quale argomento culturale non è discusso nel testo?",
+
+                           "answer": "Economia",
+
+                           "choices": ["Economia", "Musica", "Arte", "Letteratura"]
+
+                       },
+
+                       {
+
+                           "question": "Qual è il  nome del movimento culturale che ha reso  famoso Il Rinascimento?",
+
+
+                           "answer": "Umanesimo",
+
+                           "choices": ["Altruismo", "", "Realismo", "Surrealismo"]
+
+                       },
+
+                       {
+
+                           "question": "Uno dei motivi per cui Il Rinascimento è iniziato in Italia èperché molte persone ricche hanno investito nell’arte. ",
+
+                           "answer": "True",
+
+                           "choices": ["True", "False"]
+
+                       },
+
+                       {
+
+                           "question": "Chi tra i famosi artisti del rinascimento non è stato nominato nel testo? ",
+
+                           "answer": "Raphael",
+
+                           "choices": ["Michelangelo", "Leonardo da Vinci", "Piero della Francesa", "Raphael"]
+
+                       }
+
         ],
 
         "fillInDialogueQuestion": [

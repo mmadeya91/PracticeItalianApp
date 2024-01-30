@@ -210,6 +210,7 @@ struct shortStoryContainerIPAD: View {
                     Text("Short Stories").zIndex(1)
                         .font(Font.custom("Marker Felt", size: 50))
                         .foregroundColor(.white)
+                        .padding(.leading, 35)
                     
                     Button(action: {
                         withAnimation(.linear){

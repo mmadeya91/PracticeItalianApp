@@ -194,12 +194,22 @@ struct chooseActivityIPAD: View {
                 
             }
             .onAppear{
-                withAnimation(.easeIn(duration: 1.5)){
-                    animatingBear = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation(.easeIn(duration: 1.5)){
+                        
+                        animatingBear = true
+                        
+                        
+                    }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    
-                    showChatBubble = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation(.easeIn(duration: 0.5)){
+                        
+                        showChatBubble = true
+                        
+                        
+                    }
+                  
                 }
                 
                 flashCardSetAccObj.checkSetData()

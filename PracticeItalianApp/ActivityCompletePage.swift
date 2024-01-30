@@ -63,7 +63,7 @@ struct ActivityCompletePage: View {
                     VStack{
                         VStack{
                             Text("Nice Work!")
-                                .font(Font.custom("Arial Hebrew", size: 35))
+                                .font(Font.custom("Chalkboard SE", size: 35))
                             
                             
                         }
@@ -71,14 +71,14 @@ struct ActivityCompletePage: View {
                             Image("sittingBear")
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 200, height: 100)
+                                .frame(width: 300, height: 150)
                                 .shadow(radius: 10)
                                 .offset(y: animatingBear ? ((geo.size.height / 2 ) - 275) : -800)
                             
                             Image("coin2")
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 120, height: 120)
+                                .frame(width: 160, height: 120)
                                 .shadow(radius: 10)
                                 .offset(y: 40)
                             
@@ -91,12 +91,12 @@ struct ActivityCompletePage: View {
                                         
                                         self.runCounter(counter: self.$counter1, start: 0, end: 15, speed: 0.05)
                                     }
-                                }.padding(.top, 45)
+                                }.padding(.top, 70)
                         }
                         
                         Button {
                             updateUserCoins()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                 
                                 goNext = true
                             }
@@ -104,14 +104,14 @@ struct ActivityCompletePage: View {
                             
                         } label: {
                             Text("Continue")
-                                .font(Font.custom("Arial Hebrew", size: 25))
+                                .font(Font.custom("Chalkboard SE", size: 25))
                                 .foregroundColor(.black)
-                                .padding(.top, 5)
-                                .frame(width: 150, height: 50)
+                                .padding(.bottom, 5)
+                                .frame(width: 150, height: 46)
                                 .background(.teal)
                                 .overlay( /// apply a rounded border
                                     RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 4)
+                                        .stroke(.black, lineWidth: 5)
                                 )
                                 .cornerRadius(20)
                                 .padding(.top, 10)

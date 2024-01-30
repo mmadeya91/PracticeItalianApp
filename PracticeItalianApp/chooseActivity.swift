@@ -43,13 +43,14 @@ struct chooseActivity: View {
                         .edgesIgnoringSafeArea(.all)
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
                         .opacity(1.0)
+                        .zIndex(0)
                     
                     HStack{
                         Image("coin2")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 20, height: 40)
-                            .padding(.leading, 15)
+                            .padding(.leading, 30)
                         
                         Text(String(globalModel.userCoins))
                             .font(Font.custom("Arial Hebrew", size: 22))
@@ -61,8 +62,9 @@ struct chooseActivity: View {
                             .frame(width: 40, height: 40)
                             .shadow(radius: 10)
                             .padding()
+                            .padding(.trailing, 10)
                         
-                    }
+                    } .zIndex(0)
                     
                     Image("bubbleChat2")
                         .resizable()
@@ -70,12 +72,14 @@ struct chooseActivity: View {
                         .frame(width: 100, height: 40)
                         .offset(x: 100, y: 25)
                         .opacity(showChatBubble ? 1.0 : 0.0)
+                        .zIndex(0)
                     
                     Image("sittingBear")
                         .resizable()
                         .scaledToFill()
                         .frame(width: geo.size.width * 0.5, height: geo.size.width * 0.20)
                         .offset(x: 150, y: animatingBear ? 73 : 200)
+                        .zIndex(0)
                     
                     
                     
@@ -183,24 +187,34 @@ struct chooseActivity: View {
                         
                         Spacer()
                     }.frame(width:  geo.size.width * 0.85, height: geo.size.height * 0.78)
-                    //.shadow(radius: 10)
                         .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
                             .stroke(.black, lineWidth: 5))
                         .padding([.leading, .trailing], geo.size.width * 0.075)
                         .padding([.top, .bottom], geo.size.height * 0.15)
-                    //.offset(y: (geo.size.height / 2) - (geo.size.height / 2.8))
+                        .zIndex(1)
+
                     
                     
                     
                     
                 }
                 .onAppear{
-                    withAnimation(.easeIn(duration: 1.5)){
-                        animatingBear = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        withAnimation(.easeIn(duration: 1.5)){
+                            
+                            animatingBear = true
+                            
+                            
+                        }
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        
-                        showChatBubble = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        withAnimation(.easeIn(duration: 0.5)){
+                            
+                            showChatBubble = true
+                            
+                            
+                        }
+                      
                     }
                     
                     flashCardSetAccObj.checkSetData()

@@ -133,7 +133,7 @@ struct correctShortStoryButton: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 
                 
-                if questionNumber != totalQuestions  {
+                if questionNumber != totalQuestions - 1 {
                     questionNumber = questionNumber + 1
                     correctChosen.toggle()
                 }else{

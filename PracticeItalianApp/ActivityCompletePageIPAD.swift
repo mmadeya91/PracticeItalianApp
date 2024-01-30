@@ -61,7 +61,7 @@ struct ActivityCompletePageIPAD: View {
                     
                     VStack{
                         Text("Nice Work!")
-                            .font(Font.custom("Arial Hebrew", size: 50))
+                            .font(Font.custom("Chalkboard SE", size: 50))
                             .offset(y: geo.size.height / 8)
 
                         
@@ -94,7 +94,7 @@ struct ActivityCompletePageIPAD: View {
                     
                     Button {
                         updateUserCoins()
-                       DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                       DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                            
                             goNext = true
                        }
@@ -102,21 +102,21 @@ struct ActivityCompletePageIPAD: View {
                         
                     } label: {
                         Text("Continue")
-                            .font(Font.custom("Arial Hebrew", size: 30))
+                            .font(Font.custom("Chalkboard SE", size: 30))
                             .foregroundColor(.black)
-                            .padding(.top, 5)
+                            .padding(.bottom, 5)
                             .frame(width: 220, height: 80)
                             .background(.teal)
                             .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.black, lineWidth: 4)
+                                RoundedRectangle(cornerRadius: 50)
+                                    .stroke(.black, lineWidth: 5)
                             )
-                            .cornerRadius(20)
+                            .cornerRadius(50)
                             .shadow(radius: 10)
                     }.offset(x: (geo.size.width / 5), y: (geo.size.height / 5))
                     
                     NavigationLink(destination: chooseActivity(),isActive: $goNext,label:{}
-                                ).isDetailLink(false)
+                    ).isDetailLink(false)
                     
                 }
             }.onAppear{
