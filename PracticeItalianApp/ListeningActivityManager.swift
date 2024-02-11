@@ -35,7 +35,7 @@ final class ListeningActivityManager: ObservableObject {
                 tempAnswer = letterObject.answer!
             }
             
-            let newHintLetter = hintLetter(letter: letterObject.letter!, showLetter: letterObject.showLetter, answer: tempAnswer)
+            let newHintLetter = hintLetter(letter: letterObject.letter, showLetter: letterObject.showLetter, answer: tempAnswer)
             tempArray.append(newHintLetter)
         }
         currentHintLetterArray = tempArray

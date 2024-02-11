@@ -9,6 +9,12 @@ import Foundation
 import SwiftUIKit
 import SwiftUI
 
+extension AnyTransition {
+    static var backslide: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .move(edge: .trailing),
+            removal: .move(edge: .leading))}
+}
 
 extension DateComponentsFormatter {
     static let abbreviated: DateComponentsFormatter = {

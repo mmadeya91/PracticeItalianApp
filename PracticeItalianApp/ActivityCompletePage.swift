@@ -46,7 +46,7 @@ struct ActivityCompletePage: View {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                     
                                     
-                                    self.runCounter(counter: self.$counter2, start: globalModel.userCoins, end: (globalModel.userCoins + 15), speed: 0.05)
+                                    self.runCounter(counter: self.$counter2, start: globalModel.userCoins, end: (globalModel.userCoins + 1005), speed: 0.05)
                                 }
                             }
                         
@@ -138,8 +138,8 @@ struct ActivityCompletePage: View {
     
     
     func updateUserCoins(){
-            userCoins[0].coins = Int32((globalModel.userCoins + 15))
-            globalModel.userCoins = (globalModel.userCoins + 15)
+            userCoins[0].coins = Int32((globalModel.userCoins + 1005))
+            globalModel.userCoins = (globalModel.userCoins + 1005)
         
         do {
             try managedObjectContext.save()

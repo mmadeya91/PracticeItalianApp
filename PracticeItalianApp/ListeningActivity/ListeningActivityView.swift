@@ -51,19 +51,9 @@ struct ListeningActivityView: View {
                         VStack{
                             VStack{
                                 
-                                Image(String(listeningActivityVM.audioAct.image))
-                                    .resizable()
-                                    .scaledToFill()
-                                    .padding(23)
-                                    .frame(width: geo.size.width * 0.38, height: geo.size.height * 0.2)
-                                    .background(Color("WashedWhite"))
-                                    .overlay( /// apply a rounded border
-                                        RoundedRectangle(cornerRadius: 70)
-                                            .stroke(.black, lineWidth: 7)
-                                    )
-                                    .cornerRadius(70)
+                                ImageOnCircle(icon: listeningActivityVM.audioAct.image, radius: geo.size.width * 0.15)
                                     .padding(.top, 260)
-                                    .shadow(radius: 10)
+                                   
                                 
                                 Text(listeningActivityVM.audioAct.title)
                                     .font(.title)
@@ -154,6 +144,29 @@ struct ListeningActivityView: View {
     
         
         
+    }
+}
+
+struct ImageOnCircle: View {
+    
+    let icon: String
+    let radius: CGFloat
+    var squareSide: CGFloat {
+        2.0.squareRoot() * radius
+    }
+    
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(Color("WashedWhite"))
+                .frame(width: radius * 2, height: radius * 2)
+                .overlay(Circle().stroke(.black, lineWidth: 3))
+            Image(icon)
+                .resizable()
+                .aspectRatio(1.0, contentMode: .fit)
+                .frame(width: squareSide, height: squareSide)
+                .foregroundColor(.blue)
+        }
     }
 }
 

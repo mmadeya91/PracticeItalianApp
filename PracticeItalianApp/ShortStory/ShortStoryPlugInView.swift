@@ -11,12 +11,14 @@ import WrappingHStack
 
 struct ShortStoryPlugInView: View{
     
-    @ObservedObject var shortStoryPlugInVM: ShortStoryViewModel
+    @StateObject var shortStoryPlugInVM: ShortStoryViewModel
     @ObservedObject var globalModel = GlobalModel()
     @Environment(\.dismiss) var dismiss
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @State var questionNumber = 0
+    @State var shortStoryName: String
     @State var showPlayer = false
+    @State var isPreview: Bool
     @State var progress: CGFloat = 0
     @State var correctChosen: Bool = false
     @State var animateBear: Bool = false
@@ -29,26 +31,108 @@ struct ShortStoryPlugInView: View{
     var body: some View{
         GeometryReader {geo in
             if horizontalSizeClass == .compact {
-            Image("verticalNature")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            
-  
-                ScrollViewReader{scroller in
+                ZStack(alignment: .topLeading){
+                    Image("verticalNature")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                        .zIndex(0)
                     
-                    ZStack{
-                        if showUserCheck {
-                            userCheckNavigationPopUpPlugIn(showUserCheck: $showUserCheck)
-                                .transition(.slide)
-                                .animation(.easeIn)
-                                .offset(y: -220)
-                                .zIndex(2)
-                        }
-                        VStack{
-                            NavBar()
+                    HStack(spacing: 18){
+                        Spacer()
+                        Button(action: {
+                            withAnimation(.linear){
+                                showUserCheck.toggle()
+                            }
+                        }, label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 25))
+                                .foregroundColor(.gray)
                             
+                        }).zIndex(1)
+                        
+                        GeometryReader{proxy in
+                            ZStack(alignment: .leading) {
+                                Capsule()
+                                    .fill(.gray.opacity(0.25))
+                                
+                                Capsule()
+                                    .fill(Color.green)
+                                    .frame(width: proxy.size.width * CGFloat(progress))
+                            }
+                        }.frame(height: 13)
+                            .onChange(of: questionNumber){ newValue in
+                                progress = (CGFloat(newValue) / CGFloat(shortStoryPlugInVM.currentPlugInQuestions.count - 1))
+                            }
+                        
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                        Spacer()
+                    }.zIndex(2)
+                    HStack{
+                        Spacer()
+                        Text(showHint ? shortStoryPlugInVM.currentHints[questionNumber] : "Give me a Hint!")
+                            .font(Font.custom("Arial Hebrew", size: 18))
+                            .padding(25)
+                            .padding(.top, 5)
+                            .frame(height: 50)
+                            .background(Color("WashedWhite")).cornerRadius(25)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 25)
+                                    .stroke(.black, lineWidth: 4)
+                            )
+                            .onTapGesture{
+                                withAnimation(.easeIn(duration: 1)){
+                                    showHint = true
+                                }
+                            }
+                            .offset(y: 470)
+                            .zIndex(2)
+                        Spacer()
+                    }.frame(width: geo.size.width).zIndex(2)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("DarkNavy"))
+                        .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.45)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .zIndex(0)
+                        .offset(x: (geo.size.width / 25), y: (geo.size.height / 4))
+                    
+                    Image("sittingBear")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width * 0.4, height: geo.size.height * 0.4)
+                        .offset(x: 200, y: animateBear ? geo.size.height * 0.85 : -100)
+                        .zIndex(0)
+                    
+                    if correctChosen{
+                        
+                        let randomInt = Int.random(in: 1..<4)
+                        
+                        Image("bubbleChatRight"+String(randomInt))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(x: 100, y: geo.size.height * 0.87)
+                    }
+                    
+                    
+                    if showUserCheck {
+                        userCheckNavigationPopUpPlugIn(showUserCheck: $showUserCheck)
+                            .transition(.slide)
+                            .animation(.easeIn)
+                            .zIndex(2)
+                            .offset(x: (geo.size.width / 7), y: (geo.size.height / 6))
+                    }
+                    
+                    ScrollViewReader{scroller in
+                        VStack{
                             
                             ScrollView(.horizontal){
                                 
@@ -69,122 +153,44 @@ struct ShortStoryPlugInView: View{
                             }.offset(y: -85)
                                 .scrollDisabled(true)
                                 .onChange(of: questionNumber) { newIndex in
-                                    withAnimation{
-                                        scroller.scrollTo(newIndex, anchor: .center)
-                                    }
-                                    
                                     if questionNumber == shortStoryPlugInVM.currentPlugInQuestions.count {
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                             
                                             showFinishedActivityPage = true
                                         }
+                                    }else{
+                                        
+                                        withAnimation{
+                                            scroller.scrollTo(newIndex, anchor: .center)
+                                        }
                                     }
+                                    
+                      
                                 }
                             
                             
                         }.zIndex(2)
-                        
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(Color("DarkNavy"))
-                            .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.4)
-                            .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color("WashedWhite"), lineWidth: 4)
-                            )
-                            .zIndex(1)
-                        
-                        
-                        
-                        Text(showHint ? shortStoryPlugInVM.currentHints[questionNumber] : "Give me a Hint!")
-                            .font(Font.custom("Arial Hebrew", size: 18))
-                            .padding(15)
-                            .padding(.top, 5)
-                            .frame(height: 50)
-                            .background(Color("WashedWhite")).cornerRadius(5)
-                            .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(.black, lineWidth: 4)
-                            )
-                            .onTapGesture{
-                                withAnimation(.easeIn(duration: 1)){
-                                    showHint = true
-                                }
-                            }
-                            .offset(y: geo.size.height / 2.75)
-                            .zIndex(2)
-                        
-                        
-                        
-                        Image("sittingBear")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 200, height: 100)
-                            .offset(x: 75, y: animateBear ? -175 : -100)
-                            .zIndex(0)
-                        
-                        
-                        if correctChosen{
-                            
-                            let randomInt = Int.random(in: 1..<4)
-                            
-                            Image("bubbleChatRight"+String(randomInt))
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 100, height: 40)
-                                .offset(x: -20, y: -260)
-                        }
+    
                         
                         NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
                         ).isDetailLink(false)
                         
                     }
                     .onAppear{
-                        shortStoryPlugInVM.setShortStoryData(storyName: "Cristofo Columbo")
+                        if isPreview {
+                            shortStoryPlugInVM.setShortStoryData()
+                            
+                        }
+                        shortStoryPlugInVM.setShortStoryData()
                         withAnimation(.spring()){
                             animateBear = true
                         }
                     }.offset(x: selected ? -5 : 0)
-                }
-            }else{
-                ShortStoryPlugInViewIPAD(shortStoryPlugInVM: shortStoryPlugInVM)
-            }
-        }
-    }
-    
-    @ViewBuilder
-    func NavBar() -> some View{
-        HStack(spacing: 18){
-            Spacer()
-            Button(action: {
-                withAnimation(.linear){
-                    showUserCheck.toggle()
-                }
-            }, label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 25))
-                    .foregroundColor(.gray)
-                
-            })
-            
-            GeometryReader{proxy in
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(.gray.opacity(0.25))
+                }.navigationBarBackButtonHidden(true)
                     
-                    Capsule()
-                        .fill(Color.green)
-                        .frame(width: proxy.size.width * CGFloat(progress))
-                }
-            }.frame(height: 13)
-                .onChange(of: questionNumber){ newValue in
-                    progress = (CGFloat(newValue) / 4)
-                }
-            
-            Image("italyFlag")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-            Spacer()
+            }else{
+                ShortStoryPlugInViewIPAD(shortStoryPlugInVM: shortStoryPlugInVM, shortStoryName: shortStoryName, isPreview: false)
+            }
         }
     }
     
@@ -234,7 +240,7 @@ struct ShortStoryPlugInView: View{
                     .background(Color("WashedWhite")).cornerRadius(15).shadow(radius: 10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color("WashedWhite"), lineWidth: 3)
+                            .stroke(.black, lineWidth: 3)
                     )
                     .shadow(radius: 10)
                 
@@ -274,7 +280,7 @@ struct ShortStoryPlugInView: View{
                     .background(Color("WashedWhite")).cornerRadius(15).shadow(radius: 10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color("WashedWhite"), lineWidth: 3)
+                            .stroke(.black, lineWidth: 3)
                     )
                     .shadow(radius: 10)
                 
@@ -319,16 +325,17 @@ struct ShortStoryPlugInView: View{
                                         .padding(1)
                                         .padding(.top, 6)
                                 }
-                            }.frame(width: geo.size.width * 0.8)
+                            }.frame(width: geo.size.width * 0.8, height: geo.size.height * 0.125)
                                 .padding(.leading, 12)
                                 .padding([.top, .bottom], 25)
                             
-                        }.frame(width: geo.size.width * 0.9)
+                        }.frame(width: geo.size.width * 0.9, height: geo.size.height * 0.2)
                             .background(Color("WashedWhite")).cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(.black, lineWidth: 3)
                             )
+                            .padding(.leading, 5)
                         
                         VStack {
                             VStack{
@@ -356,13 +363,13 @@ struct ShortStoryPlugInView: View{
                                 }.padding(.top, 15)
                             }.padding([.leading, .trailing], 15)
                             
-                        }.padding(.top, 20)
-    
+                        }.padding(.top, 40)
+                        
                         
                         
                     }.frame(width: geo.size.width)
                         .frame(minHeight: geo.size.height)
-                     
+                    
                     
                     
                     
@@ -417,8 +424,8 @@ struct ShortStoryPlugInView: View{
                         Spacer()
                     }
                 }
-                    
-        
+                
+                
             }.frame(width: 265, height: 200)
                 .background(Color.white)
                 .cornerRadius(20)
@@ -432,9 +439,9 @@ struct ShortStoryPlugInView: View{
     }
     
     struct ShortStoryPlugInView_Previews: PreviewProvider {
-        static var shortStoryPlugInVM = ShortStoryViewModel(currentStoryIn: 0)
+        static var shortStoryPlugInVM = ShortStoryViewModel(currentStoryIn: "La Mia Introduzione")
         static var previews: some View {
-            ShortStoryPlugInView(shortStoryPlugInVM: shortStoryPlugInVM).environmentObject(GlobalModel())
+            ShortStoryPlugInView(shortStoryPlugInVM: shortStoryPlugInVM, shortStoryName: "La Mia Introduzione", isPreview: true).environmentObject(GlobalModel())
         }
     }
 }

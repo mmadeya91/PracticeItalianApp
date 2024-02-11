@@ -13,15 +13,37 @@ final class ShortStoryViewModel: ObservableObject {
     @Published private(set) var currentPlugInQuestionsChoices: [[pluginShortStoryCharacter]] = [[pluginShortStoryCharacter]]()
     @Published private(set) var currentHints: [String] = [String]()
     @Published private(set) var currentStory: String
+    @Published private(set) var currentStoryData: storyObject
     
-    init(currentStoryIn: Int){
+    init(currentStoryIn: String){
         switch currentStoryIn {
-        case 0:
-            currentStory = "Cristofo Columbo"
+        case "La Mia Introduzione":
+            currentStoryData = storyObject.introduzione
+            currentStory = "La Mia Introduzione"
+        case "Il Mio Migliore Amico":
+            currentStoryData = storyObject.amico
+            currentStory = "Il Mio Migliore Amico"
+        case "La Mia Famiglia":
+            currentStoryData = storyObject.famiglia
+            currentStory = "La Mia Famiglia"
+        case "Le Mie Vacanze in Sicilia":
+            currentStoryData = storyObject.vacanza
+            currentStory = "Le Mie Vacanze in Sicilia"
+        case "La Mia Routine":
+            currentStoryData = storyObject.routine
+            currentStory = "La Mia Routine"
+        case "Ragù Di Maiale Brasato":
+            currentStoryData = storyObject.ragu
+            currentStory = "Ragù Di Maiale Brasato"
+        case "Il Mio Fine Settimana":
+            currentStoryData = storyObject.weekend
+            currentStory = "Il Mio Fine Settimana"
         default:
-            currentStory = "Cristofo Columbo"
+            currentStoryData = storyObject.introduzione
+            currentStory = "La Mia Introduzione"
         }
     }
+    
 //
 //    static let introduzione: storyObject = allStoryObjects[0]
 //    static let amico: storyObject = allStoryObjects[1]
@@ -32,42 +54,19 @@ final class ShortStoryViewModel: ObservableObject {
 //    static let weekend: storyObject = allStoryObjects[6]
 
     
-    func setShortStoryData(storyName: String) {
+    func setShortStoryData() {
         
         var tempArray: [shortStoryPlugInDataObj] = [shortStoryPlugInDataObj]()
         var tempChoicesArray: [[pluginShortStoryCharacter]] = [[pluginShortStoryCharacter]]()
         var tempHintArray: [String] = [String]()
         
-        let shortStoryList: [storyObject] = storyObject.allStoryObjects
-        
-        var chosenStoryObject: storyObject = shortStoryList[0]
-        
-        switch storyName {
-            case "La Mia Introduzione":
-                chosenStoryObject = shortStoryList[0]
-            case "Il Mio Migliore Amico":
-                chosenStoryObject = shortStoryList[1]
-            case "La Mia Famiglia":
-                chosenStoryObject = shortStoryList[1]
-            case "Le Mie Vacanze in Sicilia":
-                chosenStoryObject = shortStoryList[2]
-            case "La Mia Routine":
-                chosenStoryObject = shortStoryList[3]
-            case "Ragù Di Maiale Brasato":
-                chosenStoryObject = shortStoryList[4]
-            case "Il Mio Fine Settimana":
-                chosenStoryObject = shortStoryList[5]
-            default:
-                chosenStoryObject = shortStoryList[0]
-            }
-        
-        let storyString = chosenStoryObject.story
+        let storyString = currentStoryData.story
 
-        let wordLinks: [WordLink] = chosenStoryObject.wordLinks
+        let wordLinks: [WordLink] = currentStoryData.wordLinks
 
-        let questions: [QuestionsObj] = chosenStoryObject.questionsObjs
+        let questions: [QuestionsObj] = currentStoryData.questionsObjs
         
-        let plugInQuestions: [FillInBlankQuestion] = chosenStoryObject.fillInBlankQuestions
+        let plugInQuestions: [FillInBlankQuestion] = currentStoryData.fillInBlankQuestions
         
         currentPlugInQuestions = plugInQuestions
         
@@ -76,9 +75,10 @@ final class ShortStoryViewModel: ObservableObject {
             
             tempHintArray.append(question.englishLine1)
             
-            for choice in question.plugInChoices{
+            for choice in question.plugInChoices.shuffled(){
                 var newPlugInCharacter = pluginShortStoryCharacter(value: choice.choice, isCorrect: choice.isCorrect)
                 tempChoices.append(newPlugInCharacter)
+                
             }
             
             tempChoicesArray.append(tempChoices)

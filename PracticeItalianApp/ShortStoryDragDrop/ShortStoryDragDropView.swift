@@ -13,11 +13,12 @@ struct ShortStoryDragDropView: View{
     @Environment(\.dismiss) var dismiss
     var isPreview: Bool
     @State var questionNumber = 0
+    @State var shortStoryName: String
     @State var showPlayer = false
     @State var showUserCheck = false
     @State var progress: CGFloat = 0.0
+    @State var showInfoPopUp = false
     
-    let shortStoryVM = ShortStoryViewModel(currentStoryIn: 0)
     
     var body: some View{
             GeometryReader {geo in
@@ -51,15 +52,53 @@ struct ShortStoryDragDropView: View{
                             }
                         }.frame(height: 13)
                             .onChange(of: questionNumber){ newValue in
-                                progress = (CGFloat(newValue) / 4)
+                                progress = (CGFloat(newValue) / CGFloat(shortStoryDragDropVM.currentDragDropQuestions.count + 1))
                             }
-                        
+                    
                         Image("italyFlag")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40, height: 40)
                         Spacer()
                     }.padding([.leading, .trailing], 15).zIndex(1)
+                    
+                    if showInfoPopUp{
+                        ZStack(alignment: .topLeading){
+                            Button(action: {
+                                showInfoPopUp.toggle()
+                            }, label: {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 25))
+                                    .foregroundColor(.black)
+                                
+                            }).offset(x: 8, y:-49)
+                            
+                            VStack{
+                                Text("Drag and the Italian words or phrases in the correct order in the grey boxes to form the sentence listed above in English.")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                            }
+                        }.frame(width: 300, height: 250)
+                            .background(Color("WashedWhite"))
+                            .cornerRadius(20)
+                            .shadow(radius: 20)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.black, lineWidth: 3)
+                            )
+                            .transition(.slide).animation(.easeIn).zIndex(2)
+                            .offset(x: geo.size.width / 10, y: geo.size.height / 3)
+                    }
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("WashedWhite"))
+                        .frame(width: UIScreen.main.bounds.size.width  * 0.9, height: geo.size.height * 0.73)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .zIndex(0)
+                        .offset(x: (geo.size.width / 25), y: (geo.size.height / 4))
                     
                     ScrollViewReader{scroller in
                         
@@ -73,6 +112,27 @@ struct ShortStoryDragDropView: View{
                                     .zIndex(2)
                             }
                             VStack{
+                                HStack{
+                                    Text("Form this sentence")
+                                        .font(.title2.bold())
+                                        .padding(.bottom, 15)
+                                        .padding(.top, 45)
+                                    
+                                    Button(action: {
+                                        withAnimation(.linear){
+                                            showInfoPopUp.toggle()
+                                        }
+                                    }, label: {
+                                        Image(systemName: "info.circle.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .foregroundColor(.white)
+                                            .frame(width: 30, height: 30)
+                                        
+                                    })
+                                    .padding(.leading, 5)
+                                    .padding(.top, 30)
+                                }.offset(y: 20)
                                 
                                 ScrollView(.horizontal){
                                     
@@ -102,19 +162,19 @@ struct ShortStoryDragDropView: View{
                                     }
                                 }
                                 
-                                NavigationLink(destination: ShortStoryPlugInView(shortStoryPlugInVM: shortStoryVM),isActive: $showPlayer,label:{}
+                                NavigationLink(destination: ShortStoryPlugInView(shortStoryPlugInVM: ShortStoryViewModel(currentStoryIn: shortStoryName), shortStoryName: shortStoryName, isPreview: false),isActive: $showPlayer,label:{}
                                 ).isDetailLink(false)
                             }.zIndex(1)
                             
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color("WashedWhite"))
-                                .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.7)
-                                .overlay( /// apply a rounded border
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 4)
-                                )
-                                .zIndex(0)
-                                .offset(y: (geo.size.height / 9))
+//                            RoundedRectangle(cornerRadius: 20)
+//                                .fill(Color("WashedWhite"))
+//                                .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.7)
+//                                .overlay( /// apply a rounded border
+//                                    RoundedRectangle(cornerRadius: 20)
+//                                        .stroke(.black, lineWidth: 4)
+//                                )
+//                                .zIndex(0)
+//                                .offset(y: (geo.size.height / 9))
                             
                             
                             
@@ -123,10 +183,11 @@ struct ShortStoryDragDropView: View{
                         .onAppear{
                             shortStoryDragDropVM.setData()
                             shortStoryDragDropVM.setChoiceArrayDataSet()
+                            
                         }
                     }
                 }else{
-                    ShortStoryDragDropViewIPAD(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false)
+                    ShortStoryDragDropViewIPAD(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false, shortStoryName: shortStoryName)
                 }
             }.navigationBarBackButtonHidden(true)
     }
@@ -158,32 +219,30 @@ struct shortStoryDragDropViewBuilder: View {
     
     var body: some View {
         GeometryReader{geo in
-            VStack {
-                
+            ZStack{
                 VStack {
-                    Text("Form this sentence")
-                        .font(.title2.bold())
-                        .padding(.bottom, 15)
-                        .padding(.top, 45)
                     
-                    Text(englishSentence)
-                        .bold()
-                        .font(Font.custom("Marker Felt", size: geo.size.height * 0.033))
-                        .padding()
-                        .frame(width:geo.size.width * 0.95)
-                        .background(Color.teal)
-                        .cornerRadius(10)
-                        .foregroundColor(Color("WashedWhite"))
-                        .multilineTextAlignment(.center)
-                        .overlay( /// apply a rounded border
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(.black, lineWidth: 4)
-                        )
-                        .padding([.leading, .trailing], geo.size.width * 0.025)
-                }
-                DropArea()
-                    .padding(.vertical, 30)
-                DragArea()
+                    VStack {
+                        Text(englishSentence)
+                            .bold()
+                            .font(Font.custom("Marker Felt", size: geo.size.height * 0.027))
+                            .padding()
+                            .frame(width:geo.size.width * 0.93, height: geo.size.width * 0.35)
+                            .background(Color.teal)
+                            .cornerRadius(10)
+                            .foregroundColor(Color("WashedWhite"))
+                            .multilineTextAlignment(.center)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(.black, lineWidth: 4)
+                            )
+                            .padding([.leading, .trailing], geo.size.width * 0.025)
+                    }
+                    DropArea()
+                        .padding(.vertical, 20)
+                    DragArea()
+                }.zIndex(1)
+                
             }
         }
         .padding()
@@ -265,7 +324,7 @@ struct shortStoryDragDropViewBuilder: View {
                             .padding(.horizontal, item.padding)
                             .background{
                                 RoundedRectangle(cornerRadius: 6, style: .continuous)
-                                    .stroke(.gray)
+                                    .stroke(.black, lineWidth: 3)
                             }
                             .onDrag{
                                 return .init(contentsOf: URL(string: item.id))!
@@ -295,7 +354,7 @@ struct shortStoryDragDropViewBuilder: View {
         
         var currentWidth: CGFloat = 0
         
-        let totalScreenWidth: CGFloat = UIScreen.main.bounds.width - 30
+        let totalScreenWidth: CGFloat = UIScreen.main.bounds.width - 45
         
         for character in characters {
             currentWidth += character.textSize
@@ -410,7 +469,7 @@ struct userCheckNavigationPopUp: View{
 struct ShortStoryDragDropView_Previews: PreviewProvider {
     static var shortStoryDragDropVM: ShortStoryDragDropViewModel = ShortStoryDragDropViewModel(chosenStoryName: "La Mia Introduzione")
     static var previews: some View {
-        ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: true)
+        ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: true, shortStoryName: "La Mia Introduzione")
     }
 }
 

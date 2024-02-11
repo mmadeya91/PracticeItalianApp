@@ -27,17 +27,18 @@ struct listeningActivity: View {
     @State private var progress: CGFloat = 0.0
     @State var showUserCheck: Bool = false
     @State var questionsExpanded: Bool = false
+    @State var isDonePlaying = false
     
     let timer = Timer.publish(every: 0.5, on: .main, in: .common)
         .autoconnect()
     
+ 
     
     
     var body: some View {
         GeometryReader{geo in
             if horizontalSizeClass == .compact {
                 ZStack(alignment: .topLeading){
-                    
                     Image("verticalNature")
                         .resizable()
                         .scaledToFill()
@@ -66,7 +67,7 @@ struct listeningActivity: View {
                             }
                         }.frame(height: 13)
                             .onChange(of: questionNumber){ newValue in
-                                progress = (CGFloat(newValue) / 4)
+                                progress = (CGFloat(newValue) / CGFloat(listeningActivityVM.audioAct.comprehensionQuestions.count + 1))
                             }
                         
                         Image("italyFlag")
@@ -74,113 +75,104 @@ struct listeningActivity: View {
                             .scaledToFit()
                             .frame(width: 40, height: 40)
                         Spacer()
-                    }.padding(.top, 30)
-                        .zIndex(1)
+                    }.zIndex(1)
                     
                     
-                    VStack{
+                    VStack(spacing: 0){
                         
                         
-                        VStack{
+                        
+                        
+                        if !questionsExpanded{
+                            ImageOnCircle(icon: listeningActivityVM.audioAct.image, radius: geo.size.width * 0.15)
+                                .padding(.top, 10)
+                            
+                        }
+                        
+                        Text(listeningActivityVM.audioAct.title)
+                            .font(Font.custom("Futura", size: 18))
+                            .frame(width: 150, height: 80)
+                            .multilineTextAlignment(.center)
+                        
+                        
+                        
+                        
+                        
+                        
+                        if let player = audioManager.player {
                             VStack(spacing: 0){
                                 
-                                if !questionsExpanded{
-                                    Image(listeningActivityVM.audioAct.image)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: geo.size.width * 0.18, height: geo.size.width * 0.17)
-                                        .padding()
-                                        .background(.white)
-                                        .cornerRadius(60)
-                                        .overlay( RoundedRectangle(cornerRadius: 60)
-                                            .stroke(.black, lineWidth: 3))
-                                        .shadow(radius: 10)
-                                }
-                                
-                                Text(listeningActivityVM.audioAct.title)
-                                    .font(Font.custom("Futura", size: 18))
-                                    .frame(width: 150, height: 80)
-                                    .multilineTextAlignment(.center)
-                                
-                            }
-                            
-                            
-                            
-                            
-                            if let player = audioManager.player {
-                                VStack(spacing: 0){
+                                Slider(value: $value, in: 0...player.duration) { editing
+                                    in
                                     
-                                    Slider(value: $value, in: 0...player.duration) { editing
-                                        in
-                                        
-                                        print("editing", editing)
-                                        isEditing = editing
-                                        
-                                        if !editing {
-                                            player.currentTime = value
-                                        }
+                                    print("editing", editing)
+                                    isEditing = editing
+                                    
+                                    if !editing {
+                                        player.currentTime = value
                                     }
-                                    .scaleEffect(1.25)
-                                    .frame(width: 220, height: 20)
-                                    .tint(.orange)
-                                    
-                                    
-                                    HStack{
-                                        Text(DateComponentsFormatter.positional
-                                            .string(from: player.currentTime) ?? "0:00")
-                                        
-                                        Spacer()
-                                        
-                                        Text(DateComponentsFormatter.positional
-                                            .string(from: player.duration - player.currentTime) ?? "0:00")
-                                        
-                                    }.padding(5)
-                                }.padding([.leading, .trailing], 35)
-                                    .offset(y: -15)
+                                }
+                                .scaleEffect(1.25)
+                                .frame(width: 220, height: 20)
+                                .tint(.orange)
+                                
                                 
                                 HStack{
-                                    let color: Color = audioManager.isLooping ? .teal : .black
-                                    let tortoiseColor: Color = audioManager.isSlowPlayback ? .teal : .black
+                                    Text(DateComponentsFormatter.positional
+                                        .string(from: player.currentTime) ?? "0:00")
                                     
-                                    PlaybackControlButton(systemName: "repeat", color: color) {
-                                        audioManager.toggleLoop()
-                                    }.padding(.leading, 20)
-                                    Spacer()
-                                    PlaybackControlButton(systemName: "gobackward.10") {
-                                        player.currentTime -= 10
-                                    }
-                                    Spacer()
-                                    PlaybackControlButton(systemName: audioManager.isPlaying ? "pause.circle.fill" : "play.circle.fill", fontSize: 44) {
-                                        audioManager.playPlause()
-                                    }.padding([.top, .bottom], 3)
-                                    Spacer()
-                                    PlaybackControlButton(systemName: "goforward.10") {
-                                        player.currentTime += 10
-                                    }
                                     Spacer()
                                     
-                                    PlaybackControlButton(systemName: "tortoise.fill", color: tortoiseColor){
-                                        audioManager.slowSpeed()
-                                    }.padding(.trailing, 20)
+                                    Text(DateComponentsFormatter.positional
+                                        .string(from: player.duration - player.currentTime) ?? "0:00")
                                     
-                                    
+                                }.padding(5)
+                            }.padding([.leading, .trailing], 35)
+                                .offset(y: -15)
+                            
+                            HStack{
+                                let color: Color = audioManager.isLooping ? .teal : .black
+                                let tortoiseColor: Color = audioManager.isSlowPlayback ? .teal : .black
+                                
+                                PlaybackControlButton(systemName: "repeat", color: color) {
+                                    audioManager.toggleLoop()
+                                }.padding(.leading, 20)
+                                Spacer()
+                                PlaybackControlButton(systemName: "gobackward.10") {
+                                    player.currentTime -= 10
                                 }
-                                .frame(width: 360).background(Color("WashedWhite"))
-                                .cornerRadius(20)
-                                .overlay( /// apply a rounded border
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 3)
-                                )
-                                .padding([.leading, .trailing], 15)
-                                //.padding(.top, 5)
+                                Spacer()
+                                PlaybackControlButton(systemName: audioManager.isPlaying && player.currentTime != 0 ? "pause.circle.fill" : "play.circle.fill", fontSize: 44) {
+                                    audioManager.playPlause()
+                                    
+                                    
+                                }.padding([.top, .bottom], 3)
+                                Spacer()
+                                PlaybackControlButton(systemName: "goforward.10") {
+                                    player.currentTime += 10
+                                }
+                                Spacer()
+                                
+                                PlaybackControlButton(systemName: "tortoise.fill", color: tortoiseColor){
+                                    audioManager.slowSpeed()
+                                }.padding(.trailing, 20)
                                 
                                 
                             }
-                        }.frame(width: geo.size.width * 0.9)
-                            .padding([.leading, .trailing], geo.size.width * 0.05)
-                            .padding(.top, 120)
-                        // .scaleEffect(questionsExpanded ? 0.9 : 1)
-                        //.offset(y: questionsExpanded ? -40 : 0)
+                            .frame(width: 360).background(Color("WashedWhite"))
+                            .cornerRadius(20)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.black, lineWidth: 3)
+                            )
+                            .padding([.leading, .trailing], 15)
+                            //.padding(.top, 5)
+                            
+                            
+                        }
+                        
+                        
+                        
                         
                         GroupBox{
                             
@@ -193,18 +185,16 @@ struct listeningActivity: View {
                                     
                                     
                                     Text(listeningActivityVM.audioAct.comprehensionQuestions[questionNumber].question)
-                                        .font(Font.custom("Arial Hebrew", size: geo.size.height * 0.023))
+                                        .font(Font.custom("Arial Hebrew", size: 17))
                                         .multilineTextAlignment(.center)
-                                        .bold()
-                                        .padding([.leading, .trailing], 5)
-                                        .frame(width: geo.size.width)
-                                        .padding([.top, .bottom], 12)
-                                        .background(.teal.opacity(0.5))
-                                        .border(width: 2.5, edges: [.bottom], color: .black)
+                                        .padding(15)
+                                        .frame(width: geo.size.width - 37)
+                                        .background(Color("WashedWhite")).cornerRadius(20)
+                                        .border(width: 4, edges: [.bottom], color:Color("DarkNavy"))
                                     
                                     
                                     if questionNumber != 4 {
-                                        radioButtonsLAComprehension(correctAnswer: listeningActivityVM.audioAct.comprehensionQuestions[questionNumber].answer, choicesIn: listeningActivityVM.audioAct.comprehensionQuestions[questionNumber].choices, questionNumber: $questionNumber, wrongChosen: $wrongChosen, correctChosen: $correctChosen, showDialogueQuestions: $showDialogueQuestions)
+                                        radioButtonsLAComprehension(correctAnswer: listeningActivityVM.audioAct.comprehensionQuestions[questionNumber].answer, choicesIn: listeningActivityVM.audioAct.comprehensionQuestionChoices[questionNumber], questionNumber: $questionNumber, wrongChosen: $wrongChosen, correctChosen: $correctChosen, showDialogueQuestions: $showDialogueQuestions)
                                         
                                     }
                                     
@@ -212,8 +202,8 @@ struct listeningActivity: View {
                                     
                                 }
                                 .frame(width: geo.size.width - 60)
-                                .background(Color("WashedWhite")).cornerRadius(2)
-                                .overlay( RoundedRectangle(cornerRadius: 9)
+                                .background(Color("WashedWhite")).cornerRadius(1)
+                                .overlay( RoundedRectangle(cornerRadius: 1)
                                     .stroke(Color("DarkNavy"), lineWidth: 4))
                                 .padding(.top, 10)
                                 
@@ -227,8 +217,11 @@ struct listeningActivity: View {
                             .padding(.top, 10)
                         // .offset(y: questionsExpanded ? -50 : 0)
                         
-                    }.padding(.bottom, 10)
-                        .zIndex(1)
+                    }.frame(width: geo.size.width)
+                        .frame(minHeight: geo.size.height)
+                        .offset(y: -20)
+                        
+                        
                     
                     
                     
@@ -270,7 +263,8 @@ struct listeningActivity: View {
                 listeningActivityIPAD(listeningActivityVM: listeningActivityVM, isPreview: false)
             }
                 
-            }  .ignoresSafeArea()
+            }.navigationBarBackButtonHidden(true)
+            //.ignoresSafeArea()
                 .onAppear{
                     withAnimation(.spring()){
                         animatingBear = true
@@ -278,10 +272,13 @@ struct listeningActivity: View {
                     
                     audioManager.startPlayer(track: listeningActivityVM.audioAct.track, isPreview: isPreview)
                     
+                    
                 }
                 .onReceive(timer) { _ in
                     guard let player = audioManager.player, !isEditing else {return}
                     value = player.currentTime
+                    
+                
                 }
                 .onChange(of: questionNumber){ newValue in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -322,6 +319,8 @@ struct radioButtonsLAComprehension: View {
 struct userCheckNavigationPopUpListeningActivity: View{
     @Binding var showUserCheck: Bool
     
+    @EnvironmentObject var audioManager: AudioManager
+    
     var body: some View{
         
         
@@ -351,6 +350,8 @@ struct userCheckNavigationPopUpListeningActivity: View{
                         Text("Yes")
                             .font(Font.custom("Arial Hebrew", size: 15))
                             .foregroundColor(Color.blue)
+                    }).simultaneousGesture(TapGesture().onEnded{
+                        audioManager.player?.stop()
                     })
                     Spacer()
                     Button(action: {showUserCheck.toggle()}, label: {

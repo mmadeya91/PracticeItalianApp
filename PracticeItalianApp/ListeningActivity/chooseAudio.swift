@@ -63,7 +63,7 @@ struct chooseAudio: View {
                                 Image("coin2")
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 40, height: 40)
+                                    .frame(width: 30, height: 30)
                                 Text(String(globalModel.userCoins))
                                     .font(Font.custom("Arial Hebrew", size: 22))
                             }.padding(.trailing, 50)
@@ -82,18 +82,34 @@ struct chooseAudio: View {
                         
                         
                         shortStoryContainer2(showInfoPopUp: $showInfoPopup, attemptToBuyPupUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName).frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
-                            .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                            .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 20)
                                 .stroke(.black, lineWidth: 5))
                             .padding([.leading, .trailing], geo.size.width * 0.05)
-                            .padding([.top, .bottom], geo.size.height * 0.18)
-                    }
+                            .padding([.top, .bottom], geo.size.height * 0.155)
+                    }.padding(.top, 8)
                     
                     if showInfoPopup{
-                        VStack{
-                            Text("Listen to the following dialogues performed by a native Italian speaker. \n \nDo your best to comprehend the audio and answer the questions to the best of your ability!")
-                                .multilineTextAlignment(.center)
-                                .padding()
-                        }.frame(width: 300, height: 285)
+                        ZStack(alignment: .topLeading){
+                            Button(action: {
+                                showInfoPopup.toggle()
+                            }, label: {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 25))
+                                    .foregroundColor(.black)
+                                
+                            }).padding(.leading, 15)
+                                .zIndex(1)
+                                .offset(y: -15)
+                           
+                         
+             
+                                
+                                Text("Listen to the following dialogues performed by a native Italian speaker. \n \nDo your best to comprehend the audio and answer the questions to the best of your ability!")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                                    .padding(.top, 15)
+                         
+                        }.frame(width: geo.size.width * 0.8, height: geo.size.width * 0.7)
                             .background(Color("WashedWhite"))
                             .cornerRadius(20)
                             .shadow(radius: 20)
@@ -102,15 +118,17 @@ struct chooseAudio: View {
                                     .stroke(.black, lineWidth: 3)
                             )
                             .transition(.slide).animation(.easeIn).zIndex(2)
-                            .offset(y: (geo.size.height / 2) - 100)
-                            .padding(.leading, 38)
+                            .padding([.leading, .trailing], geo.size.width * 0.1)
+                            .padding([.top, .bottom], geo.size.height * 0.3)
+                        
+                        
                     }
                     
                     
                     if attemptToBuyPopUp{
                         VStack{
                             VStack{
-                                Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' flash card set?")
+                                Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' Audio Activity?")
                                     .multilineTextAlignment(.center)
                                     .padding()
                                 
@@ -121,16 +139,25 @@ struct chooseAudio: View {
                                 }
                                 
                                 HStack{
+                                    Spacer()
                                     Button(action: {
                                         checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
-                                    }, label: {Text("Yes")})
+                                        
+                                        attemptToBuyPopUp = false
+                                    }, label: {Text("Yes")
+                                            .font(.system(size: 20))
+                                    })
+                                    Spacer()
                                     Button(action: {
                                         attemptToBuyPopUp = false
-                                    }, label: {Text("No")})
-                                }
+                                    }, label: {Text("No")
+                                            .font(.system(size: 20))
+                                    })
+                                    Spacer()
+                                }.padding(.top, 20)
                                 
                             }
-                        }.frame(width: 300, height: 285)
+                        }.frame(width: geo.size.width * 0.8, height: geo.size.width * 0.7)
                             .background(Color("WashedWhite"))
                             .cornerRadius(20)
                             .shadow(radius: 20)
@@ -139,12 +166,19 @@ struct chooseAudio: View {
                                     .stroke(.black, lineWidth: 3)
                             )
                             .transition(.slide).animation(.easeIn).zIndex(2)
+                            .padding([.leading, .trailing], geo.size.width * 0.1)
+                            .padding([.top, .bottom], geo.size.height * 0.3)
                         
                     }
                     
                 }.onAppear{
-                    withAnimation(.easeIn(duration: 1.5)){
-                        animatingBear = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        withAnimation(.easeIn(duration: 1.5)){
+                            
+                            animatingBear = true
+                            
+                            
+                        }
                     }
                 }.navigationBarBackButtonHidden(true)
             }else{
@@ -204,12 +238,12 @@ struct shortStoryContainer2: View {
     @Binding var attemptToBuyPupUp: Bool
     @Binding var attemptedBuyName: String
     var body: some View{
-        ZStack{
-            VStack{
+     
+        VStack(spacing: 0){
                 
                 HStack{
                     Text("Audio Stories").zIndex(1)
-                        .font(Font.custom("Marker Felt", size: 30))
+                        .font(Font.custom("Marker Felt", size: 33))
                         .foregroundColor(.white)
                         .padding(.leading, 35)
                     
@@ -226,16 +260,17 @@ struct shortStoryContainer2: View {
                         
                     })
                     .padding(.leading, 5)
-                } .frame(width: 450, height: 60)
+                }.frame(width: 450, height: 80)
                     .background(Color("DarkNavy")).opacity(0.75)
                     .border(width: 8, edges: [.bottom], color: .teal)
+                
                 
                 
                 audioHStack(attemptToBuyPopUp: $attemptToBuyPupUp, attemptedBuyName: $attemptedBuyName)
                 
             }
             
-        }
+        
     }
 }
 
@@ -254,10 +289,12 @@ struct audioHStack: View {
                     .padding(.top, 10)
                     .border(width: 3, edges: [.bottom], color: .teal)
                 HStack{
+                    Spacer()
                     audioChoiceButton(shortStoryName: bookTitles[0], audioImage: "pot", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                     Spacer()
                     audioChoiceButton(shortStoryName:bookTitles[1], audioImage: "dinner", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
-                }.padding([.leading, .trailing], 35)
+                    Spacer()
+                }
                     .padding(.top, 30)
                     .padding(.bottom, 20)
                 
@@ -267,10 +304,12 @@ struct audioHStack: View {
                     .border(width: 3, edges: [.bottom], color: .teal)
                 
                 HStack{
+                    Spacer()
                     audioChoiceButton(shortStoryName: bookTitles[2], audioImage: "directions", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                     Spacer()
                     audioChoiceButton(shortStoryName: bookTitles[3], audioImage: "clothesStore", attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
-                }.padding([.leading, .trailing], 28)
+                    Spacer()
+                }
                     .padding(.top, 20)
                 
                 Text("Hard")
@@ -338,12 +377,12 @@ struct audioChoiceButton: View {
                         )
                         
                         Text(shortStoryName)
-                            .font(Font.custom("Marker Felt", size: 20))
-                            .frame(width: 120, height: 85)
+                            .font(Font.custom("Futura", size: 18))
+                            .frame(width: 130, height: 80)
                             .multilineTextAlignment(.center)
                            
                         
-                    }.padding()
+                    }
                     
                 }else{
                     VStack(spacing: 0){
@@ -365,8 +404,8 @@ struct audioChoiceButton: View {
                             })
                         
                         Text(shortStoryName)
-                            .font(Font.custom("Marker Felt", size: 20))
-                            .frame(width: 100, height: 85)
+                            .font(Font.custom("Futura", size: 18))
+                            .frame(width: 130, height: 80)
                             .multilineTextAlignment(.center)
 
                         
@@ -378,7 +417,7 @@ struct audioChoiceButton: View {
                         Image(audioImage)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 75, height: 75)
+                            .frame(width: 65, height: 65)
                         
                             .padding()
                             .background(.white)

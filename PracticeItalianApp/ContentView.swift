@@ -27,13 +27,12 @@ class GlobalModel: ObservableObject {
         //FlashCardSets
          dataSetObject(setName: "Food", isUnlocked: false),
         //ShortStories
-         dataSetObject(setName: "test2", isUnlocked: false),
-         dataSetObject(setName: "test3", isUnlocked: false),
-         dataSetObject(setName: "test4", isUnlocked: false),
-         dataSetObject(setName: "test4", isUnlocked: false),
-         dataSetObject(setName: "test5", isUnlocked: false)
+         dataSetObject(setName: "La Mia Famiglia", isUnlocked: false),
+         dataSetObject(setName: "Le Mie Vacanze in Sicilia", isUnlocked: false),
+         dataSetObject(setName: "La Mia Routine", isUnlocked: false),
+         dataSetObject(setName: "Ragù Di Maiale Brasato", isUnlocked: false),
+         dataSetObject(setName: "Il Mio Fine Settimana", isUnlocked: false)
     ]
-    
     
     
     struct dataSetObject: Identifiable{
@@ -182,18 +181,21 @@ struct ContentView: View {
             userUnlockedData4.isUnlocked = false
             //ShortStories
             let userUnlockedData5 = UserUnlockedDataSets(context: viewContext)
-            userUnlockedData5.dataSetName = "test2"
+            userUnlockedData5.dataSetName = "La Mia Famiglia"
             userUnlockedData5.isUnlocked = false
             let userUnlockedData6 = UserUnlockedDataSets(context: viewContext)
-            userUnlockedData6.dataSetName = "test3"
+            userUnlockedData6.dataSetName = "Le Mie Vacanze in Sicilia"
             userUnlockedData6.isUnlocked = false
             let userUnlockedData7 = UserUnlockedDataSets(context: viewContext)
-            userUnlockedData7.dataSetName = "test4"
+            userUnlockedData7.dataSetName = "La Mia Routine"
             userUnlockedData7.isUnlocked = false
             let userUnlockedData8 = UserUnlockedDataSets(context: viewContext)
-            userUnlockedData8.dataSetName = "test5"
+            userUnlockedData8.dataSetName = "Ragù Di Maiale Brasato"
             userUnlockedData8.isUnlocked = false
-          
+            let userUnlockedData9 = UserUnlockedDataSets(context: viewContext)
+            userUnlockedData8.dataSetName = "Il Mio Fine Settimana"
+            userUnlockedData8.isUnlocked = false
+    
      
             do {
                 try viewContext.save()
@@ -202,7 +204,7 @@ struct ContentView: View {
             }
             
         }else{
-            setGlobalUserUnlockedData()
+           setGlobalUserUnlockedData()
         }
         
         

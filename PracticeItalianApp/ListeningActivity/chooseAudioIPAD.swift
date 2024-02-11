@@ -146,8 +146,13 @@ struct chooseAudioIPAD: View {
                 }
                 
             }.onAppear{
-                withAnimation(.easeIn(duration: 1.5)){
-                    animatingBear = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation(.easeIn(duration: 1.5)){
+                        
+                        animatingBear = true
+                        
+                        
+                    }
                 }
             }.navigationBarBackButtonHidden(true)
         }
@@ -346,7 +351,7 @@ struct audioChoiceButtonIPAD: View {
                             .multilineTextAlignment(.center)
                            
                         
-                    }.padding()
+                    }
                     
                 }else{
                     VStack(spacing: 0){

@@ -110,12 +110,15 @@ enum Gender: String, Codable {
 
 
 struct ListeningActivityElement: Codable {
-    var audioName, audioTranscriptItalian, audioTranscriptEnglish: String
-    let audioCutArrays: [String]
-    var comprehensionQuestions: [ComprehensionQuestion]
-    var fillInDialogueQuestion: [FillInDialogueQuestion]
-    var blankExplanation: [BlankExplanation]
-    var putInOrderDialogueBoxes: [PutInOrderDialogueBox]
+    var audioName: String
+      var isConversation: Bool
+      var numberOfDialogueQuestions: Int
+      var speaker1Image, speaker2Image, audioTranscriptItalian, audioTranscriptEnglish: String
+      var audioCutArrays: [String]
+      var comprehensionQuestions: [ComprehensionQuestion]
+      var fillInDialogueQuestion: [FillInDialogueQuestion]
+      var blankExplanation: [BlankExplanation]
+      var putInOrderDialogueBoxes: [PutInOrderDialogueBox]
     
     static let allListeningActivityElements: [ListeningActivityElement] = Bundle.main.decode(file: "ListeningActivity.json")
     
@@ -140,16 +143,17 @@ struct ComprehensionQuestion: Codable {
 }
 
 // MARK: - FillInDialogueQuestion
-struct FillInDialogueQuestion: Codable, Hashable {
-    var fullSentence, questionPart1, answer, questionPart2: String
+struct FillInDialogueQuestion: Codable {
+    var fullSentence: String
+    var speakerNumber: Int
+    var questionPart1, answer, questionPart2: String
     var answerArray: [AnswerArray]
-    var isQuestion: Bool
-    var correctChosen: Bool
+    var isQuestion, correctChosen: Bool
 }
 
 // MARK: - AnswerArray
-struct AnswerArray: Codable, Hashable {
-    var letter: String?
+struct AnswerArray: Codable {
+    var letter: String
     var showLetter: Bool
     var answer: String?
 }

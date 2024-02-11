@@ -31,6 +31,7 @@ struct ShortStoryDragDropDelegate: DropDelegate {
                     droppedCount += 1
                     
                     if Int(droppedCount) == characters.count {
+                        SoundManager.instance.playSound(sound: .correct)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             questionNumber += 1
                         }
@@ -39,7 +40,6 @@ struct ShortStoryDragDropDelegate: DropDelegate {
                     let progress = (droppedCount / CGFloat(characters.count))
                     withAnimation{
                         currentItem.isShowing = true
-                        SoundManager.instance.playSound(sound: .correct)
                         updateShuffledArray(character: currentItem)
                         self.progress = progress
 

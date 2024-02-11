@@ -2,6 +2,11 @@
 	{
 
 		"audioName": "Pasta Alla Carbonara",
+        
+        "isConversation": false,
+        "speaker1Image": "chef",
+        "speaker2Image": "placeholder",
+        "numberOfDialogueQuestions": 5,
 
 		"audioTranscriptItalian": "Per prima cosa mettete a bollire l'acqua per la pasta mentre si prepara il condimento. Tagliare 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante. Preparare quindi la crema di Pecorino Romano. In una ciotola mettete 4 uova intere e 100 grammi di pecorino romano. Aggiungete del pepe nero fresco e mescolate velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa. Mettete da parte il sugo e buttate la pasta nell'acqua bollente con un po' di sale e cuocetela al dente. Quando la pasta sarà cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto. Infine, togliete la padella dal fuoco e aggiungete a filo la vostra crema di pecorino continuando a mantecare gli spaghetti. Se la salsa è troppo liquida, puoi aggiungere altro formaggio. Se è troppo denso, puoi aggiungere un po' dell'acqua della pasta per ottenere la consistenza desiderata.",
         
@@ -65,6 +70,7 @@
 		"fillInDialogueQuestion": [
 			{
 				"fullSentence": "Per prima cosa mettete a bollire l'acqua per la pasta mentre si prepara il condimento.",
+                "speakerNumber": 1,
 				"questionPart1": "Per prima cosa mettete a ",
 				"answer": "bollire",
 				"questionPart2": " l'acqua per la pasta mentre si prepara il condimento.",
@@ -83,6 +89,7 @@
 			},
 			{
 				"fullSentence": "Tagliate 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.",
+                "speakerNumber": 1,
 				"questionPart1": "",
 				"answer": "Tagliate",
 				"questionPart2": " 200 grammi di guanciale a pezzetti, quindi cuocere in una padella a fuoco medio per 2 o 3 minuti fino a quando diventa marrone e croccante.",
@@ -101,6 +108,7 @@
 			},
 			{
 				"fullSentence": "Preparare quindi la crema di Pecorino Romano. In una ciotola mettete 4 uova intere e 100 grammi di pecorino romano.",
+                "speakerNumber": 1,
 				"questionPart1": "",
 				"answer": "",
 				"questionPart2": "",
@@ -119,6 +127,7 @@
 			},
 			{
 				"fullSentence": "Aggiungete del pepe nero fresco e mescolate velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa.",
+                "speakerNumber": 1,
 				"questionPart1": "Aggiungete del pepe nero fresco e ",
 				"answer": "mescolate",
 				"questionPart2": " velocemente con una forchetta o una frusta fino ad ottenere una salsa cremosa.",
@@ -138,6 +147,7 @@
 			},
             {
 				"fullSentence": "Mettete da parte il sugo e buttate la pasta nell'acqua bollente con un po' di sale e cuocetela al dente.",
+                "speakerNumber": 1,
 				"questionPart1": "",
 				"answer": "",
 				"questionPart2": "",
@@ -156,6 +166,7 @@
 			},
             {
 				"fullSentence": "Quando la pasta sarà cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto.",
+                "speakerNumber": 1,
 				"questionPart1": "Quando la pasta ",
 				"answer": "sarà",
 				"questionPart2": " cotta, scolatela e mettetela in una padella a fuoco vivace. Mescolare la pasta cotta con il guanciale per circa 1 minuto.",
@@ -170,6 +181,7 @@
 			},
 			{
 				"fullSentence": "Infine, togliete la padella dal fuoco e aggiungete a filo la vostra crema di pecorino continuando a mantecare gli spaghetti.",
+                "speakerNumber": 1,
 				"questionPart1": "Infine, togliete la padella dal fuoco e ",
 				"answer": "aggiungete",
 				"questionPart2": " a filo la vostra crema di pecorino continuando a mantecare gli spaghetti.",
@@ -190,6 +202,7 @@
 			},
 			{
 				"fullSentence": "Se la salsa è troppo liquida, puoi aggiungere altro formaggio. Se è troppo denso, puoi aggiungere un po' dell'acqua della pasta per ottenere la consistenza desiderata.",
+                "speakerNumber": 1,
 				"questionPart1": "",
 				"answer": "",
 				"questionPart2": "",
@@ -254,7 +267,12 @@
     {
 
         "audioName": "Cosa Desidera?",
-
+        
+        "isConversation": true,
+        "speaker1Image": "woman1",
+        "speaker2Image": "man1",
+        "numberOfDialogueQuestions": 6,
+        
         "audioTranscriptItalian": "Cameriere: Buonasera! \nCliente: Salve, Ha un tavolo per uno? \nCameriere: Ne abbiamo uno fuori, va bene? \nCliente: Certamente \nCameriere: Mi segua perfavore. \nCameriere: Cosa desidera? \nCliente: Che piatti tipici italiani ha per cena oggi? \nCameriere: Abbiamo melanzane alla parmigiana, gnocchi al pesto, e la specialità di oggi è un buonissimo bucatini alla amatriciana. \nCliente: Hmm, i bucatini all'amatriciana sembrano deliziosi! Ne prendo uno per favore. \nCameriere: Meraviglioso, vuole qualcosa da bere con quello? Un aperitivo magari? \nCliente: Prendo un bicchiere di vino rosso e una bottiglia di acqua naturale per favore. \nCameriere: Meraviglioso, ora prendo il suo vino. \nCliente Grazie \nCameriere: Prego",
         
         "audioTranscriptEnglish": "Waiter: Good evening! \nCustomer: Hello! Do you have a table for one? \nWaiter: We have one outside, is that okay? \nCustomer: Certainly \nWaiter: Follow me please \nWaiter: What do you desire? \nCustomer: What typical Italian dishes do you have for dinner today? \nWaiter: We have eggplant parmesan, gnocchi al pesto, and today’s special is a very good bucatini alla amatriciana. \nCustomer: Hmm, the bucatini alla amatriciana sounds delicious! I will take one please. \nWaiter: Wonderful, do you want anything to drink with that? An aperitif maybe? \nCustomer: I will take a glass of red wine, and a bottle of natural water please. \nWaiter: Wonderful, I will get your wine now. \nCustomer Thank you \nWaiter: Prego",
@@ -286,7 +304,7 @@
 
                        "question": "Quale sono i due piatti tipici che il cliente può ordinare?",
 
-                       "answer": "Parmigiana di melanzane , Gnocchi al Pesto",
+                       "answer": "Parmigiana di melanzane, Gnocchi al Pesto",
 
                        "choices": ["Parmigiana di melanzane, Gnocchi al Pesto","Lasagna, Pasta alla Carbonara", "Gnocchi al Pesto", "Spaghetti alle Bolognese, Ravioli"]
 
@@ -317,6 +335,7 @@
         "fillInDialogueQuestion": [
             {
                 "fullSentence": "Buonasera!",
+                "speakerNumber": 1,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -336,6 +355,7 @@
             },
             {
                 "fullSentence": "Salve, ha un tavolo per uno?",
+                "speakerNumber": 2,
                 "questionPart1": "Salve, ",
                 "answer": "ha",
                 "questionPart2": " un tavolo per uno?",
@@ -349,6 +369,7 @@
             },
             {
                 "fullSentence": "Ne abbiamo uno fuori, va bene?",
+                "speakerNumber": 1,
                 "questionPart1": "Ne abbiamo uno ",
                 "answer": "fuori",
                 "questionPart2": ", va bene?",
@@ -365,6 +386,7 @@
             },
             {
                 "fullSentence": "Certamente.",
+                "speakerNumber": 2,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -384,6 +406,7 @@
             },
             {
                 "fullSentence": "Mi segua perfavore.",
+                "speakerNumber": 1,
                 "questionPart1": "Mi ",
                 "answer": "segua",
                 "questionPart2": "perfavore.",
@@ -400,6 +423,7 @@
             },
             {
                 "fullSentence": "Cosa desidera?",
+                "speakerNumber": 1,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -419,6 +443,7 @@
             },
             {
                 "fullSentence": "Che piatti tipici italiani ha per cena oggi?",
+                "speakerNumber": 2,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -438,6 +463,7 @@
             },
             {
                 "fullSentence": "Abbiamo melanzane alla parmigiana, gnocchi al pesto, e la specialità di oggi è un buonissimo bucatini alla amatriciana.",
+                "speakerNumber": 1,
                 "questionPart1": "Abbiamo ",
                 "answer": "melanzane",
                 "questionPart2": " alla parmigiana, gnocchi al pesto, e la specialità di oggi è un buonissimo bucatini alla amatriciana.",
@@ -459,6 +485,7 @@
             },
             {
                 "fullSentence": "Hmm, i bucatini all'amatriciana sembrano deliziosi! Ne prendo uno per favore.",
+                "speakerNumber": 2,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -478,6 +505,7 @@
             },
             {
                 "fullSentence": "Meraviglioso, vuole qualcosa da bere con quello? Un aperitivo magari?",
+                "speakerNumber": 1,
                 "questionPart1": "Meraviglioso, ",
                 "answer": "vuole",
                 "questionPart2": " qualcosa da bere con quello? Un aperitivo magari?",
@@ -494,6 +522,7 @@
             },
             {
                 "fullSentence": "Prendo un bicchiere di vino rosso e una bottiglia di acqua naturale per favore.",
+                "speakerNumber": 2,
                 "questionPart1": "Prendo un ",
                 "answer": "bicciere",
                 "questionPart2": " di vino rosso e una bottiglia di acqua naturale per favore.",
@@ -513,6 +542,7 @@
             },
             {
                 "fullSentence": "Meraviglioso, ora prendo il suo vino.",
+                "speakerNumber": 1,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -532,6 +562,7 @@
             },
             {
                 "fullSentence": "Grazie",
+                "speakerNumber": 2,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -551,6 +582,7 @@
             },
             {
                 "fullSentence": "Prego",
+                "speakerNumber": 1,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -618,6 +650,11 @@
     {
 
         "audioName": "Indicazioni per gli Uffizi",
+        
+        "isConversation": true,
+        "speaker1Image": "man2",
+        "speaker2Image": "woman2",
+        "numberOfDialogueQuestions": 7,
 
         "audioTranscriptItalian": "Mateo: Mi scusi \nSconosciuto: Sì? Come posso aiutarla? \nMateo: Grazie, sto cercando di arrivare alla Galleria degli Uffizi, ma mi sono perso. Può darmi indicazioni? \nSconosciuto: Certo, ci sei molto vicino. Forse 5 o 10 minuti a piedi da qui. \nSconosciuto: Devi camminare dritto su la via dei Benci fino al primo incrocio. \nSconosciuto: Poi girare a sinistra su Borgo dei Greci e proseguire dritto fino a raggiungere un altro incrocio. \nSconosciuto: Lì, girerai a destra in via del Leoni. \nSconosciuto. Segui quella strada verso sud e passerai davanti al ristorante Braceria Auditore. \nSconosciuto: Il ristorante è vicino alla galleria, se fai ancora qualche metro lungo la strada dovresti vedere le indicazioni per il museo. \nSconosciuto: Capito? \nMatteo: Sì! Grazie mille. \nSconosciuto: Prego, non c’è di che.",
         
@@ -680,6 +717,7 @@
         "fillInDialogueQuestion": [
             {
                 "fullSentence": "Mi scusi",
+                "speakerNumber": 1,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -699,6 +737,7 @@
             },
             {
                 "fullSentence": "Sì? Come posso aiutarla?",
+                "speakerNumber": 2,
                 "questionPart1": "Sì? Come posso ",
                 "answer": "aiutarla",
                 "questionPart2": "?",
@@ -718,6 +757,7 @@
             },
             {
                 "fullSentence": "Grazie, sto cercando di arrivare alla Galleria degli Uffizi, ma mi sono perso. Può darmi indicazioni?",
+                "speakerNumber": 1,
                 "questionPart1": "Grazie, sto cercando di arrivare alla Galleria degli Uffizi, ma mi sono ",
                 "answer": "perso",
                 "questionPart2": ". Può darmi indicazioni?",
@@ -734,6 +774,7 @@
             },
             {
                 "fullSentence": "Certo, ci sei molto vicino. Forse 5 o 10 minuti a piedi da qui.",
+                "speakerNumber": 2,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -753,6 +794,7 @@
             },
             {
                 "fullSentence": "Devi camminare dritto su la via dei Benci fino al primo incrocio.",
+                "speakerNumber": 2,
                 "questionPart1": "Devi camminare ",
                 "answer": "dritto",
                 "questionPart2": " su la via dei Benci fino al primo incrocio.",
@@ -770,6 +812,7 @@
             },
             {
                 "fullSentence": "Poi girare a sinistra su Borgo dei Greci e proseguire dritto fino a raggiungere un altro incrocio.",
+                "speakerNumber": 2,
                 "questionPart1": "Poi girare a ",
                 "answer": "sinistra",
                 "questionPart2": " su Borgo dei Greci e proseguire dritto fino a raggiungere un altro incrocio.",
@@ -789,6 +832,7 @@
             },
             {
                 "fullSentence": "Lì, girerai a destra in via del Leoni.",
+                "speakerNumber": 2,
                 "questionPart1": "Lì, girerai a",
                 "answer": "destra",
                 "questionPart2": " in via del Leoni.",
@@ -806,6 +850,7 @@
             },
             {
                 "fullSentence": "Segui quella strada verso sud e passerai davanti al ristorante Braceria Auditore.",
+                "speakerNumber": 2,
                 "questionPart1": "Segui quella strada verso sud e passerai ",
                 "answer": "davanti",
                 "questionPart2": " al ristorante Braceria Auditore.",
@@ -825,6 +870,7 @@
             },
             {
                 "fullSentence": "Il ristorante è vicino alla galleria, se fai ancora qualche metro lungo la strada dovresti vedere le indicazioni per il museo.",
+                "speakerNumber": 2,
                 "questionPart1": "Il ristorante è",
                 "answer": "vicino",
                 "questionPart2": " alla galleria, se fai ancora qualche metro lungo la strada dovresti vedere le indicazioni per il museo.",
@@ -842,6 +888,7 @@
             },
             {
                 "fullSentence": "Capito?",
+                "speakerNumber": 2,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -861,6 +908,7 @@
             },
             {
                 "fullSentence": "Sì! Grazie mille.",
+                "speakerNumber": 1,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -880,6 +928,7 @@
             },
             {
                 "fullSentence": "Prego, non c’è di che.",
+                "speakerNumber": 2,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -959,6 +1008,11 @@
     {
 
         "audioName": "Stili di Bellagio",
+        
+        "isConversation": false,
+        "speaker1Image": "woman3",
+        "speaker2Image": "placeholder",
+        "numberOfDialogueQuestions": 10,
 
         "audioTranscriptItalian": "Ciao a tutti! Venite a visitare il nostro nuovo negozio “Stili di Bellagio”. Abbiamo molte belle mode per uomini e donne. Maglioni di cotone di tante taglie e colori diversi. Abiti di seta con fiori per l'estate e bei tailleur per uomo. Abbiamo anche scarpe di molti stili e trame diversi. Scarpe da ginnastica per l'allenamento e scarpe in pelle per uscire o per l'ufficio. Abbiamo molti camerini e ti invitiamo a entrare e provare i nostri vestiti. Se qualcosa è troppo stretto o troppo grande, troveremo la taglia giusta per te! Se ti piace guardare le vetrine, abbiamo anche alcuni dei nostri migliori vestiti nelle vetrine dei negozi. Siamo aperti dalle 9:00 alle 17:00 e ci troviamo accanto alla gelateria di via Roma. ti aspettiamo vieni a trovarci!",
         
@@ -1022,6 +1076,7 @@
         "fillInDialogueQuestion": [
             {
                 "fullSentence": "Ciao a tutti! Venite a visitare il nostro nuovo negozio “Stili di Bellagio",
+                "speakerNumber": 1,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -1041,6 +1096,7 @@
             },
             {
                 "fullSentence": "Abbiamo molte belle mode per uomini e donne",
+                "speakerNumber": 1,
                 "questionPart1": "Abbiamo molte belle ",
                 "answer": "mode",
                 "questionPart2": " per uomini e donne",
@@ -1056,6 +1112,7 @@
             },
             {
                 "fullSentence": "Maglioni di cotone di tante taglie e colori diversi.",
+                "speakerNumber": 1,
                 "questionPart1": "",
                 "answer": "Maglione",
                 "questionPart2": " di cotone di tante taglie e colori diversi.",
@@ -1075,6 +1132,7 @@
             },
             {
                 "fullSentence": "Abiti di seta con fiori per l'estate e bei tailleur per uomo.",
+                "speakerNumber": 1,
                 "questionPart1": "Abiti di ",
                 "answer": "seta",
                 "questionPart2": " con fiori per l'estate e bei tailleur per uomo.",
@@ -1090,6 +1148,7 @@
             },
             {
                 "fullSentence": "Abbiamo anche scarpe di molti stili e trame diversi.",
+                "speakerNumber": 1,
                 "questionPart1": "Abbiamo anche ",
                 "answer": "scarpe",
                 "questionPart2": " di molti stili e trame diversi.",
@@ -1107,6 +1166,7 @@
             },
             {
                 "fullSentence": "Scarpe da ginnastica per l'allenamento e scarpe in pelle per uscire o per l'ufficio.",
+                "speakerNumber": 1,
                 "questionPart1": "Scarpe da ginnastica per l'allenamento e scarpe in ",
                 "answer": "pelle",
                 "questionPart2": " per uscire o per l'ufficio.",
@@ -1123,6 +1183,7 @@
             },
             {
                 "fullSentence": "Abbiamo molti camerini e ti invitiamo a entrare e provare i nostri vestiti.",
+                "speakerNumber": 1,
                 "questionPart1": "Abbiamo molti ",
                 "answer": "camerini",
                 "questionPart2": " e ti invitiamo a entrare e provare i nostri vestiti.",
@@ -1142,6 +1203,7 @@
             },
             {
                 "fullSentence": "Se qualcosa è troppo stretto o troppo grande, troveremo la taglia giusta per te!",
+                "speakerNumber": 1,
                 "questionPart1": "Se qualcosa è troppo ",
                 "answer": "stretto",
                 "questionPart2": " o troppo grande, troveremo la taglia giusta per te!",
@@ -1160,6 +1222,7 @@
             },
             {
                 "fullSentence": "Se ti piace guardare le vetrine, abbiamo anche alcuni dei nostri migliori vestiti nelle vetrine dei negozi.",
+                "speakerNumber": 1,
                 "questionPart1": "Se ti piace guardare le ",
                 "answer": "vetrine",
                 "questionPart2": " abbiamo anche alcuni dei nostri migliori vestiti nelle vetrine dei negozi.",
@@ -1180,6 +1243,7 @@
             },
             {
                 "fullSentence": "Siamo aperti dalle 9:00 alle 17:00 e ci troviamo accanto alla gelateria di via Roma.",
+                "speakerNumber": 1,
                 "questionPart1": "Siamo ",
                 "answer": "aperti",
                 "questionPart2": " dalle 9:00 alle 17:00 e ci troviamo accanto alla gelateria di via Roma.",
@@ -1197,6 +1261,7 @@
             },
             {
                 "fullSentence": "ti aspettiamo vieni a trovarci!",
+                "speakerNumber": 1,
                 "questionPart1": "ti",
                 "answer": "aspettiamo",
                 "questionPart2": "vieni a trovarci",
@@ -1294,6 +1359,11 @@
     {
 
         "audioName": "Il Rinascimento",
+        
+        "isConversation": false,
+        "speaker1Image": "teacher",
+        "speaker2Image": "placeholder",
+        "numberOfDialogueQuestions": 8,
 
         "audioTranscriptItalian": "Il Rinascimento italiano è stato un periodo della storia italiana che si è verificato nei secoli XV e XVI. Il rinascimento iniziò in Toscana, ma il cuore del movimento stava avvenendo nella città di Firenze. Il Rinascimento italiano è famoso per le sue conquiste nella pittura, nella musica, nella scultura, nella letteratura e in molte altre forme di arte e scienza. Alcuni degli artisti italiani più famosi di quel tempo includono Leonardo da Vinci, Michelangelo, Donatello e Piero della Francesca. Gran parte del Rinascimento includeva il movimento culturale chiamato 'Umanesimo'. La sua filosofia era di far avvicinare le persone sia alla scienza che alle arti classiche. Uno dei motivi per cui iniziò il rinascimento in Italia fu durante quel periodo, l'Italia era diventata molto ricca e quelle persone benestanti erano disposte a spendere i loro soldi per sostenere artisti e scienziati nella loro ricerca dell'umanesimo. Il Rinascimento si diffuse in tutta Europa ed è responsabile della crescita della conoscenza e dell'arte in tutto il mondo.",
         
@@ -1358,6 +1428,7 @@
         "fillInDialogueQuestion": [
             {
                 "fullSentence": "Il Rinascimento italiano è stato un periodo della storia italiana che si è verificato nei secoli XV e XVI.",
+                "speakerNumber": 1,
                 "questionPart1": "Il Rinascimento italiano è stato un periodo della storia italiana che si è verificato nei ",
                 "answer": "secoli",
                 "questionPart2": " XV e XVI.",
@@ -1375,6 +1446,7 @@
             },
             {
                 "fullSentence": "Il rinascimento iniziò in Toscana, ma il cuore del movimento stava avvenendo nella città di Firenze.",
+                "speakerNumber": 1,
                 "questionPart1": "Il rinascimento iniziò in Toscana, ma il ",
                 "answer": "cuore",
                 "questionPart2": " del movimento stava avvenendo nella città di Firenze.",
@@ -1391,6 +1463,7 @@
             },
             {
                 "fullSentence": "Il Rinascimento italiano è famoso per le sue conquiste nella pittura, nella musica, nella scultura, nella letteratura e in molte altre forme di arte e scienza.",
+                "speakerNumber": 1,
                 "questionPart1": "Il Rinascimento italiano è famoso per le sue ",
                 "answer": "conquiste",
                 "questionPart2": " nella pittura, nella musica, nella scultura, nella letteratura e in molte altre forme di arte e scienza.",
@@ -1411,6 +1484,7 @@
             },
             {
                 "fullSentence": "Alcuni degli artisti italiani più famosi di quel tempo includono Leonardo da Vinci, Michelangelo, Donatello e Piero della Francesca.",
+                "speakerNumber": 1,
                 "questionPart1": "",
                 "answer": "",
                 "questionPart2": "",
@@ -1430,6 +1504,7 @@
             },
             {
                 "fullSentence": "Gran parte del Rinascimento includeva il movimento culturale chiamato 'Umanesimo'.",
+                "speakerNumber": 1,
                 "questionPart1": "Gran parte del Rinascimento includeva il movimento culturale ",
                 "answer": "chiamato",
                 "questionPart2": " 'Umanesimo'.",
@@ -1449,6 +1524,7 @@
             },
             {
                 "fullSentence": "La sua filosofia era di far avvicinare le persone sia alla scienza che alle arti classiche.",
+                "speakerNumber": 1,
                 "questionPart1": "La sua filosofia era di far ",
                 "answer": "pelle",
                 "questionPart2": " le persone sia alla scienza che alle arti classiche.",
@@ -1470,6 +1546,7 @@
             },
             {
                 "fullSentence": "Uno dei motivi per cui iniziò il rinascimento in Italia fu durante quel periodo, l'Italia era diventata molto ricca.",
+                "speakerNumber": 1,
                 "questionPart1": "Uno dei motivi per cui iniziò il rinascimento in Italia fu durante quel periodo, l'Italia era ",
                 "answer": "diventata",
                 "questionPart2": " molto ricca.",
@@ -1490,6 +1567,7 @@
             },
             {
                 "fullSentence": "Quelle persone benestanti erano disposte a spendere i loro soldi per sostenere artisti e scienziati nella loro ricerca dell'umanesimo.",
+                "speakerNumber": 1,
                 "questionPart1": "Quelle persone benestanti erano disposte a spendere i loro soldi per sostenere artisti e scienziati nella loro ",
                 "answer": "ricerca",
                 "questionPart2": " dell'umanesimo.",
@@ -1508,6 +1586,7 @@
             },
             {
                 "fullSentence": "Il Rinascimento si diffuse in tutta Europa ed è responsabile della crescita della conoscenza e dell'arte in tutto il mondo.",
+                "speakerNumber": 1,
                 "questionPart1": "Il Rinascimento si diffuse in tutta Europa ed è responsabile della ",
                 "answer": "crescita",
                 "questionPart2": " della conoscenza e dell'arte in tutto il mondo.",

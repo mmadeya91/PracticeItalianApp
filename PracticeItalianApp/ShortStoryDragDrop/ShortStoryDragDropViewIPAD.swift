@@ -11,33 +11,36 @@ struct ShortStoryDragDropViewIPAD: View{
     @StateObject var shortStoryDragDropVM: ShortStoryDragDropViewModel
     @Environment(\.dismiss) var dismiss
     var isPreview: Bool
+    @State var shortStoryName: String
     @State var questionNumber = 0
     @State var showPlayer = false
     @State var showUserCheck = false
     @State var progress: CGFloat = 0.0
-    
-    let shortStoryVM = ShortStoryViewModel(currentStoryIn: 0)
+    @State var correctChosen = false
+    @State var animateBear = false
     
     var body: some View{
+        
             GeometryReader {geo in
-                Image("verticalNature")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                HStack{
-                    Button(action: {
-                        withAnimation(.linear){
-                            showUserCheck.toggle()
-                        }
-                    }, label: {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 45))
-                            .foregroundColor(.gray)
+                ZStack(alignment: .topLeading){
+                    Image("verticalNature")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    HStack{
+                        Button(action: {
+                            withAnimation(.linear){
+                                showUserCheck.toggle()
+                            }
+                        }, label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 45))
+                                .foregroundColor(.gray)
+                            
+                        })
                         
-                    })
-                    
-                    
+                        
                         GeometryReader{proxy in
                             ZStack(alignment: .leading) {
                                 Capsule()
@@ -47,9 +50,9 @@ struct ShortStoryDragDropViewIPAD: View{
                                     .fill(Color.green)
                                     .frame(width: proxy.size.width * CGFloat(progress))
                             }
-                        }.frame(height: 13)
+                        }.frame(height: 18)
                             .onChange(of: questionNumber){ newValue in
-                                progress = (CGFloat(newValue) / 4)
+                                progress = (CGFloat(newValue) / CGFloat(shortStoryDragDropVM.currentDragDropQuestions.count + 1))
                             }
                         
                         Image("italyFlag")
@@ -57,72 +60,104 @@ struct ShortStoryDragDropViewIPAD: View{
                             .scaledToFit()
                             .frame(width: 55, height: 55)
                         Spacer()
-                }.padding([.leading, .trailing], 15).zIndex(1)
-                
-                ScrollViewReader{scroller in
+                    }.padding([.leading, .trailing], 15).zIndex(1)
                     
-                    ZStack{
-                        if showUserCheck {
-                            userCheckNavigationPopUpIPAD(showUserCheck: $showUserCheck)
-                                .transition(.slide)
-                                .animation(.easeIn)
+                    Image("sittingBear")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width * 0.4, height: geo.size.height * 0.35)
+                        .offset(x: 450, y: animateBear ? geo.size.height * 0.89 : -100)
+                        .zIndex(0)
+                    
+                    if correctChosen{
+                        
+                        let randomInt = Int.random(in: 1..<4)
+                        
+                        Image("bubbleChatRight"+String(randomInt))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 160, height: 40)
+                            .offset(x: 350, y: geo.size.height * 0.92)
+                    }
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("WashedWhite"))
+                        .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.6)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .zIndex(0)
+                        .offset(x: (geo.size.width / 30), y: (geo.size.height / 4))
+                    
+                    ScrollViewReader{scroller in
+                        
+                        ZStack{
+                            if showUserCheck {
+                                userCheckNavigationPopUpIPAD(showUserCheck: $showUserCheck)
+                                    .transition(.slide)
+                                    .animation(.easeIn)
                                 //.padding(.leading, 20)
-                                .padding(.top, 60)
-                                .zIndex(2)
-                        }
-                        VStack{
-                            
-                            ScrollView(.horizontal){
+                                    .padding(.top, 60)
+                                    .zIndex(2)
+                            }
+                            VStack{
                                 
-                                HStack{
-                                    ForEach(0..<shortStoryDragDropVM.currentDragDropQuestions.count, id: \.self) { i in
-                                        VStack{
+                                ScrollView(.horizontal){
+                                    
+                                    HStack{
+                                        ForEach(0..<shortStoryDragDropVM.currentDragDropQuestions.count, id: \.self) { i in
+                                            VStack{
+                                                
+                                                
+                                                
+                                                
+                                                shortStoryDragDropViewBuilderIPAD(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, progress: $progress, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence,questionNumberCount: shortStoryDragDropVM.currentDragDropQuestions.count).frame(width: geo.size.width)
+                                                    .frame(minHeight: geo.size.height)
+                                            }
                                             
-                                            
-                                            
-                                            
-                                            shortStoryDragDropViewBuilderIPAD(charactersSet: shortStoryDragDropVM.currentDragDropChoicesList, questionNumber: $questionNumber, progress: $progress, englishSentence: shortStoryDragDropVM.currentDragDropQuestions[i].fullSentence,questionNumberCount: shortStoryDragDropVM.currentDragDropQuestions.count).frame(width: geo.size.width)
-                                                .frame(minHeight: geo.size.height)
                                         }
-                                        
+                                    }
+                                    
+                                }
+                                .scrollDisabled(true)
+                                .onChange(of: questionNumber) { newIndex in
+                                    correctChosen = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                        correctChosen = false
+                                    }
+                                    withAnimation{
+                                        scroller.scrollTo(newIndex, anchor: .center)
+                                    }
+                                    
+                                    if questionNumber == shortStoryDragDropVM.currentDragDropQuestions.count {
+                                        showPlayer = true
                                     }
                                 }
                                 
-                            }
-                            .scrollDisabled(true)
-                            .onChange(of: questionNumber) { newIndex in
-                                withAnimation{
-                                    scroller.scrollTo(newIndex, anchor: .center)
-                                }
+                                NavigationLink(destination: ShortStoryPlugInViewIPAD(shortStoryPlugInVM: ShortStoryViewModel(currentStoryIn: shortStoryName), shortStoryName: shortStoryName, isPreview: false),isActive: $showPlayer,label:{}
+                                ).isDetailLink(false)
                                 
-                                if questionNumber == shortStoryDragDropVM.currentDragDropQuestions.count {
-                                    showPlayer = true
-                                }
-                            }
+                                
+                            }.zIndex(1)
                             
-                            NavigationLink(destination: ShortStoryPlugInView(shortStoryPlugInVM: shortStoryVM),isActive: $showPlayer,label:{}
-                                                              ).isDetailLink(false)
-                        }.zIndex(1)
-                        
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(Color("WashedWhite"))
-                            .frame(width: geo.size.width * 0.93, height: geo.size.height * 0.5)
-                            .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.black, lineWidth: 4)
-                            )
-                            .zIndex(0)
-                            .offset(y: (geo.size.height / 70))
-                         
-                        
-                        
-                        
+                            
+                            
+                            
+                            
+                            
+                        }
+                        .onAppear{
+                            shortStoryDragDropVM.setData()
+                            shortStoryDragDropVM.setChoiceArrayDataSet()
+                            withAnimation{
+                                animateBear = true
+                            }
+                        }
                     }
-                    .onAppear{
-                        shortStoryDragDropVM.setData()
-                        shortStoryDragDropVM.setChoiceArrayDataSet()
-                    }
+                    
                 }
+                
             }.navigationBarBackButtonHidden(true)
     }
 }
@@ -153,33 +188,36 @@ struct shortStoryDragDropViewBuilderIPAD: View {
     
     var body: some View {
         GeometryReader{geo in
-            VStack {
-                
+            ZStack{
                 VStack {
-                    Text("Form this sentence")
-                        .font(.title2.bold())
-                        .padding(.bottom, 15)
-                        .padding(.top, 125)
                     
-                    Text(englishSentence)
-                        .bold()
-                        .font(Font.custom("Marker Felt", size: geo.size.height * 0.028))
-                        .padding()
-                        .frame(width:geo.size.width * 0.85)
-                        .background(Color.teal)
-                        .cornerRadius(10)
-                        .foregroundColor(Color("WashedWhite"))
-                        .multilineTextAlignment(.center)
-                        .overlay( /// apply a rounded border
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(.black, lineWidth: 4)
-                        )
-                        .padding([.leading, .trailing], geo.size.width * 0.075)
-                        .padding(.top, 20)
-                }
-                DropArea()
-                    .padding(.vertical, 30)
-                DragArea()
+                    VStack {
+                        Text("Form the sentence")
+                            .font(Font.custom("Marker Felt", size: geo.size.height * 0.028))
+                            .padding(.bottom, 15)
+                            .padding(.top, 125)
+                        
+                        Text(englishSentence)
+                            .bold()
+                            .font(Font.custom("Marker Felt", size: geo.size.height * 0.028))
+                            .padding()
+                            .frame(width:geo.size.width * 0.85, height: geo.size.height * 0.175)
+                            .background(Color.teal)
+                            .cornerRadius(10)
+                            .foregroundColor(Color("WashedWhite"))
+                            .multilineTextAlignment(.center)
+                            .overlay( /// apply a rounded border
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(.black, lineWidth: 4)
+                            )
+                            .padding([.leading, .trailing], geo.size.width * 0.075)
+                            .padding(.top, 20)
+                    }
+                    DropArea()
+                        .padding(.vertical, 70)
+                    DragArea()
+                }.zIndex(1)
+            
             }
         }
         .padding()
@@ -229,7 +267,7 @@ struct shortStoryDragDropViewBuilderIPAD: View {
                 HStack(spacing:10){
                     ForEach($row){$item in
                         Text(item.value)
-                            .font(.system(size: item.fontSize))
+                            .font(.system(size: 28))
                             .padding(.vertical, 5)
                             .padding(.horizontal, item.padding)
                             .opacity(item.isShowing ? 1 : 0)
@@ -251,17 +289,17 @@ struct shortStoryDragDropViewBuilderIPAD: View {
     
     @ViewBuilder
     func DragArea()->some View {
-        VStack(spacing: 20){
+        VStack(spacing: 40){
             ForEach(shuffledRows, id: \.self){row in
-                HStack(spacing:25){
+                HStack(spacing:45){
                     ForEach(row){item in
                         Text(item.value)
-                            .font(.system(size: item.fontSize))
+                            .font(.system(size: 28))
                             .padding(.vertical, 7)
                             .padding(.horizontal, item.padding)
                             .background{
                                 RoundedRectangle(cornerRadius: 6, style: .continuous)
-                                    .stroke(.gray)
+                                    .stroke(.black, lineWidth: 3)
                             }
                             .onDrag{
                                 return .init(contentsOf: URL(string: item.id))!
@@ -273,7 +311,7 @@ struct shortStoryDragDropViewBuilderIPAD: View {
                             }
                             
                     }
-                }
+                }//.frame(width: UIScreen.main.bounds.size.width - 200)
                 
             }
         }
@@ -292,7 +330,7 @@ struct shortStoryDragDropViewBuilderIPAD: View {
         
         var currentWidth: CGFloat = 0
         
-        let totalScreenWidth: CGFloat = UIScreen.main.bounds.width - 30
+        let totalScreenWidth: CGFloat = UIScreen.main.bounds.width - 400
         
         for character in characters {
             currentWidth += character.textSize
@@ -315,13 +353,13 @@ struct shortStoryDragDropViewBuilderIPAD: View {
     }
     
     func textSize(character: dragDropShortStoryCharacter)->CGFloat{
-        let font = UIFont.systemFont(ofSize: character.fontSize)
+        let font = UIFont.systemFont(ofSize: character.fontSize )
         
         let attributes = [NSAttributedString.Key.font : font]
         
         let size = (character.value as NSString).size(withAttributes: attributes)
         
-        return size.width + (character.padding * 2) + 15
+        return size.width + (character.padding * 2)
     }
     
     func updateShuffledArray(character: dragDropShortStoryCharacter){
@@ -407,7 +445,7 @@ struct userCheckNavigationPopUpIPAD: View{
 struct ShortStoryDragDropViewIPAD_Previews: PreviewProvider {
     static var shortStoryDragDropVM: ShortStoryDragDropViewModel = ShortStoryDragDropViewModel(chosenStoryName: "La Mia Introduzione")
     static var previews: some View {
-        ShortStoryDragDropViewIPAD(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: true)
+        ShortStoryDragDropViewIPAD(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: true, shortStoryName: "La Mia Introduzione")
     }
 }
 

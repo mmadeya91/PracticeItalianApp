@@ -87,11 +87,13 @@ struct shortStoryViewIPAD: View {
                 }).zIndex(2)
                     .offset(x:650, y: 150)
 
-                if showPopUpScreen{
-                    popUpViewIPAD(storyObj: self.storyObj, linkClickedString: self.$linkClickedString, showPopUpScreen: self.$showPopUpScreen).transition(.slide).animation(.easeIn).zIndex(2)
-                        .offset(x: (geo.size.width / 4), y: (geo.size.height / 2) - 155)
+               //if showPopUpScreen{
+                    popUpViewIPAD(storyObj: self.storyObj, linkClickedString: self.$linkClickedString, showPopUpScreen: self.$showPopUpScreen).zIndex(2)
+                        .offset(x: showPopUpScreen ? (geo.size.width / 4) : -950, y: (geo.size.height / 2) - 155)
+                    
+               
 
-                }
+               // }
                 
                 VStack(spacing: 0){
                         ScrollView(.vertical, showsIndicators: false) {
@@ -204,7 +206,7 @@ struct shortStoryViewIPAD: View {
 
                         }
                     
-                    NavigationLink(destination:  ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false),isActive: $showShortStoryDragDrop,label:{}
+                NavigationLink(destination:  ShortStoryDragDropView(shortStoryDragDropVM: shortStoryDragDropVM, isPreview: false, shortStoryName: chosenStoryNameIn),isActive: $showShortStoryDragDrop,label:{}
                                                       ).isDetailLink(false)
                     
             }
@@ -213,7 +215,9 @@ struct shortStoryViewIPAD: View {
     
     func handleURL(_ url: URL, name: String) -> OpenURLAction.Result {
         linkClickedString = name
-        showPopUpScreen.toggle()
+        withAnimation(.easeIn(duration: 0.75)){
+            showPopUpScreen.toggle()
+        }
         return .handled
     }
     
@@ -235,7 +239,9 @@ struct popUpViewIPAD: View{
         
         ZStack{
             Button(action: {
-                showPopUpScreen.toggle()
+                withAnimation(.easeIn(duration: 0.75)){
+                    showPopUpScreen.toggle()
+                }
             }, label: {
                 Image("popUpX")
                     .resizable()

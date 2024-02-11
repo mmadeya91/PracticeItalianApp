@@ -426,7 +426,7 @@
 
                      "englishLine1": "To hope - Presente (Io)",
 
-                     "question": "Spero di andare a Londra l’anno prossimo per vedere il “Big Ben” il famoso orologio inglese e realizzare così il mio sogno.",
+                     "question": "Spero di andare a Londra l’anno prossimo per vedere il “Big Ben” il famoso orologio inglese.",
 
                      "missingWord": "Spero",
 
@@ -472,25 +472,17 @@
 
             {
 
-            "englishSentence": "My family is big and I also have a very sweet white and black dog named Blacky.",
+            "englishSentence": "I also have a very sweet white and black dog named Blacky.",
 
-            "choices": ["La mia famiglia", "è grande", "e ho anche", "un cane", "bianco e nero", "molto dolce", "che si chiama", "Nerone"]
-
-            },
-            
-            {
-
-            "englishSentence": "In my free time I play sports, watch tv and a lot of movies...",
-
-            "choices": ["Nel", "mio tempo", "libero", "faccio", "sport,", "guardo", "serie tv", "e tantissimi", "film"]
+            "choices": ["Ho anche", "un cane", "bianco e nero", "molto dolce", "che si chiama", "Nerone"]
 
             },
             
             {
 
-            "englishSentence": "I hope to go to London next year to see Big Ben, the famous clock...",
+            "englishSentence": "I hope to go to London next year to see Big Ben.",
 
-            "choices": ["Spero", "di andare", "a", "Londra", "l'anno", "prossimo", "per vedere", "il", "Big Ben", "il famoso", "orologio"]
+            "choices": ["Spero", "di andare", "a", "Londra", "l'anno", "prossimo", "per vedere", "il", "Big Ben."]
 
             }
 
@@ -842,12 +834,11 @@
 
             {
 
-            "englishSentence": "I hope we remain friends for my whole life because I like him a lot.",
+            "englishSentence": "I hope we remain friends for my whole life.",
 
-            "choices": ["Spero", "di rimanere", "amico", "con", "lui", "per tutta", "la vita", "perché", "gli", "voglio", "molto bene"]
+            "choices": ["Spero", "di rimanere", "amico", "con", "lui", "per tutta", "la vita."]
 
             },
-
             {
 
             "englishSentence": "We live in a small town in the province of Naples.",
@@ -866,19 +857,12 @@
             
             {
 
-            "englishSentence": "Luca is intelligent, he is always reading a book, now, he is reading a book about the famous soccer player Diego Maradona.",
+            "englishSentence": "Luca is intelligent and is always reading a book.",
 
-            "choices": ["Luca è", "intelligente,", "lui legge", "sempre", "un", "libro", "adesso", "sta", "leggendo", "un libro", "sul", "famoso", "calciatore", "Diego Maradona"]
-
-            },
-            
-            {
-
-            "englishSentence": "Tomorrow is the 30th of October and it is Luca's birthday.",
-
-            "choices": ["Domani", "è", "il 30", "di", "Ottobre", "ed è", "il", "compleanno", "di", "Luca."]
+            "choices": ["Luca è", "intelligente", "e", "lui legge", "sempre", "un", "libro."]
 
             }
+
 
         ]
 
@@ -1264,13 +1248,6 @@
 
             },
             
-            {
-
-            "englishSentence": "Like I said, this is a family run restaurant.",
-
-            "choices": ["Come", "ho", "detto", "questo", "è", "un", "ristorante", "e", "conduzione", "familiare"]
-
-            },
             
             {
 
@@ -1662,14 +1639,6 @@
             "englishSentence": "This weekend I go to Sicily for vacation.",
 
             "choices": ["Questa", "settimana", "vado", "in", "Sicilia", "in", "vacanza"]
-
-            },
-
-            {
-
-            "englishSentence": "First I must arrive at the airport in Catania.",
-
-            "choices": ["Prima", "devo", "arrivare", "all'aeroporto", "di", "Catania"]
 
             },
 
@@ -2117,14 +2086,6 @@
             
             {
 
-            "englishSentence": "Usually I go to the bar and have a cappuccino with a nutella croissant.",
-
-            "choices": ["Di", "solito", "vado", "al", "bar", "e", "prendo", "un", "cappuccino", "con", "un", "cornetto", "alla", "nutella"]
-
-            },
-            
-            {
-
             "englishSentence": "I fall asleep around 11 listening to classical music.",
 
             "choices": ["Mi", "addormento", "verso", "le", "undici", "ascoltando", "musica", "classica"]
@@ -2537,14 +2498,6 @@
 
             "choices": ["Coprire", "con", "un", "coperchio", "e", "metti", "nel", "forno"]
 
-            },
-            
-            {
-
-            "englishSentence": "Serve with a spoonful of fresh riccota.",
-
-            "choices": ["Servi", "con", "un", "cucchiaio", "di", "ricotta", "fresca"]
-
             }
 
         ]
@@ -2942,14 +2895,6 @@
             "englishSentence": "Before going to bed, I made a midnight snack.",
 
             "choices": ["Prima", "di andare", "a", "dormire,", "ho", "fatto", "uno spuntino", "di", "mezzanotte."]
-
-            },
-            
-            {
-
-            "englishSentence": "I must say that it was a special weekend.",
-
-            "choices": ["Devo", "dire", "che", "è", "stato", "un", "fino", "settimana", "speciale."]
 
             }
 

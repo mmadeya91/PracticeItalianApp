@@ -41,8 +41,10 @@ final class AudioManager: ObservableObject{
             if isPreview {
                 player?.prepareToPlay()
             }else {
+               
                 player?.play()
                 isPlaying = true
+                
             }
         }catch{
             print("Fail to initialize player", error)
@@ -73,7 +75,7 @@ final class AudioManager: ObservableObject{
 
         if !isSlowPlayback {
             player.enableRate = true
-            player.rate = 0.5
+            player.rate = 0.60
             isSlowPlayback = true
         }else {
             player.enableRate = true

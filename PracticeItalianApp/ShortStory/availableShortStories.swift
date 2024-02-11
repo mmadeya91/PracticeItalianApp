@@ -70,7 +70,7 @@ struct availableShortStories: View {
                                 Image("coin2")
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 40, height: 40)
+                                    .frame(width: 30, height: 30)
                                 Text(String(globalModel.userCoins))
                                     .font(Font.custom("Arial Hebrew", size: 22))
                             }.padding(.trailing, 50)
@@ -89,18 +89,29 @@ struct availableShortStories: View {
                         
                         shortStoryContainer(showInfoPopup: $showInfoPopup, attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName: $attemptedBuyName)
                             .frame(width:  geo.size.width * 0.9, height: geo.size.height * 0.75)
-                            .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 16)
+                            .background(Color("WashedWhite")).cornerRadius(20).overlay( RoundedRectangle(cornerRadius: 20)
                                 .stroke(.black, lineWidth: 5))
                             .padding([.leading, .trailing], geo.size.width * 0.05)
-                            .padding([.top, .bottom], geo.size.height * 0.18)
-                    }
+                            .padding([.top, .bottom], geo.size.height * 0.155)
+                    }.padding(.top, 8)
                     
                     if showInfoPopup{
-                        VStack{
-                            Text("Do your best to read and understand the following short stories on various topics. \n \nWhile you read, pay attention to key vocabulary words as you will be quizzed after on your comprehension!")
-                                .multilineTextAlignment(.center)
-                                .padding()
-                        }.frame(width: 300, height: 285)
+                        ZStack(alignment: .topLeading){
+                            Button(action: {
+                                showInfoPopup.toggle()
+                            }, label: {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 25))
+                                    .foregroundColor(.black)
+                                
+                            }).offset(x: 8, y:-19)
+                            
+                            VStack{
+                                Text("Do your best to read and understand the following short stories on various topics. \n \nWhile you read, pay attention to key vocabulary words as you will be quizzed after on your comprehension!")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                            }
+                        }.frame(width: geo.size.width * 0.8, height: geo.size.width * 0.7)
                             .background(Color("WashedWhite"))
                             .cornerRadius(20)
                             .shadow(radius: 20)
@@ -109,13 +120,14 @@ struct availableShortStories: View {
                                     .stroke(.black, lineWidth: 3)
                             )
                             .transition(.slide).animation(.easeIn).zIndex(2)
-                            .offset(x: geo.size.width / 7, y: geo.size.height / 3)
+                            .padding([.leading, .trailing], geo.size.width * 0.1)
+                            .padding([.top, .bottom], geo.size.height * 0.3)
                     }
                     
                     if attemptToBuyPopUp{
                         VStack{
                             VStack{
-                                Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' flash card set?")
+                                Text("Do you want to spend 25 of your coins to unlock the '" + String(attemptedBuyName) + "' short story?")
                                     .multilineTextAlignment(.center)
                                     .padding()
                                 
@@ -126,16 +138,25 @@ struct availableShortStories: View {
                                 }
                                 
                                 HStack{
+                                    Spacer()
                                     Button(action: {
-                                        checkAndUpdateUserCoins(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
-                                    }, label: {Text("Yes")})
+                                        checkAndUpdateUserCoinsSS(userCoins: globalModel.userCoins, chosenDataSet: attemptedBuyName)
+                                        
+                                        attemptToBuyPopUp = false
+                                    }, label: {Text("Yes")
+                                            .font(.system(size: 20))
+                                    })
+                                    Spacer()
                                     Button(action: {
                                         attemptToBuyPopUp = false
-                                    }, label: {Text("No")})
-                                }
+                                    }, label: {Text("No")
+                                            .font(.system(size: 20))
+                                    })
+                                    Spacer()
+                                }.padding(.top, 20)
                                 
                             }
-                        }.frame(width: 300, height: 285)
+                        }.frame(width: geo.size.width * 0.8, height: geo.size.width * 0.7)
                             .background(Color("WashedWhite"))
                             .cornerRadius(20)
                             .shadow(radius: 20)
@@ -144,12 +165,19 @@ struct availableShortStories: View {
                                     .stroke(.black, lineWidth: 3)
                             )
                             .transition(.slide).animation(.easeIn).zIndex(2)
+                            .padding([.leading, .trailing], geo.size.width * 0.1)
+                            .padding([.top, .bottom], geo.size.height * 0.3)
                         
                     }
                     
                 }.onAppear{
-                    withAnimation(.spring()){
-                        animatingBear = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        withAnimation(.easeIn(duration: 1.5)){
+                            
+                            animatingBear = true
+                            
+                            
+                        }
                     }
                 }
             }else{
@@ -159,11 +187,11 @@ struct availableShortStories: View {
         
     }
     
-    func unlockData(chosenDataSet: String){
+    func unlockDataSS(chosenDataSet: String){
         for dataSet in fetchedUserUnlockedData {
             if dataSet.dataSetName == chosenDataSet {
                 dataSet.isUnlocked = true
-                updateGlobalModel(chosenDataSet: chosenDataSet)
+                updateGlobalModelSS(chosenDataSet: chosenDataSet)
                 do {
                     try viewContext.save()
                 } catch {
@@ -174,7 +202,7 @@ struct availableShortStories: View {
         }
     }
     
-    func updateGlobalModel(chosenDataSet: String){
+    func updateGlobalModelSS(chosenDataSet: String){
         for i in 0...globalModel.currentUnlockableDataSets.count-1 {
             if globalModel.currentUnlockableDataSets[i].setName == chosenDataSet {
                 globalModel.currentUnlockableDataSets[i].isUnlocked = true
@@ -182,11 +210,11 @@ struct availableShortStories: View {
         }
     }
     
-    func checkAndUpdateUserCoins(userCoins: Int, chosenDataSet: String)->Bool{
+    func checkAndUpdateUserCoinsSS(userCoins: Int, chosenDataSet: String)->Bool{
         if globalModel.userCoins >= 25 {
             fetchedUserCoins[0].coins = Int32(globalModel.userCoins - 25)
             globalModel.userCoins = globalModel.userCoins - 25
-            unlockData(chosenDataSet: chosenDataSet)
+            unlockDataSS(chosenDataSet: chosenDataSet)
             do {
                 try viewContext.save()
             } catch {
@@ -210,34 +238,36 @@ struct shortStoryContainer: View {
     @Binding var attemptToBuyPopUp: Bool
     @Binding var attemptedBuyName: String
     var body: some View{
-        ZStack{
-            VStack{
-                HStack{
-                    Text("Short Stories").zIndex(1)
-                        .font(Font.custom("Marker Felt", size: 30))
-                        .foregroundColor(.white)
-                        .padding(.leading, 35)
-                    
-                    Button(action: {
-                        withAnimation(.linear){
-                            showInfoPopup.toggle()
-                        }
-                    }, label: {
-                        Image(systemName: "info.circle.fill")
-                            .resizable()
-                            .scaledToFit()
+        //GeometryReader { geo in
+            //ZStack{
+        VStack(spacing: 0){
+                    HStack{
+                        Text("Short Stories")
+                            .font(Font.custom("Marker Felt", size: 33))
                             .foregroundColor(.white)
-                            .frame(width: 30, height: 30)
+                            .padding(.leading, 35)
                         
-                    })
-                    .padding(.leading, 5)
-                } .frame(width: 450, height: 60)
-                    .background(Color("DarkNavy")).opacity(0.75)
-                    .border(width: 8, edges: [.bottom], color: .teal)
-                
-                bookHStack(attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
-                
-            }.zIndex(1)
+                        Button(action: {
+                            withAnimation(.linear){
+                                showInfoPopup.toggle()
+                            }
+                        }, label: {
+                            Image(systemName: "info.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.white)
+                                .frame(width: 30, height: 30)
+                            
+                        })
+                        .padding(.leading, 5)
+                    } .frame(width: 450, height: 80)
+                        .background(Color("DarkNavy")).opacity(0.75)
+                        .border(width: 8, edges: [.bottom], color: .teal)
+                    
+                    bookHStack(attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:$attemptedBuyName)
+                    
+                //}.zIndex(1)
+           // }
             
         }
     }
@@ -297,7 +327,7 @@ struct bookHStack: View {
                     }.padding([.leading, .trailing], 55)
                 }
             }
-        }
+        }.background(Color("WashedWhite"))
         
     }
     
@@ -317,7 +347,7 @@ struct bookButton: View {
     var body: some View{
         ZStack {
             if lockedStories.contains(shortStoryName){
-                if !checkIfUnlockedAudio(dataSetName: shortStoryName){
+                if !checkIfUnlockedStory(dataSetName: shortStoryName){
                     VStack(spacing: 0){
                         
                         Button(action: {
@@ -358,7 +388,7 @@ struct bookButton: View {
                 }else{
                     VStack(spacing: 0){
                         
-                        NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName), label: {
+                        NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName, shortStoryDragDropVM: ShortStoryDragDropViewModel(chosenStoryName: shortStoryName)), label: {
                             Image("book3")
                                 .resizable()
                                 .scaledToFit()
@@ -384,7 +414,7 @@ struct bookButton: View {
                 }
             }else{
                 VStack(spacing: 0){
-                    NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName), label: {
+                    NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName, shortStoryDragDropVM: ShortStoryDragDropViewModel(chosenStoryName: shortStoryName)), label: {
                         Image("book3")
                             .resizable()
                             .scaledToFit()
@@ -414,7 +444,7 @@ struct bookButton: View {
         }
     }
     
-    func checkIfUnlockedAudio(dataSetName: String)->Bool{
+    func checkIfUnlockedStory(dataSetName: String)->Bool{
         var tempBool = false
         for i in 0...globalModel.currentUnlockableDataSets.count - 1 {
             if globalModel.currentUnlockableDataSets[i].setName == dataSetName {
@@ -468,5 +498,6 @@ struct EdgeBorder: Shape {
 struct availableShortStories_Previews: PreviewProvider {
     static var previews: some View {
         availableShortStories().environmentObject(GlobalModel())
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

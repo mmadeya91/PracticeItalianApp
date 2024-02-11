@@ -205,7 +205,7 @@ struct shortStoryContainerIPAD: View {
     @Binding var attemptedBuyName: String
     var body: some View{
         ZStack{
-            VStack{
+            VStack(spacing: 0){
                 HStack{
                     Text("Short Stories").zIndex(1)
                         .font(Font.custom("Marker Felt", size: 50))
@@ -242,7 +242,7 @@ struct bookHStackIPAD: View {
     @Binding var attemptedBuyName: String
     var body: some View{
         
-        let bookTitles: [String] = ["Cristofo Columbo", "test1", "test2", "test3", "test4", "test5"]
+        let bookTitles: [String] = ["La Mia Introduzione", "Il Mio Migliore Amico", "La Mia Famiglia", "Le Mie Vacanze in Sicilia", "La Mia Routine", "Ragù Di Maiale Brasato", "Il Mio Fine Settimana"]
         
         ScrollView{
             VStack{
@@ -263,8 +263,7 @@ struct bookHStackIPAD: View {
                         .padding(.top, 40)
                     HStack{
                         bookButtonIPAD(shortStoryName: bookTitles[2], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
-                        Spacer()
-                        bookButtonIPAD(shortStoryName: bookTitles[3], attemptToBuyPopUp: $attemptToBuyPopUp, attemptedBuyName:     $attemptedBuyName)
+
                     }.padding([.leading, .trailing], 110)
                 }
                 VStack{
@@ -306,7 +305,7 @@ struct bookButtonIPAD: View {
     
     @EnvironmentObject var globalModel: GlobalModel
     
-    let lockedStories: [String] = ["test2", "test3", "test4", "test5"]
+    let lockedStories: [String] = ["La Mia Famiglia", "Le Mie Vacanze in Sicilia", "La Mia Routine", "Ragù Di Maiale Brasato", "Il Mio Fine Settimana"]
     
     var shortStoryName: String
     @Binding var attemptToBuyPopUp: Bool
@@ -357,7 +356,7 @@ struct bookButtonIPAD: View {
                 }else{
                     VStack(spacing: 0){
                         
-                        NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName), label: {
+                        NavigationLink(destination: shortStoryViewIPAD(chosenStoryNameIn: shortStoryName, shortStoryDragDropVM: ShortStoryDragDropViewModel(chosenStoryName: shortStoryName)), label: {
                             Image("book3")
                                 .resizable()
                                 .scaledToFit()
@@ -383,7 +382,7 @@ struct bookButtonIPAD: View {
                 }
             }else{
                 VStack(spacing: 0){
-                    NavigationLink(destination: shortStoryView(chosenStoryNameIn: shortStoryName), label: {
+                    NavigationLink(destination: shortStoryViewIPAD(chosenStoryNameIn: shortStoryName, shortStoryDragDropVM: ShortStoryDragDropViewModel(chosenStoryName: shortStoryName)), label: {
                         Image("book3")
                             .resizable()
                             .scaledToFit()

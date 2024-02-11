@@ -34,12 +34,32 @@ struct LAPutDialogueInOrder: View {
     var body: some View {
         GeometryReader{geo in
             if horizontalSizeClass == .compact {
-                Image("verticalNature")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                ZStack{
+                ZStack(alignment: .topLeading){
+                    Image("verticalNature")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    
+                    
+                    HStack(spacing: 18){
+                        Button(action: {
+                            showUserCheck.toggle()
+                        }, label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 25))
+                                .foregroundColor(.gray)
+                            
+                        })
+                        
+                        Spacer()
+                        
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .shadow(radius: 10)
+                    }.padding([.leading, .trailing], 25)
                     
                     if showUserCheck {
                         userCheckNavigationPopUpListeningActivity(showUserCheck: $showUserCheck)
@@ -50,26 +70,7 @@ struct LAPutDialogueInOrder: View {
                             .zIndex(2)
                     }
                     
-                    
-                    VStack(spacing: 0){
-                        HStack(spacing: 18){
-                            Button(action: {
-                                showUserCheck.toggle()
-                            }, label: {
-                                Image(systemName: "xmark")
-                                    .font(.system(size: 25))
-                                    .foregroundColor(.gray)
-                                
-                            })
-                            
-                            Spacer()
-                            
-                            Image("italyFlag")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
-                                .shadow(radius: 10)
-                        }.padding([.leading, .trailing], 25)
+        
                         
                         
                         
@@ -79,27 +80,30 @@ struct LAPutDialogueInOrder: View {
                                 
                                 LazyVGrid(columns: columns, spacing: 18, content: {
                                     
-                                    Text("Place the Dialogue In the Correct Order")
-                                        .font(Font.custom("", size: 16))
+                                    Text("Rearrange to the Correct Order")
+                                        .font(Font.custom("Chalkboard SE", size: 18))
                                         .foregroundColor(.black)
-                                        .underline()
+                                       
                                     
                                     ForEach(LAPutDialogueInOrderVM.dialogueBoxes){ item in
                                         
                                         Text(item.dialogueText)
-                                            .font(Font.custom("Chalkboard SE", size: geo.size.height * 0.017))
-                                            .padding(5)
+                                            .font(Font.custom("", size: geo.size.height * 0.0178))
+                                            .padding([.leading, .trailing], 5)
+                                            .padding([.top, .bottom], 6)
                                             .multilineTextAlignment(.leading)
                                         //                                    dialogueBoxView(dialogueText: item.dialogueText)
-                                            .frame(width: geo.size.width * 0.8)
-                                            .background(item.positionWrong ? .red.opacity(0.7) : .teal.opacity(0.7))
+                                            .frame(width: geo.size.width * 0.85)
+                                            .padding([.top, .bottom], 2)
+                                            .padding([.leading, .trailing], 5)
+                                            .background(item.positionWrong ? .red.opacity(0.7) : .white.opacity(0.9))
                                             .cornerRadius(10)
                                             .overlay( /// apply a rounded border
                                                 RoundedRectangle(cornerRadius: 10)
                                                     .stroke(.black, lineWidth: 2)
                                             )
                                             .opacity(item.id == draggingItem?.id && isUpdating ? 0.5 : 1) // <- HERE
-                                            .scaleEffect(item.positionWrong ? 1.05 : 1)
+                                            .scaleEffect(item.positionWrong ? 1.02 : 1)
                                             .onDrag {
                                                 draggingItem = item
                                                 return NSItemProvider(contentsOf: URL(string: "\(item.id)"))!
@@ -107,114 +111,113 @@ struct LAPutDialogueInOrder: View {
                                             .onDrop(of: [.item], delegate: DropViewDelegate(currentItem: item, items: $LAPutDialogueInOrderVM.dialogueBoxes, draggingItem: $draggingItem, updating: $isUpdating))
                                     }
                                 }).animation(.easeIn(duration: reveal ? 2.5 : 0.75), value: LAPutDialogueInOrderVM.dialogueBoxes)
+                                    .offset(y: 50)
                                 
                                 
-                            }.scrollDisabled(true).padding(.top, 20)
+                            }.scrollDisabled(true)
                             
-                        }.frame(width: geo.size.width * 0.9, height: geo.size.height * 0.85)
-                            .background(.white)
-                            .cornerRadius(20)
-                            .overlay( /// apply a rounded border
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.black, lineWidth: 4)
-                            )
-                            .padding([.leading, .trailing], geo.size.width * 0.05)
-                            .padding(.top, 20)
-                            .offset(x: animateInvalidEntry ? -30 : 0)
-                    }.zIndex(1)
-                    
-                    HStack{
-                        Spacer()
-                        var tempLoopCounter = 0
-                        
-                        Button(action: {
-                            
-                            var tempCheck = false
-                            
-                            while tempLoopCounter <= LAPutDialogueInOrderVM.dialogueBoxes.count-1 {
+                            HStack{
+                                Spacer()
+                                var tempLoopCounter = 0
                                 
-                                if LAPutDialogueInOrderVM.dialogueBoxes[tempLoopCounter].position != tempLoopCounter+1 {
-                                    withAnimation(.spring()){
-                                        LAPutDialogueInOrderVM.dialogueBoxes[tempLoopCounter].positionWrong = true
+                                Button(action: {
+                                    
+                                    var tempCheck = false
+                                    
+                                    while tempLoopCounter <= LAPutDialogueInOrderVM.dialogueBoxes.count-1 {
                                         
+                                        if LAPutDialogueInOrderVM.dialogueBoxes[tempLoopCounter].position != tempLoopCounter+1 {
+                                            withAnimation(.spring()){
+                                                LAPutDialogueInOrderVM.dialogueBoxes[tempLoopCounter].positionWrong = true
+                                                
+                                                
+                                            }
+                                            tempCheck = true
+                                        }else{
+                                            withAnimation(.spring()){
+                                            LAPutDialogueInOrderVM.dialogueBoxes[tempLoopCounter].positionWrong = false
+                                            }
+                                        }
+                                        
+                                        tempLoopCounter += 1
                                         
                                     }
-                                    tempCheck = true
-                                }
+                                    
+                                    if tempCheck {
+                                        wrongOrder = true
+                                    }
+                                    
+                                    
+                                    if !wrongOrder {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+                                            showFinishedActivityPage = true
+                                        }
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                            correctChosen = false
+                                        }
+                                        correctChosen = true
+                                        
+                                        SoundManager.instance.playSound(sound: .correct)
+                                    }else{
+                                        SoundManager.instance.playSound(sound: .wrong)
+                                        animateView()
+                                    }
+                                    
+                                }, label: {
+                                    Text("Check")
+                                        .font(Font.custom("Chalkboard SE", size: 18)).padding(.bottom, 4)
+                                        .foregroundColor(.white)
+                                        .frame(width: 110, height: 35)
+                                        .background(Color("DarkNavy"))
+                                        .cornerRadius(10)
+                                        .shadow(radius: 10)
+                                        .overlay( /// apply a rounded border
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(.black, lineWidth: 3)
+                                        )
+                                })
                                 
-                                tempLoopCounter += 1
+                                Spacer()
                                 
+                                Button(action: {
+                                    
+                                    for var item in LAPutDialogueInOrderVM.dialogueBoxes {
+                                        item.positionWrong = false
+                                    }
+                                    
+                                    wrongOrder = false
+                                    
+                                    LAPutDialogueInOrderVM.dialogueBoxes = LAPutDialogueInOrderVM.correctOrder
+                                    reveal = true
+                                    
+                                }, label: {
+                                    Text("Reveal")
+                                        .font(Font.custom("Chalkboard SE", size: 18)).padding(.bottom, 4)
+                                        .foregroundColor(.white)
+                                        .frame(width: 110, height: 35)
+                                        .background(Color("DarkNavy"))
+                                        .cornerRadius(10)
+                                        .shadow(radius: 10)
+                                        .overlay( /// apply a rounded border
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(.black, lineWidth: 3)
+                                        )
+                                })
+                                Spacer()
                             }
                             
-                            if tempCheck {
-                                wrongOrder = true
-                            }
-                            
-                            
-                            if !wrongOrder {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                    correctChosen = false
-                                }
-                                correctChosen = true
-                                
-                                SoundManager.instance.playSound(sound: .correct)
-                            }else{
-                                SoundManager.instance.playSound(sound: .wrong)
-                                animateView()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                                    showFinishedActivityPage = true
-                                }
-                            }
-                            
-                        }, label: {
-                            Text("Check")
-                                .font(Font.custom("Chalkboard SE", size: 20)).padding(.bottom, 4)
-                                .frame(width: 120, height: 40)
-                                .background(.white)
-                                .cornerRadius(10)
-                                .shadow(radius: 10)
-                                .overlay( /// apply a rounded border
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.black, lineWidth: 3)
-                                )
-                        })
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            
-                            for var item in LAPutDialogueInOrderVM.dialogueBoxes {
-                                item.positionWrong = false
-                            }
-                            
-                            wrongOrder = false
-                            
-                            LAPutDialogueInOrderVM.dialogueBoxes = LAPutDialogueInOrderVM.correctOrder
-                            reveal = true
-                            
-                        }, label: {
-                            Text("Reveal")
-                                .font(Font.custom("Chalkboard SE", size: 20)).padding(.bottom, 4)
-                                .frame(width: 120, height: 40)
-                                .background(.white)
-                                .cornerRadius(10)
-                                .shadow(radius: 10)
-                                .overlay( /// apply a rounded border
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.black, lineWidth: 3)
-                                )
-                        })
-                        Spacer()
-                    }.offset(y:310)
-                        .zIndex(1)
-                    
+                        }.frame(width: geo.size.width * 0.9, height: geo.size.height * 0.95)
+                            .padding([.leading, .trailing], geo.size.width * 0.05)
+                            .padding(.top, 10)
+                            .offset(x: animateInvalidEntry ? -30 : 0)
+                  
                     
                     
                     
                     NavigationLink(destination: ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
                     ).isDetailLink(false)
                     
-                }
+                }.navigationBarBackButtonHidden(true)
                 .onAppear{
                     withAnimation(.spring()){
                         animatingBear = true
@@ -253,6 +256,7 @@ struct dialogueBoxView: View {
         Text(dialogueText)
             .font(Font.custom("Chalkboard SE", size: 11))
             .padding(5)
+            .padding([.leading, .trailing], 10)
             .multilineTextAlignment(.leading)
     }
 }
