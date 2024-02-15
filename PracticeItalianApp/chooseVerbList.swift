@@ -64,14 +64,31 @@ struct chooseVerbList: View {
                     
                     VStack{
                         
-                        ScrollView{
+                     
                             VStack{
-                                Text("Verb Sets").zIndex(1)
-                                    .font(Font.custom("Marker Felt", size: 30))
-                                    .foregroundColor(.white)
-                                    .frame(width: 450, height: 60)
+                                HStack{
+                                    Text("Verb Sets").zIndex(1)
+                                        .font(Font.custom("Marker Felt", size: 33))
+                                        .foregroundColor(.white)
+                                        .padding(.leading, 35)
+                                    
+                                    Button(action: {
+                                        withAnimation(.linear){
+                                            
+                                        }
+                                    }, label: {
+                                        Image(systemName: "info.circle.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .foregroundColor(.white)
+                                            .frame(width: 30, height: 30)
+                                        
+                                    })
+                                    .padding(.leading, 5)
+                                }.frame(width: 450, height: 80)
                                     .background(Color("DarkNavy")).opacity(0.75)
                                     .border(width: 8, edges: [.bottom], color: .teal)
+                                ScrollView{
                                 HStack{
                                     Spacer()
                                     VStack{
@@ -120,8 +137,11 @@ struct chooseVerbList: View {
                             .padding([.top, .bottom], geo.size.height * 0.18)
                     }
                 }.onAppear{
-                    withAnimation(.spring()){
-                        animatingBear = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        
+                        withAnimation(.spring()){
+                            animatingBear = true
+                        }
                     }
                 }
             }else{

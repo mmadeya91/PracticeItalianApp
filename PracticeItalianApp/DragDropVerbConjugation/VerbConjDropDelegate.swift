@@ -37,13 +37,13 @@ struct VerbConjDropDelegate: DropDelegate{
                             questionNumber += 1
                             correctChosen = false
                         }
+                        SoundManager.instance.playSound(sound: .correct)
                         correctChosen = true
                     }
                     
                     let progress = (droppedCount / 6)
                     withAnimation{
                         currentItem.isShowing = true
-                        SoundManager.instance.playSound(sound: .correct)
                         updateShuffledArray(character: currentItem)
                         self.progress = progress
 

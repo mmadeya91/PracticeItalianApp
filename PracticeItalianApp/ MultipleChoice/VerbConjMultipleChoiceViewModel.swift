@@ -76,7 +76,7 @@ final class VerbConjMultipleChoiceViewModel: ObservableObject {
                 tenseNameIn = ""
             }
             
-            let multipleChoiceObject = multipleChoiceVerbObject(pronoun: pickPronoun, verbNameIt: verbToDisplay.verb.verbName, verbNameEng: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, choiceList: choiceList.shuffled(), tenseName: tenseNameIn, pres: verbArrays[0], pass: verbArrays[1], fut: verbArrays[2], imp: verbArrays[3], impera: verbArrays[4], cond: verbArrays[5])
+            let multipleChoiceObject = multipleChoiceVerbObject(pronoun: pickPronoun, verbNameIt: verbToDisplay.verb.verbName, verbNameEng: "(" +  verbToDisplay.verb.verbEngl + ")", correctAnswer: correctAnswer, choiceList: choiceList.shuffled(), tenseName: tenseNameIn, pres: verbArrays[0], pass: verbArrays[1], fut: verbArrays[2], imp: verbArrays[3], impera: verbArrays[4], cond: verbArrays[5])
             
             tempMCVO.append(multipleChoiceObject)
             
@@ -146,7 +146,7 @@ final class VerbConjMultipleChoiceViewModel: ObservableObject {
                 tenseNameIn = ""
             }
             
-            let multipleChoiceObject = multipleChoiceVerbObject(pronoun: pickPronoun, verbNameIt: verbToDisplay.verb.verbName, verbNameEng: verbToDisplay.verb.verbEngl, correctAnswer: correctAnswer, choiceList: choiceList.shuffled(), tenseName: tenseNameIn, pres: verbArrays[0], pass: verbArrays[1], fut: verbArrays[2], imp: verbArrays[3], impera: verbArrays[4], cond: verbArrays[5])
+            let multipleChoiceObject = multipleChoiceVerbObject(pronoun: pickPronoun, verbNameIt: verbToDisplay.verb.verbName, verbNameEng: "(" + verbToDisplay.verb.verbEngl + ")", correctAnswer: correctAnswer, choiceList: choiceList.shuffled(), tenseName: tenseNameIn, pres: verbArrays[0], pass: verbArrays[1], fut: verbArrays[2], imp: verbArrays[3], impera: verbArrays[4], cond: verbArrays[5])
             
             tempMCVO.append(multipleChoiceObject)
             
@@ -160,7 +160,7 @@ final class VerbConjMultipleChoiceViewModel: ObservableObject {
     func createMultipleChoiceVerbObjects(myListIn: FetchedResults<UserVerbList>){
         var tempVerbObjArray: [verbObject] = [verbObject]()
         for verbObj in myListIn {
-            tempVerbObjArray.append(verbObject(verb: Verb(verbName: verbObj.verbNameItalian!, verbEngl: verbObj.verbNameEnglish!), presenteConjList: verbObj.presente!, passatoProssimoConjList: verbObj.passatoProssimo!, futuroConjList: verbObj.futuro!, imperfettoConjList: verbObj.imperfetto!, presenteCondizionaleConjList: verbObj.condizionale!, imperativoConjList: verbObj.imperativo!))
+            tempVerbObjArray.append(verbObject(verb: Verb(verbName: verbObj.verbNameItalian!, verbEngl: "(" + verbObj.verbNameEnglish! + ")"), presenteConjList: verbObj.presente!, passatoProssimoConjList: verbObj.passatoProssimo!, futuroConjList: verbObj.futuro!, imperfettoConjList: verbObj.imperfetto!, presenteCondizionaleConjList: verbObj.condizionale!, imperativoConjList: verbObj.imperativo!))
         }
        allUserMadeVerbs = tempVerbObjArray  
     }

@@ -41,7 +41,7 @@ struct DragDropVerbConjugationView: View {
                         
                         Spacer()
                         
-                        Text(String(questionNumber) + "/" + String( dragDropVerbConjugationVM.currentTenseDragDropData.count))
+                        Text(String(questionNumber) + "/" + String( dragDropVerbConjugationVM.currentTenseDragDropData.count / 3))
                             .font(.title3)
                             .foregroundColor(.black)
                         
@@ -51,7 +51,7 @@ struct DragDropVerbConjugationView: View {
                             .scaledToFit()
                             .frame(width: 40, height: 40)
                         
-                    }.padding([.leading, .trailing], 25)
+                    }.padding([.leading, .trailing], 25).zIndex(1)
                     //                HStack{
                     //                    Button(action: {
                     //                        withAnimation(.linear){
@@ -96,30 +96,33 @@ struct DragDropVerbConjugationView: View {
                                     .padding(.top, 60)
                                     .zIndex(2)
                             }
-                            VStack{
+                            VStack(spacing: 0){
                                 
                                 Text(getTenseString(tenseIn: dragDropVerbConjugationVM.currentTense))
                                     .font(Font.custom("Chalkboard SE", size: 25))
                                     .underline()
+                                    
                                 
                                 ScrollView(.horizontal){
                                     
                                     HStack{
-                                        ForEach(0..<dragDropVerbConjugationVM.currentTenseDragDropData.count, id: \.self) { i in
+                                        ForEach(0..<dragDropVerbConjugationVM.currentTenseDragDropData.count / 3, id: \.self) { i in
                                             VStack{
                                                 dragDropViewBuilder(tense: dragDropVerbConjugationVM.currentTense, currentVerb: dragDropVerbConjugationVM.currentTenseDragDropData[i].currentVerb, characters: dragDropVerbConjugationVM.currentTenseDragDropData[i].choices , leftDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListLeft, rightDropCharacters: dragDropVerbConjugationVM.currentTenseDragDropData[i].dropVerbListRight, questionNumber: $questionNumber, correctChosen: $correctChosen, wrongChosen: $wrongChosen).frame(width: geo.size.width)
                                                     .frame(minHeight: geo.size.height)
-                                            }
+                                            }.offset(y: -10)
+                                                
                                             //.offset(y:-90)
                                             
                                         }
                                     }
                                     
-                                }
+                                }.frame(width: geo.size.width)
+                                    .frame(minHeight: geo.size.height)
                                 .scrollDisabled(true)
                                 .onChange(of: questionNumber) { newIndex in
                                     
-                                    if newIndex > dragDropVerbConjugationVM.currentTenseDragDropData.count - 1 {
+                                    if newIndex == dragDropVerbConjugationVM.currentTenseDragDropData.count / 3 {
                                         showFinishedActivityPage = true
                                     }else{
                                         
@@ -132,18 +135,18 @@ struct DragDropVerbConjugationView: View {
                                 }
                                 
                                 
-                            }.zIndex(1)
+                            }.zIndex(2)
                             
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(Color("WashedWhite"))
-                                .frame(width: geo.size.width * 0.95, height: geo.size.height * 0.7)
+                                .frame(width: geo.size.width * 0.95, height: geo.size.height * 0.77)
                                 .overlay( /// apply a rounded border
                                     RoundedRectangle(cornerRadius: 20)
                                         .stroke(.black, lineWidth: 4)
                                 )
                         }
                         .offset(y: 50)
-                        .zIndex(0)
+                       
                         
                         //                    Image("sittingBear")
                         //                        .resizable()
@@ -305,13 +308,10 @@ struct dragDropViewBuilder: View{
                 VStack{
                     
                     VStack(spacing: 0){
-                        Text("Complete the Table")
-                            .font(.title2.bold())
-                            .offset(y:-15)
                         
                         Text(currentVerb.verbName + "\n" + currentVerb.verbEngl)
                             .font(.title2.bold()).multilineTextAlignment(.center)
-                            .frame(width: geo.size.width * 0.65)
+                            .frame(width: geo.size.width * 0.65, height: 70)
                             .padding()
                             .background(.teal)
                             .cornerRadius(15)
@@ -324,12 +324,12 @@ struct dragDropViewBuilder: View{
                         VStack{
                             HStack{
                                 //Spacer()
-                                LeftDropArea().padding(.leading, 50)
-                                Spacer()
-                                RightDropArea().padding(.trailing, 70)
+                                LeftDropArea().frame(width: geo.size.width * 0.4)
+                               
+                                RightDropArea().frame(width: geo.size.width * 0.4)
                                 //Spacer()
                                 
-                            }
+                            }.frame(width: geo.size.width * 0.9)
                         }
                         .padding(.top, 10)
                     }.padding(.bottom, 15)
@@ -354,7 +354,7 @@ struct dragDropViewBuilder: View{
     
     @ViewBuilder
     func LeftDropArea()->some View{
-        VStack(spacing:10){
+        VStack(spacing:7){
             ForEach($leftDropCharacters){$item in
                 Text(item.isShowing ? item.value : item.pronoun)
                     .font(.system(size: item.fontSize))
@@ -362,14 +362,14 @@ struct dragDropViewBuilder: View{
                     .background{
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
                             .fill(item.isShowing ? .teal : .gray.opacity(0.25))
-                            .frame(width: 160, height: 40)
+                            .frame(width: 150, height: 35)
                         
                     }
                     .background{
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
                             .stroke(.gray)
                             .opacity(item.isShowing ? 1: 0)
-                            .frame(width: 160, height: 40)
+                            .frame(width: 150, height: 35)
                             
                         
                     }
@@ -413,7 +413,7 @@ struct dragDropViewBuilder: View{
     
     @ViewBuilder
     func RightDropArea()->some View{
-        VStack(spacing:10){
+        VStack(spacing:5){
             ForEach($rightDropCharacters){$item in
                 Text(item.isShowing ? item.value : item.pronoun)
                     .font(.system(size: item.fontSize))
@@ -421,14 +421,14 @@ struct dragDropViewBuilder: View{
                     .background{
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
                             .fill(item.isShowing ? .teal : .gray.opacity(0.25))
-                            .frame(width: 160, height: 40)
+                            .frame(width: 150, height: 35)
                         
                     }
                     .background{
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
                             .stroke(.gray)
                             .opacity(item.isShowing ? 1: 0)
-                            .frame(width: 160, height: 40)
+                            .frame(width: 150, height: 35)
                         
                     }
                     .padding([.top, .bottom], 10)
@@ -452,6 +452,7 @@ struct dragDropViewBuilder: View{
                             .background{
                                 RoundedRectangle(cornerRadius: 15, style: .continuous)
                                     .stroke(.gray)
+                                 
                             }
                             .onDrag{
                                 draggingItem = item
@@ -485,7 +486,7 @@ struct dragDropViewBuilder: View{
         
         var currentWidth: CGFloat = 0
         
-        let totalScreenWidth: CGFloat = UIScreen.main.bounds.width - 30
+        let totalScreenWidth: CGFloat = UIScreen.main.bounds.width - 50
         
         for character in characters {
             currentWidth += character.textSize

@@ -113,10 +113,10 @@ final class FlashCardAccDataManager {
         if accuracy > 80.0 {
             return 3
         }
-        if accuracy < 80.0 && accuracy > 65.0 {
+        if accuracy < 80.0 && accuracy > 60.0 {
             return 2
         }
-        if accuracy < 65.0 && accuracy > 0.0 {
+        if accuracy < 50.0 && accuracy > 0.0 {
             return 1
         }else {
             return 0

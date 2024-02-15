@@ -40,16 +40,31 @@ struct CreateVerbTemplate: View {
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                ZStack{
+                ZStack(alignment: .topLeading){
                     
-                    Button(action: {
-                        dismiss()
-                    }, label: {
-                        Image(systemName: "xmark")
-                            .font(.largeTitle)
-                            .tint(Color.black)
+                    HStack(spacing: 18){
+                    
+                        Button(action: {
+                            dismiss()
+                        }, label: {
+                            Image(systemName: "xmark")
+                                .font(.title)
+                                .foregroundColor(.black)
+                                .padding(.leading, 25)
+                            
+                            
+                            
+                        })
+                        Spacer()
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .shadow(radius: 10)
+                            .padding(.trailing, 30)
+                      
                         
-                    }).padding(.bottom, 700).padding(.trailing, 300)
+                    }
                     
                     VStack{
                         HStack{
@@ -189,7 +204,8 @@ struct CreateVerbTemplate: View {
                             }
                             
                         }.padding([.leading, .trailing], 15)
-                    }
+                      
+                    }.offset(y: geo.size.height / 7)
                     .sheet(isPresented: $showingSheet) {
                         SheetViewVerbTemplate(tense: tenseForSheet, verbNameItalian: $verbNameItalian, verbNameEnglish: $verbNameEnglish, presente: $presente, passatoProssimo: $passatoProssimo, imperfetto: $imperfetto, futuro: $futuro, condizionale: $condizionale, imperativo: $imperativo)
                     }
@@ -279,133 +295,140 @@ struct SheetViewVerbTemplate: View {
     @State var animateInvalidEntry2: Bool = false
     
     var body: some View{
-        ZStack(alignment: .topLeading){
-            
-            Color("DarkNavy").opacity(0.75).ignoresSafeArea()
-            
-            Button(action: {
-                dismiss()
-            }, label: {
-                Image(systemName: "xmark")
-                    .font(.largeTitle)
-                    .tint(Color.white)
+        GeometryReader{ geo in
+            ZStack(alignment: .topLeading){
                 
-            }).padding()
-            
-            VStack{
+                Image("verticalNature")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 
-                Text(getTenseString(tenseInt: tense))
-                    .font(.title)
-                    .frame(width: 400, height: 50)
-                    .foregroundColor(.black)
-                    .background(.white.opacity(0.75))
-                    .padding(.top, 100)
-                
-                
-                
-                Text(verbNameItalian + "\n" + verbNameEnglish)
-                    .font(.title)
-                    .frame(width: 200, height: 70)
-                    .background(.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 10)
-                    .overlay( RoundedRectangle(cornerRadius: 10)
-                    .stroke(.black, lineWidth: 2))
-                    .padding(.top, 40)
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    Image(systemName: "xmark")
+                        .font(.largeTitle)
+                        .tint(Color.white)
+                    
+                }).padding()
                 
                 VStack{
-                    VStack{
-                        HStack{
-                            VStack{
-                                HStack{
-                                    TextField(checkIfConjBoxEmpty(indexIn: 0) ? "Io" : "", text: $io)
-                                        .font(.title)
-                                        .padding(.leading, 10)
-                                        .frame(width: 170)
-                                        .background(.white)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 10)
-                                        .overlay( RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.black, lineWidth: 2))
-                                }.padding(.leading,15)
-                                
-                                HStack{
-                                    TextField(checkIfConjBoxEmpty(indexIn: 1) ? "Tu" : "", text: $tu)
-                                        .font(.title)
-                                        .padding(.leading, 10)
-                                        .frame(width: 170)
-                                        .background(.white)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 10)
-                                        .overlay( RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.black, lineWidth: 2))
-                                }.padding(.leading,15)
-                                
-                                HStack{
-                                    TextField(checkIfConjBoxEmpty(indexIn: 2) ? "Lui/Lei/Lei" : "", text: $lui)
-                                        .font(.title)
-                                        .padding(.leading, 10)
-                                        .frame(width: 170)
-                                        .background(.white)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 10)
-                                        .overlay( RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.black, lineWidth: 2))
-                                }.padding(.leading,15)
-                                
-                            }
-                            Spacer()
-                            VStack{
-                                HStack{
-                                    TextField(checkIfConjBoxEmpty(indexIn: 3) ? "Loro" : "", text: $loro)
-                                        .font(.title)
-                                        .padding(.leading, 10)
-                                        .frame(width: 170)
-                                        .background(.white)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 10)
-                                        .overlay( RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.black, lineWidth: 2))
-                                }.padding(.trailing, 15)
-                                
-                                HStack{
-                                    TextField(checkIfConjBoxEmpty(indexIn: 4) ? "Noi" : "", text: $noi)
-                                        .font(.title)
-                                        .padding(.leading, 10)
-                                        .frame(width: 170)
-                                        .background(.white)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 10)
-                                        .overlay( RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.black, lineWidth: 2))
-                                }.padding(.trailing, 15)
-                                
-                                HStack{
-                                    TextField(checkIfConjBoxEmpty(indexIn: 5) ? "Voi" : "", text: $voi)
-                                        .font(.title)
-                                        .padding(.leading, 10)
-                                        .frame(width: 170)
-                                        .background(.white)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 10)
-                                        .overlay( RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.black, lineWidth: 2))
-                                }.padding(.trailing, 15)
-                                
-                            }
-                        }
-                    }.padding(.top, 40).padding([.leading, .trailing], 5)
                     
+                    Text(getTenseString(tenseInt: tense))
+                        .font(.title)
+                        .frame(width: 400, height: 50)
+                        .foregroundColor(.black)
+                        .background(.white.opacity(0.75))
+                        .padding(.top, 100)
+                    
+                    
+                    
+                    Text(verbNameItalian + "\n" + verbNameEnglish)
+                        .font(.title)
+                        .frame(width: geo.size.width * 0.6)
+                        .background(.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                        .overlay( RoundedRectangle(cornerRadius: 10)
+                            .stroke(.black, lineWidth: 2))
+                        .padding(.top, 40)
+                        .padding([.leading, .trailing], 0.2)
+                    
+                    VStack{
+                        VStack{
+                            HStack{
+                                VStack{
+                                    HStack{
+                                        TextField(checkIfConjBoxEmpty(indexIn: 0) ? "Io" : "", text: $io)
+                                            .font(.title)
+                                            .padding(.leading, 10)
+                                            .frame(width: 170)
+                                            .background(.white)
+                                            .cornerRadius(10)
+                                            .shadow(radius: 10)
+                                            .overlay( RoundedRectangle(cornerRadius: 10)
+                                                .stroke(.black, lineWidth: 2))
+                                    }.padding(.leading,15)
+                                    
+                                    HStack{
+                                        TextField(checkIfConjBoxEmpty(indexIn: 1) ? "Tu" : "", text: $tu)
+                                            .font(.title)
+                                            .padding(.leading, 10)
+                                            .frame(width: 170)
+                                            .background(.white)
+                                            .cornerRadius(10)
+                                            .shadow(radius: 10)
+                                            .overlay( RoundedRectangle(cornerRadius: 10)
+                                                .stroke(.black, lineWidth: 2))
+                                    }.padding(.leading,15)
+                                    
+                                    HStack{
+                                        TextField(checkIfConjBoxEmpty(indexIn: 2) ? "Lui/Lei/Lei" : "", text: $lui)
+                                            .font(.title)
+                                            .padding(.leading, 10)
+                                            .frame(width: 170)
+                                            .background(.white)
+                                            .cornerRadius(10)
+                                            .shadow(radius: 10)
+                                            .overlay( RoundedRectangle(cornerRadius: 10)
+                                                .stroke(.black, lineWidth: 2))
+                                    }.padding(.leading,15)
+                                    
+                                }
+                                Spacer()
+                                VStack{
+                                    HStack{
+                                        TextField(checkIfConjBoxEmpty(indexIn: 3) ? "Loro" : "", text: $loro)
+                                            .font(.title)
+                                            .padding(.leading, 10)
+                                            .frame(width: 170)
+                                            .background(.white)
+                                            .cornerRadius(10)
+                                            .shadow(radius: 10)
+                                            .overlay( RoundedRectangle(cornerRadius: 10)
+                                                .stroke(.black, lineWidth: 2))
+                                    }.padding(.trailing, 15)
+                                    
+                                    HStack{
+                                        TextField(checkIfConjBoxEmpty(indexIn: 4) ? "Noi" : "", text: $noi)
+                                            .font(.title)
+                                            .padding(.leading, 10)
+                                            .frame(width: 170)
+                                            .background(.white)
+                                            .cornerRadius(10)
+                                            .shadow(radius: 10)
+                                            .overlay( RoundedRectangle(cornerRadius: 10)
+                                                .stroke(.black, lineWidth: 2))
+                                    }.padding(.trailing, 15)
+                                    
+                                    HStack{
+                                        TextField(checkIfConjBoxEmpty(indexIn: 5) ? "Voi" : "", text: $voi)
+                                            .font(.title)
+                                            .padding(.leading, 10)
+                                            .frame(width: 170)
+                                            .background(.white)
+                                            .cornerRadius(10)
+                                            .shadow(radius: 10)
+                                            .overlay( RoundedRectangle(cornerRadius: 10)
+                                                .stroke(.black, lineWidth: 2))
+                                    }.padding(.trailing, 15)
+                                    
+                                }
+                            }
+                        }.padding(.top, 40).padding([.leading, .trailing], 5)
+                        
+                    }
                 }
+                
             }
-            
-        }
-        .offset(x: animateInvalidEntry2 ? -30 : 0)
-        .onAppear{
-            setShowingTenseArray(tenseIn: tense)
-        }
-        .onDisappear{
-            setArray(tenseIn: tense)
+            .offset(x: animateInvalidEntry2 ? -30 : 0)
+            .onAppear{
+                setShowingTenseArray(tenseIn: tense)
+            }
+            .onDisappear{
+                setArray(tenseIn: tense)
+            }
         }
         
     }

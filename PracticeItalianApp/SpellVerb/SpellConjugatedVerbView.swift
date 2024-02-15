@@ -37,14 +37,57 @@ struct SpellConjugatedVerbView: View {
      
         GeometryReader{ geo in
             if horizontalSizeClass == .compact {
-                Image("verticalNature")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                ZStack{
+                ZStack(alignment: .topLeading){
+                    Image("verticalNature")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                    
+                    HStack(spacing: 18){
+                        Spacer()
+                        NavigationLink(destination: chooseFlashCardSet(), label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 25))
+                                .foregroundColor(.gray)
+                            
+                            
+                        })
+                        
+                        GeometryReader{proxy in
+                            ZStack(alignment: .leading) {
+                                Capsule()
+                                    .fill(.gray.opacity(0.25))
+                                
+                                Capsule()
+                                    .fill(Color.green)
+                                    .frame(width: proxy.size.width * CGFloat(progress))
+                            }
+                        }.frame(height: 13)
+                            .onChange(of: currentQuestionNumber){ newValue in
+                                progress = (CGFloat(newValue) / CGFloat(spellConjVerbVM.currentTenseSpellConjVerbData.count + 1))
+                            }
+                        
+                        Image("italyFlag")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                        Spacer()
+                    }.zIndex(2)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("WashedWhite"))
+                        .frame(width: geo.size.width * 0.9, height: 160)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .offset(y: geo.size.height / 4)
+                        .padding([.leading, .trailing], geo.size.width * 0.05)
+                        .zIndex(0)
+
+                    
                     VStack{
-                        NavBar().padding([.leading, .trailing], 20).zIndex(2)
                         
                         Text(getTenseString(tenseIn: spellConjVerbVM.currentTense))
                             .font(Font.custom("Chalkboard SE", size: 25))
@@ -56,23 +99,26 @@ struct SpellConjugatedVerbView: View {
                                     ForEach(0..<spellConjVerbVM.currentTenseSpellConjVerbData.count, id: \.self) {i in
                                         
                                         VStack(spacing: 0){
-                                            questionView(vbItalian: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameItalian, vbEnglish: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameEnglish, pronoun: spellConjVerbVM.currentTenseSpellConjVerbData[i].pronoun).padding(.bottom, 25)
-                                                .padding(.top, 40)
+                                            questionView(vbItalian: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameItalian, vbEnglish: spellConjVerbVM.currentTenseSpellConjVerbData[i].verbNameEnglish, pronoun: spellConjVerbVM.currentTenseSpellConjVerbData[i].pronoun)
+                                                .offset(y: -20)
                                             
                                             HStack{
                                                 
                                                 ForEach($spellConjVerbVM.currentHintLetterArray, id: \.self) { $answerArray in
                                                     Text(answerArray.letter)
-                                                        .font(Font.custom("Chalkboard SE", size: 25))
+                                                        .font(Font.custom("Chalkboard SE", size: 20))
                                                         .foregroundColor(.black.opacity(answerArray.showLetter ? 1.0 : 0.0))
                                                         .underline(color: .black)
+                                                        .offset(y: 10)
+                                                        .zIndex(2)
                                                     
-                                                }.padding(.bottom, 90)
+                                                }
                                                 
                                             }
                                             
-                                        }.frame(width: geo.size.width)
-                                            .frame(minHeight: geo.size.height)
+                                        }.frame(width: geo.size.width, height : 200)
+                                            
+                                           
                                     }
                                     
                                 }
@@ -80,7 +126,6 @@ struct SpellConjugatedVerbView: View {
                                 NavigationLink(destination:  ActivityCompletePage(),isActive: $showFinishedActivityPage,label:{}
                                 ).isDetailLink(false)
                             }
-                            .offset(y: -200)
                             .scrollDisabled(true)
                             .onChange(of: currentQuestionNumber) { newIndex in
                                 
@@ -95,29 +140,13 @@ struct SpellConjugatedVerbView: View {
                             }
                         }
                         
-                    }.zIndex(1)
-                    
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color("WashedWhite"))
-                        .frame(width: 340, height: 130)
-                        .overlay( /// apply a rounded border
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(.black, lineWidth: 4)
-                        )
-                        .offset(y: -135)
-                        .zIndex(0)
-                    
-                    TextField("", text: $userAnswer)
-                        .background(Color.white.cornerRadius(10))
-                        .font(Font.custom("Marker Felt", size: 50))
-                        .shadow(color: Color.black, radius: 12, x: 0, y:10)
-                        .frame(width: 350)
-                        .padding(.bottom, 45)
-                        .zIndex(1)
-                    
-                    VStack{
-                        HStack{
-                            Button(action: {
+                        TextField("", text: $userAnswer)
+                            .background(Color.white.cornerRadius(10))
+                            .font(Font.custom("Marker Felt", size: 50))
+                            .shadow(color: Color.black, radius: 12, x: 0, y:10)
+                            .frame(width: 350)
+                            .padding(.top, 50)
+                            .onSubmit{
                                 if userAnswer != "" {
                                     
                                     if correctChosen || wrongChosen {
@@ -152,23 +181,9 @@ struct SpellConjugatedVerbView: View {
                                         wrongChosen = true
                                     }
                                 }
-                            }, label: {
-                                Text("Check")
-                                
-                            }).font(Font.custom("Marker Felt", size:  18))
-                                .frame(width:160, height: 40)
-                                .background(Color.teal)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(20)
-                                .overlay( /// apply a rounded border
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 4)
-                                )
-                                .shadow(radius: 10)
-                                .padding(.trailing, 5)
-                                .padding(.top, 15)
-                            
-                            
+                            }
+                        
+                        HStack{
                             Button(action: {
                                 
                                 let currentHLACount = spellConjVerbVM.currentHintLetterArray.count
@@ -213,8 +228,32 @@ struct SpellConjugatedVerbView: View {
                                 
                                 
                             })
-                        }.offset(y: 90).zIndex(1)
                         
+                        }
+                        
+                        Text(currentVerbIta + " is already in MyList!")
+                            .font(Font.custom("Arial Hebrew", size: 16))
+                            .padding(.top, 3)
+                            .padding([.top, .bottom], 5)
+                            .padding([.leading, .trailing], 15)
+                            .background(Color("WashedWhite"))
+                            .foregroundColor(.black)
+                            .opacity(showAlreadyExists ? 1 : 0)
+                            .padding(.top, 7)
+                            
+                        
+                    }.zIndex(1)
+                        .padding(.top, 65)
+                    
+                 
+                    
+                    Image("sittingBear")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width * 0.6, height: geo.size.height * 0.2)
+                        .offset(x: 190, y: animatingBear ? geo.size.height / 1.07 : 750)
+                    
+                    HStack{
                         Button(action: {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                                 showAlreadyExists = false
@@ -227,43 +266,11 @@ struct SpellConjugatedVerbView: View {
                                 }
                                 saved = true
                             }
-                            
-                        }, label: {
-                            Text("Add " + currentVerbIta + " to MyList")
-                                .font(Font.custom("Marker Felt", size:  18))
-                                .padding(.top, 3)
-                                .padding([.leading, .trailing], 20)
-                                .frame(height: 45)
-                                .background(Color.teal)
-                                .foregroundColor(Color.white)
-                                .overlay( /// apply a rounded border
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 4)
-                                )
-                                .cornerRadius(20)
-                                .shadow(radius: 10)
-                                .padding(.trailing, 5)
-                            
-                            
-                        }).offset(y:100)
-                        
-                        Text(currentVerbIta + " is already in MyList!")
-                            .font(Font.custom("Arial Hebrew", size: 20))
-                            .padding(.top, 3)
-                            .padding([.top, .bottom], 5)
-                            .padding([.leading, .trailing], 15)
-                            .background(Color("WashedWhite"))
-                            .foregroundColor(.black)
-                            .cornerRadius(15)
-                            .opacity(showAlreadyExists ? 1 : 0)
-                            .offset(y:140)
-                    }.zIndex(1)
-                    
-                    Image("sittingBear")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geo.size.width * 0.6, height: geo.size.height * 0.2)
-                        .offset(x: 110, y: animatingBear ? 300 : 750)
+                        }, label: {   Image("save")
+                                .resizable()
+                                .scaledToFit()
+                            .frame(width: 65, height: 65)})
+                    }.frame(maxHeight: .infinity, alignment: .bottomLeading).padding(15)
                     
                     if saved {
                         
@@ -271,7 +278,19 @@ struct SpellConjugatedVerbView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 245)
+                            .offset(x: 150, y: (geo.size.height / 1.14))
+                        
+                    }
+                     
+                    
+                    
+                    if saved {
+                        
+                        Image("bubbleChatSaved")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 40)
+                            .offset(x: 150, y: (geo.size.height / 1.14))
                         
                     }
                     
@@ -283,7 +302,7 @@ struct SpellConjugatedVerbView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 200)
+                            .offset(x: 150, y: (geo.size.height / 1.14))
                     }
                     
                     if wrongChosen{
@@ -294,11 +313,13 @@ struct SpellConjugatedVerbView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 200)
+                            .offset(x: 150, y: (geo.size.height / 1.14))
                     }
                     
                     
-                }.onAppear{
+                    
+                }.navigationBarBackButtonHidden(true)
+                .onAppear{
                     withAnimation(.spring()){
                         animatingBear = true
                     }
@@ -314,7 +335,7 @@ struct SpellConjugatedVerbView: View {
             }else{
                 SpellConjugatedVerbViewIPAD(spellConjVerbVM: spellConjVerbVM, isPreview: false)
             }
-        }.navigationBarBackButtonHidden(true)
+        }
         
         
         
@@ -354,34 +375,6 @@ struct SpellConjugatedVerbView: View {
       }
     
     
-    
-    @ViewBuilder
-    func NavBar() -> some View{
-        HStack(spacing: 18){
-            NavigationLink(destination: chooseVerbList(), label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 25))
-                    .foregroundColor(.gray)
-            })
-            
-            GeometryReader{proxy in
-                      ZStack(alignment: .leading) {
-                         Capsule()
-                             .fill(.gray.opacity(0.25))
-                          
-                          Capsule()
-                              .fill(Color.green)
-                              .frame(width: proxy.size.width * progress)
-                      }
-                  }.frame(height: 20)
-            
-            Image("italyFlag")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-                .shadow(radius: 10)
-        }
-    }
     
     func getTenseString(tenseIn: Int)->String{
         switch tenseIn {

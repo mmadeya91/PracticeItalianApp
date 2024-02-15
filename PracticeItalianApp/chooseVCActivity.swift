@@ -17,6 +17,7 @@ struct chooseVCActivity: View {
     @State private var showActivity: Bool = false
     @State private var myListIsEmpty: Bool = false
     @State private var animatingBear = false
+    @State private var showInfoPopUp = false
     
     var fetchedResults: [verbObject] = [verbObject]()
     
@@ -62,11 +63,63 @@ struct chooseVCActivity: View {
                         }
                         
                         
+                        if showInfoPopUp{
+                            ZStack(alignment: .topLeading){
+                                Button(action: {
+                                    showInfoPopUp.toggle()
+                                }, label: {
+                                    Image(systemName: "xmark")
+                                        .font(.system(size: 25))
+                                        .foregroundColor(.black)
+                                    
+                                }).padding(.leading, 15)
+                                    .zIndex(1)
+                                    .offset(y: -15)
+                               
+                             
+                 
+                                    
+                                    Text("Choose from the following activities to practice conjugating Italian verbs in different tenses. \n\n Choose one of the available tenses from the picker wheel before picking your activity.")
+                                        .multilineTextAlignment(.center)
+                                        .padding()
+                                        .padding(.top, 15)
+                             
+                            }.frame(width: geo.size.width * 0.8, height: geo.size.width * 0.7)
+                                .background(Color("WashedWhite"))
+                                .cornerRadius(20)
+                                .shadow(radius: 20)
+                                .overlay( /// apply a rounded border
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(.black, lineWidth: 3)
+                                )
+                                .transition(.slide).animation(.easeIn).zIndex(2)
+                                .padding([.leading, .trailing], geo.size.width * 0.1)
+                                .padding([.top, .bottom], geo.size.height * 0.3)
+                            
+                            
+                        }
+                        
                         VStack{
-                            Text("Verb Conjugation").zIndex(1)
-                                .font(Font.custom("Marker Felt", size: 30))
-                                .foregroundColor(.white)
-                                .frame(width: 450, height: 60)
+                            HStack{
+                                Text("Verb Conjugation").zIndex(1)
+                                    .font(Font.custom("Marker Felt", size: 33))
+                                    .foregroundColor(.white)
+                                    .padding(.leading, 35)
+                                
+                                Button(action: {
+                                    withAnimation(.linear){
+                                        showInfoPopUp.toggle()
+                                    }
+                                }, label: {
+                                    Image(systemName: "info.circle.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundColor(.white)
+                                        .frame(width: 30, height: 30)
+                                    
+                                })
+                                .padding(.leading, 5)
+                            }.frame(width: 450, height: 80)
                                 .background(Color("DarkNavy")).opacity(0.75)
                                 .border(width: 8, edges: [.bottom], color: .teal)
                             Spacer()
@@ -168,8 +221,12 @@ struct chooseVCActivity: View {
                             .padding([.leading, .trailing], geo.size.width * 0.05)
                             .padding([.top, .bottom], geo.size.height * 0.12)
                     }.onAppear{
-                        withAnimation(.spring()){
-                            animatingBear = true
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            
+                            withAnimation(.spring()){
+                                animatingBear = true
+                            }
                         }
                     }
                     

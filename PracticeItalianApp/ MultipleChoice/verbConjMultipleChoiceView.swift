@@ -61,7 +61,7 @@ struct verbConjMultipleChoiceView: View{
                             }
                         }.frame(height: 13)
                             .onChange(of: counter){ newValue in
-                                progress = (CGFloat(newValue) / 4)
+                                progress = (CGFloat(newValue) / CGFloat(verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count + 1))
                             }
                         
                         Image("italyFlag")
@@ -70,6 +70,17 @@ struct verbConjMultipleChoiceView: View{
                             .frame(width: 40, height: 40)
                         Spacer()
                     }
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("WashedWhite"))
+                        .frame(width: geo.size.width * 0.95, height: 250)
+                        .overlay( /// apply a rounded border
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.black, lineWidth: 4)
+                        )
+                        .padding([.leading, .trailing], geo.size.width * 0.025)
+                        .offset(y: geo.size.height / 3)
+                        .zIndex(0)
                     VStack{
                         
                         Text(getTenseString(tenseIn: verbConjMultipleChoiceVM.currentTense))
@@ -85,10 +96,10 @@ struct verbConjMultipleChoiceView: View{
                                         VStack{
                                             
                                             
-                                            Text(verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameIt + " - " + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].pronoun + "\n(" + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameEng)
+                                            Text(verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameIt + " - " + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].pronoun + "\n" + verbConjMultipleChoiceVM.currentTenseMCConjVerbData[i].verbNameEng)
                                                 .bold()
                                                 .font(Font.custom("Arial Hebrew", size: 20))
-                                                .frame(width:geo.size.width * 0.7)
+                                                .frame(width:geo.size.width * 0.7, height: 70)
                                                 .padding()
                                                 .background(Color.teal)
                                                 .cornerRadius(10)
@@ -100,7 +111,7 @@ struct verbConjMultipleChoiceView: View{
                                                 )
                                             
                                                 .padding(.bottom, 20)
-                                                .shadow(radius: 10)
+                                             
                                             
                                             
                                             
@@ -118,7 +129,7 @@ struct verbConjMultipleChoiceView: View{
                             .frame(minHeight: geo.size.height)
                             .onChange(of: counter) { newIndex in
                                 if newIndex == verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                         showFinishedActivityPage = true
                                     }
                                     progress = CGFloat(verbConjMultipleChoiceVM.currentTenseMCConjVerbData.count)
@@ -161,12 +172,12 @@ struct verbConjMultipleChoiceView: View{
                                 .cornerRadius(20)
                                 .overlay( /// apply a rounded border
                                     RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 4)
+                                        .stroke(.black, lineWidth: 3)
                                 )
                                 .shadow(radius: 10)
                             
                             
-                        }).offset(y:-350)
+                        }).offset(y:-320)
                         
                         Text(currentVerbIta + " is already in MyList!")
                             .font(Font.custom("Arial Hebrew", size: 20))
@@ -185,17 +196,6 @@ struct verbConjMultipleChoiceView: View{
                     .zIndex(1)
                     
                     
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color("WashedWhite"))
-                        .frame(width: geo.size.width * 0.95, height: geo.size.height * 0.34)
-                        .overlay( /// apply a rounded border
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(.black, lineWidth: 4)
-                        )
-                        .padding([.leading, .trailing], geo.size.width * 0.025)
-                        .offset(y: geo.size.height / 3)
-                        .zIndex(0)
-                    
                     
                     Image("sittingBear")
                         .resizable()
@@ -209,7 +209,7 @@ struct verbConjMultipleChoiceView: View{
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(y: 240)
+                            .offset(x: 150, y: geo.size.height - 85)
                         
                     }
                     
@@ -221,7 +221,7 @@ struct verbConjMultipleChoiceView: View{
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(x: 150, y: geo.size.height - 95)
+                            .offset(x: 150, y: geo.size.height - 85)
                     }
                     
                     if wrongChosen{
@@ -232,7 +232,7 @@ struct verbConjMultipleChoiceView: View{
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 40)
-                            .offset(x: 150, y: geo.size.height - 95)
+                            .offset(x: 150, y: geo.size.height - 85)
                     }
                     
                     
@@ -358,17 +358,19 @@ struct choicesView: View{
     @Binding var correctChosen: Bool
     
     var body: some View{
-        HStack{
-            multipleChoiceButton(choiceString: choicesIn[0], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
-            multipleChoiceButton(choiceString: choicesIn[1], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
-        }
-        HStack{
-            multipleChoiceButton(choiceString: choicesIn[2], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
-            multipleChoiceButton(choiceString: choicesIn[3], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
-        }
-        HStack{
-            multipleChoiceButton(choiceString: choicesIn[4], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
-            multipleChoiceButton(choiceString: choicesIn[5], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+        VStack(spacing: 15){
+            HStack{
+                multipleChoiceButton(choiceString: choicesIn[0], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+                multipleChoiceButton(choiceString: choicesIn[1], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+            }
+            HStack{
+                multipleChoiceButton(choiceString: choicesIn[2], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+                multipleChoiceButton(choiceString: choicesIn[3], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+            }
+            HStack{
+                multipleChoiceButton(choiceString: choicesIn[4], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+                multipleChoiceButton(choiceString: choicesIn[5], correctAnswer: correctAnswerIn, counter: $counter, wrongChosen: $wrongChosen, correctChosen: $correctChosen)
+            }
         }
         
     }

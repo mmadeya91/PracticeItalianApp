@@ -36,17 +36,17 @@ struct incorrectMCButton: View {
             
         }, label: {
             Text(choiceString)
-                .font(Font.custom("Arial Hebrew", size: 18))
+                .font(Font.custom("Arial Hebrew", size: 14))
                 .padding(.top, 6)
                 .padding([.leading, .trailing], 2)
             
-        }).frame(width:165, height: 40)
+        }).frame(width:160, height: 40)
              .background(defColor)
              .foregroundColor(Color.white)
              .cornerRadius(20)
              .overlay( /// apply a rounded border
                  RoundedRectangle(cornerRadius: 20)
-                     .stroke(.black, lineWidth: 3)
+                     .stroke(.black, lineWidth: 2)
              )
          
              .shadow(radius: 5)
@@ -73,17 +73,17 @@ struct correctMCButton: View {
             
         }, label: {
             Text(choiceString)
-                .font(Font.custom("Arial Hebrew", size: 18))
+                .font(Font.custom("Arial Hebrew", size: 14))
                 .padding(.top, 6)
                 .padding([.leading, .trailing], 2)
             
-        }).frame(width:165, height: 40)
+        }).frame(width:160, height: 40)
             .background(defColor)
             .foregroundColor(Color.white)
             .cornerRadius(20)
             .overlay( /// apply a rounded border
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(.black, lineWidth: 3)
+                    .stroke(.black, lineWidth: 2)
             )
         
             .shadow(radius: 5)
